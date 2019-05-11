@@ -1,27 +1,31 @@
-﻿// Copyright 2019 Tech4 Labs. All Rights Reserved.
+// Copyright 2019 Tech4 Labs. All Rights Reserved.
 
 #pragma once
 
 #include "CoreMinimal.h"
-#include "T4ContentDataTypes.h"
 #include "Classes/Engine/DataTable.h"
-#include "T4ContentMasterTable.generated.h"
+#include "T4ContentTable_Player.generated.h"
 
 /**
   * http://api.unrealengine.com/KOR/Gameplay/DataDriven/
  */
+class UT4ActorEntityAsset;
+
 USTRUCT()
-struct FT4ContentMasterTableRow : public FTableRowBase
+struct FT4ContentPlayerTableRow : public FTableRowBase
 {
 	GENERATED_USTRUCT_BODY()
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attribute)
-	ET4ContentTableType Type;
+	int32 UID;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attribute)
 	FName Name;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attribute)
-	TSoftObjectPtr<UDataTable> Table;
+	FGuid Guid;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attribute)
+	TSoftObjectPtr<UT4ActorEntityAsset> EntityAsset;
 };

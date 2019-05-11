@@ -3,29 +3,25 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "T4ContentDataTypes.h"
 #include "Classes/Engine/DataTable.h"
-#include "T4ContentWorldTable.generated.h"
+#include "T4ContentTable_Master.generated.h"
 
 /**
   * http://api.unrealengine.com/KOR/Gameplay/DataDriven/
  */
-class UT4WorldEntityAsset;
-
 USTRUCT()
-struct FT4ContentWorldTableRow : public FTableRowBase
+struct FT4ContentMasterTableRow : public FTableRowBase
 {
 	GENERATED_USTRUCT_BODY()
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attribute)
-	int32 UID;
+	ET4ContentTableType Type;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attribute)
 	FName Name;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attribute)
-	FGuid Guid;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attribute)
-	TSoftObjectPtr<UT4WorldEntityAsset> EntityAsset;
+	TSoftObjectPtr<UDataTable> Table;
 };

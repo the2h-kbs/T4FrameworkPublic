@@ -203,6 +203,9 @@ struct T4FRAMEWORK_API FT4PacketFOEnterSC : public FT4PacketStoC
 
 public:
 	UPROPERTY(VisibleAnywhere)
+	FT4NetID NetID;
+
+	UPROPERTY(VisibleAnywhere)
 	FT4ObjectID EnterObjectID;
 
 	UPROPERTY(VisibleAnywhere)
@@ -258,6 +261,9 @@ struct T4FRAMEWORK_API FT4PacketItemEnterSC : public FT4PacketStoC
 	GENERATED_USTRUCT_BODY()
 
 public:
+	UPROPERTY(VisibleAnywhere)
+	FT4NetID NetID;
+
 	UPROPERTY(VisibleAnywhere)
 	FT4ObjectID EnterObjectID;
 

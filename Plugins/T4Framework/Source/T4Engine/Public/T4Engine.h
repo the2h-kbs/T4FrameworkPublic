@@ -21,7 +21,7 @@ class IT4GameWorld;
 class IT4GameObject;
 
 class IT4Controller;
-class IT4NPController;
+class IT4AIController;
 class IT4PlayerController;
 
 struct FT4ObjectAction;
@@ -172,14 +172,14 @@ public:
 
 	virtual bool HasPlayingAction(const FT4ActionKey& InActionKey) const = 0; // #20
 
-	virtual IT4NPController* CastNPCController() = 0;
+	virtual IT4AIController* CastAIController() = 0;
 	virtual IT4PlayerController* CastPlayerController() = 0;
 };
 
-class T4ENGINE_API IT4NPController : public IT4Controller
+class T4ENGINE_API IT4AIController : public IT4Controller
 {
 public:
-	virtual ~IT4NPController() {}
+	virtual ~IT4AIController() {}
 };
 
 class T4ENGINE_API IT4PlayerController : public IT4Controller

@@ -4,17 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "Classes/Engine/DataTable.h"
-#include "T4ContentNPCTable.generated.h"
+#include "T4ContentTable_Item.generated.h"
 
 /**
   * http://api.unrealengine.com/KOR/Gameplay/DataDriven/
  */
 class UBehaviorTree;
 class UBlackboardData;
-class UT4ActorEntityAsset;
+class UT4ItemEntityAsset;
 
 USTRUCT()
-struct FT4ContentNPCTableRow : public FTableRowBase
+struct FT4ContentItemTableRow : public FTableRowBase
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -28,12 +28,15 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attribute)
 	FGuid Guid;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attribute)
-	TSoftObjectPtr<UT4ActorEntityAsset> EntityAsset;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Asset)
+	TSoftObjectPtr<UT4ItemEntityAsset> EntityAsset;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attribute)
+	FName EquipBoneOrSocketName;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Asset)
 	TSoftObjectPtr<UBlackboardData> BlackboardDataPath;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attribute)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Asset)
 	TSoftObjectPtr<UBehaviorTree> BehaviorTreePath;
 };

@@ -1,10 +1,10 @@
-﻿// Copyright 2019 Tech4 Labs. All Rights Reserved.
+// Copyright 2019 Tech4 Labs. All Rights Reserved.
 
 #pragma once
 
 #include "CoreMinimal.h"
 #include "Classes/Engine/DataTable.h"
-#include "T4ContentSkillTable.generated.h"
+#include "T4ContentTable_Effect.generated.h"
 
 /**
   * http://api.unrealengine.com/KOR/Gameplay/DataDriven/
@@ -12,12 +12,12 @@
 class UT4ActionContiAsset;
 
 USTRUCT()
-struct FT4ContentSkillTableRow : public FTableRowBase
+struct FT4ContentEffectTableRow : public FTableRowBase
 {
 	GENERATED_USTRUCT_BODY()
 
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attribute)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Attribute)
 	int32 UID;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attribute)

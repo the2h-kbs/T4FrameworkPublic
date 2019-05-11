@@ -1,17 +1,17 @@
-﻿// Copyright 2019 Tech4 Labs. All Rights Reserved.
+// Copyright 2019 Tech4 Labs. All Rights Reserved.
 
 #pragma once
 
 #include "CoreMinimal.h"
 #include "T4Engine/Public/T4EngineTypes.h"
 #include "GameFramework/Pawn.h"
-#include "T4NPCDefaultPawn.generated.h"
+#include "T4AIDefaultPawn.generated.h"
 
 /**
   *
  */
 UCLASS()
-class T4FRAMEWORK_API AT4NPCDefaultPawn : public APawn
+class T4FRAMEWORK_API AT4AIDefaultPawn : public APawn
 {
 	GENERATED_UCLASS_BODY()
 

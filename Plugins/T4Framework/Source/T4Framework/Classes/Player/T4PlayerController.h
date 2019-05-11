@@ -75,7 +75,7 @@ public:
 
 	bool HasPlayingAction(const FT4ActionKey& InActionKey) const override; // #20
 
-	IT4NPController* CastNPCController() override { return nullptr; }
+	IT4AIController* CastAIController() override { return nullptr; }
 	IT4PlayerController* CastPlayerController() override { return static_cast<IT4PlayerController*>(this); }
 
 public:

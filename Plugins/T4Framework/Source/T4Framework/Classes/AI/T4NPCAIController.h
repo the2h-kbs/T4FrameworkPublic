@@ -10,7 +10,7 @@
 #include "T4Engine/Public/T4Engine.h"
 
 #include "AIController.h"
-#include "T4NPCController.generated.h"
+#include "T4NPCAIController.generated.h"
 
 /**
   * http://api.unrealengine.com/KOR/Gameplay/Framework/Controller/AIController/
@@ -21,7 +21,7 @@ class UBlackboardData;
 class UT4PathFollowingComponent;
 
 UCLASS()
-class T4FRAMEWORK_API AT4NPCController : public AAIController, public IT4NPController
+class T4FRAMEWORK_API AT4NPCAIController : public AAIController, public IT4AIController
 {
 	GENERATED_UCLASS_BODY()
 
@@ -71,11 +71,11 @@ public:
 
 	bool HasPlayingAction(const FT4ActionKey& InActionKey) const override; // #20
 
-	IT4NPController* CastNPCController() override { return static_cast<IT4NPController*>(this); }
+	IT4AIController* CastAIController() override { return static_cast<IT4AIController*>(this); }
 	IT4PlayerController* CastPlayerController() override { return nullptr; }
 
 public:
-	bool SetNPCData(const FName& InNPCTableName); // #31
+	bool SetTableData(const FName& InNPCTableName); // #31
 
 	void SetNetID(const FT4NetID& InNetID) { NetID = InNetID;}
 	const FT4NetID& GetNetID() const { return NetID; }

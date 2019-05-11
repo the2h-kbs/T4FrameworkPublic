@@ -99,17 +99,13 @@ public:
 #endif
 
 	// Server
+	virtual uint32 GetNewUniqueNetID() = 0; // #41
 	virtual FT4ObjectID GetNewUniqueObjectID() = 0;
 
 	virtual bool AddAIController(const FT4NetID& InUniqueID, AAIController* InController) = 0; // #31
 	virtual void RemoveAIController(const FT4NetID& InUniqueID) = 0; // #31
-	virtual AAIController* GetAIController(const FT4NetID& InUniqueID) const = 0; // #31
 
-	virtual AAIController* DoNPCSpawn(
-		TSubclassOf<AAIController> InNPCControllerClass,
-		const FVector& InSpawnLocation,
-		const FRotator& InSpawnRotation
-	) = 0; // #31
+	virtual AAIController* GetAIController(const FT4NetID& InUniqueID) const = 0; // #31
 };
 
 T4FRAMEWORK_API IT4GameFramework* CreateT4Framework(
