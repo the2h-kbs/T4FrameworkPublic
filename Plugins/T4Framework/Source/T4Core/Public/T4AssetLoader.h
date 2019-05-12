@@ -1,45 +1,87 @@
-﻿// Copyright 2019 Tech4 Labs. All Rights Reserved.
+// Copyright 2019 Tech4 Labs. All Rights Reserved.
 
 #pragma once
 
 #include "CoreMinimal.h"
 
-#include "T4Core/Public/T4CoreTypes.h"
+#include "T4Asset.h"
 
 /**
-  *
+  * http://api.unrealengine.com/KOR/Programming/Assets/AsyncLoading/
  */
-DECLARE_DELEGATE_OneParam(FT4LoadDelegate, UObject*);
-class T4CORE_API IT4AssetLoadHandle
+class FT4AssetLoader
 {
 public:
-	virtual ~IT4AssetLoadHandle() {}
+	explicit FT4AssetLoader()
+		: bSyncLoad(false)
+		, bBindComplated(false)
+		, LoadHandle(nullptr)
+		, DebugToken(NAME_None)
+	{
+	}
+	virtual ~FT4AssetLoader()
+	{
+		Reset();
+	}
 
-	virtual void OnDestroy() = 0;
+	virtual void Reset()
+	{
+		if (nullptr != LoadHandle)
+		{
+			LoadHandle->OnDestroy();
+			LoadHandle = nullptr;
+		}
+	}
 
-	virtual bool IsLoadFailed() const = 0;
-	virtual bool IsLoadCompleted() const = 0;
+	void Load(
+		const FSoftObjectPath& InAssetPath,
+		bool bInSyncLoad,
+		const TCHAR* InDebugString
+	)
+	{
+		bSyncLoad = bInSyncLoad;
+		IT4AssetManager* AssetLoader = GetT4AssetManager();
+		LoadHandle = AssetLoader->RequestAsync(InAssetPath);
+		DebugToken = InDebugString;
+	}
 
-	virtual bool GetLoadProgress() const = 0;
+	FORCEINLINE bool IsLoadFailed() const
+	{
+		if (nullptr == LoadHandle)
+		{
+			return true;
+		}
+		return LoadHandle->IsLoadFailed();
+	}
 
-	virtual UObject* GetLoadedAsset() const = 0;
-	virtual const FSoftObjectPath& GetObjectPath() const = 0;
+	FORCEINLINE bool IsLoadCompleted() const
+	{
+		if (nullptr == LoadHandle)
+		{
+			return false;
+		}
+		return LoadHandle->IsLoadCompleted();
+	}
+
+	FORCEINLINE bool IsBinded() const
+	{ 
+		return bBindComplated;
+	}
+
+	FORCEINLINE void SetBinded()
+	{
+		Reset();
+		bBindComplated = true;
+	}
+
+	FORCEINLINE bool CheckReset() const
+	{
+		return (nullptr == LoadHandle) ? true : false;
+	}
+
+protected:
+	bool bSyncLoad;
+	bool bBindComplated;
+	IT4AssetHandle* LoadHandle;
+	FName DebugToken;
 };
-
-class T4CORE_API IT4AssetLoader
-{
-public:
-	virtual ~IT4AssetLoader() {}
-
-	virtual bool Initialize() = 0;
-	virtual void Finalize() = 0;
-
-	virtual void Process(float InDeltaSeconds) = 0;
-
-	virtual IT4AssetLoadHandle* RequestAsync(
-		const FSoftObjectPath& InPath, 
-		FT4LoadDelegate InLoadDelegate = FT4LoadDelegate()
-	) = 0;
-};
-
-T4CORE_API IT4AssetLoader* GetT4AssetLoader();

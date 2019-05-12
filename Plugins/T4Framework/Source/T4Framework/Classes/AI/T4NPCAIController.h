@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 
-#include "Content/T4ContentDataLoadHelper.h"
+#include "Content/T4ContentDataLoader.h"
 #include "Public/Protocol/T4PacketTypes.h" // #25
 
 #include "T4Engine/Public/T4Engine.h"
@@ -94,8 +94,8 @@ private:
 	FName NPCTableName;
 	bool bAIDataLoaded;
 
-	FT4BlackboardDataLoadHelper BlackboardDataLoader;
-	FT4BehaviorAssetLoadHelper BehaviorTreeDataLoader;
+	FT4BlackboardDataLoader BlackboardDataLoader;
+	FT4BehaviorTreeDataLoader BehaviorTreeDataLoader;
 
 private:
 	UPROPERTY(transient)

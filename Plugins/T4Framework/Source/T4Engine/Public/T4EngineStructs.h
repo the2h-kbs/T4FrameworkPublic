@@ -24,6 +24,7 @@ struct T4ENGINE_API FT4GameObjectProperty
 		CapsuleRadius = 0.0f;
 		HalfHeight = 0.0f;
 		MeshImportRotation = FRotator::ZeroRotator;
+		RelativeScale3D = FVector::OneVector; // #37
 	}
 
 	const float GetMoveSpeed(const ET4MoveType InMoveType) const
@@ -41,6 +42,7 @@ struct T4ENGINE_API FT4GameObjectProperty
 	float CapsuleRadius;
 	float HalfHeight; // #18
 	FRotator MeshImportRotation; // #30
+	FVector RelativeScale3D; // #37
 };
 
 class IT4GameObject;

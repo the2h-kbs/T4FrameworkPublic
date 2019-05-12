@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Public/T4EntityTypes.h"
+#include "Classes/Entity/T4EntityTypes.h"
 #include "T4EntityAsset.h"
 #include "T4ActorEntityAsset.generated.h"
 
@@ -31,6 +31,7 @@ class USkeletalMesh;
 class UAnimBlueprint;
 class UAnimMontage;
 class UBlendSpace;
+class UT4CostumeEntityAsset;
 
 USTRUCT(BlueprintType)
 struct T4CORE_API FT4EntityActorFullBodyMeshData
@@ -42,11 +43,26 @@ public:
 	{
 	}
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = DataPath)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Asset)
 	TSoftObjectPtr<USkeletalMesh> SkeletalMeshPath;
 };
 
-// TODO : #37
+// #37
+USTRUCT(BlueprintType)
+struct T4CORE_API FT4EntityActorCompositePartMeshData
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	FT4EntityActorCompositePartMeshData()
+	{
+	}
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Asset)
+	TSoftObjectPtr<UT4CostumeEntityAsset> CostumeEntityAsset;
+};
+
+// #37
 USTRUCT(BlueprintType)
 struct T4CORE_API FT4EntityActorCompositeMeshData
 {
@@ -54,8 +70,15 @@ struct T4CORE_API FT4EntityActorCompositeMeshData
 
 public:
 	FT4EntityActorCompositeMeshData()
+		: MasterPartName(NAME_None)
 	{
 	}
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = DataPath)
+	FName MasterPartName; // #37
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = DataPath)
+	TMap<FName, FT4EntityActorCompositePartMeshData> DefaultPartsData; // #37
 };
 
 USTRUCT(BlueprintType)
@@ -116,6 +139,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Data)
 	FT4EntityActorFullBodyMeshData FullBodyMeshData;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Data)
+	FT4EntityActorCompositeMeshData CopmpositeMeshData; // #37
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Data)
 	FT4EntityActorAnimationData AnimationData;

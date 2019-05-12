@@ -28,10 +28,10 @@
 - Milestone 3 (2019.07.09 ~ 2019.09.27) <예정>
   - 오픈 월드 제작에 필요한 월드 관련 기능 및 툴 개발
 - Milestone 4 (...)
-  - **Tech4Labs 데모 만들기**
-  - 물리 및 사운드 관련 기능 개발
+  - **NextGen 데모 만들기**
+    - RayTracing (4.22) & Niagara ChaosPhysics (4.23)
 
-### 영상 및 자료
+### 개발 영상 및 자료
 
 [![Video Label](http://img.youtube.com/vi/kq6mi8CEYi0/0.jpg)](https://youtu.be/kq6mi8CEYi0?t=0s)
 
@@ -41,8 +41,8 @@
   - https://github.com/Tech4Labs/T4FrameworkPrivate
   - 접근 권한 요청은 'niceofer@hotmail.com' 으로 Github 'Username or email' 을 보내주시기 바랍니다.
 
-### Tech4Labs 는...
+### Tech4Labs
 
-- 최고 수준의 엔진 프로그래머와 TA 로 구성된 전문가 그룹을 지향합니다.
-  - **함께할 렌더링과 툴을 담당할 프로그래머 2명과 TA 1명을 찾고 있습니다.**
+- Tech4 는 프로그래머 3명 (아키텍트, 렌더링, 툴), TA 1명으로 구성될 그래픽스 랩입니다.
+  - 함께할 렌더링과 툴을 담당할 프로그래머와 TA 를 찾고 있습니다.
   - 관심 있으신 분은 'niceofer@hotmail.com' 로 메일 주시기 바랍니다.
