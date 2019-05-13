@@ -40,9 +40,3 @@
 - 풀 소스 코드는 현재 비공개로 제공되며, MIT 라이선스 기반 오픈 소스 프로젝트로 운영됩니다.
   - https://github.com/Tech4Labs/T4FrameworkPrivate
   - 접근 권한 요청은 'niceofer@hotmail.com' 으로 Github 'Username or email' 을 보내주시기 바랍니다.
-
-### Tech4Labs
-
-- Tech4 는 프로그래머 3명 (아키텍트, 렌더링, 툴), TA 1명으로 구성될 그래픽스 랩입니다.
-  - 함께할 렌더링과 툴을 담당할 프로그래머와 TA 를 찾고 있습니다.
-  - 관심 있으신 분은 'niceofer@hotmail.com' 로 메일 주시기 바랍니다.
