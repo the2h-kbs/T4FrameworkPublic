@@ -181,6 +181,9 @@ private:
 	void CS_RecvPacket_UnEquip(const FT4PacketUnEquipCS& InPacket);
 
 	UFUNCTION(Reliable, server, WithValidation)
+	void CS_RecvPacket_Exchange(const FT4PacketExchangeCS& InPacket); // #37
+
+	UFUNCTION(Reliable, server, WithValidation)
 	void CS_RecvPacket_Attack(const FT4PacketAttackCS& InPacket);
 
 	UFUNCTION(Reliable, server, WithValidation)
@@ -267,6 +270,9 @@ private:
 
 	UFUNCTION(Reliable, client)
 	void SC_RecvPacket_UnEquip(const FT4PacketUnEquipSC& InPacket);
+
+	UFUNCTION(Reliable, client)
+	void SC_RecvPacket_Exchange(const FT4PacketExchangeSC& InPacket); // #37
 
 	UFUNCTION(Reliable, client)
 	void SC_RecvPacket_Attack(const FT4PacketAttackSC& InPacket);

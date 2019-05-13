@@ -33,7 +33,9 @@ enum class ET4ActionType : uint32
 	JumpTo,
 	TeleportTo,
 
-	EquipItem,
+	EquipWeapon, // #22
+	ExchangeCostume, // #37
+
 	LockOn,
 
 	MoveSpeed,
@@ -45,6 +47,10 @@ enum class ET4ActionType : uint32
 	Conti, // #24
 
 	Stop,
+
+	// begin Editor
+	EditorDirty, // #37
+
 	None,
 };
 
@@ -77,6 +83,16 @@ enum class ET4RotationType : uint8
 	TargetObject,
 
 	Default,
+};
+
+UENUM()
+enum class ET4EditorDirtyType : uint8
+{
+	All,
+	Attribute,
+	Data,
+
+	None,
 };
 
 static const uint32 INVALID_ACTION_KEY = (uint32)-1;

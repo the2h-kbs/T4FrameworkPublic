@@ -111,7 +111,7 @@ public:
 	{
 		if (ET4EntityType::None == EntityType)
 		{
-			OutMsg = TEXT("No set EntityType");
+			OutMsg = TEXT("Not set EntityType");
 			return false;
 		}
 		if (!EntityAssetPath.IsValid())

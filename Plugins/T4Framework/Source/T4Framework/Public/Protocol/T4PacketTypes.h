@@ -21,8 +21,10 @@ enum class ET4PacketCtoS : uint32
 	Locked,
 	UnLocked,
 
-	Equip,
-	UnEquip,
+	Equip, // #22
+	UnEquip, // #22
+
+	Exchange, // #37
 
 	Attack,
 
@@ -73,6 +75,8 @@ enum class ET4PacketStoC : uint32
 
 	Equip,
 	UnEquip,
+
+	Exchange, // #37
 
 	Attack,
 	Effect,

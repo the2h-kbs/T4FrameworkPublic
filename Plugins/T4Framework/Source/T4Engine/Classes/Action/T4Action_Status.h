@@ -13,7 +13,7 @@
 
 // ET4ActionType::Possess
 // ET4ActionType::LockOn
-// ET4ActionType::EquipItem
+// ET4ActionType::EquipWeapon
 
 USTRUCT()
 struct T4ENGINE_API FT4PossessAction : public FT4ObjectAction
@@ -63,13 +63,13 @@ public:
 };
 
 USTRUCT()
-struct T4ENGINE_API FT4EquipItemAction : public FT4ObjectAction
+struct T4ENGINE_API FT4EquipWeaponAction : public FT4ObjectAction
 {
 	GENERATED_USTRUCT_BODY()
 
 public:
 	UPROPERTY(EditAnywhere)
-	FSoftObjectPath EntityAssetPath;
+	TSoftObjectPtr<class UT4WeaponEntityAsset> WeaponEntityAsset;
 
 	UPROPERTY(EditAnywhere)
 	FName BoneOrSocketName;
@@ -78,25 +78,25 @@ public:
 	bool bUsePreloading;
 
 public:
-	FT4EquipItemAction()
+	FT4EquipWeaponAction()
 		: FT4ObjectAction(StaticActionType())
 		, BoneOrSocketName(NAME_None)
 		, bUsePreloading(false)
 	{
 	}
 
-	static ET4ActionType StaticActionType() { return ET4ActionType::EquipItem; }
+	static ET4ActionType StaticActionType() { return ET4ActionType::EquipWeapon; }
 
 	bool Validate(FString& OutMsg) override
 	{
-		if (!EntityAssetPath.IsValid())
+		if (WeaponEntityAsset.IsNull())
 		{
-			OutMsg = TEXT("Invalid EntityAssetPath");
+			OutMsg = TEXT("Invalid WeaponEntityAsset");
 			return false;
 		}
 		if (BoneOrSocketName == NAME_None)
 		{
-			OutMsg = TEXT("No set TargetSocket");
+			OutMsg = TEXT("Not set TargetSocket");
 			return false;
 		}
 		return true;
@@ -104,6 +104,49 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("OAction:EquipItem"));
+		return FString(TEXT("OAction:EquipWeapon"));
+	}
+};
+
+// #37
+USTRUCT()
+struct T4ENGINE_API FT4ExchangeCostumeAction : public FT4ObjectAction
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	UPROPERTY(EditAnywhere)
+	TSoftObjectPtr<class UT4CostumeEntityAsset> CostumeEntityAsset;
+
+	UPROPERTY(EditAnywhere)
+	FName TargetPartsName;
+	
+public:
+	FT4ExchangeCostumeAction()
+		: FT4ObjectAction(StaticActionType())
+		, TargetPartsName(NAME_None)
+	{
+	}
+
+	static ET4ActionType StaticActionType() { return ET4ActionType::ExchangeCostume; }
+
+	bool Validate(FString& OutMsg) override
+	{
+		if (CostumeEntityAsset.IsNull())
+		{
+			OutMsg = TEXT("Invalid CostumeEntityAsset");
+			return false;
+		}
+		if (TargetPartsName == NAME_None)
+		{
+			OutMsg = TEXT("Not set TargetParts");
+			return false;
+		}
+		return true;
+	}
+
+	FString ToString() const override
+	{
+		return FString(TEXT("OAction:ExchangeCostume"));
 	}
 };

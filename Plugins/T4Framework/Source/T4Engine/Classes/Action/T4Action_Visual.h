@@ -1,10 +1,10 @@
-﻿// Copyright 2019 Tech4 Labs. All Rights Reserved.
+// Copyright 2019 Tech4 Labs. All Rights Reserved.
 
 #pragma once
 
 #include "CoreMinimal.h"
 #include "T4ActionBase.h"
-#include "T4Action_Primitive.generated.h"
+#include "T4Action_Visual.generated.h"
 
 /**
   *
