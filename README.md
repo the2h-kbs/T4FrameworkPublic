@@ -14,21 +14,22 @@
 ### 프로젝트
 
 - 지원 UE4 버전 : 4.22.1
+- Public 버전 라이선스 : MIT License
 - 개발 진행 : Prototype (Milestone 2)
 - 정식 릴리즈 : 2019.10.01 (목표)
 
 ### 로드맵
 
 - Milestone 1 (2019.01.19 ~ 2019.04.19) <완료>
-  - **UE4 기반 MMO 프레임워크 만들기**
+  - UE4 기반 MMO 프레임워크 만들기
   - 아키텍처 설계 및 구현, 테스트 프레임워크 구축
-- Milestone 2 (2019.05.13 ~ 2019.06.28) **<진행>**
+- **Milestone 2 (2019.05.06 ~ 2019.06.28) <=진행**
   - **C/S 환경에서의 기본 전투 데모 만들기**
   - 캐릭터 셋업 및 액션 툴 및 기능 개발
 - Milestone 3 (2019.07.09 ~ 2019.09.27) <예정>
   - 오픈 월드 제작에 필요한 월드 관련 기능 및 툴 개발
 - Milestone 4 (...)
-  - **NextGen 데모 만들기**
+  - NextGen 데모 만들기
     - RayTracing (4.22) & Niagara ChaosPhysics (4.23)
 
 ### 개발 영상 및 자료
@@ -42,6 +43,5 @@
 
 ### Full Source Code
 
-- 풀 소스 코드는 현재 비공개로 제공되며, MIT 라이선스 기반 오픈 소스 프로젝트로 운영됩니다.
+- 풀 소스 저장소는 비공개로 운영됩니다. 접근 권한은 'niceofer@hotmail.com' 로 문의주시기 바랍니다.
   - https://github.com/Tech4Labs/T4FrameworkPrivate
-  - 접근 권한 요청은 'niceofer@hotmail.com' 으로 Github 'Username or email' 을 보내주시기 바랍니다.
