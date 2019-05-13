@@ -33,7 +33,12 @@
 
 ### 개발 영상 및 자료
 
-[![Video Label](http://img.youtube.com/vi/kq6mi8CEYi0/0.jpg)](https://youtu.be/kq6mi8CEYi0?t=0s)
+- **T4RehearsalEntity Editor Prototype**
+  - M2 : 2019.05.06 ~ 2019.05.13
+  - [![Video Label](http://img.youtube.com/vi/pA4cK60z0Bs/0.jpg)](https://youtu.be/pA4cK60z0Bs?t=0s)
+- **T4Framework Prototype**
+  - M1 : 2019.01.19 ~ 2019.04.19
+  - [![Video Label](http://img.youtube.com/vi/kq6mi8CEYi0/0.jpg)](https://youtu.be/kq6mi8CEYi0?t=0s)
 
 ### Full Source Code
 

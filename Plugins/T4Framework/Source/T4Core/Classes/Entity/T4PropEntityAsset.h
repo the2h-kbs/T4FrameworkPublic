@@ -32,6 +32,28 @@ class USkeletalMesh;
 class UParticleSystem;
 
 USTRUCT(BlueprintType)
+struct T4CORE_API FT4EntityPropPhysicalAttribute : public FT4EntityBasePhysicalAttribute
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	FT4EntityPropPhysicalAttribute()
+	{
+	}
+};
+
+USTRUCT(BlueprintType)
+struct T4CORE_API FT4EntityPropRenderingAttribute : public FT4EntityBaseRenderingAttribute
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	FT4EntityPropRenderingAttribute()
+	{
+	}
+};
+
+USTRUCT(BlueprintType)
 struct T4CORE_API FT4EntityPropNormalMeshData
 {
 	GENERATED_USTRUCT_BODY()
@@ -76,7 +98,10 @@ public:
 	ET4EntityPropType PropType;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Attribute)
-	FT4EntityRenderingAttribute Rendering;
+	FT4EntityPropPhysicalAttribute Physical;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Attribute)
+	FT4EntityPropRenderingAttribute Rendering;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Data)
 	FT4EntityPropNormalMeshData NormalMeshData;

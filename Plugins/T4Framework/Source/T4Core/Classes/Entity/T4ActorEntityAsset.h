@@ -34,6 +34,48 @@ class UBlendSpace;
 class UT4CostumeEntityAsset;
 
 USTRUCT(BlueprintType)
+struct T4CORE_API FT4EntityActorPhysicalAttribute : public FT4EntityBasePhysicalAttribute
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	FT4EntityActorPhysicalAttribute()
+		: RunSpeed(500.0f)
+		, WalkSpeed(100.0f)
+		, LockOnSpeed(100.0f)
+		, JumpZVelocity(300.0f)
+		, RotationRateYaw(720.0f)
+	{
+	}
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Physical, meta = (ClampMin = "10.0", ClampMax = "1000"))
+	float RunSpeed;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Physical, meta = (ClampMin = "10.0", ClampMax = "500"))
+	float WalkSpeed;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Physical, meta = (ClampMin = "10.0", ClampMax = "500"))
+	float LockOnSpeed;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Physical, meta = (ClampMin = "10.0", ClampMax = "1000"))
+	float JumpZVelocity;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Physical, meta = (ClampMin = "10.0", ClampMax = "1080"))
+	float RotationRateYaw;
+};
+
+USTRUCT(BlueprintType)
+struct T4CORE_API FT4EntityActorRenderingAttribute : public FT4EntityBaseRenderingAttribute
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	FT4EntityActorRenderingAttribute()
+	{
+	}
+};
+
+USTRUCT(BlueprintType)
 struct T4CORE_API FT4EntityActorFullBodyMeshData
 {
 	GENERATED_USTRUCT_BODY()
@@ -132,10 +174,10 @@ public:
 	ET4EntityActorType ActorType;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Attribute)
-	FT4EntityPhysicalAttribute Physical;
+	FT4EntityActorPhysicalAttribute Physical;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Attribute)
-	FT4EntityRenderingAttribute Rendering;
+	FT4EntityActorRenderingAttribute Rendering;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Data)
 	FT4EntityActorFullBodyMeshData FullBodyMeshData;

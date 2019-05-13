@@ -14,6 +14,28 @@ class UStaticMesh;
 class USkeletalMesh;
 
 USTRUCT(BlueprintType)
+struct T4CORE_API FT4EntityItemPhysicalAttribute : public FT4EntityBasePhysicalAttribute
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	FT4EntityItemPhysicalAttribute()
+	{
+	}
+};
+
+USTRUCT(BlueprintType)
+struct T4CORE_API FT4EntityItemRenderingAttribute : public FT4EntityBaseRenderingAttribute
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	FT4EntityItemRenderingAttribute()
+	{
+	}
+};
+
+USTRUCT(BlueprintType)
 struct T4CORE_API FT4EntityItemDropMeshData
 {
 	GENERATED_USTRUCT_BODY()
@@ -48,7 +70,10 @@ public:
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Attribute)
-	FT4EntityRenderingAttribute Rendering;
+	FT4EntityItemPhysicalAttribute DropMeshPhysical;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Attribute)
+	FT4EntityItemRenderingAttribute DropMeshRendering;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Data)
 	FT4EntityItemDropMeshData DropMeshData;

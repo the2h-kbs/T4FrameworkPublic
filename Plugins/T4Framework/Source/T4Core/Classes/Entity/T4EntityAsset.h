@@ -37,19 +37,15 @@ public:
 };
 
 USTRUCT(BlueprintType)
-struct T4CORE_API FT4EntityPhysicalAttribute
+struct T4CORE_API FT4EntityBasePhysicalAttribute
 {
 	GENERATED_USTRUCT_BODY()
 
 public:
-	FT4EntityPhysicalAttribute()
+	FT4EntityBasePhysicalAttribute()
 		: Height(200.0f)
 		, Radius(25.0f)
-		, RunSpeed(500.0f)
-		, WalkSpeed(100.0f)
-		, LockOnSpeed(100.0f)
-		, JumpZVelocity(300.0f)
-		, RotationRateYaw(720.0f)
+
 	{
 	}
 
@@ -58,30 +54,15 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Physical, meta = (ClampMin = "10.0", ClampMax = "500"))
 	float Radius;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Physical, meta = (ClampMin = "10.0", ClampMax = "1000"))
-	float RunSpeed;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Physical, meta = (ClampMin = "10.0", ClampMax = "500"))
-	float WalkSpeed;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Physical, meta = (ClampMin = "10.0", ClampMax = "500"))
-	float LockOnSpeed;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Physical, meta = (ClampMin = "10.0", ClampMax = "1000"))
-	float JumpZVelocity;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Physical, meta = (ClampMin = "10.0", ClampMax = "1080"))
-	float RotationRateYaw;
 };
 
 USTRUCT(BlueprintType)
-struct T4CORE_API FT4EntityRenderingAttribute
+struct T4CORE_API FT4EntityBaseRenderingAttribute
 {
 	GENERATED_USTRUCT_BODY()
 
 public:
-	FT4EntityRenderingAttribute()
+	FT4EntityBaseRenderingAttribute()
 		: Scale(1.0f)
 		, ImportRotationYaw(-90.0f)
 	{
