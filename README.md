@@ -11,11 +11,11 @@
 - Dedicated Server 환경을 지원하며 언제든 별도의 Standalone 서버와 연동할 수 있습니다.
 - 최상의 퀄리티를 유지하며 효율적으로 개발할 수 있는 다양한 노하우를 제공합니다.
 
-### 프로젝트
+### 프로젝트 (공개버전, Public Repository)
 
 - 지원 UE4 버전 : 4.22.1
-- Public 버전 라이선스 : MIT License
-- 개발 진행 : Prototype (Milestone 2)
+- 공개버전 라이선스 : MIT License
+- 개발 상황 : Prototype (Milestone 2)
 - 정식 릴리즈 : 2019.10.01 (목표)
 
 ### 로드맵
