@@ -9,6 +9,7 @@
   * #35 
  */
 class UT4EntityAsset;
+// #T4_ADD_ENTITY_TAG
 class UT4WorldEntityAsset;
 class UT4ActorEntityAsset;
 class UT4PropEntityAsset;
@@ -28,6 +29,7 @@ public:
 	virtual const UT4EntityAsset* GetEntity(const FT4EntityKey& InKey) = 0;
 	virtual const UT4EntityAsset* GetEntity(const FSoftObjectPath& InPath) = 0;
 	
+	// #T4_ADD_ENTITY_TAG
 	virtual const UT4WorldEntityAsset* GetWorldEntity(const FT4EntityKey& InKey) = 0;
 	virtual const UT4WorldEntityAsset* GetWorldEntity(const FSoftObjectPath& InPath) = 0;
 

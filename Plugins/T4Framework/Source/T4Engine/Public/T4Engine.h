@@ -303,6 +303,7 @@ public:
 	virtual IT4PlayerController* GetPlayerController() = 0;
 	virtual bool SetPlayerController(IT4PlayerController* InPlayerController) = 0;
 
+	virtual bool HasPlayerObject() const = 0;
 	virtual bool IsPlayerObject(const FT4ObjectID& InObjectID) const = 0;
 	virtual bool IsPlayerObject(IT4GameObject* InGameObject) const = 0;
 

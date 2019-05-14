@@ -58,7 +58,6 @@ enum class ET4ActionType : uint32
 UENUM()
 enum class ET4LifecyclePolicy : uint8
 {
-	Auto,
 	Duration,
 	Looping,
 

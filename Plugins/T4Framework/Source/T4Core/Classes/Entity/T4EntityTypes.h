@@ -8,6 +8,9 @@
 /**
   * http://api.unrealengine.com/KOR/Programming/UnrealArchitecture/Reference/Properties/
  */
+// WARN : #35 : Entity Type 을 추가한다면 아래 테그로 검색해서 모두 추가해줄 것!
+// #T4_ADD_ENTITY_TAG
+
 UENUM()
 enum class ET4EntityType : uint8
 {
