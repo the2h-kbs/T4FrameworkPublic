@@ -12,14 +12,14 @@ T4Framework 를 도입해 게임 프로토타이핑과 매스 프로덕션을 �
 - UE4 Dedicated Server 환경을 지원하며 자체 제작된 Standalone 서버와의 연동도 지원 가능합니다.
 - 언리얼 엔진의 기능을 최대한 사용하며 효율적으로 개발할 수 있는 다양한 노하우를 제공합니다.
 
-## 프로젝트 (공개버전, Public Repository)
+## 1. 프로젝트 (공개버전, Public Repository)
 
 - 지원 UE4 버전 : 4.22.1
 - 공개버전 라이선스 : MIT License
 - 개발 상황 : Prototype (Milestone 2)
 - 정식 릴리즈 : 2019.10.01 (UE4 Marketplace 배포)
 
-## 로드맵
+## 2. 로드맵
 
 - [완료] ~~Milestone 1 (2019.01.19 ~ 2019.04.19)~~
   - ~~UE4 기반 MMO 프레임워크 만들기~~
@@ -34,7 +34,7 @@ T4Framework 를 도입해 게임 프로토타이핑과 매스 프로덕션을 �
   - NextGen 데모 만들기
   - RayTracing (4.22) & Niagara ChaosPhysics (4.23)
 
-## 개발 영상 및 자료
+## 3. 개발 영상 및 자료
 
 - **T4RehearsalConti Editor Prototyping** (GamePlay Action Setup)
   - M1 ~ M2 : 2019.04.05 ~ 2019.05.14
@@ -46,8 +46,12 @@ T4Framework 를 도입해 게임 프로토타이핑과 매스 프로덕션을 �
   - M1 : 2019.01.19 ~ 2019.04.19
   - <https://youtu.be/kq6mi8CEYi0?t=0s>
 
-## Full Source Code
+## 4. 라이선스
 
-- https://github.com/Tech4Labs/T4FrameworkPrivate
-  - 풀 소스 리포지토리는 비공개로 운영됩니다. 
-  - 접근 권한은 'niceofer@hotmail.com' 로 문의주시기 바랍니다.
+- 공개버전(Public Repository)은 MIT License 입니다.
+  - 현재 Win64 바이너리만 제공되고 있습니다.
+- 비공개 버전(Full Source Code) 라이선스는 아래 메일 주소로 문의주시기 바랍니다.
+  - 라이선스 문의 : niceofer@hotmail.com (Tech4Labs, SoonBo Noh)
+  - Private Repository : https://github.com/Tech4Labs/T4FrameworkPrivate
+
+
