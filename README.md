@@ -35,7 +35,7 @@
 
 ## 개발 영상 및 자료
 
-- **T4RehearsalConti Editor Prototyping** (GamePlay Action Build)
+- **T4RehearsalConti Editor Prototyping** (GamePlay Action Setup)
   - M1 ~ M2 : 2019.04.05 ~ 2019.05.14
   - <https://youtu.be/YNrqP0fB4Ck?t=0s>
 - **T4RehearsalEntity Editor Prototyping** (Character Setup)
