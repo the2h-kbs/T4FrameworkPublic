@@ -38,7 +38,7 @@ T4Framework 를 도입해 게임 프로토타이핑과 매스 프로덕션을 �
 
 - **T4RehearsalConti Editor Prototyping** (GamePlay Action Setup)
   - M1 ~ M2 : 2019.04.05 ~ 2019.05.14
-  - <https://youtu.be/YNrqP0fB4Ck?t=0s>
+  - <https://youtu.be/shc2cLraU6M?t=0s>
 - **T4RehearsalEntity Editor Prototyping** (Character Setup)
   - M2 : 2019.05.06 ~ 2019.05.13
   - <https://youtu.be/pA4cK60z0Bs?t=0s>
