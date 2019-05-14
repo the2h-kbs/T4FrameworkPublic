@@ -104,6 +104,7 @@ public:
 	virtual bool IsLoadComplated() const = 0;
 
 	virtual void OnReset() = 0;
+	virtual void OnSetZombie() = 0; // #36 : Leave 시의 Zombie 처리. Coll 충돌 제외 등...
 
 	virtual bool OnExecute(
 		const FT4ObjectAction* InAction, // WARN : only reference
