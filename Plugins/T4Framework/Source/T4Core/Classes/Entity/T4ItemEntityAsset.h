@@ -21,6 +21,8 @@ struct T4CORE_API FT4EntityItemPhysicalAttribute : public FT4EntityBasePhysicalA
 public:
 	FT4EntityItemPhysicalAttribute()
 	{
+		Height = 50.0f;
+		Radius = 10.0f;
 	}
 };
 
