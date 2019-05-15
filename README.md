@@ -5,14 +5,7 @@ T4Framework 를 도입해 게임 프로토타이핑과 매스 프로덕션을 �
 아키텍처 설계 및 기능 구현 시간을 아이디어 검증과 신기술 개발에 투자하실 수 있습니다.
 ```
 
-## 1. 프로젝트 (공개버전, Public Repository)
-
-- 지원 UE4 버전 : 4.22.1
-- 공개버전 라이선스 : MIT License
-- 개발 상황 : Prototype (Milestone 2)
-- 정식 릴리즈 : 2019.10.01 (UE4 Marketplace 배포)
-
-## 2. 소개
+## 1. 소개
 
 - UE4 기반 MMO 게임 프레임워크입니다.
 - 액션 연출과 대규모 오픈 월드 제작에 특화된 프레임워크입니다.
@@ -20,6 +13,16 @@ T4Framework 를 도입해 게임 프로토타이핑과 매스 프로덕션을 �
 - 콘텐츠 및 에셋 제작을 위한 인하우스 툴을 제공해 생산성을 높일 수 있습니다.
 - UE4 Dedicated Server 환경을 지원하며 별도의 Standalone 서버 연동도 지원 가능합니다.
 - 언리얼 엔진의 기능과 퀄리티를 최대한 활용하며 효율적으로 개발할 수 있는 다양한 노하우를 제공합니다.
+
+## 2. 정보
+
+- 공개 버전 (Public Repository)
+  - <https://github.com/Tech4Labs/T4Framework>
+  - MIT License
+- 지원 UE4 버전 : 4.22.1
+- 지원 플랫폼 : Win64, Android
+- 개발 상황 : Prototype (Milestone 2)
+- 정식 릴리즈 : 2019.10.01 (UE4 Marketplace 배포)
 
 ## 3. 로드맵
 
@@ -50,10 +53,8 @@ T4Framework 를 도입해 게임 프로토타이핑과 매스 프로덕션을 �
 
 ## 5. 라이선스
 
-- 공개버전(Public Repository)은 MIT License 입니다.
+- 공개 버전(Public Repository)은 MIT License 입니다.
   - 현재 Win64 바이너리만 제공되고 있습니다.
 - 비공개 버전(Full Source Code) 라이선스는 아래 메일 주소로 문의주시기 바랍니다.
   - 라이선스 문의 : niceofer@hotmail.com (Tech4Labs, SoonBo Noh)
-  - Private Repository : https://github.com/Tech4Labs/T4FrameworkPrivate
-
-
+  - Private Repository : <https://github.com/Tech4Labs/T4FrameworkPrivate>
