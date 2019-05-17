@@ -35,7 +35,7 @@ T4Framework 를 도입해 게임 프로토타이핑과 매스 프로덕션을 �
 - [예정] Milestone 3 (2019.07.09 ~ 2019.09.27)
   - 오픈 월드 제작에 필요한 월드 관련 기능 및 툴 개발
   - T4RehearsalLevel Editor Prototyping
-- [예정] UE4 Marketplace 배포 (2019.10.01)
+- [예정] **UE4 Marketplace 배포** (2019.10.01)
   - 공개 버전 (무료)
 - [예정] Milestone 4 (2019.10.07 ~)
   - NextGen 데모 만들기
@@ -43,10 +43,10 @@ T4Framework 를 도입해 게임 프로토타이핑과 매스 프로덕션을 �
 
 ## 4. 개발 영상 및 자료
 
-### Release
+### Release Version
 - 준비중...
 
-### Prototype
+### Prototype Version
 - **T4RehearsalConti Editor** (GamePlay Action Setup)
   - M1 ~ M2 : 2019.04.05 ~ 2019.05.14
   - <https://youtu.be/shc2cLraU6M?t=0s>
