@@ -24,7 +24,7 @@ T4Framework 를 도입해 게임 프로토타이핑과 매스 프로덕션을 �
 - 개발 상황 : Prototype (Milestone 2)
 - 정식 릴리즈 : 2019.10.01 (UE4 Marketplace 배포)
 
-## 3. 마일스톤
+## 3. 로드맵
 
 - [완료] ~~Milestone 1 (2019.01.19 ~ 2019.04.19)~~
   - ~~UE4 기반 MMO 프레임워크 만들기~~
@@ -41,12 +41,12 @@ T4Framework 를 도입해 게임 프로토타이핑과 매스 프로덕션을 �
   - NextGen 데모 만들기
   - RayTracing (4.22) & Niagara ChaosPhysics (4.23)
 
-## 4. 개발 영상 및 자료
+## 4. 영상 및 자료
 
 ### Release Version
 - 준비중...
 
-### Prototype Version
+### Prototype Version (개발중...)
 - **T4RehearsalConti Editor** (GamePlay Action Setup)
   - M1 ~ M2 : 2019.04.05 ~ 2019.05.14
   - <https://youtu.be/shc2cLraU6M?t=0s>
