@@ -34,20 +34,26 @@ T4Framework 를 도입해 게임 프로토타이핑과 매스 프로덕션을 �
   - 캐릭터 셋업 및 액션 툴 기능 개발
 - [예정] Milestone 3 (2019.07.09 ~ 2019.09.27)
   - 오픈 월드 제작에 필요한 월드 관련 기능 및 툴 개발
-  - T4RehearsalProcedural Editor Prototyping
-- [예정] Milestone 4 (...)
+  - T4RehearsalLevel Editor Prototyping
+- [예정] UE4 Marketplace 배포 (2019.10.01)
+  - 공개 버전 (무료)
+- [예정] Milestone 4 (2019.10.07 ~)
   - NextGen 데모 만들기
   - RayTracing (4.22) & Niagara ChaosPhysics (4.23)
 
 ## 4. 개발 영상 및 자료
 
-- **T4RehearsalConti Editor Prototyping** (GamePlay Action Setup)
+### Release
+- 준비중...
+
+### Prototype
+- **T4RehearsalConti Editor** (GamePlay Action Setup)
   - M1 ~ M2 : 2019.04.05 ~ 2019.05.14
   - <https://youtu.be/shc2cLraU6M?t=0s>
-- **T4RehearsalEntity Editor Prototyping** (Character Setup)
+- **T4RehearsalEntity Editor** (Character Setup)
   - M2 : 2019.05.06 ~ 2019.05.13
   - <https://youtu.be/pA4cK60z0Bs?t=0s>
-- **T4Framework Architecture Prototyping**
+- **T4Framework Architecture**
   - M1 : 2019.01.19 ~ 2019.04.19
   - <https://youtu.be/kq6mi8CEYi0?t=0s>
 
