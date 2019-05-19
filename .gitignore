@@ -57,9 +57,14 @@
 *.bat
 .vs
 *.target
+BuildRules/
 Saved/
 Content/
+Plugins/T4Framework/Source/T4Core/Public
 Plugins/T4Framework/Source/T4Core/Private
+Plugins/T4Framework/Source/T4Engine/Public
 Plugins/T4Framework/Source/T4Engine/Private
+Plugins/T4Framework/Source/T4Framework/Public
 Plugins/T4Framework/Source/T4Framework/Private
+Plugins/T4Framework/Source/T4RehearsalEditor/Public
 Plugins/T4Framework/Source/T4RehearsalEditor/Private
