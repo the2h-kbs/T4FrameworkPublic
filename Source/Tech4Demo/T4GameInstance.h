@@ -1,4 +1,4 @@
-﻿// Copyright 2019 Tech4 Labs. All Rights Reserved.
+// Copyright 2019 Tech4 Labs. All Rights Reserved.
 
 #pragma once
 
@@ -29,6 +29,6 @@ public:
 #endif
 
 private:
-	ET4SceneLayer SceneLayer;
+	ET4LayerType LayerType;
 	IT4GameFramework* GameFramework;
 };

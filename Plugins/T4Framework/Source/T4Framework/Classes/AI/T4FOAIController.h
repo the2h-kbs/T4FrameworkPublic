@@ -58,7 +58,7 @@ protected:
 
 public:
 	// IT4Controller
-	ET4SceneLayer GetSceneLayer() const override { return SceneLayer; }
+	ET4LayerType GetLayerType() const override { return LayerType; }
 	ET4ControllerType GetType() const override { return ET4ControllerType::NPCAI; }
 
 	bool SetTargetObject(const FT4ObjectID& InNewTargetID) override;
@@ -86,7 +86,7 @@ protected:
 	bool CheckAIDataLoading();
 
 private:
-	ET4SceneLayer SceneLayer;
+	ET4LayerType LayerType;
 
 	FT4NetID NetID; // #15
 	FT4ObjectID TargetObjectID;

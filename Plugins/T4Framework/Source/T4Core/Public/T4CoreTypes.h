@@ -9,7 +9,7 @@
   * http://api.unrealengine.com/KOR/Programming/UnrealArchitecture/Reference/Properties/
  */
 UENUM()
-enum class ET4SceneLayer : uint8
+enum class ET4LayerType : uint8
 {
 	Server, // #15
 	ServerMax,

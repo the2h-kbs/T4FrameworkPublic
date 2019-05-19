@@ -5,7 +5,6 @@
 *.slo
 *.lo
 *.o
-*.obj
 
 # Precompiled Headers
 *.gch
@@ -39,12 +38,25 @@
 *.png
 *_BuiltData.uasset
 
+# Intermediate
+*.exp
+*.txt
+*.bin
+*.log
+*.res
+*.dat
+*.deps
+*.response
+*.uhtmanifest
+*.vcxproj
+*.filters
+*.user
+
 # UnrealEngine
 *.sln
 *.bat
 .vs
 *.target
-Intermediate/
 Saved/
 Content/
 Plugins/T4Framework/Source/T4Core/Private

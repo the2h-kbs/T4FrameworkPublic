@@ -1,4 +1,4 @@
-﻿// Copyright 2019 Tech4 Labs. All Rights Reserved.
+// Copyright 2019 Tech4 Labs. All Rights Reserved.
 
 #pragma once
 
@@ -47,8 +47,8 @@ public:
 	void Reset() override;
 
 public:
-	ET4SceneLayer GetSceneLayer() const { return SceneLayer; }
+	ET4LayerType GetLayerType() const { return LayerType; }
 
 private:
-	ET4SceneLayer SceneLayer;
+	ET4LayerType LayerType;
 };

@@ -1,4 +1,4 @@
-﻿// Copyright 2019 Tech4 Labs. All Rights Reserved.
+// Copyright 2019 Tech4 Labs. All Rights Reserved.
 
 #include "T4GameInstance.h"
 #include "T4GameMode.h"
@@ -11,7 +11,7 @@
  */
 UT4GameInstance::UT4GameInstance(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
-	, SceneLayer(ET4SceneLayer::Max)
+	, LayerType(ET4LayerType::Max)
 	, GameFramework(nullptr)
 {
 }
@@ -21,15 +21,15 @@ void UT4GameInstance::Init()
 	Super::Init();
 	// #15
 	ET4FrameworkType CreateFrameworkType = ET4FrameworkType::Client;
-	if (FT4SceneLayer::CheckServer(WorldContext))
+	if (T4Layer::CheckServer(WorldContext))
 	{
 		CreateFrameworkType = ET4FrameworkType::Server;
 	}
 	GameFramework = CreateT4Framework(CreateFrameworkType, WorldContext);
-	check(ET4SceneLayer::Max == SceneLayer);
-	SceneLayer = FT4SceneLayer::Get(WorldContext);
-	check(SceneLayer < ET4SceneLayer::Max);
-	check(SceneLayer == GameFramework->GetSceneLayer());
+	check(ET4LayerType::Max == LayerType);
+	LayerType = T4Layer::Get(WorldContext);
+	check(LayerType < ET4LayerType::Max);
+	check(LayerType == GameFramework->GetLayerType());
 }
 
 void UT4GameInstance::Shutdown()
@@ -52,7 +52,7 @@ FGameInstancePIEResult UT4GameInstance::StartPlayInEditorGameInstance(
 	FGameInstancePIEResult PIEResult = Super::StartPlayInEditorGameInstance(LocalPlayer, Params);
 	if (PIEResult.IsSuccess())
 	{
-		check(SceneLayer < ET4SceneLayer::Max);
+		check(LayerType < ET4LayerType::Max);
 		check(nullptr != GameFramework);
 		GameFramework->OnStartPlay(false);
 	}

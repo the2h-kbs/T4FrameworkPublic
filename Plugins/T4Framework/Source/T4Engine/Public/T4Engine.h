@@ -91,7 +91,7 @@ class T4ENGINE_API IT4GameObject
 public:
 	virtual ~IT4GameObject() {}
 
-	virtual ET4SceneLayer GetSceneLayer() const = 0;
+	virtual ET4LayerType GetLayerType() const = 0;
 	virtual ET4ObjectType GetType() const = 0;
 
 	virtual const FT4ObjectID& GetObjectID() const = 0;
@@ -147,7 +147,7 @@ public:
 	virtual ~IT4ObjectFactory() {};
 
 	virtual IT4GameObject* CreateGameObject(
-		ET4SceneLayer InSceneLayer,
+		ET4LayerType InLayerType,
 		const FT4ObjectEnterAction* InAction
 	) = 0;
 
@@ -160,7 +160,7 @@ class T4ENGINE_API IT4Controller
 public:
 	virtual ~IT4Controller() {}
 
-	virtual ET4SceneLayer GetSceneLayer() const = 0;
+	virtual ET4LayerType GetLayerType() const = 0;
 	virtual ET4ControllerType GetType() const = 0;
 
 	virtual bool SetTargetObject(const FT4ObjectID& InNewTargetID) = 0;
@@ -247,7 +247,7 @@ class T4ENGINE_API IT4GameWorld
 public:
 	virtual ~IT4GameWorld() {}
 
-	virtual ET4SceneLayer GetSceneLayer() const = 0;
+	virtual ET4LayerType GetLayerType() const = 0;
 	virtual ET4WorldType GetType() const = 0;
 
 	virtual void OnReset() = 0;
@@ -323,6 +323,6 @@ T4ENGINE_API IT4GameWorld* CreateT4GameWorld(
 );
 T4ENGINE_API void DestroyT4GameWorld(IT4GameWorld* InGameWorld);
 
-T4ENGINE_API IT4GameWorld* GetT4GameWorld(ET4SceneLayer InSceneWorld);
+T4ENGINE_API IT4GameWorld* GetT4GameWorld(ET4LayerType InSceneWorld);
 
 T4ENGINE_API IT4ObjectFactory* GetT4ObjectFactory();

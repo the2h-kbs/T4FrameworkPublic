@@ -27,5 +27,5 @@ protected:
 	void BeginPlay() override;
 
 protected:
-	ET4SceneLayer SceneLayer;
+	ET4LayerType LayerType;
 };

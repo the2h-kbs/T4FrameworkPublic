@@ -19,7 +19,7 @@
  */
 AT4GameMode::AT4GameMode(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
-	, SceneLayer(ET4SceneLayer::Max)
+	, LayerType(ET4LayerType::Max)
 {
 	PlayerControllerClass = AT4PlayerController::StaticClass();
 	DefaultPawnClass = AT4PlayerDefaultPawn::StaticClass();
@@ -33,16 +33,16 @@ void AT4GameMode::InitGame(
 {
 	Super::InitGame(MapName, Options, ErrorMessage);
 
-	check(ET4SceneLayer::Max == SceneLayer);
-	SceneLayer = FT4SceneLayer::Get(GetWorld());
-	check(ET4SceneLayer::Max != SceneLayer);
+	check(ET4LayerType::Max == LayerType);
+	LayerType = T4Layer::Get(GetWorld());
+	check(ET4LayerType::Max != LayerType);
 
 #if USES_GAME_MODE_LOG
 	UE_LOG(
 		LogT4Demo,
 		Display,
 		TEXT("[SL:%u] AT4GameMode : InitGame"),
-		uint32(SceneLayer)
+		uint32(LayerType)
 	);
 #endif
 }
@@ -53,7 +53,7 @@ void AT4GameMode::StartPlay()
 
 #if !WITH_EDITOR
 	// only game used. edit call to UT4GameInstance::StartPlayInEditorGameInstance.
-	IT4GameFramework* Framework = GetT4Framework(SceneLayer);
+	IT4GameFramework* Framework = GetT4Framework(LayerType);
 	check(nullptr != Framework);
 	Framework->OnStartPlay(false);
 #endif
@@ -78,7 +78,7 @@ void AT4GameMode::PreLogin(
 		LogT4Demo,
 		Display,
 		TEXT("[SL:%u] AT4GameMode : PreLogin, Option '%s'"),
-		uint32(SceneLayer),
+		uint32(LayerType),
 		*Options
 	);
 #endif
@@ -107,7 +107,7 @@ APlayerController* AT4GameMode::Login(
 		LogT4Demo,
 		Display,
 		TEXT("[SL:%u] AT4GameMode : Login, Option '%s'"),
-		uint32(SceneLayer),
+		uint32(LayerType),
 		*Options
 	);
 #endif
@@ -125,7 +125,7 @@ void AT4GameMode::Logout(AController* Exiting)
 		LogT4Demo,
 		Display,
 		TEXT("[SL:%u] AT4GameMode : Logout, bLocalPlayer '%s'"),
-		uint32(SceneLayer),
+		uint32(LayerType),
 		bLocalController ? TEXT("true") : TEXT("false")
 	);
 #endif

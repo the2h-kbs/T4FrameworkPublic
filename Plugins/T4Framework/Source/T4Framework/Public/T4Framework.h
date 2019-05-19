@@ -72,7 +72,7 @@ class T4FRAMEWORK_API IT4GameFramework
 public:
 	virtual ~IT4GameFramework() {}
 
-	virtual ET4SceneLayer GetSceneLayer() const = 0;
+	virtual ET4LayerType GetLayerType() const = 0;
 	virtual ET4FrameworkType GetType() const = 0;
 
 	virtual void OnReset() = 0;
@@ -114,4 +114,4 @@ T4FRAMEWORK_API IT4GameFramework* CreateT4Framework(
 );
 T4FRAMEWORK_API void DestroyT4Framework(IT4GameFramework* InFramework);
 
-T4FRAMEWORK_API IT4GameFramework* GetT4Framework(ET4SceneLayer InSceneLayer);
+T4FRAMEWORK_API IT4GameFramework* GetT4Framework(ET4LayerType InLayerType);

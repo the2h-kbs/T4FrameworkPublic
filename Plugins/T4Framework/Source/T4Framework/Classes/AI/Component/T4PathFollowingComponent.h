@@ -1,4 +1,4 @@
-﻿// Copyright 2019 Tech4 Labs. All Rights Reserved.
+// Copyright 2019 Tech4 Labs. All Rights Reserved.
 
 #pragma once
 
@@ -36,6 +36,6 @@ protected:
 	void UpdatePathSegment() override;
 
 private:
-	ET4SceneLayer SceneLayer;
+	ET4LayerType LayerType;
 	FT4ObjectID AIObjectID;
 };
