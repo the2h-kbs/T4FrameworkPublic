@@ -89,46 +89,46 @@ template<> T4REHEARSALEDITOR_API UClass* StaticClass<class UT4RehearsalThumbnail
 #define T4FrameworkDeploy_Plugins_T4Framework_Source_T4RehearsalEditor_Private_Utility_T4RehearsalThumbnailRenderer_h_36_RPC_WRAPPERS_NO_PURE_DECLS
 #define T4FrameworkDeploy_Plugins_T4Framework_Source_T4RehearsalEditor_Private_Utility_T4RehearsalThumbnailRenderer_h_36_INCLASS_NO_PURE_DECLS \
 private: \
-	static void StaticRegisterNativesUT4ActionContiThumbnailRenderer(); \
-	friend struct Z_Construct_UClass_UT4ActionContiThumbnailRenderer_Statics; \
+	static void StaticRegisterNativesUT4ContiThumbnailRenderer(); \
+	friend struct Z_Construct_UClass_UT4ContiThumbnailRenderer_Statics; \
 public: \
-	DECLARE_CLASS(UT4ActionContiThumbnailRenderer, UT4RehearsalThumbnailBaseRenderer, COMPILED_IN_FLAGS(0), CASTCLASS_None, TEXT("/Script/T4RehearsalEditor"), NO_API) \
-	DECLARE_SERIALIZER(UT4ActionContiThumbnailRenderer)
+	DECLARE_CLASS(UT4ContiThumbnailRenderer, UT4RehearsalThumbnailBaseRenderer, COMPILED_IN_FLAGS(0), CASTCLASS_None, TEXT("/Script/T4RehearsalEditor"), NO_API) \
+	DECLARE_SERIALIZER(UT4ContiThumbnailRenderer)
 
 
 #define T4FrameworkDeploy_Plugins_T4Framework_Source_T4RehearsalEditor_Private_Utility_T4RehearsalThumbnailRenderer_h_36_INCLASS \
 private: \
-	static void StaticRegisterNativesUT4ActionContiThumbnailRenderer(); \
-	friend struct Z_Construct_UClass_UT4ActionContiThumbnailRenderer_Statics; \
+	static void StaticRegisterNativesUT4ContiThumbnailRenderer(); \
+	friend struct Z_Construct_UClass_UT4ContiThumbnailRenderer_Statics; \
 public: \
-	DECLARE_CLASS(UT4ActionContiThumbnailRenderer, UT4RehearsalThumbnailBaseRenderer, COMPILED_IN_FLAGS(0), CASTCLASS_None, TEXT("/Script/T4RehearsalEditor"), NO_API) \
-	DECLARE_SERIALIZER(UT4ActionContiThumbnailRenderer)
+	DECLARE_CLASS(UT4ContiThumbnailRenderer, UT4RehearsalThumbnailBaseRenderer, COMPILED_IN_FLAGS(0), CASTCLASS_None, TEXT("/Script/T4RehearsalEditor"), NO_API) \
+	DECLARE_SERIALIZER(UT4ContiThumbnailRenderer)
 
 
 #define T4FrameworkDeploy_Plugins_T4Framework_Source_T4RehearsalEditor_Private_Utility_T4RehearsalThumbnailRenderer_h_36_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
-	NO_API UT4ActionContiThumbnailRenderer(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
-	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UT4ActionContiThumbnailRenderer) \
-	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, UT4ActionContiThumbnailRenderer); \
-DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UT4ActionContiThumbnailRenderer); \
+	NO_API UT4ContiThumbnailRenderer(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
+	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UT4ContiThumbnailRenderer) \
+	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, UT4ContiThumbnailRenderer); \
+DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UT4ContiThumbnailRenderer); \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
-	NO_API UT4ActionContiThumbnailRenderer(UT4ActionContiThumbnailRenderer&&); \
-	NO_API UT4ActionContiThumbnailRenderer(const UT4ActionContiThumbnailRenderer&); \
+	NO_API UT4ContiThumbnailRenderer(UT4ContiThumbnailRenderer&&); \
+	NO_API UT4ContiThumbnailRenderer(const UT4ContiThumbnailRenderer&); \
 public:
 
 
 #define T4FrameworkDeploy_Plugins_T4Framework_Source_T4RehearsalEditor_Private_Utility_T4RehearsalThumbnailRenderer_h_36_ENHANCED_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
-	NO_API UT4ActionContiThumbnailRenderer(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()) : Super(ObjectInitializer) { }; \
+	NO_API UT4ContiThumbnailRenderer(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()) : Super(ObjectInitializer) { }; \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
-	NO_API UT4ActionContiThumbnailRenderer(UT4ActionContiThumbnailRenderer&&); \
-	NO_API UT4ActionContiThumbnailRenderer(const UT4ActionContiThumbnailRenderer&); \
+	NO_API UT4ContiThumbnailRenderer(UT4ContiThumbnailRenderer&&); \
+	NO_API UT4ContiThumbnailRenderer(const UT4ContiThumbnailRenderer&); \
 public: \
-	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, UT4ActionContiThumbnailRenderer); \
-DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UT4ActionContiThumbnailRenderer); \
-	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UT4ActionContiThumbnailRenderer)
+	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, UT4ContiThumbnailRenderer); \
+DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UT4ContiThumbnailRenderer); \
+	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UT4ContiThumbnailRenderer)
 
 
 #define T4FrameworkDeploy_Plugins_T4Framework_Source_T4RehearsalEditor_Private_Utility_T4RehearsalThumbnailRenderer_h_36_PRIVATE_PROPERTY_OFFSET
@@ -155,7 +155,7 @@ private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-template<> T4REHEARSALEDITOR_API UClass* StaticClass<class UT4ActionContiThumbnailRenderer>();
+template<> T4REHEARSALEDITOR_API UClass* StaticClass<class UT4ContiThumbnailRenderer>();
 
 #define T4FrameworkDeploy_Plugins_T4Framework_Source_T4RehearsalEditor_Private_Utility_T4RehearsalThumbnailRenderer_h_45_RPC_WRAPPERS
 #define T4FrameworkDeploy_Plugins_T4Framework_Source_T4RehearsalEditor_Private_Utility_T4RehearsalThumbnailRenderer_h_45_RPC_WRAPPERS_NO_PURE_DECLS

@@ -14,7 +14,7 @@
 // ET4ActionType::Conti
 // ET4ActionType::Stop
 
-class UT4ActionContiAsset;
+class UT4ContiAsset;
 
 USTRUCT()
 struct T4ENGINE_API FT4ContiAction : public FT4ObjectAction
@@ -23,7 +23,7 @@ struct T4ENGINE_API FT4ContiAction : public FT4ObjectAction
 
 public:
 	UPROPERTY(EditAnywhere)
-	TSoftObjectPtr<UT4ActionContiAsset> ContiAsset;
+	TSoftObjectPtr<UT4ContiAsset> ContiAsset;
 
 	UPROPERTY(EditAnywhere)
 	bool bUsePreloading;

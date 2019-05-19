@@ -17,7 +17,7 @@ void EmptyLinkFunctionForGeneratedCodeT4Action_Common() {}
 	UPackage* Z_Construct_UPackage__Script_T4Engine();
 	T4ENGINE_API UScriptStruct* Z_Construct_UScriptStruct_FT4ObjectAction();
 	T4ENGINE_API UScriptStruct* Z_Construct_UScriptStruct_FT4ContiAction();
-	T4ENGINE_API UClass* Z_Construct_UClass_UT4ActionContiAsset_NoRegister();
+	T4ENGINE_API UClass* Z_Construct_UClass_UT4ContiAsset_NoRegister();
 // End Cross Module References
 class UScriptStruct* FT4StopAction::StaticStruct()
 {
@@ -173,7 +173,7 @@ static struct FScriptStruct_T4Engine_StaticRegisterNativesFT4ContiAction
 		{ "ModuleRelativePath", "Classes/Action/T4Action_Common.h" },
 	};
 #endif
-	const UE4CodeGen_Private::FSoftObjectPropertyParams Z_Construct_UScriptStruct_FT4ContiAction_Statics::NewProp_ContiAsset = { "ContiAsset", nullptr, (EPropertyFlags)0x0014000000000001, UE4CodeGen_Private::EPropertyGenFlags::SoftObject, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FT4ContiAction, ContiAsset), Z_Construct_UClass_UT4ActionContiAsset_NoRegister, METADATA_PARAMS(Z_Construct_UScriptStruct_FT4ContiAction_Statics::NewProp_ContiAsset_MetaData, ARRAY_COUNT(Z_Construct_UScriptStruct_FT4ContiAction_Statics::NewProp_ContiAsset_MetaData)) };
+	const UE4CodeGen_Private::FSoftObjectPropertyParams Z_Construct_UScriptStruct_FT4ContiAction_Statics::NewProp_ContiAsset = { "ContiAsset", nullptr, (EPropertyFlags)0x0014000000000001, UE4CodeGen_Private::EPropertyGenFlags::SoftObject, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FT4ContiAction, ContiAsset), Z_Construct_UClass_UT4ContiAsset_NoRegister, METADATA_PARAMS(Z_Construct_UScriptStruct_FT4ContiAction_Statics::NewProp_ContiAsset_MetaData, ARRAY_COUNT(Z_Construct_UScriptStruct_FT4ContiAction_Statics::NewProp_ContiAsset_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UScriptStruct_FT4ContiAction_Statics::PropPointers[] = {
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FT4ContiAction_Statics::NewProp_bUsePreloading,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UScriptStruct_FT4ContiAction_Statics::NewProp_ContiAsset,
@@ -206,7 +206,7 @@ static struct FScriptStruct_T4Engine_StaticRegisterNativesFT4ContiAction
 		}
 		return ReturnStruct;
 	}
-	uint32 Get_Z_Construct_UScriptStruct_FT4ContiAction_Hash() { return 2719187543U; }
+	uint32 Get_Z_Construct_UScriptStruct_FT4ContiAction_Hash() { return 2678294049U; }
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 #ifdef _MSC_VER
 #pragma warning (pop)

@@ -13,7 +13,7 @@
 #include "T4Engine/Classes/Action/T4Action_Move.h"
 #include "T4Engine/Classes/Action/T4Action_Visual.h"
 #include "T4Engine/Classes/Action/T4Action_Root.h"
-#include "T4Engine/Classes/Action/T4ActionContiAsset.h"
+#include "T4Engine/Classes/Conti/T4ContiAsset.h"
 #include "T4Engine/Classes/Action/T4Action_Common.h"
 #include "T4Engine/Classes/Action/T4Action_Editor.h"
 #include "T4Engine/Classes/Action/T4Action_Status.h"

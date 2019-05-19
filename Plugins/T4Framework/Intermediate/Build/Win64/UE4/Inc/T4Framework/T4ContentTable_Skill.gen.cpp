@@ -16,7 +16,7 @@ void EmptyLinkFunctionForGeneratedCodeT4ContentTable_Skill() {}
 	T4FRAMEWORK_API UScriptStruct* Z_Construct_UScriptStruct_FT4ContentSkillTableRow();
 	UPackage* Z_Construct_UPackage__Script_T4Framework();
 	ENGINE_API UScriptStruct* Z_Construct_UScriptStruct_FTableRowBase();
-	T4ENGINE_API UClass* Z_Construct_UClass_UT4ActionContiAsset_NoRegister();
+	T4ENGINE_API UClass* Z_Construct_UClass_UT4ContiAsset_NoRegister();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FGuid();
 // End Cross Module References
 class UScriptStruct* FT4ContentSkillTableRow::StaticStruct()
@@ -81,7 +81,7 @@ static struct FScriptStruct_T4Framework_StaticRegisterNativesFT4ContentSkillTabl
 		{ "ModuleRelativePath", "Classes/Content/T4ContentTable_Skill.h" },
 	};
 #endif
-	const UE4CodeGen_Private::FSoftObjectPropertyParams Z_Construct_UScriptStruct_FT4ContentSkillTableRow_Statics::NewProp_ContiAsset = { "ContiAsset", nullptr, (EPropertyFlags)0x0014000000000005, UE4CodeGen_Private::EPropertyGenFlags::SoftObject, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FT4ContentSkillTableRow, ContiAsset), Z_Construct_UClass_UT4ActionContiAsset_NoRegister, METADATA_PARAMS(Z_Construct_UScriptStruct_FT4ContentSkillTableRow_Statics::NewProp_ContiAsset_MetaData, ARRAY_COUNT(Z_Construct_UScriptStruct_FT4ContentSkillTableRow_Statics::NewProp_ContiAsset_MetaData)) };
+	const UE4CodeGen_Private::FSoftObjectPropertyParams Z_Construct_UScriptStruct_FT4ContentSkillTableRow_Statics::NewProp_ContiAsset = { "ContiAsset", nullptr, (EPropertyFlags)0x0014000000000005, UE4CodeGen_Private::EPropertyGenFlags::SoftObject, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FT4ContentSkillTableRow, ContiAsset), Z_Construct_UClass_UT4ContiAsset_NoRegister, METADATA_PARAMS(Z_Construct_UScriptStruct_FT4ContentSkillTableRow_Statics::NewProp_ContiAsset_MetaData, ARRAY_COUNT(Z_Construct_UScriptStruct_FT4ContentSkillTableRow_Statics::NewProp_ContiAsset_MetaData)) };
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FT4ContentSkillTableRow_Statics::NewProp_Guid_MetaData[] = {
 		{ "Category", "Attribute" },
@@ -137,7 +137,7 @@ static struct FScriptStruct_T4Framework_StaticRegisterNativesFT4ContentSkillTabl
 		}
 		return ReturnStruct;
 	}
-	uint32 Get_Z_Construct_UScriptStruct_FT4ContentSkillTableRow_Hash() { return 1710991354U; }
+	uint32 Get_Z_Construct_UScriptStruct_FT4ContentSkillTableRow_Hash() { return 3624805214U; }
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 #ifdef _MSC_VER
 #pragma warning (pop)

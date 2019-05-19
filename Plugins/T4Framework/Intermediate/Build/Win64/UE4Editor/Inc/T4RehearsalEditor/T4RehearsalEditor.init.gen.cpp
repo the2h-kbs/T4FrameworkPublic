@@ -21,8 +21,8 @@ void EmptyLinkFunctionForGeneratedCodeT4RehearsalEditor_init() {}
 				nullptr,
 				0,
 				PKG_CompiledIn | 0x00000040,
-				0xA9C98606,
-				0x3BAE4347,
+				0x811D7432,
+				0xD29D6BE2,
 				METADATA_PARAMS(nullptr, 0)
 			};
 			UE4CodeGen_Private::ConstructUPackage(ReturnPackage, PackageParams);

@@ -9,7 +9,7 @@
 /**
   * http://api.unrealengine.com/KOR/Gameplay/DataDriven/
  */
-class UT4ActionContiAsset;
+class UT4ContiAsset;
 
 USTRUCT()
 struct FT4ContentSkillTableRow : public FTableRowBase
@@ -27,5 +27,5 @@ public:
 	FGuid Guid;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attribute)
-	TSoftObjectPtr<UT4ActionContiAsset> ContiAsset;
+	TSoftObjectPtr<UT4ContiAsset> ContiAsset;
 };
