@@ -11,7 +11,6 @@
  */
 UT4GameInstance::UT4GameInstance(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
-	, LayerType(ET4LayerType::Max)
 	, GameFramework(nullptr)
 {
 }
@@ -26,8 +25,7 @@ void UT4GameInstance::Init()
 		CreateFrameworkType = ET4FrameworkType::Server;
 	}
 	GameFramework = CreateT4Framework(CreateFrameworkType, WorldContext);
-	check(ET4LayerType::Max == LayerType);
-	LayerType = T4Layer::Get(WorldContext);
+	ET4LayerType LayerType = T4Layer::Get(WorldContext);
 	check(LayerType < ET4LayerType::Max);
 	check(LayerType == GameFramework->GetLayerType());
 }
@@ -52,9 +50,8 @@ FGameInstancePIEResult UT4GameInstance::StartPlayInEditorGameInstance(
 	FGameInstancePIEResult PIEResult = Super::StartPlayInEditorGameInstance(LocalPlayer, Params);
 	if (PIEResult.IsSuccess())
 	{
-		check(LayerType < ET4LayerType::Max);
 		check(nullptr != GameFramework);
-		GameFramework->OnStartPlay(false);
+		GameFramework->OnStartPlay();
 	}
 	return PIEResult;
 }

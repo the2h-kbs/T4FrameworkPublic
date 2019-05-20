@@ -29,6 +29,5 @@ public:
 #endif
 
 private:
-	ET4LayerType LayerType;
 	IT4GameFramework* GameFramework;
 };
