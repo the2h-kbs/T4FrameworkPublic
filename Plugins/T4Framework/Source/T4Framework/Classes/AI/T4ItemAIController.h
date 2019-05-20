@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 
-#include "Content/T4ContentDataLoader.h"
 #include "Public/Protocol/T4PacketTypes.h" // #25
 
 #include "T4Engine/Public/T4Engine.h"
@@ -19,6 +18,8 @@
 class UBehaviorTree;
 class UBlackboardData;
 class UT4PathFollowingComponent;
+class FT4BlackboardDataLoader;
+class FT4BehaviorTreeDataLoader;
 
 UCLASS()
 class T4FRAMEWORK_API AT4ItemAIController : public AAIController, public IT4AIController
@@ -94,8 +95,8 @@ private:
 	FName ItemTableName;
 	bool bAIDataLoaded;
 
-	FT4BlackboardDataLoader BlackboardDataLoader;
-	FT4BehaviorTreeDataLoader BehaviorTreeDataLoader;
+	FT4BlackboardDataLoader* BlackboardDataLoader;
+	FT4BehaviorTreeDataLoader* BehaviorTreeDataLoader;
 
 private:
 	UPROPERTY(transient)

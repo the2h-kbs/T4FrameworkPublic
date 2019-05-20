@@ -13,6 +13,7 @@
 #include "T4Framework/Classes/AI/T4FOAIController.h"
 #include "T4Framework/Classes/AI/T4ItemAIController.h"
 #include "T4Framework/Classes/Player/T4LocalPlayer.h"
+#include "T4Framework/Classes/Player/Component/T4NetReplicateComponent.h"
 #include "T4Framework/Classes/AI/T4NPCAIController.h"
 #include "T4Framework/Classes/AI/Component/T4PathFollowingComponent.h"
 #include "T4Framework/Classes/Player/T4PlayerCameraManager.h"

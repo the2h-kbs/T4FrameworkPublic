@@ -18,6 +18,7 @@
 #include "D:\GitHub\T4FrameworkDeploy\Plugins\T4Framework\Intermediate\Build\Win64\UE4Editor\Inc\T4Framework\T4Framework.init.gen.cpp"
 #include "D:\GitHub\T4FrameworkDeploy\Plugins\T4Framework\Intermediate\Build\Win64\UE4Editor\Inc\T4Framework\T4ItemAIController.gen.cpp"
 #include "D:\GitHub\T4FrameworkDeploy\Plugins\T4Framework\Intermediate\Build\Win64\UE4Editor\Inc\T4Framework\T4LocalPlayer.gen.cpp"
+#include "D:\GitHub\T4FrameworkDeploy\Plugins\T4Framework\Intermediate\Build\Win64\UE4Editor\Inc\T4Framework\T4NetReplicateComponent.gen.cpp"
 #include "D:\GitHub\T4FrameworkDeploy\Plugins\T4Framework\Intermediate\Build\Win64\UE4Editor\Inc\T4Framework\T4NPCAIController.gen.cpp"
 #include "D:\GitHub\T4FrameworkDeploy\Plugins\T4Framework\Intermediate\Build\Win64\UE4Editor\Inc\T4Framework\T4PacketBase.gen.cpp"
 #include "D:\GitHub\T4FrameworkDeploy\Plugins\T4Framework\Intermediate\Build\Win64\UE4Editor\Inc\T4Framework\T4PacketCS_Action.gen.cpp"
