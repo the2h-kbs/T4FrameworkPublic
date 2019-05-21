@@ -329,17 +329,3 @@ bool FT4PacketHandlerSC::OnRecvPacket(const FT4PacketStoC* InPacket)
 	}
 	return true;
 }
-
-void FT4PacketHandlerSC::OnBroadcastMoveToPacket(
-	const FT4ObjectID& InObjectID,
-	float InMoveSpeed,
-	const FVector& InMoveDirection
-)
-{
-	// #42
-	FT4PacketMoveToSC NewPacketSC;
-	NewPacketSC.ObjectID = InObjectID;
-	NewPacketSC.MoveSpeed = InMoveSpeed;
-	NewPacketSC.MoveDirection = InMoveDirection;
-	OnBroadcastPacket(&NewPacketSC);
-}

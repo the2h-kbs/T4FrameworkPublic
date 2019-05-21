@@ -4,8 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "T4FrameworkNet.h"
-#include "T4Engine/Public/T4EngineTypes.h"
+#include "T4FrameworkDelegates.h" // #42
+
 #include "T4Core/Public/T4CoreTypes.h"
+#include "T4Engine/Public/T4EngineTypes.h"
 
 #if WITH_EDITOR
 #include "ICursor.h"
@@ -14,8 +16,6 @@
 /**
   * 
  */
-struct FT4PacketStoC;
-struct FT4PacketCtoS;
 class IT4PlayerController;
 class IT4GameWorld;
 class IT4GameObject;
@@ -48,34 +48,6 @@ public:
 };
 #endif
 
-class T4FRAMEWORK_API IT4PacketHandlerSC
-{
-public:
-	virtual ~IT4PacketHandlerSC() {}
-
-	virtual bool OnSendPacket(FT4PacketStoC* InPacket, IT4PlayerController* InRecvPC) = 0;
-	virtual bool OnBroadcastPacket(FT4PacketStoC* InPacket) = 0;
-
-	virtual bool OnRecvPacket(const FT4PacketStoC* InPacket) = 0;
-
-	virtual void OnBroadcastMoveToPacket(
-		const FT4ObjectID& InObjectID, 
-		float InMoveSpeed, 
-		const FVector& InMoveDirection
-	) = 0; // #42
-};
-
-class T4FRAMEWORK_API IT4PacketHandlerCS
-{
-public:
-	virtual ~IT4PacketHandlerCS() {}
-
-	virtual bool OnSendPacket(FT4PacketCtoS* InPacket) = 0; // Client, Reliable
-
-	virtual bool OnRecvPacket_Validation(const FT4PacketCtoS* InPacket) = 0;
-	virtual bool OnRecvPacket(const FT4PacketCtoS* InPacket, IT4PlayerController* InSenderPC) = 0;
-};
-
 // #42
 class T4FRAMEWORK_API IT4GameplayHandler
 {
@@ -90,9 +62,6 @@ public:
 	virtual void OnPlayerSpawned(IT4PlayerController* InOwnerPC) = 0;
 
 	virtual void OnProcess(float InDeltaTime) = 0;
-
-	virtual IT4PacketHandlerSC* GetPacketHandlerSC() = 0; // #27
-	virtual IT4PacketHandlerCS* GetPacketHandlerCS() = 0; // #27
 
 #if WITH_EDITOR
 	virtual void SetInputControlLock(bool bLock) = 0; // #30
@@ -146,7 +115,3 @@ T4FRAMEWORK_API IT4GameFramework* T4FrameworkCreate(
 T4FRAMEWORK_API void T4FrameworkDestroy(IT4GameFramework* InFramework);
 
 T4FRAMEWORK_API IT4GameFramework* T4FrameworkGet(ET4LayerType InLayerType);
-
-// #42
-DECLARE_DELEGATE_OneParam(FOnRegisterDefaultT4Gameplay, IT4GameFramework*);
-T4FRAMEWORK_API FOnRegisterDefaultT4Gameplay& T4FrameworkRegisterDefaultGameplayDelegateGet();

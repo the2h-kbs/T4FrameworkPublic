@@ -5,10 +5,13 @@
 
 #include "Network/Protocol/T4PacketCS.h"
 
-#include "T4Framework/Public/T4Framework.h"
-#include "T4Framework/Public/T4FrameworkUtils.h"
+#include "Public/T4Gameplay.h"
+#include "Gameplay/T4GameplayInstance.h"
+
 #include "T4Engine/Classes/Action/T4ActionMinimal.h"
 #include "T4Engine/Public/T4Engine.h"
+#include "T4Framework/Public/T4Framework.h"
+#include "T4Framework/Public/T4FrameworkUtils.h"
 
 #include "Components/InputComponent.h"
 
@@ -567,10 +570,12 @@ IT4PacketHandlerCS* UT4GameplayControl::GetPacketHandlerCS() const
 	check(ET4LayerType::Max > LayerType);
 	IT4GameFramework* GameFramework = T4FrameworkGet(LayerType);
 	check(nullptr != GameFramework);
-	IT4GameplayHandler* GameplayHandler = GameFramework->GetGameplayHandler();
-	if (nullptr == GameplayHandler)
+	FT4GameplayInstance* GameplayInstance = FT4GameplayInstance::CastGameplayInstance(
+		GameFramework->GetGameplayHandler()
+	);
+	if (nullptr == GameplayInstance)
 	{
 		return nullptr;
 	}
-	return GameplayHandler->GetPacketHandlerCS();
+	return GameplayInstance->GetPacketHandlerCS();
 }

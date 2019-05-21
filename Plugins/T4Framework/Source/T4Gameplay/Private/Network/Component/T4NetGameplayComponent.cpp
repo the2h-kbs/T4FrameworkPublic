@@ -2,9 +2,12 @@
 
 #include "T4NetGameplayComponent.h"
 
+#include "Public/T4Gameplay.h"
+#include "Gameplay/T4GameplayInstance.h"
+
+#include "T4Core/Public/T4CoreLayer.h"
 #include "T4Framework/Classes/Player/T4PlayerController.h"
 #include "T4Framework/Public/T4Framework.h"
-#include "T4Core/Public/T4CoreLayer.h"
 
 #include "T4GameplayInternal.h"
 
@@ -42,12 +45,14 @@ FORCEINLINE IT4PacketHandlerCS* GetPacketHandlerCS(const ET4LayerType InLayerTyp
 	{
 		return nullptr;
 	}
-	IT4GameplayHandler* GameplayHandler = GameFramework->GetGameplayHandler();
-	if (nullptr == GameplayHandler)
+	FT4GameplayInstance* GameplayInstance = FT4GameplayInstance::CastGameplayInstance(
+		GameFramework->GetGameplayHandler()
+	);
+	if (nullptr == GameplayInstance)
 	{
 		return nullptr;
 	}
-	return GameplayHandler->GetPacketHandlerCS();
+	return GameplayInstance->GetPacketHandlerCS();
 }
 
 bool UT4NetGameplayComponent::CS_RecvPacket_Validate(const FT4PacketCtoS* InPacket)
@@ -117,12 +122,14 @@ void UT4NetGameplayComponent::SC_RecvPacket_Implementation(const FT4PacketStoC* 
 	{
 		return;
 	}
-	IT4GameplayHandler* GameplayHandler = GameFramework->GetGameplayHandler();
-	if (nullptr == GameplayHandler)
+	FT4GameplayInstance* GameplayInstance = FT4GameplayInstance::CastGameplayInstance(
+		GameFramework->GetGameplayHandler()
+	);
+	if (nullptr == GameplayInstance)
 	{
 		return;
 	}
-	IT4PacketHandlerSC* PacketHandlerSC = GameplayHandler->GetPacketHandlerSC();
+	IT4PacketHandlerSC* PacketHandlerSC = GameplayInstance->GetPacketHandlerSC();
 	if (nullptr == PacketHandlerSC)
 	{
 		return;

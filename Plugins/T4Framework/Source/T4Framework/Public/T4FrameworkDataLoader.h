@@ -8,7 +8,6 @@
 /**
   *
  */
-
 class FT4BlackboardDataLoader : public FT4AssetLoader
 {
 public:

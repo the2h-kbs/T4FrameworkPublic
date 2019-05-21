@@ -15,6 +15,7 @@
 #include "D:\GitHub\T4FrameworkDeploy\Plugins\T4Framework\Source\T4Framework\Private\Player\T4PlayerController.cpp"
 #include "D:\GitHub\T4FrameworkDeploy\Plugins\T4Framework\Source\T4Framework\Private\Player\T4PlayerDefaultPawn.cpp"
 #include "D:\GitHub\T4FrameworkDeploy\Plugins\T4Framework\Source\T4Framework\Private\T4FrameworkDataLoader.cpp"
+#include "D:\GitHub\T4FrameworkDeploy\Plugins\T4Framework\Source\T4Framework\Private\T4FrameworkDelegates.cpp"
 #include "D:\GitHub\T4FrameworkDeploy\Plugins\T4Framework\Source\T4Framework\Private\T4FrameworkModule.cpp"
 #include "D:\GitHub\T4FrameworkDeploy\Plugins\T4Framework\Source\T4Framework\Private\T4FrameworkUtils.cpp"
 #include "D:\GitHub\T4FrameworkDeploy\Plugins\T4Framework\Source\T4Framework\Private\Tests\T4FrameworkAutomationTests.cpp"

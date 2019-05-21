@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "T4Engine/Public/T4EngineTypes.h"
-#include "T4Framework/Public/T4Framework.h"
+#include "Public/T4Gameplay.h"
 
 /**
   *
@@ -23,12 +23,6 @@ public:
 	bool OnBroadcastPacket(FT4PacketStoC* InPacket) override;
 
 	bool OnRecvPacket(const FT4PacketStoC* InPacket) override;
-
-	void OnBroadcastMoveToPacket(
-		const FT4ObjectID& InObjectID,
-		float InMoveSpeed,
-		const FVector& InMoveDirection
-	) override; // #42
 
 public:
 	ET4LayerType GetLayerType() const { return LayerType; }

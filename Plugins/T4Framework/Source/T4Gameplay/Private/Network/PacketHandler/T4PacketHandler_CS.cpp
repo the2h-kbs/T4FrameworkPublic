@@ -5,9 +5,12 @@
 #include "Network/Protocol/T4PacketCS.h"
 #include "Network/Component/T4NetGameplayComponent.h" // #42
 
-#include "T4Framework/Classes/Player/T4PlayerController.h"
-#include "T4Engine/Public/T4Engine.h"
+#include "Public/T4Gameplay.h"
+#include "Gameplay/T4GameplayInstance.h"
+
 #include "T4Core/Public/T4CoreMinimal.h"
+#include "T4Engine/Public/T4Engine.h"
+#include "T4Framework/Classes/Player/T4PlayerController.h"
 
 #if (WITH_EDITOR || WITH_SERVER_CODE) // #41
 #include "Engine/World.h"
@@ -114,12 +117,14 @@ IT4PacketHandlerSC* FT4PacketHandlerCS::GetPacketHandlerSC() const
 	check(ET4LayerType::Max > LayerType);
 	IT4GameFramework* GameFramework = T4FrameworkGet(LayerType);
 	check(nullptr != GameFramework);
-	IT4GameplayHandler* GameplayHandler = GameFramework->GetGameplayHandler();
-	if (nullptr == GameplayHandler)
+	FT4GameplayInstance* GameplayInstance = FT4GameplayInstance::CastGameplayInstance(
+		GameFramework->GetGameplayHandler()
+	);
+	if (nullptr == GameplayInstance)
 	{
 		return nullptr;
 	}
-	return GameplayHandler->GetPacketHandlerSC();
+	return GameplayInstance->GetPacketHandlerSC();
 }
 
 bool FT4PacketHandlerCS::DoSendPacketForServer(FT4PacketStoC* InSendPacket)

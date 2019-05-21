@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "T4Engine/Public/T4EngineTypes.h"
-#include "T4Framework/Public/T4Framework.h"
+#include "Public/T4Gameplay.h"
 
 /**
   *
