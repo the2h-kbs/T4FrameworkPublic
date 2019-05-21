@@ -16,24 +16,29 @@
   "Installed": false,
   "Modules": [
     {
-      "Name": "T4Core",
-      "Type": "Runtime",
-      "LoadingPhase": "PreDefault"
+		"Name": "T4Core",
+		"Type": "Runtime",
+		"LoadingPhase": "PreDefault"
     },
     {
-      "Name": "T4Engine",
-      "Type": "Runtime",
-      "LoadingPhase": "PreDefault"
+		"Name": "T4Engine",
+		"Type": "Runtime",
+		"LoadingPhase": "PreDefault"
     },
+	{
+		"Name": "T4Framework",
+		"Type": "Runtime",
+		"LoadingPhase": "PreDefault"
+	},
+	{
+		"Name": "T4Gameplay",
+		"Type": "Runtime",
+		"LoadingPhase": "PostDefault"
+	},
     {
-      "Name": "T4Framework",
-      "Type": "Runtime",
-      "LoadingPhase": "PostEngineInit"
-    },
-    {
-      "Name": "T4RehearsalEditor",
-      "Type": "Editor",
-      "LoadingPhase": "PostEngineInit"
+		"Name": "T4RehearsalEditor",
+		"Type": "Editor",
+		"LoadingPhase": "PostEngineInit"
     }
   ]
 }

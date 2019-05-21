@@ -8,6 +8,8 @@
 #include "Public/T4EngineStructs.h"
 #include "T4Core/Classes/Entity/T4EntityTypes.h"
 
+#include "InputCoreTypes.h"
+#include "Components/SceneComponent.h"
 #include "GenericPlatform/ICursor.h"
 #include "CollisionQueryParams.h"
 
@@ -32,7 +34,9 @@ struct FT4ActionParameters; // #28
 struct FT4PacketCtoS;
 struct FT4PacketStoC;
 
+struct FWorldContext;
 class UInputComponent;
+class UActorComponent;
 class AController;
 
 class T4ENGINE_API IT4AnimControl
@@ -192,9 +196,14 @@ public:
 	//       동일 프로세스에서 Player 의 Role 이 바뀌며 C/S Player 로 바뀌기 때문에 혼란스러운 점이 있기 때문
 	virtual bool CheckAuthority() const = 0; // return HasAuthority()
 
+	virtual AController* GetController() = 0; // #42
+
 	virtual UInputComponent* NewInputComponent() = 0;
 	virtual void SetInputComponent(UInputComponent* InInputComponent) = 0;
 	virtual void OnSetInputMode(ET4InputMode InMode) = 0;
+
+	virtual void RegisterNetGameplayComponent(UActorComponent* InComponent) = 0; // #42
+	virtual UActorComponent* GetNetGameplayComponent() const = 0; // #42
 
 	virtual FRotator GetViewControlRotation() const = 0;
 
@@ -317,12 +326,12 @@ public:
 	) = 0; // #34
 };
 
-T4ENGINE_API IT4GameWorld* CreateT4GameWorld(
+T4ENGINE_API IT4GameWorld* T4EngineWorldCreate(
 	ET4WorldType InWorldType,
 	FWorldContext* InWorldContext
 );
-T4ENGINE_API void DestroyT4GameWorld(IT4GameWorld* InGameWorld);
+T4ENGINE_API void T4EngineWorldDestroy(IT4GameWorld* InGameWorld);
 
-T4ENGINE_API IT4GameWorld* GetT4GameWorld(ET4LayerType InSceneWorld);
+T4ENGINE_API IT4GameWorld* T4EngineWorldGet(ET4LayerType InSceneWorld);
 
-T4ENGINE_API IT4ObjectFactory* GetT4ObjectFactory();
+T4ENGINE_API IT4ObjectFactory* T4EngineObjectFactoryGet();

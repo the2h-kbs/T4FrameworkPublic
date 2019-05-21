@@ -42,4 +42,4 @@ public:
 	) = 0;
 };
 
-T4CORE_API IT4AssetManager* GetT4AssetManager();
+T4CORE_API IT4AssetManager* T4CoreAssetManagerGet();

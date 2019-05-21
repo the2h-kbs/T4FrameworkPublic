@@ -40,7 +40,7 @@ public:
 	)
 	{
 		bSyncLoad = bInSyncLoad;
-		IT4AssetManager* AssetLoader = GetT4AssetManager();
+		IT4AssetManager* AssetLoader = T4CoreAssetManagerGet();
 		LoadHandle = AssetLoader->RequestAsync(InAssetPath);
 		DebugToken = InDebugString;
 	}

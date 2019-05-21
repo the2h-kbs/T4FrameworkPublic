@@ -1,4 +1,4 @@
-﻿// Copyright 2019 Tech4 Labs. All Rights Reserved.
+// Copyright 2019 Tech4 Labs. All Rights Reserved.
 
 using UnrealBuildTool;
 
@@ -18,7 +18,8 @@ public class Tech4Demo : ModuleRules
                 "InputCore",
                 "T4Core",
                 "T4Engine",
-                "T4Framework"
+                "T4Framework",
+                "T4Gameplay",
             }
         );
 

@@ -11,7 +11,7 @@
 class UWorld;
 struct FWorldContext;
 
-namespace T4Layer
+namespace T4CoreLayer
 {
 	T4CORE_API bool AddMultiLayer(const FWorldContext* InWorldContext); // #30
 	T4CORE_API void RemoveMultiLayer(const FName& InWorldContextName); // #30

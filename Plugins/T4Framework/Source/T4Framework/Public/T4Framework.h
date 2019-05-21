@@ -3,10 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
-
-#include "Public/Protocol/T4PacketTypes.h"
+#include "T4FrameworkNet.h"
 #include "T4Engine/Public/T4EngineTypes.h"
 #include "T4Core/Public/T4CoreTypes.h"
+
+#if WITH_EDITOR
+#include "ICursor.h"
+#endif
 
 /**
   * 
@@ -54,6 +57,12 @@ public:
 	virtual bool OnBroadcastPacket(FT4PacketStoC* InPacket) = 0;
 
 	virtual bool OnRecvPacket(const FT4PacketStoC* InPacket) = 0;
+
+	virtual void OnBroadcastMoveToPacket(
+		const FT4ObjectID& InObjectID, 
+		float InMoveSpeed, 
+		const FVector& InMoveDirection
+	) = 0; // #42
 };
 
 class T4FRAMEWORK_API IT4PacketHandlerCS
@@ -65,6 +74,29 @@ public:
 
 	virtual bool OnRecvPacket_Validation(const FT4PacketCtoS* InPacket) = 0;
 	virtual bool OnRecvPacket(const FT4PacketCtoS* InPacket, IT4PlayerController* InSenderPC) = 0;
+};
+
+// #42
+class T4FRAMEWORK_API IT4GameplayHandler
+{
+public:
+	virtual ~IT4GameplayHandler() {}
+
+	virtual bool OnInitialize(ET4LayerType InLayerType) = 0;
+	virtual void OnFinalize() = 0;
+
+	virtual void OnReset() = 0;
+	virtual void OnStartPlay() = 0;
+	virtual void OnPlayerSpawned(IT4PlayerController* InOwnerPC) = 0;
+
+	virtual void OnProcess(float InDeltaTime) = 0;
+
+	virtual IT4PacketHandlerSC* GetPacketHandlerSC() = 0; // #27
+	virtual IT4PacketHandlerCS* GetPacketHandlerCS() = 0; // #27
+
+#if WITH_EDITOR
+	virtual void SetInputControlLock(bool bLock) = 0; // #30
+#endif
 };
 
 class T4FRAMEWORK_API IT4GameFramework
@@ -86,10 +118,8 @@ public:
 	virtual UWorld* GetWorld() const = 0;
 	virtual IT4GameWorld* GetGameWorld() const = 0;
 
-	virtual IT4PacketHandlerSC* GetPacketHandlerSC() = 0; // #27
-	virtual IT4PacketHandlerCS* GetPacketHandlerCS() = 0; // #27
-
-	virtual void DisableConsoleCommand() = 0;
+	virtual void RegisterGameplayHandler(IT4GameplayHandler* InHandler) = 0; // #42
+	virtual IT4GameplayHandler* GetGameplayHandler() const = 0; // #42
 
 	// Client
 	virtual IT4PlayerController* GetPlayerController() const = 0;
@@ -97,7 +127,6 @@ public:
 #if WITH_EDITOR
 	virtual void SetInputControlLock(bool bLock) = 0; // #30
 	virtual void SetEditorViewportClient(IT4EditorViewportClient* InViewportClient) = 0; // #30
-	virtual void DoSpawnCharacter(const FName& InCharTableName, const FVector& InSpawnLocation) = 0; // #30
 #endif
 
 	// Server
@@ -110,10 +139,14 @@ public:
 	virtual AAIController* GetAIController(const FT4NetID& InUniqueID) const = 0; // #31
 };
 
-T4FRAMEWORK_API IT4GameFramework* CreateT4Framework(
+T4FRAMEWORK_API IT4GameFramework* T4FrameworkCreate(
 	ET4FrameworkType InFrameworkType,
 	FWorldContext* InWorldContext
 );
-T4FRAMEWORK_API void DestroyT4Framework(IT4GameFramework* InFramework);
+T4FRAMEWORK_API void T4FrameworkDestroy(IT4GameFramework* InFramework);
 
-T4FRAMEWORK_API IT4GameFramework* GetT4Framework(ET4LayerType InLayerType);
+T4FRAMEWORK_API IT4GameFramework* T4FrameworkGet(ET4LayerType InLayerType);
+
+// #42
+DECLARE_DELEGATE_OneParam(FOnRegisterDefaultT4Gameplay, IT4GameFramework*);
+T4FRAMEWORK_API FOnRegisterDefaultT4Gameplay& T4FrameworkRegisterDefaultGameplayDelegateGet();

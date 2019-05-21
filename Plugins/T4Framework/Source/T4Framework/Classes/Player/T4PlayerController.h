@@ -71,9 +71,14 @@ public:
 	// IT4PlayerController
 	bool CheckAuthority() const override { return HasAuthority(); }
 
+	AController* GetController() override; // #42
+
 	UInputComponent* NewInputComponent() override;
 	void SetInputComponent(UInputComponent* InInputComponent) override;
 	void OnSetInputMode(ET4InputMode InMode) override;
+
+	void RegisterNetGameplayComponent(UActorComponent* InComponent) override; // #42
+	UActorComponent* GetNetGameplayComponent() const override { return NetGameplayComponent; } // #42
 
 	FRotator GetViewControlRotation() const override;
 
@@ -113,8 +118,6 @@ public:
 	}
 #endif
 
-	UT4NetReplicateComponent* GetNetReplicateComponent() const { return NetReplicateComponent; }
-
 private:
 	IT4GameObject* GetGameObject(const FT4ObjectID& InObjectID) const;
 
@@ -133,7 +136,7 @@ private:
 	TWeakObjectPtr<UT4CameraComponent> CameraComponent;
 
 	UPROPERTY(Category=Network, VisibleAnywhere)
-	UT4NetReplicateComponent* NetReplicateComponent; // #42
+	UActorComponent* NetGameplayComponent; // #42
 
 	bool bCameraMoveLocked;
 	FVector2D SaveMouseLocation;

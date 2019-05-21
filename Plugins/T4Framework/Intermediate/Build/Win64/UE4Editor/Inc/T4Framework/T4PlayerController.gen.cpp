@@ -17,7 +17,7 @@ void EmptyLinkFunctionForGeneratedCodeT4PlayerController() {}
 	T4FRAMEWORK_API UClass* Z_Construct_UClass_AT4PlayerController();
 	ENGINE_API UClass* Z_Construct_UClass_APlayerController();
 	UPackage* Z_Construct_UPackage__Script_T4Framework();
-	T4FRAMEWORK_API UClass* Z_Construct_UClass_UT4NetReplicateComponent_NoRegister();
+	ENGINE_API UClass* Z_Construct_UClass_UActorComponent_NoRegister();
 // End Cross Module References
 	void AT4PlayerController::StaticRegisterNativesAT4PlayerController()
 	{
@@ -33,9 +33,9 @@ void EmptyLinkFunctionForGeneratedCodeT4PlayerController() {}
 		static const UE4CodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
 #if WITH_METADATA
-		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_NetReplicateComponent_MetaData[];
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_NetGameplayComponent_MetaData[];
 #endif
-		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_NetReplicateComponent;
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_NetGameplayComponent;
 		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UE4CodeGen_Private::FClassParams ClassParams;
@@ -52,15 +52,15 @@ void EmptyLinkFunctionForGeneratedCodeT4PlayerController() {}
 	};
 #endif
 #if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AT4PlayerController_Statics::NewProp_NetReplicateComponent_MetaData[] = {
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AT4PlayerController_Statics::NewProp_NetGameplayComponent_MetaData[] = {
 		{ "Category", "Network" },
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Classes/Player/T4PlayerController.h" },
 	};
 #endif
-	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AT4PlayerController_Statics::NewProp_NetReplicateComponent = { "NetReplicateComponent", nullptr, (EPropertyFlags)0x00400000000a0009, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AT4PlayerController, NetReplicateComponent), Z_Construct_UClass_UT4NetReplicateComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AT4PlayerController_Statics::NewProp_NetReplicateComponent_MetaData, ARRAY_COUNT(Z_Construct_UClass_AT4PlayerController_Statics::NewProp_NetReplicateComponent_MetaData)) };
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AT4PlayerController_Statics::NewProp_NetGameplayComponent = { "NetGameplayComponent", nullptr, (EPropertyFlags)0x00400000000a0009, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AT4PlayerController, NetGameplayComponent), Z_Construct_UClass_UActorComponent_NoRegister, METADATA_PARAMS(Z_Construct_UClass_AT4PlayerController_Statics::NewProp_NetGameplayComponent_MetaData, ARRAY_COUNT(Z_Construct_UClass_AT4PlayerController_Statics::NewProp_NetGameplayComponent_MetaData)) };
 	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AT4PlayerController_Statics::PropPointers[] = {
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AT4PlayerController_Statics::NewProp_NetReplicateComponent,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AT4PlayerController_Statics::NewProp_NetGameplayComponent,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_AT4PlayerController_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<AT4PlayerController>::IsAbstract,
@@ -89,7 +89,7 @@ void EmptyLinkFunctionForGeneratedCodeT4PlayerController() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(AT4PlayerController, 2238207293);
+	IMPLEMENT_CLASS(AT4PlayerController, 3738258232);
 	template<> T4FRAMEWORK_API UClass* StaticClass<AT4PlayerController>()
 	{
 		return AT4PlayerController::StaticClass();

@@ -4,7 +4,8 @@
 
 #include "CoreMinimal.h"
 
-#include "Public/Protocol/T4PacketTypes.h" // #25
+#include "Public/T4FrameworkNet.h" // #25, #42
+#include "Public/T4FrameworkDataLoader.h" // #42
 
 #include "T4Engine/Public/T4Engine.h"
 
@@ -18,8 +19,6 @@
 class UBehaviorTree;
 class UBlackboardData;
 class UT4PathFollowingComponent;
-class FT4BlackboardDataLoader;
-class FT4BehaviorTreeDataLoader;
 
 UCLASS()
 class T4FRAMEWORK_API AT4ItemAIController : public AAIController, public IT4AIController
@@ -76,7 +75,11 @@ public:
 	IT4PlayerController* CastPlayerController() override { return nullptr; }
 
 public:
-	bool SetTableData(const FName& InItemTableName); // #31
+	bool SetTableData(
+		const FName& InTableName,
+		const FSoftObjectPath& InBehaviorTreePath,
+		const FSoftObjectPath& InBlackboardDataPath
+	); // #31
 
 	void SetNetID(const FT4NetID& InNetID) { NetID = InNetID;}
 	const FT4NetID& GetNetID() const { return NetID; }
@@ -95,8 +98,8 @@ private:
 	FName ItemTableName;
 	bool bAIDataLoaded;
 
-	FT4BlackboardDataLoader* BlackboardDataLoader;
-	FT4BehaviorTreeDataLoader* BehaviorTreeDataLoader;
+	FT4BlackboardDataLoader BlackboardDataLoader;
+	FT4BehaviorTreeDataLoader BehaviorTreeDataLoader;
 
 private:
 	UPROPERTY(transient)

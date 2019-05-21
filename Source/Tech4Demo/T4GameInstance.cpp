@@ -3,8 +3,8 @@
 #include "T4GameInstance.h"
 #include "T4GameMode.h"
 
-#include "T4Framework/Public/T4Framework.h"
 #include "T4Core/Public/T4CoreMinimal.h"
+#include "T4Framework/Public/T4Framework.h"
 
 /**
   * http://api.unrealengine.com/KOR/Gameplay/Framework/GameFlow/index.html
@@ -20,12 +20,13 @@ void UT4GameInstance::Init()
 	Super::Init();
 	// #15
 	ET4FrameworkType CreateFrameworkType = ET4FrameworkType::Client;
-	if (T4Layer::CheckServer(WorldContext))
+	if (T4CoreLayer::CheckServer(WorldContext))
 	{
 		CreateFrameworkType = ET4FrameworkType::Server;
 	}
-	GameFramework = CreateT4Framework(CreateFrameworkType, WorldContext);
-	ET4LayerType LayerType = T4Layer::Get(WorldContext);
+	GameFramework = T4FrameworkCreate(CreateFrameworkType, WorldContext);
+	check(nullptr != GameFramework);
+	ET4LayerType LayerType = T4CoreLayer::Get(WorldContext);
 	check(LayerType < ET4LayerType::Max);
 	check(LayerType == GameFramework->GetLayerType());
 }
@@ -34,7 +35,7 @@ void UT4GameInstance::Shutdown()
 {
 	if (nullptr != GameFramework)
 	{
-		DestroyT4Framework(GameFramework);
+		T4FrameworkDestroy(GameFramework);
 		GameFramework = nullptr;
 	}
 	Super::Shutdown();

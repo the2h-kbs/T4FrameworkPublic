@@ -60,7 +60,7 @@ DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(AT4PlayerController); \
 
 
 #define T4FrameworkDeploy_Plugins_T4Framework_Source_T4Framework_Classes_Player_T4PlayerController_h_29_PRIVATE_PROPERTY_OFFSET \
-	FORCEINLINE static uint32 __PPO__NetReplicateComponent() { return STRUCT_OFFSET(AT4PlayerController, NetReplicateComponent); }
+	FORCEINLINE static uint32 __PPO__NetGameplayComponent() { return STRUCT_OFFSET(AT4PlayerController, NetGameplayComponent); }
 
 
 #define T4FrameworkDeploy_Plugins_T4Framework_Source_T4Framework_Classes_Player_T4PlayerController_h_26_PROLOG

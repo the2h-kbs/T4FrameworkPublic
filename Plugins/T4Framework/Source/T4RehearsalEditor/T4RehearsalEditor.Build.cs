@@ -35,7 +35,8 @@ namespace UnrealBuildTool.Rules
                 new string[] {
                     "T4Core",
                     "T4Engine",
-                    "T4Framework"
+                    "T4Framework",
+                    "T4Gameplay",
                 }
             );
         }

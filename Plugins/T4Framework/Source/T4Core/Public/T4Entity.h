@@ -49,4 +49,4 @@ public:
 	virtual const UT4WeaponEntityAsset* GetWeaponEntity(const FSoftObjectPath& InPath) = 0;
 };
 
-T4CORE_API IT4EntityManager* GetT4EntityManager();
+T4CORE_API IT4EntityManager* T4CoreEntityManagerGet();

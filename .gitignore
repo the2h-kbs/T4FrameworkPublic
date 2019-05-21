@@ -63,4 +63,5 @@ Content/
 Plugins/T4Framework/Source/T4Core/Private
 Plugins/T4Framework/Source/T4Engine/Private
 Plugins/T4Framework/Source/T4Framework/Private
+Plugins/T4Framework/Source/T4Gameplay/Private
 Plugins/T4Framework/Source/T4RehearsalEditor/Private

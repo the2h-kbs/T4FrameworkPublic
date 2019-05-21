@@ -27,11 +27,11 @@ void AT4GameMode::StartPlay()
 	Super::StartPlay();
 
 #if !WITH_EDITOR
-	ET4LayerType LayerType = T4Layer::Get(GetWorld());
+	ET4LayerType LayerType = T4CoreLayer::Get(GetWorld());
 	check(ET4LayerType::Max != LayerType);
 
 	// only game used. edit call to UT4GameInstance::StartPlayInEditorGameInstance.
-	IT4GameFramework* Framework = GetT4Framework(LayerType);
+	IT4GameFramework* Framework = T4FrameworkGet(LayerType);
 	check(nullptr != Framework);
 	Framework->OnStartPlay();
 #endif
