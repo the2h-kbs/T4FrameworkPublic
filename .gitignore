@@ -60,10 +60,7 @@
 BuildRules/
 Saved/
 Content/
-Plugins/T4Framework/Intermediate/Build/Win64/UE4/Development/T4Gameplay
-Plugins/T4Framework/Intermediate/Build/Win64/UE4/Inc/T4Gameplay
-Plugins/T4Framework/Intermediate/Build/Win64/UE4Editor/Development/T4Gameplay
-Plugins/T4Framework/Intermediate/Build/Win64/UE4Editor/Inc/T4Gameplay
+Intermediate/
 Plugins/T4Framework/Source/T4AssetEd/Private
 Plugins/T4Framework/Source/T4Core/Private
 Plugins/T4Framework/Source/T4Engine/Private

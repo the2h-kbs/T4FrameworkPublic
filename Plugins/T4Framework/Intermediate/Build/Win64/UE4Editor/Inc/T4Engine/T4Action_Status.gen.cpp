@@ -16,9 +16,9 @@ void EmptyLinkFunctionForGeneratedCodeT4Action_Status() {}
 	T4ENGINE_API UScriptStruct* Z_Construct_UScriptStruct_FT4ExchangeCostumeAction();
 	UPackage* Z_Construct_UPackage__Script_T4Engine();
 	T4ENGINE_API UScriptStruct* Z_Construct_UScriptStruct_FT4ObjectAction();
-	T4CORE_API UClass* Z_Construct_UClass_UT4CostumeEntityAsset_NoRegister();
+	T4ENGINE_API UClass* Z_Construct_UClass_UT4CostumeEntityAsset_NoRegister();
 	T4ENGINE_API UScriptStruct* Z_Construct_UScriptStruct_FT4EquipWeaponAction();
-	T4CORE_API UClass* Z_Construct_UClass_UT4WeaponEntityAsset_NoRegister();
+	T4ENGINE_API UClass* Z_Construct_UClass_UT4WeaponEntityAsset_NoRegister();
 	T4ENGINE_API UScriptStruct* Z_Construct_UScriptStruct_FT4LockOnAction();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FRotator();
 	T4ENGINE_API UScriptStruct* Z_Construct_UScriptStruct_FT4PossessAction();

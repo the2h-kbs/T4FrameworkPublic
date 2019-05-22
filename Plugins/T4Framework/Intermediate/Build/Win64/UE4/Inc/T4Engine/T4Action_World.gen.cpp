@@ -21,7 +21,7 @@ void EmptyLinkFunctionForGeneratedCodeT4Action_World() {}
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FRotator();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FSoftObjectPath();
-	T4CORE_API UEnum* Z_Construct_UEnum_T4Core_ET4EntityType();
+	T4ENGINE_API UEnum* Z_Construct_UEnum_T4Engine_ET4EntityType();
 	T4ENGINE_API UScriptStruct* Z_Construct_UScriptStruct_FT4ChangePlayerAction();
 	T4ENGINE_API UScriptStruct* Z_Construct_UScriptStruct_FT4ChangeWorldAction();
 // End Cross Module References
@@ -211,7 +211,7 @@ static struct FScriptStruct_T4Engine_StaticRegisterNativesFT4ObjectEnterAction
 		{ "ModuleRelativePath", "Classes/Action/T4Action_World.h" },
 	};
 #endif
-	const UE4CodeGen_Private::FEnumPropertyParams Z_Construct_UScriptStruct_FT4ObjectEnterAction_Statics::NewProp_EntityType = { "EntityType", nullptr, (EPropertyFlags)0x0010000000000001, UE4CodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FT4ObjectEnterAction, EntityType), Z_Construct_UEnum_T4Core_ET4EntityType, METADATA_PARAMS(Z_Construct_UScriptStruct_FT4ObjectEnterAction_Statics::NewProp_EntityType_MetaData, ARRAY_COUNT(Z_Construct_UScriptStruct_FT4ObjectEnterAction_Statics::NewProp_EntityType_MetaData)) };
+	const UE4CodeGen_Private::FEnumPropertyParams Z_Construct_UScriptStruct_FT4ObjectEnterAction_Statics::NewProp_EntityType = { "EntityType", nullptr, (EPropertyFlags)0x0010000000000001, UE4CodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(FT4ObjectEnterAction, EntityType), Z_Construct_UEnum_T4Engine_ET4EntityType, METADATA_PARAMS(Z_Construct_UScriptStruct_FT4ObjectEnterAction_Statics::NewProp_EntityType_MetaData, ARRAY_COUNT(Z_Construct_UScriptStruct_FT4ObjectEnterAction_Statics::NewProp_EntityType_MetaData)) };
 	const UE4CodeGen_Private::FBytePropertyParams Z_Construct_UScriptStruct_FT4ObjectEnterAction_Statics::NewProp_EntityType_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UE4CodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, nullptr, METADATA_PARAMS(nullptr, 0) };
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UScriptStruct_FT4ObjectEnterAction_Statics::NewProp_Name_MetaData[] = {
@@ -265,7 +265,7 @@ static struct FScriptStruct_T4Engine_StaticRegisterNativesFT4ObjectEnterAction
 		}
 		return ReturnStruct;
 	}
-	uint32 Get_Z_Construct_UScriptStruct_FT4ObjectEnterAction_Hash() { return 1978725157U; }
+	uint32 Get_Z_Construct_UScriptStruct_FT4ObjectEnterAction_Hash() { return 651221131U; }
 class UScriptStruct* FT4ChangePlayerAction::StaticStruct()
 {
 	static class UScriptStruct* Singleton = NULL;

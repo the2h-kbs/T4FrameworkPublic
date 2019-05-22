@@ -6,7 +6,7 @@
 #include "Classes/Action/T4ActionTypes.h"
 #include "Public/T4EngineTypes.h"
 #include "Public/T4EngineStructs.h"
-#include "T4Core/Classes/Entity/T4EntityTypes.h"
+#include "T4Engine/Classes/Assets/Entity/T4EntityTypes.h"
 
 #include "InputCoreTypes.h"
 #include "Components/SceneComponent.h"

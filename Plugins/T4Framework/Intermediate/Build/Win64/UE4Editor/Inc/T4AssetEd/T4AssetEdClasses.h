@@ -8,9 +8,11 @@
 
 
 #include "T4AssetEd/Classes/Factories/T4ActorEntityFactory.h"
+#include "T4AssetEd/Classes/Factories/T4AnimSetFactory.h"
 #include "T4AssetEd/Classes/Factories/T4ContiFactory.h"
 #include "T4AssetEd/Classes/Factories/T4CostumeEntityFactory.h"
 #include "T4AssetEd/Classes/Factories/T4PropEntityFactory.h"
 #include "T4AssetEd/Classes/Factories/T4WeaponEntityFactory.h"
 #include "T4AssetEd/Classes/Factories/T4WorldEntityFactory.h"
+#include "T4AssetEd/Classes/Definitions/T4AnimSetDefinitionTable.h"
 

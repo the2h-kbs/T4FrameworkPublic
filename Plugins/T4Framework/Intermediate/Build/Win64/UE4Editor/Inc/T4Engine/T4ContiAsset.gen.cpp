@@ -5,7 +5,7 @@
 ===========================================================================*/
 
 #include "UObject/GeneratedCppIncludes.h"
-#include "T4Engine/Classes/Conti/T4ContiAsset.h"
+#include "T4Engine/Classes/Assets/Conti/T4ContiAsset.h"
 #include "Serialization/ArchiveUObjectFromStructuredArchive.h"
 #ifdef _MSC_VER
 #pragma warning (push)
@@ -59,16 +59,16 @@ void EmptyLinkFunctionForGeneratedCodeT4ContiAsset() {}
 		{ "BlueprintType", "true" },
 		{ "Category", "Tech4Labs" },
 		{ "ClassGroupNames", "Tech4Labs" },
-		{ "IncludePath", "Conti/T4ContiAsset.h" },
+		{ "IncludePath", "Assets/Conti/T4ContiAsset.h" },
 		{ "IsBlueprintBase", "true" },
-		{ "ModuleRelativePath", "Classes/Conti/T4ContiAsset.h" },
+		{ "ModuleRelativePath", "Classes/Assets/Conti/T4ContiAsset.h" },
 		{ "SerializeToFArchive", "" },
 	};
 #endif
 #if WITH_EDITORONLY_DATA
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UT4ContiAsset_Statics::NewProp_ThumbnailImage_MetaData[] = {
-		{ "ModuleRelativePath", "Classes/Conti/T4ContiAsset.h" },
+		{ "ModuleRelativePath", "Classes/Assets/Conti/T4ContiAsset.h" },
 	};
 #endif
 	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UT4ContiAsset_Statics::NewProp_ThumbnailImage = { "ThumbnailImage", nullptr, (EPropertyFlags)0x0010000800000000, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UT4ContiAsset, ThumbnailImage), Z_Construct_UClass_UTexture2D_NoRegister, METADATA_PARAMS(Z_Construct_UClass_UT4ContiAsset_Statics::NewProp_ThumbnailImage_MetaData, ARRAY_COUNT(Z_Construct_UClass_UT4ContiAsset_Statics::NewProp_ThumbnailImage_MetaData)) };
@@ -76,7 +76,7 @@ void EmptyLinkFunctionForGeneratedCodeT4ContiAsset() {}
 #if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_UT4ContiAsset_Statics::NewProp_RootAction_MetaData[] = {
 		{ "Category", "T4ContiAsset" },
-		{ "ModuleRelativePath", "Classes/Conti/T4ContiAsset.h" },
+		{ "ModuleRelativePath", "Classes/Assets/Conti/T4ContiAsset.h" },
 	};
 #endif
 	const UE4CodeGen_Private::FStructPropertyParams Z_Construct_UClass_UT4ContiAsset_Statics::NewProp_RootAction = { "RootAction", nullptr, (EPropertyFlags)0x0010000000000001, UE4CodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(UT4ContiAsset, RootAction), Z_Construct_UScriptStruct_FT4RootAction, METADATA_PARAMS(Z_Construct_UClass_UT4ContiAsset_Statics::NewProp_RootAction_MetaData, ARRAY_COUNT(Z_Construct_UClass_UT4ContiAsset_Statics::NewProp_RootAction_MetaData)) };
@@ -113,7 +113,7 @@ void EmptyLinkFunctionForGeneratedCodeT4ContiAsset() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(UT4ContiAsset, 3345241088);
+	IMPLEMENT_CLASS(UT4ContiAsset, 765496609);
 	template<> T4ENGINE_API UClass* StaticClass<UT4ContiAsset>()
 	{
 		return UT4ContiAsset::StaticClass();
