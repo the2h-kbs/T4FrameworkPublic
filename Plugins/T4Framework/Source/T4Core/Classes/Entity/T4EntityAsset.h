@@ -91,19 +91,16 @@ public:
 	virtual void GetAssetRegistryTags(TArray<FAssetRegistryTag>& OutTags) const override;
 	//~ End UObject interface
 
-public:
 	virtual ET4EntityType GetEntityType() const { return ET4EntityType::None; }
 
 #if WITH_EDITOR
 	DECLARE_MULTICAST_DELEGATE(FOnPropertiesChanged);
 	FOnPropertiesChanged& OnPropertiesChanged() { return OnPropertiesChangedDelegate; }
-
-	template <class T>
-	static T* CreateAsset(const FString& InAssetName, const FString& InPackagePath);
-	bool SaveAsset(bool bCheckDirty = false);
 #endif // WITH_EDITOR
 
 public:
+	static const FName CallingContextName;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Attribute)
 	FT4EntityDefaultAttribute Default;
 

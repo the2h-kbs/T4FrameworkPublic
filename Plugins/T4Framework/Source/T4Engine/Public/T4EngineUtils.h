@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 
-#include "T4Core/Public/T4Asset.h"
+#include "T4Core/Public/T4CoreAsset.h"
 
 /**
   * http://api.unrealengine.com/KOR/Programming/Assets/AsyncLoading/

@@ -33,6 +33,11 @@ namespace UnrealBuildTool.Rules
                     "T4Framework"
                 }
             );
+
+            if (Target.bBuildEditor == true)
+            {
+                PrivateDependencyModuleNames.Add("UnrealEd");
+            }
         }
 	}
 }

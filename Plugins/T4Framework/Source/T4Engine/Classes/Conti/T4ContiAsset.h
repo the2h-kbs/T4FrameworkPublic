@@ -45,16 +45,14 @@ public:
 	virtual void GetAssetRegistryTags(TArray<FAssetRegistryTag>& OutTags) const override;
 	//~ End UObject interface
 
-public:
 #if WITH_EDITOR
 	DECLARE_MULTICAST_DELEGATE(FOnPropertiesChanged);
 	FOnPropertiesChanged& OnPropertiesChanged() { return OnPropertiesChangedDelegate; }
-
-	static UT4ContiAsset* CreateAsset(const FString& InAssetName, const FString& InPackagePath);
-	bool SaveAsset(bool bCheckDirty = false);
 #endif // WITH_EDITOR
 
 public:
+	static const FName CallingContextName;
+
 	UPROPERTY(EditAnywhere)
 	FT4RootAction RootAction;
 

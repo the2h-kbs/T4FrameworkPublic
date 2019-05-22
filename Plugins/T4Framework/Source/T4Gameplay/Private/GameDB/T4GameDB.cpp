@@ -210,13 +210,15 @@ bool FT4GameDB::Initialize(const TCHAR* InContentMasterPath)
 					{
 						continue;
 					}
-					if (T4CoreIsWithEditorBuild() && GameWorldData.DataTable.IsValid())
+#if WITH_EDITOR
+					if (GameWorldData.DataTable.IsValid())
 					{
 						GameWorldData.DataTable->OnDataTableChanged().AddRaw(
 							this,
 							&FT4GameDB::OnWorldTableChanged
 						);
 					}
+#endif
 				}
 				break;
 
@@ -230,13 +232,15 @@ bool FT4GameDB::Initialize(const TCHAR* InContentMasterPath)
 					{
 						continue;
 					}
-					if (T4CoreIsWithEditorBuild() && GamePlayerData.DataTable.IsValid())
+#if WITH_EDITOR
+					if (GamePlayerData.DataTable.IsValid())
 					{
 						GamePlayerData.DataTable->OnDataTableChanged().AddRaw(
 							this,
 							&FT4GameDB::OnPlayerTableChanged
 						);
 					}
+#endif
 				}
 				break;
 
@@ -250,13 +254,15 @@ bool FT4GameDB::Initialize(const TCHAR* InContentMasterPath)
 					{
 						continue;
 					}
-					if (T4CoreIsWithEditorBuild() && GameNPCData.DataTable.IsValid())
+#if WITH_EDITOR
+					if (GameNPCData.DataTable.IsValid())
 					{
 						GameNPCData.DataTable->OnDataTableChanged().AddRaw(
 							this,
 							&FT4GameDB::OnNPCTableChanged
 						);
 					}
+#endif
 				}
 				break;
 
@@ -270,13 +276,15 @@ bool FT4GameDB::Initialize(const TCHAR* InContentMasterPath)
 					{
 						continue;
 					}
-					if (T4CoreIsWithEditorBuild() && GameFOData.DataTable.IsValid())
+#if WITH_EDITOR
+					if (GameFOData.DataTable.IsValid())
 					{
 						GameFOData.DataTable->OnDataTableChanged().AddRaw(
 							this,
 							&FT4GameDB::OnFOTableChanged
 						);
 					}
+#endif
 				}
 				break;
 
@@ -290,13 +298,15 @@ bool FT4GameDB::Initialize(const TCHAR* InContentMasterPath)
 					{
 						continue;
 					}
-					if (T4CoreIsWithEditorBuild() && GameItemData.DataTable.IsValid())
+#if WITH_EDITOR
+					if (GameItemData.DataTable.IsValid())
 					{
 						GameItemData.DataTable->OnDataTableChanged().AddRaw(
 							this,
 							&FT4GameDB::OnItemTableChanged
 						);
 					}
+#endif
 				}
 				break;
 
@@ -310,13 +320,15 @@ bool FT4GameDB::Initialize(const TCHAR* InContentMasterPath)
 					{
 						continue;
 					}
-					if (T4CoreIsWithEditorBuild() && GameSkillData.DataTable.IsValid())
+#if WITH_EDITOR
+					if (GameSkillData.DataTable.IsValid())
 					{
 						GameSkillData.DataTable->OnDataTableChanged().AddRaw(
 							this,
 							&FT4GameDB::OnSkillTableChanged
 						);
 					}
+#endif
 				}
 				break;
 
@@ -330,13 +342,15 @@ bool FT4GameDB::Initialize(const TCHAR* InContentMasterPath)
 					{
 						continue;
 					}
-					if (T4CoreIsWithEditorBuild() && GameEffectData.DataTable.IsValid())
+#if WITH_EDITOR
+					if (GameEffectData.DataTable.IsValid())
 					{
 						GameEffectData.DataTable->OnDataTableChanged().AddRaw(
 							this,
 							&FT4GameDB::OnEffectTableChanged
 						);
 					}
+#endif
 				}
 				break;
 

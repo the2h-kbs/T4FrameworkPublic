@@ -1,44 +1,49 @@
 {
-  "FileVersion": 3,
-  "Version": 1,
-  "VersionName": "1.0",
-  "FriendlyName": "Tech4Labs",
-  "Description": "",
-  "Category": "Examples",
-  "CreatedBy": "Tech4 Labs.",
-  "CreatedByURL": "https://blog.naver.com/niceofer",
-  "DocsURL": "",
-  "MarketplaceURL": "",
-  "SupportURL": "https://blog.naver.com/niceofer",
-  "EnabledByDefault": false,
-  "CanContainContent": true,
-  "IsBetaVersion": false,
-  "Installed": false,
-  "Modules": [
-    {
-		"Name": "T4Core",
-		"Type": "Runtime",
-		"LoadingPhase": "PreDefault"
-    },
-    {
-		"Name": "T4Engine",
-		"Type": "Runtime",
-		"LoadingPhase": "PreDefault"
-    },
-	{
-		"Name": "T4Framework",
-		"Type": "Runtime",
-		"LoadingPhase": "PreDefault"
-	},
-	{
-		"Name": "T4Gameplay",
-		"Type": "Runtime",
-		"LoadingPhase": "PostDefault"
-	},
-    {
-		"Name": "T4RehearsalEditor",
-		"Type": "Editor",
-		"LoadingPhase": "PostEngineInit"
-    }
-  ]
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "Tech4Labs",
+	"Description": "",
+	"Category": "Examples",
+	"CreatedBy": "Tech4 Labs.",
+	"CreatedByURL": "https://blog.naver.com/niceofer",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "https://blog.naver.com/niceofer",
+	"EnabledByDefault": false,
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "T4Core",
+			"Type": "Runtime",
+			"LoadingPhase": "PreDefault"
+		},
+		{
+			"Name": "T4Engine",
+			"Type": "Runtime",
+			"LoadingPhase": "PreDefault"
+		},
+		{
+			"Name": "T4Framework",
+			"Type": "Runtime",
+			"LoadingPhase": "PreDefault"
+		},
+		{
+			"Name": "T4Gameplay",
+			"Type": "Runtime",
+			"LoadingPhase": "PostDefault"
+		},
+		{
+			"Name": "T4AssetEd",
+			"Type": "Editor",
+			"LoadingPhase": "PostEngineInit"
+		},
+		{
+			"Name": "T4RehearsalEd",
+			"Type": "Editor",
+			"LoadingPhase": "PostEngineInit"
+		}
+	]
 }

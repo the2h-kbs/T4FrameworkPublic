@@ -30,8 +30,6 @@ namespace UnrealBuildTool.Rules
             if (Target.bBuildEditor == true)
             {
                 PrivateDependencyModuleNames.Add("UnrealEd");
-                PrivateDependencyModuleNames.Add("AssetTools");
-                PrivateDependencyModuleNames.Add("ContentBrowser");
             }
         }
 	}

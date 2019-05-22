@@ -9,7 +9,6 @@
 #include "D:\GitHub\T4FrameworkDeploy\Plugins\T4Framework\Source\T4Core\Private\Entity\T4PropEntityAsset.cpp"
 #include "D:\GitHub\T4FrameworkDeploy\Plugins\T4Framework\Source\T4Core\Private\Entity\T4WeaponEntityAsset.cpp"
 #include "D:\GitHub\T4FrameworkDeploy\Plugins\T4Framework\Source\T4Core\Private\Entity\T4WorldEntityAsset.cpp"
-#include "D:\GitHub\T4FrameworkDeploy\Plugins\T4Framework\Source\T4Core\Private\T4CoreAPI.cpp"
 #include "D:\GitHub\T4FrameworkDeploy\Plugins\T4Framework\Source\T4Core\Private\T4CoreLayer.cpp"
 #include "D:\GitHub\T4FrameworkDeploy\Plugins\T4Framework\Source\T4Core\Private\T4CoreModule.cpp"
 #include "D:\GitHub\T4FrameworkDeploy\Plugins\T4Framework\Source\T4Core\Private\Tests\T4CoreAutomationTests.cpp"

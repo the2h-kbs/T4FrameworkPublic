@@ -23,6 +23,11 @@ public class Tech4Demo : ModuleRules
             }
         );
 
+        if (Target.bBuildEditor == true)
+        {
+            PrivateDependencyModuleNames.Add("UnrealEd");
+        }
+
         PrivateDependencyModuleNames.AddRange(new string[] {  });
 	}
 }
