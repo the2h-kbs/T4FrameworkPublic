@@ -19,7 +19,7 @@ T4Framework 를 도입해 게임 프로토타이핑과 매스 프로덕션을 �
 - 공개 버전 (Public Repository)
   - <https://github.com/Tech4Labs/T4Framework>
   - MIT License
-- 지원 UE4 버전 : 4.22.1
+- 지원 UE4 버전 : 4.22.2
 - 지원 플랫폼 : Win64, Android
 - 개발 상황 : Prototype (Milestone 2)
 - 정식 릴리즈 : 2019.10.01 (UE4 Marketplace 배포)

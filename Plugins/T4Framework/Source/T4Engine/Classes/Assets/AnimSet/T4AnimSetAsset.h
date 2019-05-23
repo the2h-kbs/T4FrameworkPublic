@@ -26,6 +26,7 @@ private:
 };
 
 class UTexture2D;
+class UAnimSequence;
 class UT4EntityAsset;
 UCLASS(ClassGroup = Tech4Labs, Category = "Tech4Labs", BlueprintType, Blueprintable)
 class T4ENGINE_API UT4AnimSetAsset : public UObject
@@ -50,8 +51,11 @@ public:
 public:
 	static const FName CallingContextName;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = SkillAnimations)
+	TMap<FName, TSoftObjectPtr<UAnimSequence>> AnimSequences;
+
 #if WITH_EDITORONLY_DATA
-	UPROPERTY()
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Editor)
 	TSoftObjectPtr<UT4EntityAsset> OwnerEntity;
 
 	UPROPERTY()

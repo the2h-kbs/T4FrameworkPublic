@@ -3,24 +3,33 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "T4Engine/Classes/Assets/Entity/T4EntityTypes.h"
 #include "Classes/Engine/DataTable.h"
-#include "T4AnimSetDefinitionTable.generated.h"
+#include "T4AnimSequenceInfoTable.generated.h"
 
 /**
   * http://api.unrealengine.com/KOR/Gameplay/DataDriven/
  */
+UENUM()
+enum class ET4AnimSequenceCategory : uint8
+{
+	Player,
+	NPC,
+	FO,
+
+	All
+};
+
 USTRUCT()
-struct FT4AnimSetDefinitionTableRow : public FTableRowBase
+struct FT4AnimSequenceInfoRow : public FTableRowBase
 {
 	GENERATED_USTRUCT_BODY()
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attribute)
-	ET4EntityType EntityType;
+	ET4AnimSequenceCategory Category;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attribute)
-	FName SequenceName;
+	FName Name;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attribute)
 	FString Description; 

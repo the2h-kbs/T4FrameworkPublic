@@ -49,7 +49,6 @@ bool FT4GameplayInstance::OnInitialize(ET4LayerType InLayerType)
 	LayerType = InLayerType;
 	check(ET4LayerType::Max != LayerType);
 
-	if (!GetGameDB().IsInitialized())
 	{
 		// #25
 		if (!GetGameDB().Initialize(T4ClientMasterTablePath))
@@ -84,10 +83,7 @@ void FT4GameplayInstance::OnFinalize()
 		GameplayControl->RemoveFromRoot();
 		GameplayControl.Reset();
 	}
-	if (GetGameDB().IsInitialized())
-	{
-		GetGameDB().Finalize(); // #25
-	}
+	GetGameDB().Finalize(); // #25
 	SAFE_DELETE(PacketHandlerSC);
 	SAFE_DELETE(PacketHandlerCS);
 }
