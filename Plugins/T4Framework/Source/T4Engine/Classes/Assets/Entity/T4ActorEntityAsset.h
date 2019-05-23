@@ -27,6 +27,7 @@ private:
 	FT4ActorEntityCustomVersion() {}
 };
 
+class USkeleton;
 class USkeletalMesh;
 class UAnimBlueprint;
 class UAnimMontage;
@@ -87,6 +88,9 @@ public:
 	}
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Asset)
+	TSoftObjectPtr<USkeleton> SkeletonPath; // #39
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Asset)
 	TSoftObjectPtr<USkeletalMesh> SkeletalMeshPath;
 };
 
@@ -116,6 +120,9 @@ public:
 		: MasterPartName(NAME_None)
 	{
 	}
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Asset)
+	TSoftObjectPtr<USkeleton> SkeletonPath; // #39
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = DataPath)
 	FName MasterPartName; // #37
@@ -175,13 +182,13 @@ public:
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Attribute)
-	ET4EntityActorType ActorType;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Attribute)
 	FT4EntityActorPhysicalAttribute Physical;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Attribute)
 	FT4EntityActorRenderingAttribute Rendering;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Data)
+	ET4EntityActorMeshType MeshType;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Data)
 	FT4EntityActorFullBodyMeshData FullBodyMeshData;

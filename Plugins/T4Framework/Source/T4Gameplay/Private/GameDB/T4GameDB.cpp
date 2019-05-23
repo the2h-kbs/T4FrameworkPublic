@@ -84,6 +84,7 @@ inline bool LoadTableInternal(
 	}
 #if WITH_EDITOR
 	OutTableInfo.DataTable = DataTable;
+	OutTableInfo.DataTable->AddToRoot();
 #endif
 	return true;
 }
@@ -102,6 +103,7 @@ void FT4GameDataInfo::Reset()
 #if WITH_EDITOR
 	if (DataTable.IsValid())
 	{
+		DataTable->RemoveFromRoot();
 		DataTable.Reset();
 	}
 #endif

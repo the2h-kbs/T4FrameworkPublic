@@ -44,7 +44,7 @@ enum class ET4EntityWorldType : uint8
 };
 
 UENUM()
-enum class ET4EntityActorType : uint8
+enum class ET4EntityActorMeshType : uint8
 {
 	FullBody,
 	Composite, // TODO : #37
@@ -53,7 +53,7 @@ enum class ET4EntityActorType : uint8
 };
 
 UENUM()
-enum class ET4EntityPropType : uint8
+enum class ET4EntityPropMeshType : uint8
 {
 	Normal,
 	RigidBody, // TODO : M3

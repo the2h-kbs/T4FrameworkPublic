@@ -97,13 +97,13 @@ public:
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Attribute)
-	ET4EntityPropType PropType;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Attribute)
 	FT4EntityPropPhysicalAttribute Physical;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Attribute)
 	FT4EntityPropRenderingAttribute Rendering;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category= Data)
+	ET4EntityPropMeshType MeshType;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Data)
 	FT4EntityPropNormalMeshData NormalMeshData;

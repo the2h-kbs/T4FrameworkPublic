@@ -3,22 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Public/T4AssetEdInfoDatas.h"
 #include "Classes/Engine/DataTable.h"
 #include "T4AnimSequenceInfoTable.generated.h"
 
 /**
   * http://api.unrealengine.com/KOR/Gameplay/DataDriven/
  */
-UENUM()
-enum class ET4AnimSequenceCategory : uint8
-{
-	Player,
-	NPC,
-	FO,
-
-	All
-};
-
 USTRUCT()
 struct FT4AnimSequenceInfoRow : public FTableRowBase
 {
