@@ -59,8 +59,9 @@ T4Framework 를 도입해 게임 프로토타이핑과 매스 프로덕션을 �
 
 ## 5. 라이선스
 
-- 공개 버전(Public Repository)은 MIT License 입니다.
-  - 현재 Win64 바이너리만 제공되고 있습니다.
-- 비공개 버전(Full Source Code) 라이선스는 아래 메일 주소로 문의주시기 바랍니다.
-  - 라이선스 문의 : niceofer@hotmail.com (Tech4Labs, SoonBo Noh)
+- 공개 버전(Public Repository)은 MIT License 입니다. 
+  - Win64 바이너리만 제공됩니다.
+  - Public Repository : <https://github.com/Tech4Labs/T4Framework>
+- 비공개 버전(Private Repository) 라이선스는 아래 메일 주소로 문의주시기 바랍니다.
+  - niceofer@hotmail.com (Tech4Labs, SoonBo Noh)
   - Private Repository : <https://github.com/Tech4Labs/T4FrameworkPrivate>

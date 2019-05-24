@@ -27,10 +27,13 @@ private:
 };
 
 class UTexture2D;
+class USkeleton;
 class UAnimSequence;
+class UAnimMontage;
+class UBlendSpace;
 class UT4EntityAsset;
 
-USTRUCT(BlueprintType)
+USTRUCT()
 struct T4ENGINE_API FT4AnimSequenceInfo
 {
 	GENERATED_USTRUCT_BODY()
@@ -42,17 +45,37 @@ public:
 	{
 	}
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = AnimSequenceInfo)
+	UPROPERTY(VisibleAnywhere, Category = AnimSequenceInfo)
 	FName Name;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = AnimSequenceInfo)
+	UPROPERTY(VisibleAnywhere, Category = AnimSequenceInfo)
 	float DurationSec;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = AnimSequenceInfo)
+#if WITH_EDITORONLY_DATA
+	UPROPERTY(EditAnywhere, Category = AnimSequenceInfo)
 	TSoftObjectPtr<UAnimSequence> AnimSequnce;
+#endif
 };
 
-UCLASS(ClassGroup = Tech4Labs, Category = "Tech4Labs", BlueprintType, Blueprintable)
+USTRUCT()
+struct T4ENGINE_API FT4BlendSpaceInfo
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	FT4BlendSpaceInfo()
+		: Name(NAME_None)
+	{
+	}
+
+	UPROPERTY(VisibleAnywhere, Category = BlendSpaceInfo)
+	FName Name;
+
+	UPROPERTY(EditAnywhere, Category = BlendSpaceInfo)
+	TSoftObjectPtr<UBlendSpace> BlendSpace;
+};
+
+UCLASS(ClassGroup = Tech4Labs, Category = "Tech4Labs")
 class T4ENGINE_API UT4AnimSetAsset : public UObject
 {
 	GENERATED_UCLASS_BODY()
@@ -70,23 +93,38 @@ public:
 #if WITH_EDITOR
 	DECLARE_MULTICAST_DELEGATE(FOnPropertiesChanged);
 	FOnPropertiesChanged& OnPropertiesChanged() { return OnPropertiesChangedDelegate; }
+
+	UAnimMontage* AutoGenAnimMontage(
+		TMap<FName, FT4AnimSequenceInfo>& InOutAnimSequenceInfo,
+		const FName& InObjectName
+	); // #39
+
 #endif // WITH_EDITOR
 
 public:
 	static const FName CallingContextName;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Skeleton)
+	UPROPERTY(EditAnywhere, Category = Skeleton)
 	TSoftObjectPtr<USkeleton> Skeleton;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = AnimSequenceInfos)
-	TMap<FName, FT4AnimSequenceInfo> AnimSequenceInfos;
+	UPROPERTY(VisibleAnywhere, Category = SkillAnimation)
+	UAnimMontage* SkillAnimMontageAutoGen;
+
+	UPROPERTY(EditAnywhere, Category = SkillAnimation)
+	TMap<FName, FT4AnimSequenceInfo> SkillAnimSequenceInfos;
+
+	UPROPERTY(VisibleAnywhere, Category = SystemAnimation)
+	UAnimMontage* SystemAnimMontageAutoGen;
+
+	UPROPERTY(EditAnywhere, Category = SystemAnimation)
+	TMap<FName, FT4AnimSequenceInfo> SystemAnimSequenceInfos;
+
+	UPROPERTY(EditAnywhere, Category = BaseBlendSpace)
+	TMap<FName, FT4BlendSpaceInfo> BaseBlendSpaceInfos;
 
 #if WITH_EDITORONLY_DATA
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Editor)
+	UPROPERTY(EditAnywhere, Category = Editor)
 	TSoftObjectPtr<UT4EntityAsset> ParentEntityPath;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Editor)
-	ET4AnimSequenceCategory AnimSequenceCategory;
 
 	UPROPERTY()
 	UTexture2D* ThumbnailImage; // Internal: The thumbnail image

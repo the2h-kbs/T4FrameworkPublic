@@ -65,16 +65,6 @@ enum class ET4AnimMontageLayer
 	Max UMETA(Hidden)
 };
 
-UENUM()
-enum class ET4AnimSequenceCategory : uint8
-{
-	Player,
-	NPC,
-	FO,
-
-	All
-};
-
 USTRUCT()
 struct FT4ObjectID
 {

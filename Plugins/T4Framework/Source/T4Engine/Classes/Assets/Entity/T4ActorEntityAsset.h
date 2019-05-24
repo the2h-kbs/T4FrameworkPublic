@@ -149,19 +149,7 @@ public:
 	TSoftObjectPtr<UAnimBlueprint> AnimBPPath;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Asset)
-	TSoftObjectPtr<UT4AnimSetAsset> AnimSetPath; // #39
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Asset)
-	TSoftObjectPtr<UAnimMontage> SkillMontagePath;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Asset)
-	TSoftObjectPtr<UAnimMontage> MovementMontagePath;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Asset)
-	TSoftObjectPtr<UBlendSpace> MoveBSPath;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Asset)
-	TSoftObjectPtr<UBlendSpace> LockOnBSPath;
+	TSoftObjectPtr<UT4AnimSetAsset> DefaultAnimSetPath; // #39
 };
 
 UCLASS(ClassGroup = Tech4Labs, Category = "Tech4Labs", BlueprintType, Blueprintable)

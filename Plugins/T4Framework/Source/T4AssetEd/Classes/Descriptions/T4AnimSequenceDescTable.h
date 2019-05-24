@@ -3,22 +3,18 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Public/T4AssetEdInfoDatas.h"
 #include "Classes/Engine/DataTable.h"
-#include "T4AnimSequenceInfoTable.generated.h"
+#include "T4AnimSequenceDescTable.generated.h"
 
 /**
   * http://api.unrealengine.com/KOR/Gameplay/DataDriven/
  */
 USTRUCT()
-struct FT4AnimSequenceInfoRow : public FTableRowBase
+struct FT4AnimSequenceDescTableRow : public FTableRowBase
 {
 	GENERATED_USTRUCT_BODY()
 
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attribute)
-	ET4AnimSequenceCategory Category;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attribute)
 	FName Name;
 
