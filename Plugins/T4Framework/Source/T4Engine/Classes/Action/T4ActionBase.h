@@ -1,4 +1,4 @@
-﻿// Copyright 2019 Tech4 Labs. All Rights Reserved.
+// Copyright 2019 Tech4 Labs. All Rights Reserved.
 
 #pragma once
 
@@ -55,6 +55,8 @@ struct T4ENGINE_API FT4ObjectAction
 	GENERATED_USTRUCT_BODY()
 
 public:
+	// #39 : FT4ContiCustomizeDetails::CustomizeCommonActionDetails
+
 	UPROPERTY(VisibleAnywhere)
 	ET4ActionType ActionType;
 

@@ -6,6 +6,8 @@
 #include "Network/Protocol/T4PacketCS.h"
 
 #include "Public/T4Gameplay.h"
+#include "Public/T4GameplayActionMapping.h"
+
 #include "Gameplay/T4GameplayInstance.h"
 
 #include "T4Engine/Classes/Action/T4ActionMinimal.h"
@@ -55,7 +57,7 @@ void UT4GameplayControl::SetupInput()
 
 		NewInputComponent->BindAction("T4Gameplay_Teleport", IE_Pressed, this, &UT4GameplayControl::OnTeleportPressed);
 
-		NewInputComponent->BindAction("T4Gameplay_Attack", IE_Pressed, this, &UT4GameplayControl::OnAttackPressed);
+		NewInputComponent->BindAction("T4Gameplay_PrimaryAttack", IE_Pressed, this, &UT4GameplayControl::OnPrimaryAttackPressed);
 		NewInputComponent->BindAction("T4Gameplay_ChangePlayer", IE_Pressed, this, &UT4GameplayControl::OnChangePlayer);
 		
 		NewInputComponent->BindAction("T4Gameplay_EquipWeapon", IE_Pressed, this, &UT4GameplayControl::OnEquipWeaponPressed);
@@ -239,7 +241,7 @@ void UT4GameplayControl::OnJumpPressed()
 	PacketHandlerCS->OnSendPacket(&NewPacketCS);
 }
 
-void UT4GameplayControl::OnAttackPressed()
+void UT4GameplayControl::OnPrimaryAttackPressed()
 {
 	if (bInputControlLocked) // #30
 	{
@@ -267,7 +269,7 @@ void UT4GameplayControl::OnAttackPressed()
 	}
 	FT4PacketAttackCS NewPacketCS;
 	NewPacketCS.SenderID = PlayerController->GetTargetObjectID();
-	NewPacketCS.SkillNameInTable = TEXT("NormalAttack");
+	NewPacketCS.SkillNameID = T4GameplayActionMapping::GetPrimaryAttackTableNameID(LayerType);
 	IT4GameObject* MouseOverObject = T4FrameworkUtil::GetMouseOverGameObject(GetLayerType());
 	if (nullptr != MouseOverObject)
 	{
@@ -309,7 +311,7 @@ void UT4GameplayControl::OnEnterPlayer()
 	IT4PlayerController* PlayerController = GetPlayerController();
 	check(nullptr != PlayerController);
 	FT4PacketCmdPCEnterCS NewPacketCS; // #27
-	NewPacketCS.CharacterNameInTable = TEXT("DefaultCharacter");
+	NewPacketCS.CharacterNameID = T4GameplayActionMapping::GetPlayerSpawnTableNameID(LayerType);
 	NewPacketCS.SpawnLocation = PickingLocation;
 	NewPacketCS.bSetViewTarget = !PlayerController->HasTargetObject(); // WARN : 빙의된 캐릭터가 없으면 MyPC로 간주하도록 조치
 	PacketHandlerCS->OnSendPacket(&NewPacketCS);
@@ -328,7 +330,7 @@ void UT4GameplayControl::OnEnterNPC()
 		return;
 	}
 	FT4PacketCmdNPCEnterCS NewPacketCS; // #31
-	NewPacketCS.NPCNameInTable = TEXT("DefaultNPC");
+	NewPacketCS.NPCNameID = T4GameplayActionMapping::GetNPCSpawnTableNameID(LayerType);
 	NewPacketCS.SpawnLocation = PickingLocation;
 	PacketHandlerCS->OnSendPacket(&NewPacketCS);
 }
@@ -374,14 +376,14 @@ void UT4GameplayControl::OnEquipWeaponPressed()
 	{
 		FT4PacketUnEquipCS NewPacketCS; // #27
 		NewPacketCS.SenderID = PlayerController->GetTargetObjectID();
-		NewPacketCS.ItemNameInTable = TEXT("DefaultSword");
+		NewPacketCS.ItemNameID = T4GameplayActionMapping::GetEquipItemTableNameID(LayerType);
 		PacketHandlerCS->OnSendPacket(&NewPacketCS);
 	}
 	else
 	{
 		FT4PacketEquipCS NewPacketCS; // #27
 		NewPacketCS.SenderID = PlayerController->GetTargetObjectID();
-		NewPacketCS.ItemNameInTable = TEXT("DefaultSword");
+		NewPacketCS.ItemNameID = T4GameplayActionMapping::GetEquipItemTableNameID(LayerType);
 		PacketHandlerCS->OnSendPacket(&NewPacketCS);
 	}
 }

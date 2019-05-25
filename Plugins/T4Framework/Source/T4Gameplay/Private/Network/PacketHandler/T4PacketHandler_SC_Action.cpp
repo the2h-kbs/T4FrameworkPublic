@@ -23,7 +23,7 @@ void FT4PacketHandlerSC::HandleSC_Attack(const FT4PacketAttackSC* InPacket)
 	check(nullptr != InPacket);
 	check(ET4PacketStoC::Attack == InPacket->PacketSC);
 	FT4GameDB& GameDB = GetGameDB();
-	const FT4GameSkillData* SkillData = GameDB.GetSkillDataByName(InPacket->SkillNameInTable);
+	const FT4GameDBSkillRow* SkillData = GameDB.GetSkillRowByName(InPacket->SkillNameID);
 	if (nullptr == SkillData)
 	{
 		return;
@@ -47,7 +47,7 @@ void FT4PacketHandlerSC::HandleSC_Effect(const FT4PacketEffectSC* InPacket)
 	check(nullptr != InPacket);
 	check(ET4PacketStoC::Effect == InPacket->PacketSC);
 	FT4GameDB& GameDB = GetGameDB();
-	const FT4GameEffectData* EffectData = GameDB.GetEffectDataByName(InPacket->EffectNameInTable);
+	const FT4GameDBEffectRow* EffectData = GameDB.GetEffectRowByName(InPacket->EffectNameID);
 	if (nullptr == EffectData)
 	{
 		return;

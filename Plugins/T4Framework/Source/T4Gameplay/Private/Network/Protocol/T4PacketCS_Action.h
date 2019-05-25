@@ -24,7 +24,7 @@ public:
 	FT4ObjectID SenderID;
 
 	UPROPERTY(VisibleAnywhere)
-	FName SkillNameInTable;
+	FName SkillNameID;
 
 	UPROPERTY(VisibleAnywhere)
 	FT4ObjectID TargetObjectID;
@@ -32,7 +32,7 @@ public:
 public:
 	FT4PacketAttackCS()
 		: FT4PacketCtoS(ET4PacketCtoS::Attack)
-		, SkillNameInTable(NAME_None)
+		, SkillNameID(NAME_None)
 	{
 	}
 

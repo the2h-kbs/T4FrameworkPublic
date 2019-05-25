@@ -14,7 +14,7 @@
 #if WITH_EDITOR
 template <class T, class U>
 inline bool CopyDataFromRawInternal(
-	FT4GameDataInfo& InTableInfo,
+	FT4GameDBRowInfo& InTableInfo,
 	const TCHAR* InContextString
 )
 {
@@ -22,7 +22,7 @@ inline bool CopyDataFromRawInternal(
 	{
 		return false;
 	}
-	for (FT4GameData* GameData : InTableInfo.GameDatas)
+	for (FT4GameDBRow* GameData : InTableInfo.GameDatas)
 	{
 		const T* TableRow = InTableInfo.DataTable->FindRow<T>(
 			GameData->RawName,
@@ -43,7 +43,7 @@ template <class T, class U>
 inline bool LoadTableInternal(
 	const TCHAR* InTableName,
 	const TCHAR* InTablePath,
-	FT4GameDataInfo& OutTableInfo
+	FT4GameDBRowInfo& OutTableInfo
 )
 {
 	FSoftObjectPath TablePath = FString(InTablePath);
@@ -89,12 +89,12 @@ inline bool LoadTableInternal(
 	return true;
 }
 
-void FT4GameDataInfo::Reset()
+void FT4GameDBRowInfo::Reset()
 {
 	UIDMap.Empty();
 	NameMap.Empty();
 	GuidMap.Empty();
-	for (FT4GameData* GameData : GameDatas)
+	for (FT4GameDBRow* GameData : GameDatas)
 	{
 		check(nullptr != GameData);
 		delete GameData;
@@ -110,7 +110,7 @@ void FT4GameDataInfo::Reset()
 }
 
 template <class T> 
-const T* FT4GameDataInfo::GetDataByUID(const int32& InUID)
+const T* FT4GameDBRowInfo::GetRowByUID(const int32& InUID)
 {
 	if (!UIDMap.Contains(InUID))
 	{
@@ -120,7 +120,7 @@ const T* FT4GameDataInfo::GetDataByUID(const int32& InUID)
 }
 
 template <class T> 
-const T* FT4GameDataInfo::GetDataByName(const FName& InName)
+const T* FT4GameDBRowInfo::GetRowByName(const FName& InName)
 {
 	if (!NameMap.Contains(InName))
 	{
@@ -130,7 +130,7 @@ const T* FT4GameDataInfo::GetDataByName(const FName& InName)
 }
 
 template <class T> 
-const T* FT4GameDataInfo::GetDataByGuid(const FGuid& InGuid)
+const T* FT4GameDBRowInfo::GetRowByGuid(const FGuid& InGuid)
 {
 	if (!GuidMap.Contains(InGuid))
 	{
@@ -204,7 +204,7 @@ bool FT4GameDB::Initialize(const TCHAR* InContentMasterPath)
 		{
 			case ET4ContentTableType::World: // #27
 				{
-					if (!LoadTableInternal<FT4ContentWorldTableRow, FT4GameWorldData>(
+					if (!LoadTableInternal<FT4ContentWorldTableRow, FT4GameDBWorldRow>(
 						*TableName,
 						*ContentTablePath,
 						GameWorldData
@@ -226,7 +226,7 @@ bool FT4GameDB::Initialize(const TCHAR* InContentMasterPath)
 
 			case ET4ContentTableType::Player: // #27
 				{
-					if (!LoadTableInternal<FT4ContentPlayerTableRow, FT4GamePlayerData>(
+					if (!LoadTableInternal<FT4ContentPlayerTableRow, FT4GameDBPlayerRow>(
 						*TableName,
 						*ContentTablePath,
 						GamePlayerData
@@ -248,7 +248,7 @@ bool FT4GameDB::Initialize(const TCHAR* InContentMasterPath)
 
 			case ET4ContentTableType::NPC: // #31
 				{
-					if (!LoadTableInternal<FT4ContentNPCTableRow, FT4GameNPCData>(
+					if (!LoadTableInternal<FT4ContentNPCTableRow, FT4GameDBNPCRow>(
 						*TableName,
 						*ContentTablePath,
 						GameNPCData
@@ -270,7 +270,7 @@ bool FT4GameDB::Initialize(const TCHAR* InContentMasterPath)
 
 			case ET4ContentTableType::FO: // #27
 				{
-					if (!LoadTableInternal<FT4ContentFOTableRow, FT4GameFOData>(
+					if (!LoadTableInternal<FT4ContentFOTableRow, FT4GameDBFORow>(
 						*TableName,
 						*ContentTablePath,
 						GameFOData
@@ -292,7 +292,7 @@ bool FT4GameDB::Initialize(const TCHAR* InContentMasterPath)
 
 			case ET4ContentTableType::Item: // #27
 				{
-					if (!LoadTableInternal<FT4ContentItemTableRow, FT4GameItemData>(
+					if (!LoadTableInternal<FT4ContentItemTableRow, FT4GameDBItemRow>(
 						*TableName,
 						*ContentTablePath,
 						GameItemData
@@ -314,7 +314,7 @@ bool FT4GameDB::Initialize(const TCHAR* InContentMasterPath)
 
 			case ET4ContentTableType::Skill: // #25
 				{
-					if (!LoadTableInternal<FT4ContentSkillTableRow, FT4GameSkillData>(
+					if (!LoadTableInternal<FT4ContentSkillTableRow, FT4GameDBSkillRow>(
 						*TableName,
 						*ContentTablePath,
 						GameSkillData
@@ -336,7 +336,7 @@ bool FT4GameDB::Initialize(const TCHAR* InContentMasterPath)
 
 			case ET4ContentTableType::Effect: // #25
 				{
-					if (!LoadTableInternal<FT4ContentEffectTableRow, FT4GameEffectData>(
+					if (!LoadTableInternal<FT4ContentEffectTableRow, FT4GameDBEffectRow>(
 						*TableName,
 						*ContentTablePath,
 						GameEffectData
@@ -408,7 +408,7 @@ void FT4GameDB::Reset()
 void FT4GameDB::OnWorldTableChanged()
 {
 #if WITH_EDITOR
-	CopyDataFromRawInternal<FT4ContentWorldTableRow, FT4GameWorldData>(
+	CopyDataFromRawInternal<FT4ContentWorldTableRow, FT4GameDBWorldRow>(
 		GameWorldData,
 		TEXT("WorldTable")
 	);
@@ -418,7 +418,7 @@ void FT4GameDB::OnWorldTableChanged()
 void FT4GameDB::OnPlayerTableChanged()
 {
 #if WITH_EDITOR
-	CopyDataFromRawInternal<FT4ContentPlayerTableRow, FT4GamePlayerData>(
+	CopyDataFromRawInternal<FT4ContentPlayerTableRow, FT4GameDBPlayerRow>(
 		GamePlayerData,
 		TEXT("PlayerTable")
 	);
@@ -428,7 +428,7 @@ void FT4GameDB::OnPlayerTableChanged()
 void FT4GameDB::OnNPCTableChanged()
 {
 #if WITH_EDITOR
-	CopyDataFromRawInternal<FT4ContentNPCTableRow, FT4GameNPCData>(
+	CopyDataFromRawInternal<FT4ContentNPCTableRow, FT4GameDBNPCRow>(
 		GameNPCData,
 		TEXT("NPCTable")
 		);
@@ -438,7 +438,7 @@ void FT4GameDB::OnNPCTableChanged()
 void FT4GameDB::OnFOTableChanged()
 {
 #if WITH_EDITOR
-	CopyDataFromRawInternal<FT4ContentFOTableRow, FT4GameFOData>(
+	CopyDataFromRawInternal<FT4ContentFOTableRow, FT4GameDBFORow>(
 		GameFOData,
 		TEXT("FOTable")
 	);
@@ -448,7 +448,7 @@ void FT4GameDB::OnFOTableChanged()
 void FT4GameDB::OnItemTableChanged()
 {
 #if WITH_EDITOR
-	CopyDataFromRawInternal<FT4ContentItemTableRow, FT4GameItemData>(
+	CopyDataFromRawInternal<FT4ContentItemTableRow, FT4GameDBItemRow>(
 		GameItemData, 
 		TEXT("ItemTable")
 	);
@@ -458,7 +458,7 @@ void FT4GameDB::OnItemTableChanged()
 void FT4GameDB::OnSkillTableChanged()
 {
 #if WITH_EDITOR
-	CopyDataFromRawInternal<FT4ContentSkillTableRow, FT4GameSkillData>(
+	CopyDataFromRawInternal<FT4ContentSkillTableRow, FT4GameDBSkillRow>(
 		GameSkillData,
 		TEXT("SkillTable")
 	);
@@ -468,7 +468,7 @@ void FT4GameDB::OnSkillTableChanged()
 void FT4GameDB::OnEffectTableChanged()
 {
 #if WITH_EDITOR
-	CopyDataFromRawInternal<FT4ContentEffectTableRow, FT4GameEffectData>(
+	CopyDataFromRawInternal<FT4ContentEffectTableRow, FT4GameDBEffectRow>(
 		GameEffectData,
 		TEXT("EffectTable")
 	);
@@ -476,17 +476,17 @@ void FT4GameDB::OnEffectTableChanged()
 }
 
 #define DEFINE_GETTER_GAME_DATA(x)														\
-const FT4Game##x##Data* FT4GameDB::Get##x##DataByUID(const int32& InUID)				\
+const FT4GameDB##x##Row* FT4GameDB::Get##x##RowByUID(const int32& InUID)				\
 {																						\
-	return Game##x##Data.GetDataByUID<FT4Game##x##Data>(InUID);							\
+	return Game##x##Data.GetRowByUID<FT4GameDB##x##Row>(InUID);							\
 }																						\
-const FT4Game##x##Data* FT4GameDB::Get##x##DataByName(const FName& InName)				\
+const FT4GameDB##x##Row* FT4GameDB::Get##x##RowByName(const FName& InName)				\
 {																						\
-	return Game##x##Data.GetDataByName<FT4Game##x##Data>(InName);						\
+	return Game##x##Data.GetRowByName<FT4GameDB##x##Row>(InName);						\
 }																						\
-const FT4Game##x##Data* FT4GameDB::Get##x##DataByGuid(const FGuid& InGuid)				\
+const FT4GameDB##x##Row* FT4GameDB::Get##x##RowByGuid(const FGuid& InGuid)				\
 {																						\
-	return Game##x##Data.GetDataByGuid<FT4Game##x##Data>(InGuid);						\
+	return Game##x##Data.GetRowByGuid<FT4GameDB##x##Row>(InGuid);						\
 }
 
 DEFINE_GETTER_GAME_DATA(World)

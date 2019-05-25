@@ -15,98 +15,98 @@
 /**
   * 
  */
-struct FT4GameData
+struct FT4GameDBRow
 {
-	FT4GameData(const FName& InRawName)
+	FT4GameDBRow(const FName& InRawName)
 		: RawName(InRawName)
 	{
 	}
-	virtual ~FT4GameData()
+	virtual ~FT4GameDBRow()
 	{
 	}
 	FName RawName;
 };
 
-struct FT4GameWorldData : public FT4GameData
+struct FT4GameDBWorldRow : public FT4GameDBRow
 {
-	FT4GameWorldData(const FName& InRawName)
-		: FT4GameData(InRawName)
+	FT4GameDBWorldRow(const FName& InRawName)
+		: FT4GameDBRow(InRawName)
 	{
 	}
 	FT4ContentWorldTableRow RawData; // #27
 };
 
-struct FT4GamePlayerData : public FT4GameData
+struct FT4GameDBPlayerRow : public FT4GameDBRow
 {
-	FT4GamePlayerData(const FName& InRawName)
-		: FT4GameData(InRawName)
+	FT4GameDBPlayerRow(const FName& InRawName)
+		: FT4GameDBRow(InRawName)
 	{
 	}
 	FT4ContentPlayerTableRow RawData; // #27
 };
 
-struct FT4GameNPCData : public FT4GameData
+struct FT4GameDBNPCRow : public FT4GameDBRow
 {
-	FT4GameNPCData(const FName& InRawName)
-		: FT4GameData(InRawName)
+	FT4GameDBNPCRow(const FName& InRawName)
+		: FT4GameDBRow(InRawName)
 	{
 	}
 	FT4ContentNPCTableRow RawData; // #31
 };
 
-struct FT4GameFOData : public FT4GameData
+struct FT4GameDBFORow : public FT4GameDBRow
 {
-	FT4GameFOData(const FName& InRawName)
-		: FT4GameData(InRawName)
+	FT4GameDBFORow(const FName& InRawName)
+		: FT4GameDBRow(InRawName)
 	{
 	}
 	FT4ContentFOTableRow RawData; // #27
 };
 
-struct FT4GameItemData : public FT4GameData
+struct FT4GameDBItemRow : public FT4GameDBRow
 {
-	FT4GameItemData(const FName& InRawName)
-		: FT4GameData(InRawName)
+	FT4GameDBItemRow(const FName& InRawName)
+		: FT4GameDBRow(InRawName)
 	{
 	}
 	FT4ContentItemTableRow RawData; // #27
 };
 
-struct FT4GameSkillData : public FT4GameData
+struct FT4GameDBSkillRow : public FT4GameDBRow
 {
-	FT4GameSkillData(const FName& InRawName)
-		: FT4GameData(InRawName)
+	FT4GameDBSkillRow(const FName& InRawName)
+		: FT4GameDBRow(InRawName)
 	{
 	}
 	FT4ContentSkillTableRow RawData; // #27
 };
 
-struct FT4GameEffectData : public FT4GameData
+struct FT4GameDBEffectRow : public FT4GameDBRow
 {
-	FT4GameEffectData(const FName& InRawName)
-		: FT4GameData(InRawName)
+	FT4GameDBEffectRow(const FName& InRawName)
+		: FT4GameDBRow(InRawName)
 	{
 	}
 	FT4ContentEffectTableRow RawData; // #27
 };
 
-struct FT4GameDataInfo
+struct FT4GameDBRowInfo
 {
 	void Reset();
 
 	template <class T> 
-	const T* GetDataByUID(const int32& InUID);
+	const T* GetRowByUID(const int32& InUID);
 
 	template <class T> 
-	const T* GetDataByName(const FName& InName);
+	const T* GetRowByName(const FName& InName);
 
 	template <class T> 
-	const T* GetDataByGuid(const FGuid& InGuid);
+	const T* GetRowByGuid(const FGuid& InGuid);
 
-	TMap<int32, FT4GameData*> UIDMap;
-	TMap<FName, FT4GameData*> NameMap;
-	TMap<FGuid, FT4GameData*> GuidMap;
-	TArray<FT4GameData*> GameDatas;
+	TMap<int32, FT4GameDBRow*> UIDMap;
+	TMap<FName, FT4GameDBRow*> NameMap;
+	TMap<FGuid, FT4GameDBRow*> GuidMap;
+	TArray<FT4GameDBRow*> GameDatas;
 	TWeakObjectPtr<UDataTable> DataTable;
 };
 
@@ -124,33 +124,33 @@ public:
 
 	void Reload();
 
-	const FT4GameWorldData* GetWorldDataByUID(const int32& InUID);
-	const FT4GameWorldData* GetWorldDataByName(const FName& InName);
-	const FT4GameWorldData* GetWorldDataByGuid(const FGuid& InGuid);
+	const FT4GameDBWorldRow* GetWorldRowByUID(const int32& InUID);
+	const FT4GameDBWorldRow* GetWorldRowByName(const FName& InName);
+	const FT4GameDBWorldRow* GetWorldRowByGuid(const FGuid& InGuid);
 
-	const FT4GamePlayerData* GetPlayerDataByUID(const int32& InUID);
-	const FT4GamePlayerData* GetPlayerDataByName(const FName& InName);
-	const FT4GamePlayerData* GetPlayerDataByGuid(const FGuid& InGuid);
+	const FT4GameDBPlayerRow* GetPlayerRowByUID(const int32& InUID);
+	const FT4GameDBPlayerRow* GetPlayerRowByName(const FName& InName);
+	const FT4GameDBPlayerRow* GetPlayerRowByGuid(const FGuid& InGuid);
 
-	const FT4GameNPCData* GetNPCDataByUID(const int32& InUID);
-	const FT4GameNPCData* GetNPCDataByName(const FName& InName);
-	const FT4GameNPCData* GetNPCDataByGuid(const FGuid& InGuid);
+	const FT4GameDBNPCRow* GetNPCRowByUID(const int32& InUID);
+	const FT4GameDBNPCRow* GetNPCRowByName(const FName& InName);
+	const FT4GameDBNPCRow* GetNPCRowByGuid(const FGuid& InGuid);
 
-	const FT4GameFOData* GetFODataByUID(const int32& InUID);
-	const FT4GameFOData* GetFODataByName(const FName& InName);
-	const FT4GameFOData* GetFODataByGuid(const FGuid& InGuid);
+	const FT4GameDBFORow* GetFORowByUID(const int32& InUID);
+	const FT4GameDBFORow* GetFORowByName(const FName& InName);
+	const FT4GameDBFORow* GetFORowByGuid(const FGuid& InGuid);
 
-	const FT4GameItemData* GetItemDataByUID(const int32& InUID);
-	const FT4GameItemData* GetItemDataByName(const FName& InName);
-	const FT4GameItemData* GetItemDataByGuid(const FGuid& InGuid);
+	const FT4GameDBItemRow* GetItemRowByUID(const int32& InUID);
+	const FT4GameDBItemRow* GetItemRowByName(const FName& InName);
+	const FT4GameDBItemRow* GetItemRowByGuid(const FGuid& InGuid);
 
-	const FT4GameSkillData* GetSkillDataByUID(const int32& InUID);
-	const FT4GameSkillData* GetSkillDataByName(const FName& InName);
-	const FT4GameSkillData* GetSkillDataByGuid(const FGuid& InGuid);
+	const FT4GameDBSkillRow* GetSkillRowByUID(const int32& InUID);
+	const FT4GameDBSkillRow* GetSkillRowByName(const FName& InName);
+	const FT4GameDBSkillRow* GetSkillRowByGuid(const FGuid& InGuid);
 
-	const FT4GameEffectData* GetEffectDataByUID(const int32& InUID);
-	const FT4GameEffectData* GetEffectDataByName(const FName& InName);
-	const FT4GameEffectData* GetEffectDataByGuid(const FGuid& InGuid);
+	const FT4GameDBEffectRow* GetEffectRowByUID(const int32& InUID);
+	const FT4GameDBEffectRow* GetEffectRowByName(const FName& InName);
+	const FT4GameDBEffectRow* GetEffectRowByGuid(const FGuid& InGuid);
 
 private:
 	void Reset();
@@ -167,13 +167,13 @@ private:
 	bool bInitialized;
 	int32 InitCount;
 
-	FT4GameDataInfo GameWorldData;
-	FT4GameDataInfo GamePlayerData;
-	FT4GameDataInfo GameNPCData; // #31
-	FT4GameDataInfo GameFOData;
-	FT4GameDataInfo GameItemData;
-	FT4GameDataInfo GameSkillData;
-	FT4GameDataInfo GameEffectData;
+	FT4GameDBRowInfo GameWorldData;
+	FT4GameDBRowInfo GamePlayerData;
+	FT4GameDBRowInfo GameNPCData; // #31
+	FT4GameDBRowInfo GameFOData;
+	FT4GameDBRowInfo GameItemData;
+	FT4GameDBRowInfo GameSkillData;
+	FT4GameDBRowInfo GameEffectData;
 };
 
 FT4GameDB& GetGameDB();

@@ -32,7 +32,7 @@ public:
 
 	void OnTeleportPressed();
 
-	void OnAttackPressed();
+	void OnPrimaryAttackPressed();
 	
 	void OnChangePlayer();
 	void OnEnterPlayer();

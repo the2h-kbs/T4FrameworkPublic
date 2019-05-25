@@ -23,7 +23,7 @@ void FT4PacketHandlerSC::HandleSC_Equip(const FT4PacketEquipSC* InPacket)
 	check(nullptr != InPacket);
 	check(ET4PacketStoC::Equip == InPacket->PacketSC);
 	FT4GameDB& GameDB = GetGameDB();
-	const FT4GameItemData* ItemData = GameDB.GetItemDataByName(InPacket->ItemNameInTable);
+	const FT4GameDBItemRow* ItemData = GameDB.GetItemRowByName(InPacket->ItemNameID);
 	if (nullptr == ItemData)
 	{
 		return;
@@ -46,7 +46,7 @@ void FT4PacketHandlerSC::HandleSC_UnEquip(const FT4PacketUnEquipSC* InPacket)
 	check(nullptr != InPacket);
 	check(ET4PacketStoC::UnEquip == InPacket->PacketSC);
 	FT4GameDB& GameDB = GetGameDB();
-	const FT4GameItemData* ItemData = GameDB.GetItemDataByName(InPacket->ItemNameInTable);
+	const FT4GameDBItemRow* ItemData = GameDB.GetItemRowByName(InPacket->ItemNameID);
 	if (nullptr == ItemData)
 	{
 		return;
@@ -67,7 +67,7 @@ void FT4PacketHandlerSC::HandleSC_Exchange(const FT4PacketExchangeSC* InPacket)
 	check(nullptr != InPacket);
 	check(ET4PacketStoC::Exchange == InPacket->PacketSC);
 	FT4GameDB& GameDB = GetGameDB();
-	const FT4GameItemData* ItemData = GameDB.GetItemDataByName(InPacket->ItemNameInTable);
+	const FT4GameDBItemRow* ItemData = GameDB.GetItemRowByName(InPacket->ItemNameID);
 	if (nullptr == ItemData)
 	{
 		return;

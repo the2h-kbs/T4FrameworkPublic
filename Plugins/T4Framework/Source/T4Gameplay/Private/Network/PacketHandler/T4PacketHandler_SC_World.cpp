@@ -29,7 +29,7 @@ void FT4PacketHandlerSC::HandleSC_ChangeWorld(const FT4PacketChangeWorldSC* InPa
 	check(nullptr != InPacket);
 	check(ET4PacketStoC::ChangeWorld == InPacket->PacketSC);
 	FT4GameDB& GameDB = GetGameDB();
-	const FT4GameWorldData* WorldData = GameDB.GetWorldDataByName(InPacket->WorldNameInTable);
+	const FT4GameDBWorldRow* WorldData = GameDB.GetWorldRowByName(InPacket->WorldNameID);
 	if (nullptr == WorldData)
 	{
 		return;
@@ -51,7 +51,7 @@ void FT4PacketHandlerSC::HandleSC_MyPCEnter(const FT4PacketMyPCEnterSC* InPacket
 	check(nullptr != InPacket);
 	check(ET4PacketStoC::MyPCEnter == InPacket->PacketSC);
 	FT4GameDB& GameDB = GetGameDB();
-	const FT4GamePlayerData* CharacterData = GameDB.GetPlayerDataByName(InPacket->CharacterNameInTable);
+	const FT4GameDBPlayerRow* CharacterData = GameDB.GetPlayerRowByName(InPacket->CharacterNameID);
 	if (nullptr == CharacterData)
 	{
 		return;
@@ -74,7 +74,7 @@ void FT4PacketHandlerSC::HandleSC_MyPCEnter(const FT4PacketMyPCEnterSC* InPacket
 	NewAction.Name = TEXT("T4MyPCObject");
 	NewAction.EntityType = ET4EntityType::Actor;
 	NewAction.EntityAssetPath = CharacterData->RawData.EntityAsset.ToSoftObjectPath();
-	NewAction.ContentUniqueName = InPacket->CharacterNameInTable;
+	NewAction.ContentUniqueName = InPacket->CharacterNameID;
 	NewAction.SpawnLocation = InPacket->SpawnLocation;
 	NewAction.SpawnRotation = InPacket->SpawnRotation;
 	bool bResult = GameWorld->OnExecute(&NewAction);
@@ -91,7 +91,7 @@ void FT4PacketHandlerSC::HandleSC_PCEnter(const FT4PacketPCEnterSC* InPacket)
 	check(nullptr != InPacket);
 	check(ET4PacketStoC::PCEnter == InPacket->PacketSC);
 	FT4GameDB& GameDB = GetGameDB();
-	const FT4GamePlayerData* CharacterData = GameDB.GetPlayerDataByName(InPacket->CharacterNameInTable);
+	const FT4GameDBPlayerRow* CharacterData = GameDB.GetPlayerRowByName(InPacket->CharacterNameID);
 	if (nullptr == CharacterData)
 	{
 		return;
@@ -113,7 +113,7 @@ void FT4PacketHandlerSC::HandleSC_PCEnter(const FT4PacketPCEnterSC* InPacket)
 	NewAction.Name = TEXT("T4OtherPCObject");
 	NewAction.EntityType = ET4EntityType::Actor;
 	NewAction.EntityAssetPath = CharacterData->RawData.EntityAsset.ToSoftObjectPath();
-	NewAction.ContentUniqueName = InPacket->CharacterNameInTable;
+	NewAction.ContentUniqueName = InPacket->CharacterNameID;
 	NewAction.SpawnLocation = InPacket->SpawnLocation;
 	NewAction.SpawnRotation = InPacket->SpawnRotation;
 	GameWorld->OnExecute(&NewAction);
@@ -152,7 +152,7 @@ void FT4PacketHandlerSC::HandleSC_NPCEnter(const FT4PacketNPCEnterSC* InPacket)
 	check(nullptr != InPacket);
 	check(ET4PacketStoC::NPCEnter == InPacket->PacketSC);
 	FT4GameDB& GameDB = GetGameDB();
-	const FT4GameNPCData* NPCData = GameDB.GetNPCDataByName(InPacket->NPCNameInTable);
+	const FT4GameDBNPCRow* NPCData = GameDB.GetNPCRowByName(InPacket->NPCNameID);
 	if (nullptr == NPCData)
 	{
 		return;
@@ -175,7 +175,7 @@ void FT4PacketHandlerSC::HandleSC_NPCEnter(const FT4PacketNPCEnterSC* InPacket)
 	NewAction.Name = TEXT("T4NPCObject");
 	NewAction.EntityType = ET4EntityType::Actor;
 	NewAction.EntityAssetPath = NPCData->RawData.EntityAsset.ToSoftObjectPath();
-	NewAction.ContentUniqueName = InPacket->NPCNameInTable;
+	NewAction.ContentUniqueName = InPacket->NPCNameID;
 	NewAction.SpawnLocation = InPacket->SpawnLocation;
 	NewAction.SpawnRotation = InPacket->SpawnRotation;
 	GameWorld->OnExecute(&NewAction);
@@ -223,7 +223,7 @@ void FT4PacketHandlerSC::HandleSC_FOEnter(const FT4PacketFOEnterSC* InPacket)
 	check(nullptr != InPacket);
 	check(ET4PacketStoC::FOEnter == InPacket->PacketSC);
 	FT4GameDB& GameDB = GetGameDB();
-	const FT4GameFOData* FOData = GameDB.GetFODataByName(InPacket->FONameInTable);
+	const FT4GameDBFORow* FOData = GameDB.GetFORowByName(InPacket->FONameID);
 	if (nullptr == FOData)
 	{
 		return;
@@ -246,7 +246,7 @@ void FT4PacketHandlerSC::HandleSC_FOEnter(const FT4PacketFOEnterSC* InPacket)
 	NewAction.Name = TEXT("T4FOObject");
 	NewAction.EntityType = ET4EntityType::Prop;
 	NewAction.EntityAssetPath = FOData->RawData.EntityAsset.ToSoftObjectPath();
-	NewAction.ContentUniqueName = InPacket->FONameInTable;
+	NewAction.ContentUniqueName = InPacket->FONameID;
 	NewAction.SpawnLocation = InPacket->SpawnLocation;
 	NewAction.SpawnRotation = InPacket->SpawnRotation;
 	GameWorld->OnExecute(&NewAction);
@@ -291,7 +291,7 @@ void FT4PacketHandlerSC::HandleSC_ItemEnter(const FT4PacketItemEnterSC* InPacket
 	check(nullptr != InPacket);
 	check(ET4PacketStoC::ItemEnter == InPacket->PacketSC);
 	FT4GameDB& GameDB = GetGameDB();
-	const FT4GameItemData* ItemData = GameDB.GetItemDataByName(InPacket->ItemNameInTable);
+	const FT4GameDBItemRow* ItemData = GameDB.GetItemRowByName(InPacket->ItemNameID);
 	if (nullptr == ItemData)
 	{
 		return;
@@ -314,7 +314,7 @@ void FT4PacketHandlerSC::HandleSC_ItemEnter(const FT4PacketItemEnterSC* InPacket
 	NewAction.Name = TEXT("T4ItemObject");
 	NewAction.EntityType = ET4EntityType::Item;
 	NewAction.EntityAssetPath = ItemData->RawData.EntityAsset.ToSoftObjectPath();
-	NewAction.ContentUniqueName = InPacket->ItemNameInTable;
+	NewAction.ContentUniqueName = InPacket->ItemNameID;
 	NewAction.SpawnLocation = InPacket->SpawnLocation;
 	NewAction.SpawnRotation = InPacket->SpawnRotation;
 	GameWorld->OnExecute(&NewAction);

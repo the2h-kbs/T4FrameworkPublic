@@ -4,9 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "Classes/Action/T4Action_Root.h"
-#if WITH_EDITOR
-#include "T4ContiWithEditor.h"
-#endif
 #include "T4ContiAsset.generated.h"
 
 /**
@@ -30,7 +27,9 @@ private:
 };
 
 class UTexture2D;
-UCLASS(ClassGroup = Tech4Labs, Category = "Tech4Labs", BlueprintType, Blueprintable)
+class UT4EntityAsset;
+
+UCLASS(ClassGroup = Tech4Labs, Category = "Tech4Labs")
 class T4ENGINE_API UT4ContiAsset : public UObject
 {
 	GENERATED_UCLASS_BODY()
@@ -57,12 +56,11 @@ public:
 	FT4RootAction RootAction;
 
 #if WITH_EDITORONLY_DATA
+	UPROPERTY(EditAnywhere, Category = Editor)
+	TSoftObjectPtr<UT4EntityAsset> TestEntityAsset;
+
 	UPROPERTY()
 	UTexture2D* ThumbnailImage; // Internal: The thumbnail image
-#endif
-
-#if WITH_EDITOR
-	TMap<ET4ActionType, FSelectedEditorActionTypeInfo> SelectedEditorActionMap; // #30 : only Editor
 #endif
 
 private:

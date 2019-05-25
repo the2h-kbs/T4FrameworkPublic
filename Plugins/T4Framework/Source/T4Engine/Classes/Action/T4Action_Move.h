@@ -159,6 +159,8 @@ struct T4ENGINE_API FT4RotationAction : public FT4ObjectAction
 	GENERATED_USTRUCT_BODY()
 
 public:
+	// #39 : FT4ContiCustomizeDetails::CustomizeRotationActionDetails
+
 	UPROPERTY(EditAnywhere)
 	ET4RotationType RotationType;
 

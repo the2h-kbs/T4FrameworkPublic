@@ -31,7 +31,7 @@ class UStaticMesh;
 class USkeletalMesh;
 class UParticleSystem;
 
-USTRUCT(BlueprintType)
+USTRUCT()
 struct T4ENGINE_API FT4EntityPropPhysicalAttribute : public FT4EntityBasePhysicalAttribute
 {
 	GENERATED_USTRUCT_BODY()
@@ -44,7 +44,7 @@ public:
 	}
 };
 
-USTRUCT(BlueprintType)
+USTRUCT()
 struct T4ENGINE_API FT4EntityPropRenderingAttribute : public FT4EntityBaseRenderingAttribute
 {
 	GENERATED_USTRUCT_BODY()
@@ -55,7 +55,7 @@ public:
 	}
 };
 
-USTRUCT(BlueprintType)
+USTRUCT()
 struct T4ENGINE_API FT4EntityPropNormalMeshData
 {
 	GENERATED_USTRUCT_BODY()
@@ -66,20 +66,20 @@ public:
 	{
 	}
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category= Asset)
+	UPROPERTY(EditAnywhere, Category= Asset)
 	ET4EntityMeshType MeshType;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Asset)
+	UPROPERTY(EditAnywhere, Category = Asset)
 	TSoftObjectPtr<UStaticMesh> StaticMeshPath;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Asset)
+	UPROPERTY(EditAnywhere, Category = Asset)
 	TSoftObjectPtr<USkeletalMesh> SkeletalMeshPath;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Asset)
+	UPROPERTY(EditAnywhere, Category = Asset)
 	TSoftObjectPtr<UParticleSystem> ParticleSystemPath;
 };
 
-UCLASS(ClassGroup = Tech4Labs, Category = "Tech4Labs", BlueprintType, Blueprintable)
+UCLASS(ClassGroup = Tech4Labs, Category = "Tech4Labs")
 class T4ENGINE_API UT4PropEntityAsset : public UT4EntityAsset
 {
 	GENERATED_UCLASS_BODY()
@@ -96,15 +96,15 @@ public:
 	ET4EntityType GetEntityType() const override { return ET4EntityType::Prop; }
 
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Attribute)
+	UPROPERTY(EditAnywhere, Category=Attribute)
 	FT4EntityPropPhysicalAttribute Physical;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Attribute)
+	UPROPERTY(EditAnywhere, Category=Attribute)
 	FT4EntityPropRenderingAttribute Rendering;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category= Data)
+	UPROPERTY(EditAnywhere, Category= Data)
 	ET4EntityPropMeshType MeshType;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Data)
+	UPROPERTY(EditAnywhere, Category=Data)
 	FT4EntityPropNormalMeshData NormalMeshData;
 };

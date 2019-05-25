@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "T4Action_Move.h"
-#include "T4Action_Visual.h"
+#include "T4Action_VFX.h"
 #include "T4Action_Root.generated.h"
 
 /**

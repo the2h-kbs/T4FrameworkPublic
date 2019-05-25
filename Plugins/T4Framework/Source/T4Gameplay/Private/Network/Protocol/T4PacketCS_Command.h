@@ -34,12 +34,12 @@ struct FT4PacketCmdChangeWorldCS : public FT4PacketCtoS
 
 public:
 	UPROPERTY(VisibleAnywhere)
-	FName WorldNameInTable;
+	FName WorldNameID;
 
 public:
 	FT4PacketCmdChangeWorldCS()
 		: FT4PacketCtoS(ET4PacketCtoS::CmdChangeWorld)
-		, WorldNameInTable(NAME_None)
+		, WorldNameID(NAME_None)
 	{
 	}
 
@@ -56,7 +56,7 @@ struct FT4PacketCmdPCEnterCS : public FT4PacketCtoS
 
 public:
 	UPROPERTY(VisibleAnywhere)
-	FName CharacterNameInTable;
+	FName CharacterNameID;
 
 	UPROPERTY(VisibleAnywhere)
 	FVector SpawnLocation;
@@ -70,7 +70,7 @@ public:
 public:
 	FT4PacketCmdPCEnterCS()
 		: FT4PacketCtoS(ET4PacketCtoS::CmdPCEnter)
-		, CharacterNameInTable(NAME_None)
+		, CharacterNameID(NAME_None)
 		, SpawnLocation(FVector::ZeroVector)
 		, SpawnRotation(FRotator::ZeroRotator)
 		, bSetViewTarget(false)
@@ -112,7 +112,7 @@ struct FT4PacketCmdNPCEnterCS : public FT4PacketCtoS
 
 public:
 	UPROPERTY(VisibleAnywhere)
-	FName NPCNameInTable;
+	FName NPCNameID;
 
 	UPROPERTY(VisibleAnywhere)
 	FVector SpawnLocation;
@@ -123,7 +123,7 @@ public:
 public:
 	FT4PacketCmdNPCEnterCS()
 		: FT4PacketCtoS(ET4PacketCtoS::CmdNPCEnter)
-		, NPCNameInTable(NAME_None)
+		, NPCNameID(NAME_None)
 		, SpawnLocation(FVector::ZeroVector)
 		, SpawnRotation(FRotator::ZeroRotator)
 	{
@@ -165,7 +165,7 @@ struct FT4PacketCmdFOEnterCS : public FT4PacketCtoS
 
 public:
 	UPROPERTY(VisibleAnywhere)
-	FName FONameInTable;
+	FName FONameID;
 
 	UPROPERTY(VisibleAnywhere)
 	FVector SpawnLocation;
@@ -176,7 +176,7 @@ public:
 public:
 	FT4PacketCmdFOEnterCS()
 		: FT4PacketCtoS(ET4PacketCtoS::CmdFOEnter)
-		, FONameInTable(NAME_None)
+		, FONameID(NAME_None)
 		, SpawnLocation(FVector::ZeroVector)
 		, SpawnRotation(FRotator::ZeroRotator)
 	{
@@ -218,7 +218,7 @@ struct FT4PacketCmdItemEnterCS : public FT4PacketCtoS
 
 public:
 	UPROPERTY(VisibleAnywhere)
-	FName ItemNameInTable;
+	FName ItemNameID;
 
 	UPROPERTY(VisibleAnywhere)
 	FVector SpawnLocation;
@@ -229,7 +229,7 @@ public:
 public:
 	FT4PacketCmdItemEnterCS()
 		: FT4PacketCtoS(ET4PacketCtoS::CmdItemEnter)
-		, ItemNameInTable(NAME_None)
+		, ItemNameID(NAME_None)
 		, SpawnLocation(FVector::ZeroVector)
 		, SpawnRotation(FRotator::ZeroRotator)
 	{

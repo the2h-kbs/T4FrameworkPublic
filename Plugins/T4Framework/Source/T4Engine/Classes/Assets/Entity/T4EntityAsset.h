@@ -9,7 +9,7 @@
 /**
   * #35
  */
-USTRUCT(BlueprintType)
+USTRUCT()
 struct T4ENGINE_API FT4EntityDefaultAttribute
 {
 	GENERATED_USTRUCT_BODY()
@@ -24,7 +24,7 @@ public:
 	{
 	}
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Default)
+	UPROPERTY(EditAnywhere, Category=Default)
 	FName UniqueName;
 
 #if WITH_EDITORONLY_DATA
@@ -36,7 +36,7 @@ public:
 #endif
 };
 
-USTRUCT(BlueprintType)
+USTRUCT()
 struct T4ENGINE_API FT4EntityBasePhysicalAttribute
 {
 	GENERATED_USTRUCT_BODY()
@@ -49,14 +49,14 @@ public:
 	{
 	}
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Physical, meta = (ClampMin = "10.0", ClampMax = "1000"))
+	UPROPERTY(EditAnywhere, Category = Physical, meta = (ClampMin = "10.0", ClampMax = "1000"))
 	float Height;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Physical, meta = (ClampMin = "10.0", ClampMax = "500"))
+	UPROPERTY(EditAnywhere, Category = Physical, meta = (ClampMin = "10.0", ClampMax = "500"))
 	float Radius;
 };
 
-USTRUCT(BlueprintType)
+USTRUCT()
 struct T4ENGINE_API FT4EntityBaseRenderingAttribute
 {
 	GENERATED_USTRUCT_BODY()
@@ -68,15 +68,15 @@ public:
 	{
 	}
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Property, meta = (ClampMin = "0.1", ClampMax = "10"))
+	UPROPERTY(EditAnywhere, Category = Property, meta = (ClampMin = "0.1", ClampMax = "10"))
 	float Scale;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Property, meta = (ClampMin = "-360.0", ClampMax = "360.0"))
+	UPROPERTY(EditAnywhere, Category = Property, meta = (ClampMin = "-360.0", ClampMax = "360.0"))
 	float ImportRotationYaw;
 };
 
 class UTexture2D;
-UCLASS(ClassGroup = Tech4Labs, Category = "Tech4Labs", BlueprintType, Blueprintable)
+UCLASS(ClassGroup = Tech4Labs, Category = "Tech4Labs")
 class T4ENGINE_API UT4EntityAsset : public UObject
 {
 	GENERATED_UCLASS_BODY()
@@ -101,7 +101,7 @@ public:
 public:
 	static const FName CallingContextName;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Attribute)
+	UPROPERTY(EditAnywhere, Category=Attribute)
 	FT4EntityDefaultAttribute Default;
 
 #if WITH_EDITORONLY_DATA

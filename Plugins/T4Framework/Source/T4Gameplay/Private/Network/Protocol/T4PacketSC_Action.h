@@ -25,7 +25,7 @@ public:
 	FT4ObjectID ObjectID;
 
 	UPROPERTY(VisibleAnywhere)
-	FName SkillNameInTable;
+	FName SkillNameID;
 
 	UPROPERTY(VisibleAnywhere)
 	FT4ObjectID TargetrObjectID;
@@ -33,7 +33,7 @@ public:
 public:
 	FT4PacketAttackSC()
 		: FT4PacketStoC(ET4PacketStoC::Attack)
-		, SkillNameInTable(NAME_None)
+		, SkillNameID(NAME_None)
 	{
 	}
 
@@ -63,7 +63,7 @@ public:
 	FT4ObjectID ObjectID;
 
 	UPROPERTY(VisibleAnywhere)
-	FName EffectNameInTable;
+	FName EffectNameID;
 
 	UPROPERTY(VisibleAnywhere)
 	FT4ObjectID AttackerObjectID;
@@ -71,7 +71,7 @@ public:
 public:
 	FT4PacketEffectSC()
 		: FT4PacketStoC(ET4PacketStoC::Effect)
-		, EffectNameInTable(NAME_None)
+		, EffectNameID(NAME_None)
 	{
 	}
 

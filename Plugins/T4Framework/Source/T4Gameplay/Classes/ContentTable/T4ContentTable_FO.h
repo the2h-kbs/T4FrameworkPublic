@@ -19,21 +19,21 @@ struct FT4ContentFOTableRow : public FTableRowBase
 	GENERATED_USTRUCT_BODY()
 
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attribute)
+	UPROPERTY(EditAnywhere, Category=Attribute)
 	int32 UID;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attribute)
+	UPROPERTY(EditAnywhere, Category=Attribute)
 	FName Name;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attribute)
+	UPROPERTY(EditAnywhere, Category=Attribute)
 	FGuid Guid;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Asset)
+	UPROPERTY(EditAnywhere, Category=Asset)
 	TSoftObjectPtr<UT4PropEntityAsset> EntityAsset;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Asset)
+	UPROPERTY(EditAnywhere, Category=Asset)
 	TSoftObjectPtr<UBlackboardData> BlackboardDataPath;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Asset)
+	UPROPERTY(EditAnywhere, Category=Asset)
 	TSoftObjectPtr<UBehaviorTree> BehaviorTreePath;
 };

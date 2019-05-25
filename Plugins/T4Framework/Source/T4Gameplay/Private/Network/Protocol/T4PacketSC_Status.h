@@ -26,12 +26,12 @@ public:
 	FT4ObjectID ObjectID;
 
 	UPROPERTY(VisibleAnywhere)
-	FName ItemNameInTable;
+	FName ItemNameID;
 
 public:
 	FT4PacketEquipSC()
 		: FT4PacketStoC(ET4PacketStoC::Equip)
-		, ItemNameInTable(NAME_None)
+		, ItemNameID(NAME_None)
 	{
 	}
 
@@ -61,12 +61,12 @@ public:
 	FT4ObjectID ObjectID;
 
 	UPROPERTY(VisibleAnywhere)
-	FName ItemNameInTable;
+	FName ItemNameID;
 
 public:
 	FT4PacketUnEquipSC()
 		: FT4PacketStoC(ET4PacketStoC::UnEquip)
-		, ItemNameInTable(NAME_None)
+		, ItemNameID(NAME_None)
 	{
 	}
 
@@ -96,12 +96,12 @@ public:
 	FT4ObjectID ObjectID;
 
 	UPROPERTY(VisibleAnywhere)
-	FName ItemNameInTable;
+	FName ItemNameID;
 
 public:
 	FT4PacketExchangeSC()
 		: FT4PacketStoC(ET4PacketStoC::Exchange)
-		, ItemNameInTable(NAME_None)
+		, ItemNameID(NAME_None)
 	{
 	}
 

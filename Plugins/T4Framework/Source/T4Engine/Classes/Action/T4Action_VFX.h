@@ -4,7 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "T4ActionBase.h"
-#include "T4Action_Visual.generated.h"
+#include "Public/T4EngineAnimSet.h"
+#include "T4Action_VFX.generated.h"
 
 /**
   *
@@ -20,13 +21,31 @@ struct T4ENGINE_API FT4AnimationAction : public FT4ObjectAction
 	GENERATED_USTRUCT_BODY()
 
 public:
+	// #39 : FT4ContiCustomizeDetails::CustomizeAnimationActionDetails
+
 	UPROPERTY(EditAnywhere)
 	FName SectionName;
+
+	UPROPERTY(EditAnywhere)
+	float BlendInTimeSec;
+
+	UPROPERTY(EditAnywhere)
+	float BlendOutTimeSec;
+
+	UPROPERTY(EditAnywhere)
+	float PlayRate;
+
+	UPROPERTY(EditAnywhere)
+	int32 LoopCount;
 
 public:
 	FT4AnimationAction()
 		: FT4ObjectAction(StaticActionType())
 		, SectionName(NAME_None)
+		, BlendInTimeSec(T4AnimSetDefaultBlendInTimeSec)
+		, BlendOutTimeSec(T4AnimSetDefaultBlendOutTimeSec)
+		, PlayRate(1.0f)
+		, LoopCount(1)
 	{
 	}
 
@@ -44,6 +63,8 @@ struct T4ENGINE_API FT4ParticleAction : public FT4ObjectAction
 	GENERATED_USTRUCT_BODY()
 
 public:
+	// #39 : FT4ContiCustomizeDetails::CustomizeParticleActionDetails
+
 	UPROPERTY(EditAnywhere)
 	FName BoneOrSocketName;
 

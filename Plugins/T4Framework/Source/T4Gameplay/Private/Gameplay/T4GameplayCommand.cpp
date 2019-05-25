@@ -146,7 +146,7 @@ void FT4GameplayCommand::OnChangeToWorld(IConsoleVariable* InVariable)
 {
 	const FName WorldName = *(InVariable->GetString());
 	FT4GameDB& GameDB = GetGameDB();
-	const FT4GameWorldData* WorldData = GameDB.GetWorldDataByName(WorldName);
+	const FT4GameDBWorldRow* WorldData = GameDB.GetWorldRowByName(WorldName);
 	if (nullptr == WorldData)
 	{
 		return;
@@ -157,7 +157,7 @@ void FT4GameplayCommand::OnChangeToWorld(IConsoleVariable* InVariable)
 		return;
 	}
 	FT4PacketCmdChangeWorldCS NewPacketCS; // #27
-	NewPacketCS.WorldNameInTable = WorldName;
+	NewPacketCS.WorldNameID = WorldName;
 	PacketHandlerCS->OnSendPacket(&NewPacketCS);
 }
 
@@ -200,9 +200,9 @@ void FT4GameplayCommand::OnSpawnProp(IConsoleVariable* InVariable)
 	{
 		return;
 	}
-	const FName FONameInTable = *InVariable->GetString();
+	const FName FONameID = *InVariable->GetString();
 	FT4GameDB& GameDB = GetGameDB();
-	const FT4GameFOData* FOData = GameDB.GetFODataByName(FONameInTable);
+	const FT4GameDBFORow* FOData = GameDB.GetFORowByName(FONameID);
 	if (nullptr == FOData)
 	{
 		return;
@@ -213,7 +213,7 @@ void FT4GameplayCommand::OnSpawnProp(IConsoleVariable* InVariable)
 		return;
 	}
 	FT4PacketCmdFOEnterCS NewPacketCS; // #27
-	NewPacketCS.FONameInTable = FONameInTable;
+	NewPacketCS.FONameID = FONameID;
 	NewPacketCS.SpawnLocation = SpawnLocation;
 	PacketHandlerCS->OnSendPacket(&NewPacketCS);
 }
@@ -226,13 +226,13 @@ static void DoSpawnCharacter(
 {
 	check(nullptr != PacketHandlerCS);
 	FT4GameDB& GameDB = GetGameDB();
-	const FT4GamePlayerData* CharacterData = GameDB.GetPlayerDataByName(InCharTableName);
+	const FT4GameDBPlayerRow* CharacterData = GameDB.GetPlayerRowByName(InCharTableName);
 	if (nullptr == CharacterData)
 	{
 		return;
 	}
 	FT4PacketCmdPCEnterCS NewPacketCS; // #27
-	NewPacketCS.CharacterNameInTable = InCharTableName;
+	NewPacketCS.CharacterNameID = InCharTableName;
 	NewPacketCS.SpawnLocation = InSpawnLocation;
 	PacketHandlerCS->OnSendPacket(&NewPacketCS);
 }
@@ -299,21 +299,21 @@ void FT4GameplayCommand::OnTakeSnapshotFrom(IConsoleVariable* InVariable)
 		const FRotator Rotation = GameObject->GetRotation();
 		if (EntityKey.CheckType(ET4EntityType::Actor))
 		{
-			const FT4GamePlayerData* PlayerData = GameDB.GetPlayerDataByName(ContentUniqueName);
+			const FT4GameDBPlayerRow* PlayerData = GameDB.GetPlayerRowByName(ContentUniqueName);
 			if (nullptr != PlayerData)
 			{
 				FT4PacketCmdPCEnterCS NewPacketCS; // #27
-				NewPacketCS.CharacterNameInTable = ContentUniqueName;
+				NewPacketCS.CharacterNameID = ContentUniqueName;
 				NewPacketCS.SpawnLocation = GroundLocation;
 				NewPacketCS.SpawnRotation = Rotation;
 				PacketHandlerCS->OnSendPacket(&NewPacketCS);
 				continue;
 			}
-			const FT4GameNPCData* NPCData = GameDB.GetNPCDataByName(ContentUniqueName);
+			const FT4GameDBNPCRow* NPCData = GameDB.GetNPCRowByName(ContentUniqueName);
 			if (nullptr != NPCData)
 			{
 				FT4PacketCmdNPCEnterCS NewPacketCS; // #27
-				NewPacketCS.NPCNameInTable = ContentUniqueName;
+				NewPacketCS.NPCNameID = ContentUniqueName;
 				NewPacketCS.SpawnLocation = GroundLocation;
 				NewPacketCS.SpawnRotation = Rotation;
 				PacketHandlerCS->OnSendPacket(&NewPacketCS);
@@ -322,11 +322,11 @@ void FT4GameplayCommand::OnTakeSnapshotFrom(IConsoleVariable* InVariable)
 		}
 		else if (EntityKey.CheckType(ET4EntityType::Prop))
 		{
-			const FT4GameFOData* FOData = GameDB.GetFODataByName(ContentUniqueName);
+			const FT4GameDBFORow* FOData = GameDB.GetFORowByName(ContentUniqueName);
 			if (nullptr != FOData)
 			{
 				FT4PacketCmdFOEnterCS NewPacketCS; // #27
-				NewPacketCS.FONameInTable = ContentUniqueName;
+				NewPacketCS.FONameID = ContentUniqueName;
 				NewPacketCS.SpawnLocation = GroundLocation;
 				NewPacketCS.SpawnRotation = Rotation;
 				PacketHandlerCS->OnSendPacket(&NewPacketCS);

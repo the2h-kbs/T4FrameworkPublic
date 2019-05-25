@@ -124,14 +124,19 @@ public:
 
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditAnywhere, Category = Editor)
-	TSoftObjectPtr<UT4EntityAsset> ParentEntityPath;
+	TSoftObjectPtr<UT4EntityAsset> ParentEntityAsset;
 
 	UPROPERTY()
 	UTexture2D* ThumbnailImage; // Internal: The thumbnail image
 #endif
 
+	// #39 : WARN : CustomDetails 에서 사용하는 임시 프로퍼티! (저장되지 않는다!!)
 	UPROPERTY(EditAnywhere, Transient)
-	TSoftObjectPtr<UAnimSequence> TransientAnimSequence; // #39 : WARN : CustomDetails 에서 사용하는 임시 프로퍼티!
+	FName TransientSelectAnimSequenceName; 
+
+	UPROPERTY(EditAnywhere, Transient)
+	TSoftObjectPtr<UAnimSequence> TransientAnimSequence;
+	// ~#39 : WARN : CustomDetails 에서 사용하는 임시 프로퍼티!
 
 private:
 #if WITH_EDITOR

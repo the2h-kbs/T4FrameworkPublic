@@ -29,14 +29,14 @@ void FT4PacketHandlerCS::HandleCS_CmdChangeWorld(const FT4PacketCmdChangeWorldCS
 	check(nullptr != InPacket);
 	check(ET4PacketCtoS::CmdChangeWorld == InPacket->PacketCS);
 	FT4GameDB& GameDB = GetGameDB();
-	const FT4GameWorldData* WorldData = GameDB.GetWorldDataByName(InPacket->WorldNameInTable);
+	const FT4GameDBWorldRow* WorldData = GameDB.GetWorldRowByName(InPacket->WorldNameID);
 	if (nullptr == WorldData)
 	{
 		return;
 	}
 
 	FT4PacketChangeWorldSC NewPacketSC;
-	NewPacketSC.WorldNameInTable = InPacket->WorldNameInTable;
+	NewPacketSC.WorldNameID = InPacket->WorldNameID;
 
 	GetPacketHandlerSC()->OnRecvPacket(&NewPacketSC); // #15
 
@@ -59,7 +59,7 @@ void FT4PacketHandlerCS::HandleCS_CmdPCEnter(
 	check(nullptr != InSenderPC);
 	check(ET4PacketCtoS::CmdPCEnter == InPacket->PacketCS);
 	FT4GameDB& GameDB = GetGameDB();
-	const FT4GamePlayerData* CharacterData = GameDB.GetPlayerDataByName(InPacket->CharacterNameInTable);
+	const FT4GameDBPlayerRow* CharacterData = GameDB.GetPlayerRowByName(InPacket->CharacterNameID);
 	if (nullptr == CharacterData)
 	{
 		return;
@@ -75,7 +75,7 @@ void FT4PacketHandlerCS::HandleCS_CmdPCEnter(
 
 	FT4PacketPCEnterSC NewPCEnterPacketSC;
 	NewPCEnterPacketSC.EnterObjectID = NewSpawnObjectID;
-	NewPCEnterPacketSC.CharacterNameInTable = InPacket->CharacterNameInTable;
+	NewPCEnterPacketSC.CharacterNameID = InPacket->CharacterNameID;
 	NewPCEnterPacketSC.SpawnLocation = InPacket->SpawnLocation;
 	NewPCEnterPacketSC.SpawnRotation = InPacket->SpawnRotation;
 
@@ -103,7 +103,7 @@ void FT4PacketHandlerCS::HandleCS_CmdPCEnter(
 			{
 				FT4PacketMyPCEnterSC NewMyPCEnterPacketSC;
 				NewMyPCEnterPacketSC.EnterObjectID = NewSpawnObjectID;
-				NewMyPCEnterPacketSC.CharacterNameInTable = InPacket->CharacterNameInTable;
+				NewMyPCEnterPacketSC.CharacterNameID = InPacket->CharacterNameID;
 				NewMyPCEnterPacketSC.SpawnLocation = InPacket->SpawnLocation;
 				NewMyPCEnterPacketSC.SpawnRotation = InPacket->SpawnRotation;
 				PacketHandlerSC->OnSendPacket(&NewMyPCEnterPacketSC, TargetPC);
@@ -156,7 +156,7 @@ void FT4PacketHandlerCS::HandleCS_CmdNPCEnter(const FT4PacketCmdNPCEnterCS* InPa
 	check(nullptr != InPacket);
 	check(ET4PacketCtoS::CmdNPCEnter == InPacket->PacketCS);
 	FT4GameDB& GameDB = GetGameDB();
-	const FT4GameNPCData* NPCData = GameDB.GetNPCDataByName(InPacket->NPCNameInTable);
+	const FT4GameDBNPCRow* NPCData = GameDB.GetNPCRowByName(InPacket->NPCNameID);
 	if (nullptr == NPCData)
 	{
 		return;
@@ -200,7 +200,7 @@ void FT4PacketHandlerCS::HandleCS_CmdNPCEnter(const FT4PacketCmdNPCEnterCS* InPa
 			return;
 		}
 		bool bBinded = NPCController->SetTableData(
-			InPacket->NPCNameInTable,
+			InPacket->NPCNameID,
 			BehaviorTreePath,
 			BlackboardDataPath
 		);
@@ -217,7 +217,7 @@ void FT4PacketHandlerCS::HandleCS_CmdNPCEnter(const FT4PacketCmdNPCEnterCS* InPa
 	FT4PacketNPCEnterSC NewPacketSC;
 	NewPacketSC.NetID = NewNetID;
 	NewPacketSC.EnterObjectID = GameFramework->GetNewUniqueObjectID();
-	NewPacketSC.NPCNameInTable = InPacket->NPCNameInTable;
+	NewPacketSC.NPCNameID = InPacket->NPCNameID;
 	NewPacketSC.SpawnLocation = InPacket->SpawnLocation;
 	NewPacketSC.SpawnRotation = InPacket->SpawnRotation;
 
@@ -256,7 +256,7 @@ void FT4PacketHandlerCS::HandleCS_CmdFOEnter(const FT4PacketCmdFOEnterCS* InPack
 	check(nullptr != InPacket);
 	check(ET4PacketCtoS::CmdFOEnter == InPacket->PacketCS);
 	FT4GameDB& GameDB = GetGameDB();
-	const FT4GameFOData* FOData = GameDB.GetFODataByName(InPacket->FONameInTable);
+	const FT4GameDBFORow* FOData = GameDB.GetFORowByName(InPacket->FONameID);
 	if (nullptr == FOData)
 	{
 		return;
@@ -301,7 +301,7 @@ void FT4PacketHandlerCS::HandleCS_CmdFOEnter(const FT4PacketCmdFOEnterCS* InPack
 		}
 
 		bool bBinded = FOController->SetTableData(
-			InPacket->FONameInTable,
+			InPacket->FONameID,
 			BehaviorTreePath,
 			BlackboardDataPath
 		);
@@ -319,7 +319,7 @@ void FT4PacketHandlerCS::HandleCS_CmdFOEnter(const FT4PacketCmdFOEnterCS* InPack
 	FT4PacketFOEnterSC NewPacketSC;
 	NewPacketSC.NetID = NewNetID; // #41
 	NewPacketSC.EnterObjectID = NewSpawnObjectID;
-	NewPacketSC.FONameInTable = InPacket->FONameInTable;
+	NewPacketSC.FONameID = InPacket->FONameID;
 	NewPacketSC.SpawnLocation = InPacket->SpawnLocation;
 	NewPacketSC.SpawnRotation = InPacket->SpawnRotation;
 
@@ -358,7 +358,7 @@ void FT4PacketHandlerCS::HandleCS_CmdItemEnter(const FT4PacketCmdItemEnterCS* In
 	check(nullptr != InPacket);
 	check(ET4PacketCtoS::CmdItemEnter == InPacket->PacketCS);
 	FT4GameDB& GameDB = GetGameDB();
-	const FT4GameItemData* ItemData = GameDB.GetItemDataByName(InPacket->ItemNameInTable);
+	const FT4GameDBItemRow* ItemData = GameDB.GetItemRowByName(InPacket->ItemNameID);
 	if (nullptr == ItemData)
 	{
 		return;
@@ -403,7 +403,7 @@ void FT4PacketHandlerCS::HandleCS_CmdItemEnter(const FT4PacketCmdItemEnterCS* In
 		}
 
 		bool bBinded = ItemController->SetTableData(
-			InPacket->ItemNameInTable,
+			InPacket->ItemNameID,
 			BehaviorTreePath,
 			BlackboardDataPath
 		);
@@ -421,7 +421,7 @@ void FT4PacketHandlerCS::HandleCS_CmdItemEnter(const FT4PacketCmdItemEnterCS* In
 	FT4PacketItemEnterSC NewPacketSC;
 	NewPacketSC.NetID = NewNetID; // #41
 	NewPacketSC.EnterObjectID = NewSpawnObjectID;
-	NewPacketSC.ItemNameInTable = InPacket->ItemNameInTable;
+	NewPacketSC.ItemNameID = InPacket->ItemNameID;
 	NewPacketSC.SpawnLocation = InPacket->SpawnLocation;
 	NewPacketSC.SpawnRotation = InPacket->SpawnRotation;
 

@@ -35,7 +35,7 @@ class UBlendSpace;
 class UT4AnimSetAsset; // #39
 class UT4CostumeEntityAsset;
 
-USTRUCT(BlueprintType)
+USTRUCT()
 struct T4ENGINE_API FT4EntityActorPhysicalAttribute : public FT4EntityBasePhysicalAttribute
 {
 	GENERATED_USTRUCT_BODY()
@@ -50,23 +50,23 @@ public:
 	{
 	}
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Physical, meta = (ClampMin = "10.0", ClampMax = "1000"))
+	UPROPERTY(EditAnywhere, Category = Physical, meta = (ClampMin = "10.0", ClampMax = "1000"))
 	float RunSpeed;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Physical, meta = (ClampMin = "10.0", ClampMax = "500"))
+	UPROPERTY(EditAnywhere, Category = Physical, meta = (ClampMin = "10.0", ClampMax = "500"))
 	float WalkSpeed;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Physical, meta = (ClampMin = "10.0", ClampMax = "500"))
+	UPROPERTY(EditAnywhere, Category = Physical, meta = (ClampMin = "10.0", ClampMax = "500"))
 	float LockOnSpeed;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Physical, meta = (ClampMin = "10.0", ClampMax = "1000"))
+	UPROPERTY(EditAnywhere, Category = Physical, meta = (ClampMin = "10.0", ClampMax = "1000"))
 	float JumpZVelocity;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Physical, meta = (ClampMin = "10.0", ClampMax = "1080"))
+	UPROPERTY(EditAnywhere, Category = Physical, meta = (ClampMin = "10.0", ClampMax = "1080"))
 	float RotationRateYaw;
 };
 
-USTRUCT(BlueprintType)
+USTRUCT()
 struct T4ENGINE_API FT4EntityActorRenderingAttribute : public FT4EntityBaseRenderingAttribute
 {
 	GENERATED_USTRUCT_BODY()
@@ -77,7 +77,7 @@ public:
 	}
 };
 
-USTRUCT(BlueprintType)
+USTRUCT()
 struct T4ENGINE_API FT4EntityActorFullBodyMeshData
 {
 	GENERATED_USTRUCT_BODY()
@@ -87,15 +87,15 @@ public:
 	{
 	}
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Asset)
+	UPROPERTY(EditAnywhere, Category = Asset)
 	TSoftObjectPtr<USkeleton> SkeletonPath; // #39
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Asset)
+	UPROPERTY(EditAnywhere, Category = Asset)
 	TSoftObjectPtr<USkeletalMesh> SkeletalMeshPath;
 };
 
 // #37
-USTRUCT(BlueprintType)
+USTRUCT()
 struct T4ENGINE_API FT4EntityActorCompositePartMeshData
 {
 	GENERATED_USTRUCT_BODY()
@@ -105,12 +105,12 @@ public:
 	{
 	}
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Asset)
+	UPROPERTY(EditAnywhere, Category = Asset)
 	TSoftObjectPtr<UT4CostumeEntityAsset> CostumeEntityAsset;
 };
 
 // #37
-USTRUCT(BlueprintType)
+USTRUCT()
 struct T4ENGINE_API FT4EntityActorCompositeMeshData
 {
 	GENERATED_USTRUCT_BODY()
@@ -121,17 +121,17 @@ public:
 	{
 	}
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Asset)
+	UPROPERTY(EditAnywhere, Category = Asset)
 	TSoftObjectPtr<USkeleton> SkeletonPath; // #39
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = DataPath)
+	UPROPERTY(EditAnywhere, Category = DataPath)
 	FName MasterPartName; // #37
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = DataPath)
+	UPROPERTY(EditAnywhere, Category = DataPath)
 	TMap<FName, FT4EntityActorCompositePartMeshData> DefaultPartsData; // #37
 };
 
-USTRUCT(BlueprintType)
+USTRUCT()
 struct T4ENGINE_API FT4EntityActorAnimationData
 {
 	GENERATED_USTRUCT_BODY()
@@ -142,17 +142,17 @@ public:
 	{
 	}
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Asset)
+	UPROPERTY(EditAnywhere, Category = Asset)
 	ET4EntityAnimInstanceType AnimInstanceType;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Asset)
+	UPROPERTY(EditAnywhere, Category = Asset)
 	TSoftObjectPtr<UAnimBlueprint> AnimBPPath;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Asset)
+	UPROPERTY(EditAnywhere, Category = Asset)
 	TSoftObjectPtr<UT4AnimSetAsset> DefaultAnimSetPath; // #39
 };
 
-UCLASS(ClassGroup = Tech4Labs, Category = "Tech4Labs", BlueprintType, Blueprintable)
+UCLASS(ClassGroup = Tech4Labs, Category = "Tech4Labs")
 class T4ENGINE_API UT4ActorEntityAsset : public UT4EntityAsset
 {
 	GENERATED_UCLASS_BODY()
@@ -169,21 +169,21 @@ public:
 	ET4EntityType GetEntityType() const override { return ET4EntityType::Actor; }
 
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Attribute)
+	UPROPERTY(EditAnywhere, Category=Attribute)
 	FT4EntityActorPhysicalAttribute Physical;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Attribute)
+	UPROPERTY(EditAnywhere, Category=Attribute)
 	FT4EntityActorRenderingAttribute Rendering;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Data)
+	UPROPERTY(EditAnywhere, Category=Data)
 	ET4EntityActorMeshType MeshType;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Data)
+	UPROPERTY(EditAnywhere, Category=Data)
 	FT4EntityActorFullBodyMeshData FullBodyMeshData;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Data)
+	UPROPERTY(EditAnywhere, Category=Data)
 	FT4EntityActorCompositeMeshData CopmpositeMeshData; // #37
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Data)
+	UPROPERTY(EditAnywhere, Category=Data)
 	FT4EntityActorAnimationData AnimationData;
 };

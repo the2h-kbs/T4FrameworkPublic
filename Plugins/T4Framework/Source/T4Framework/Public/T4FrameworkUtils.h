@@ -6,6 +6,9 @@
 #include "T4Core/Public/T4CoreTypes.h"
 #include "T4Engine/Public/T4EngineUtils.h"
 
+/**
+  *
+ */
 class IT4GameObject;
 
 namespace T4FrameworkUtil

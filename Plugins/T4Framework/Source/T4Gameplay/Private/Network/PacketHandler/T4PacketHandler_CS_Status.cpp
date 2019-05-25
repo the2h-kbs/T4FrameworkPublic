@@ -37,7 +37,7 @@ void FT4PacketHandlerCS::HandleCS_Equip(const FT4PacketEquipCS* InPacket)
 	}
 
 	FT4GameDB& GameDB = GetGameDB();
-	const FT4GameItemData* ItemData = GameDB.GetItemDataByName(InPacket->ItemNameInTable);
+	const FT4GameDBItemRow* ItemData = GameDB.GetItemRowByName(InPacket->ItemNameID);
 	if (nullptr == ItemData)
 	{
 		return;
@@ -45,7 +45,7 @@ void FT4PacketHandlerCS::HandleCS_Equip(const FT4PacketEquipCS* InPacket)
 
 	FT4PacketEquipSC NewPacketSC;
 	NewPacketSC.ObjectID = InPacket->SenderID;
-	NewPacketSC.ItemNameInTable = InPacket->ItemNameInTable;
+	NewPacketSC.ItemNameID = InPacket->ItemNameID;
 
 	check(NewPacketSC.ObjectID.IsValid());
 
@@ -71,7 +71,7 @@ void FT4PacketHandlerCS::HandleCS_UnEquip(const FT4PacketUnEquipCS* InPacket)
 	}
 
 	FT4GameDB& GameDB = GetGameDB();
-	const FT4GameItemData* ItemData = GameDB.GetItemDataByName(InPacket->ItemNameInTable);
+	const FT4GameDBItemRow* ItemData = GameDB.GetItemRowByName(InPacket->ItemNameID);
 	if (nullptr == ItemData)
 	{
 		return;
@@ -79,7 +79,7 @@ void FT4PacketHandlerCS::HandleCS_UnEquip(const FT4PacketUnEquipCS* InPacket)
 
 	FT4PacketUnEquipSC NewPacketSC;
 	NewPacketSC.ObjectID = InPacket->SenderID;
-	NewPacketSC.ItemNameInTable = InPacket->ItemNameInTable;
+	NewPacketSC.ItemNameID = InPacket->ItemNameID;
 
 	check(NewPacketSC.ObjectID.IsValid());
 
@@ -105,7 +105,7 @@ void FT4PacketHandlerCS::HandleCS_Exchange(const FT4PacketExchangeCS* InPacket)
 	}
 
 	FT4GameDB& GameDB = GetGameDB();
-	const FT4GameItemData* ItemData = GameDB.GetItemDataByName(InPacket->ItemNameInTable);
+	const FT4GameDBItemRow* ItemData = GameDB.GetItemRowByName(InPacket->ItemNameID);
 	if (nullptr == ItemData)
 	{
 		return;
@@ -113,7 +113,7 @@ void FT4PacketHandlerCS::HandleCS_Exchange(const FT4PacketExchangeCS* InPacket)
 
 	FT4PacketExchangeSC NewPacketSC;
 	NewPacketSC.ObjectID = InPacket->SenderID;
-	NewPacketSC.ItemNameInTable = InPacket->ItemNameInTable;
+	NewPacketSC.ItemNameID = InPacket->ItemNameID;
 
 	check(NewPacketSC.ObjectID.IsValid());
 

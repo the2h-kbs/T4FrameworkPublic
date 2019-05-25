@@ -29,7 +29,7 @@ private:
 
 class ULevel;
 
-USTRUCT(BlueprintType)
+USTRUCT()
 struct T4ENGINE_API FT4EntityNormalWorldData
 {
 	GENERATED_USTRUCT_BODY()
@@ -39,11 +39,11 @@ public:
 	{
 	}
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Asset)
+	UPROPERTY(EditAnywhere, Category = Asset)
 	TSoftObjectPtr<UWorld> LevelPath;
 };
 
-UCLASS(ClassGroup = Tech4Labs, Category = "Tech4Labs", BlueprintType, Blueprintable)
+UCLASS(ClassGroup = Tech4Labs, Category = "Tech4Labs")
 class T4ENGINE_API UT4WorldEntityAsset : public UT4EntityAsset
 {
 	GENERATED_UCLASS_BODY()
@@ -60,9 +60,9 @@ public:
 	ET4EntityType GetEntityType() const override { return ET4EntityType::World; }
 
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Attribute)
+	UPROPERTY(EditAnywhere, Category=Attribute)
 	ET4EntityWorldType WorldType;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Data)
+	UPROPERTY(EditAnywhere, Category=Data)
 	FT4EntityNormalWorldData NormalWorldData;
 };

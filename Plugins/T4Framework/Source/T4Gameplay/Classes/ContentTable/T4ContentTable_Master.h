@@ -30,12 +30,12 @@ struct FT4ContentMasterTableRow : public FTableRowBase
 	GENERATED_USTRUCT_BODY()
 
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attribute)
+	UPROPERTY(EditAnywhere, Category=Attribute)
 	ET4ContentTableType Type;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attribute)
+	UPROPERTY(EditAnywhere, Category=Attribute)
 	FName Name;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attribute)
+	UPROPERTY(EditAnywhere, Category=Attribute)
 	TSoftObjectPtr<UDataTable> Table;
 };

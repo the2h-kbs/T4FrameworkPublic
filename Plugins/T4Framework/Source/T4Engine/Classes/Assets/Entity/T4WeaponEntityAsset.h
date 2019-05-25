@@ -29,7 +29,7 @@ private:
 class UStaticMesh;
 class USkeletalMesh;
 
-USTRUCT(BlueprintType)
+USTRUCT()
 struct T4ENGINE_API FT4EntityItemWeaponMeshData
 {
 	GENERATED_USTRUCT_BODY()
@@ -40,17 +40,17 @@ public:
 	{
 	}
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category= Asset)
+	UPROPERTY(EditAnywhere, Category= Asset)
 	ET4EntityMeshType MeshType;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Asset)
+	UPROPERTY(EditAnywhere, Category = Asset)
 	TSoftObjectPtr<UStaticMesh> StaticMeshPath;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Asset)
+	UPROPERTY(EditAnywhere, Category = Asset)
 	TSoftObjectPtr<USkeletalMesh> SkeletalMeshPath;
 };
 
-UCLASS(ClassGroup = Tech4Labs, Category = "Tech4Labs", BlueprintType, Blueprintable)
+UCLASS(ClassGroup = Tech4Labs, Category = "Tech4Labs")
 class T4ENGINE_API UT4WeaponEntityAsset : public UT4ItemEntityAsset
 {
 	GENERATED_UCLASS_BODY()
@@ -67,6 +67,6 @@ public:
 	ET4EntityType GetEntityType() const override { return ET4EntityType::Weapon; }
 
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Data)
+	UPROPERTY(EditAnywhere, Category=Data)
 	FT4EntityItemWeaponMeshData MeshData;
 };

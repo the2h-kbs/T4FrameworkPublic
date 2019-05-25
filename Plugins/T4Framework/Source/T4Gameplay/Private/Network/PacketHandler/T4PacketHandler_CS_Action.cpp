@@ -37,7 +37,7 @@ void FT4PacketHandlerCS::HandleCS_Attack(const FT4PacketAttackCS* InPacket)
 	}
 
 	FT4GameDB& GameDB = GetGameDB();
-	const FT4GameSkillData* SkillData = GameDB.GetSkillDataByName(InPacket->SkillNameInTable);
+	const FT4GameDBSkillRow* SkillData = GameDB.GetSkillRowByName(InPacket->SkillNameID);
 	if (nullptr == SkillData)
 	{
 		return;
@@ -48,7 +48,7 @@ void FT4PacketHandlerCS::HandleCS_Attack(const FT4PacketAttackCS* InPacket)
 
 	FT4PacketAttackSC NewAttackPacketSC;
 	NewAttackPacketSC.ObjectID = AttackerObjectID;
-	NewAttackPacketSC.SkillNameInTable = InPacket->SkillNameInTable;
+	NewAttackPacketSC.SkillNameID = InPacket->SkillNameID;
 
 	if (InPacket->TargetObjectID.IsValid())
 	{
@@ -72,9 +72,9 @@ void FT4PacketHandlerCS::HandleCS_Attack(const FT4PacketAttackCS* InPacket)
 	bool bCriticalHit = (0.7f <= FMath::FRandRange(0.0f, 1.0f)) ? true : false;
 	FT4PacketEffectSC NewEffectPacketSC;
 	NewEffectPacketSC.ObjectID = TargetGameObject->GetObjectID();
-	NewEffectPacketSC.EffectNameInTable = (bCriticalHit) ? TEXT("CriticalHit") : TEXT("NormalHit");
+	NewEffectPacketSC.EffectNameID = (bCriticalHit) ? TEXT("CriticalHit") : TEXT("NormalHit");
 	NewEffectPacketSC.AttackerObjectID = AttackerObjectID;
-	const FT4GameEffectData* EffectData = GameDB.GetEffectDataByName(NewEffectPacketSC.EffectNameInTable);
+	const FT4GameDBEffectRow* EffectData = GameDB.GetEffectRowByName(NewEffectPacketSC.EffectNameID);
 	if (nullptr == EffectData)
 	{
 		return;

@@ -33,12 +33,12 @@ struct FT4PacketChangeWorldSC : public FT4PacketStoC
 
 public:
 	UPROPERTY(VisibleAnywhere)
-	FName WorldNameInTable;
+	FName WorldNameID;
 
 public:
 	FT4PacketChangeWorldSC()
 		: FT4PacketStoC(ET4PacketStoC::ChangeWorld)
-		, WorldNameInTable(NAME_None)
+		, WorldNameID(NAME_None)
 	{
 	}
 
@@ -58,7 +58,7 @@ public:
 	FT4ObjectID EnterObjectID;
 
 	UPROPERTY(VisibleAnywhere)
-	FName CharacterNameInTable;
+	FName CharacterNameID;
 
 	UPROPERTY(VisibleAnywhere)
 	FVector SpawnLocation;
@@ -69,7 +69,7 @@ public:
 public:
 	FT4PacketMyPCEnterSC()
 		: FT4PacketStoC(ET4PacketStoC::MyPCEnter)
-		, CharacterNameInTable(NAME_None)
+		, CharacterNameID(NAME_None)
 		, SpawnLocation(FVector::ZeroVector)
 		, SpawnRotation(FRotator::ZeroRotator)
 	{
@@ -91,7 +91,7 @@ public:
 	FT4ObjectID EnterObjectID;
 
 	UPROPERTY(VisibleAnywhere)
-	FName CharacterNameInTable;
+	FName CharacterNameID;
 
 	UPROPERTY(VisibleAnywhere)
 	FVector SpawnLocation;
@@ -102,7 +102,7 @@ public:
 public:
 	FT4PacketPCEnterSC()
 		: FT4PacketStoC(ET4PacketStoC::PCEnter)
-		, CharacterNameInTable(NAME_None)
+		, CharacterNameID(NAME_None)
 		, SpawnLocation(FVector::ZeroVector)
 		, SpawnRotation(FRotator::ZeroRotator)
 	{
@@ -150,7 +150,7 @@ public:
 	FT4ObjectID EnterObjectID;
 
 	UPROPERTY(VisibleAnywhere)
-	FName NPCNameInTable;
+	FName NPCNameID;
 
 	UPROPERTY(VisibleAnywhere)
 	FVector SpawnLocation;
@@ -161,7 +161,7 @@ public:
 public:
 	FT4PacketNPCEnterSC()
 		: FT4PacketStoC(ET4PacketStoC::NPCEnter)
-		, NPCNameInTable(NAME_None)
+		, NPCNameID(NAME_None)
 		, SpawnLocation(FVector::ZeroVector)
 		, SpawnRotation(FRotator::ZeroRotator)
 	{
@@ -209,7 +209,7 @@ public:
 	FT4ObjectID EnterObjectID;
 
 	UPROPERTY(VisibleAnywhere)
-	FName FONameInTable;
+	FName FONameID;
 
 	UPROPERTY(VisibleAnywhere)
 	FVector SpawnLocation;
@@ -220,7 +220,7 @@ public:
 public:
 	FT4PacketFOEnterSC()
 		: FT4PacketStoC(ET4PacketStoC::FOEnter)
-		, FONameInTable(NAME_None)
+		, FONameID(NAME_None)
 		, SpawnLocation(FVector::ZeroVector)
 		, SpawnRotation(FRotator::ZeroRotator)
 	{
@@ -268,7 +268,7 @@ public:
 	FT4ObjectID EnterObjectID;
 
 	UPROPERTY(VisibleAnywhere)
-	FName ItemNameInTable;
+	FName ItemNameID;
 
 	UPROPERTY(VisibleAnywhere)
 	FVector SpawnLocation;
@@ -279,7 +279,7 @@ public:
 public:
 	FT4PacketItemEnterSC()
 		: FT4PacketStoC(ET4PacketStoC::ItemEnter)
-		, ItemNameInTable(NAME_None)
+		, ItemNameID(NAME_None)
 		, SpawnLocation(FVector::ZeroVector)
 		, SpawnRotation(FRotator::ZeroRotator)
 	{
