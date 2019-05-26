@@ -59,7 +59,7 @@ enum ET4CameraType
 UENUM()
 enum class ET4AnimMontageLayer
 {
-	Movement,
+	System,
 	Skill,
 
 	Max UMETA(Hidden)

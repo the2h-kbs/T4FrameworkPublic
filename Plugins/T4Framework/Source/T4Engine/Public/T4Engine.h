@@ -35,6 +35,7 @@ struct FT4PacketCtoS;
 struct FT4PacketStoC;
 
 struct FWorldContext;
+class UAnimSequence;
 class UInputComponent;
 class UActorComponent;
 class AController;
@@ -55,6 +56,10 @@ public:
 	) = 0;
 
 	virtual bool IsPlayingAnimation(FT4AnimInstanceID InAnimInstanceID) = 0;
+
+#if WITH_EDITOR
+	virtual bool EditorPlayAnimation(UAnimSequence* InPlayAnimSequence) = 0;
+#endif
 };
 
 class T4ENGINE_API IT4ActionNode // #23

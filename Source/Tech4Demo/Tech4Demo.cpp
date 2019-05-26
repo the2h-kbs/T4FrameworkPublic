@@ -8,17 +8,9 @@
  */
 class FTech4DemoModuleImpl : public FDefaultGameModuleImpl
 {
-	virtual void StartupModule() override;
-	virtual void ShutdownModule() override;
+	virtual void StartupModule() override {}
+	virtual void ShutdownModule() override {}
 };
-
-void FTech4DemoModuleImpl::StartupModule()
-{
-}
-
-void FTech4DemoModuleImpl::ShutdownModule()
-{
-}
 
 IMPLEMENT_PRIMARY_GAME_MODULE(FTech4DemoModuleImpl, Tech4Demo, "Tech4Demo");
 DEFINE_LOG_CATEGORY(LogT4Demo);

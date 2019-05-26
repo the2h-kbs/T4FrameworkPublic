@@ -26,9 +26,6 @@ void UT4GameInstance::Init()
 	}
 	GameFramework = T4FrameworkCreate(CreateFrameworkType, WorldContext);
 	check(nullptr != GameFramework);
-	ET4LayerType LayerType = T4CoreLayer::Get(WorldContext);
-	check(LayerType < ET4LayerType::Max);
-	check(LayerType == GameFramework->GetLayerType());
 }
 
 void UT4GameInstance::Shutdown()

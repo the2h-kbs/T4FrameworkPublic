@@ -95,6 +95,7 @@ public:
 	FOnPropertiesChanged& OnPropertiesChanged() { return OnPropertiesChangedDelegate; }
 
 	UAnimMontage* AutoGenAnimMontage(
+		ET4AnimMontageLayer InAnimMontageLayer,
 		TMap<FName, FT4AnimSequenceInfo>& InOutAnimSequenceInfo,
 		const FName& InObjectName
 	); // #39
@@ -104,7 +105,7 @@ public:
 public:
 	static const FName CallingContextName;
 
-	UPROPERTY(EditAnywhere, Category = Skeleton)
+	UPROPERTY(EditAnywhere, Category = AssetInfo)
 	TSoftObjectPtr<USkeleton> Skeleton;
 
 	UPROPERTY(VisibleAnywhere, Category = SkillAnimation)

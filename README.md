@@ -47,15 +47,18 @@ T4Framework 를 도입해 게임 프로토타이핑과 매스 프로덕션을 �
 - 준비중...
 
 ### Prototype Version (개발중...)
+- **T4RehearsalEntity Editor** (Character & Animation Setup)
+  - M2 : 2019.05.20 ~ 2019.05.25
+  - <https://youtu.be/KjuzWBJAGOQ>
 - **T4RehearsalConti Editor** (GamePlay Action Setup)
   - M1 ~ M2 : 2019.04.05 ~ 2019.05.14
-  - <https://youtu.be/shc2cLraU6M?t=0s>
+  - <https://youtu.be/shc2cLraU6M>
 - **T4RehearsalEntity Editor** (Character Setup)
   - M2 : 2019.05.06 ~ 2019.05.13
-  - <https://youtu.be/pA4cK60z0Bs?t=0s>
+  - <https://youtu.be/pA4cK60z0Bs>
 - **T4Framework Architecture**
   - M1 : 2019.01.19 ~ 2019.04.19
-  - <https://youtu.be/kq6mi8CEYi0?t=0s>
+  - <https://youtu.be/kq6mi8CEYi0>
 
 ## 5. 라이선스
 
