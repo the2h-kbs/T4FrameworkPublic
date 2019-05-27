@@ -116,6 +116,8 @@ public:
 	{
 		EditorViewportClient = InEditorViewportClient;
 	}
+
+	FOnViewTargetChanged& GetOnViewTargetChanged() override { return OnViewTargetChanged; } // #39
 #endif
 
 private:
@@ -146,5 +148,6 @@ private:
 
 #if WITH_EDITOR
 	IT4EditorViewportClient* EditorViewportClient; // #30
+	FOnViewTargetChanged OnViewTargetChanged; // #39
 #endif
 };

@@ -293,7 +293,7 @@ void FT4GameplayCommand::OnTakeSnapshotFrom(IConsoleVariable* InVariable)
 	for (FConstGameObjectIterator It = SourceGameWorld->GetObjectIterator(); It; ++It)
 	{
 		IT4GameObject* GameObject = *It;
-		const FName ContentUniqueName = GameObject->GetContentUniqueName();
+		const FName ContentUniqueName = GameObject->GetContentTableNameID();
 		const FT4EntityKey& EntityKey = GameObject->GetEntityKey();
 		const FVector GroundLocation = GameObject->GetGroundLocation();
 		const FRotator Rotation = GameObject->GetRotation();

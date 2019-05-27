@@ -34,6 +34,8 @@ struct FT4ActionParameters; // #28
 struct FT4PacketCtoS;
 struct FT4PacketStoC;
 
+class UT4EntityAsset;
+
 struct FWorldContext;
 class UAnimSequence;
 class UInputComponent;
@@ -108,7 +110,8 @@ public:
 	virtual const FName& GetName() const = 0;
 
 	virtual const FT4EntityKey& GetEntityKey() const = 0; // #35
-	virtual const FName& GetContentUniqueName() const = 0;
+	virtual const UT4EntityAsset* GetEntityAsset() = 0; // #39
+	virtual const FName& GetContentTableNameID() const = 0;
 
 	virtual bool IsLoadComplated() const = 0;
 
@@ -251,6 +254,9 @@ public:
 	) = 0; // #30
 
 	virtual void EditorSetViewportClient(class IT4EditorViewportClient* InEditorViewportClient) = 0;
+
+	DECLARE_MULTICAST_DELEGATE_OneParam(FOnViewTargetChanged, IT4GameObject*);
+	virtual FOnViewTargetChanged& GetOnViewTargetChanged() = 0;
 #endif
 };
 

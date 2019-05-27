@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 
 #include "Public/T4FrameworkNet.h" // #25, #42
-#include "Public/T4FrameworkDataLoader.h" // #42
+#include "Public/T4FrameworkAssetLoader.h" // #42
 
 #include "T4Engine/Public/T4Engine.h"
 
@@ -98,8 +98,8 @@ private:
 	FName NPCTableName;
 	bool bAIDataLoaded;
 
-	FT4BlackboardDataLoader BlackboardDataLoader;
-	FT4BehaviorTreeDataLoader BehaviorTreeDataLoader;
+	FT4BlackboardAssetLoader BlackboardAssetLoader;
+	FT4BehaviorTreeAssetLoader BehaviorTreeAssetLoader;
 
 private:
 	UPROPERTY(transient)
