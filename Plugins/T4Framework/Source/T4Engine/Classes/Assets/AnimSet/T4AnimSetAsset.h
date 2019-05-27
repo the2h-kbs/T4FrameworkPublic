@@ -133,10 +133,22 @@ public:
 
 	// #39 : WARN : CustomDetails 에서 사용하는 임시 프로퍼티! (저장되지 않는다!!)
 	UPROPERTY(EditAnywhere, Transient)
-	FName TransientSelectAnimSequenceName; 
+	FName TransientSelectSkillSectionName;
 
 	UPROPERTY(EditAnywhere, Transient)
-	TSoftObjectPtr<UAnimSequence> TransientAnimSequence;
+	TSoftObjectPtr<UAnimSequence> TransientSkillAnimSequence;
+
+	UPROPERTY(EditAnywhere, Transient)
+	FName TransientSelectSystemSectionName;
+
+	UPROPERTY(EditAnywhere, Transient)
+	TSoftObjectPtr<UAnimSequence> TransientSystemAnimSequence;
+
+	UPROPERTY(EditAnywhere, Transient)
+	FName TransientSelectBaseBlendSpaceName;
+
+	UPROPERTY(EditAnywhere, Transient)
+	TSoftObjectPtr<UBlendSpace> TransientBaseBlendSpace;
 	// ~#39 : WARN : CustomDetails 에서 사용하는 임시 프로퍼티!
 
 private:

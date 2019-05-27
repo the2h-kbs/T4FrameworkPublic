@@ -4,13 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "Classes/Engine/DataTable.h"
-#include "T4AnimSequenceDescTable.generated.h"
+#include "T4NameInfoTable.generated.h"
 
 /**
   * http://api.unrealengine.com/KOR/Gameplay/DataDriven/
  */
 USTRUCT()
-struct FT4AnimSequenceDescTableRow : public FTableRowBase
+struct FT4NameInfoTableRow : public FTableRowBase
 {
 	GENERATED_USTRUCT_BODY()
 

@@ -21,7 +21,7 @@ enum class ET4EntityType : uint8
 	Costume, // #37
 	Weapon, // #37
 
-	None UMETA(Hidden)
+	None
 };
 
 UENUM()
@@ -31,7 +31,7 @@ enum class ET4EntityMeshType : uint8
 	SkeletalMesh,
 	ParticleSystem,
 
-	Max UMETA(Hidden)
+	None
 };
 
 UENUM()
@@ -40,7 +40,7 @@ enum class ET4EntityWorldType : uint8
 	Normal,
 	Seamless, // TODO : M3
 
-	Max UMETA(Hidden)
+	Max
 };
 
 UENUM()
@@ -49,7 +49,7 @@ enum class ET4EntityActorMeshType : uint8
 	FullBody,
 	Composite, // TODO : #37
 
-	Max UMETA(Hidden)
+	None
 };
 
 UENUM()
@@ -59,17 +59,16 @@ enum class ET4EntityPropMeshType : uint8
 	RigidBody, // TODO : M3
 	Prefab, // TODO : M3
 
-	Max UMETA(Hidden)
+	None
 };
 
 UENUM()
 enum class ET4EntityAnimInstanceType
 {
-	None,
 	Human,
 	Animal,
 
-	Max UMETA(Hidden)
+	None
 };
 
 USTRUCT(BlueprintType)
