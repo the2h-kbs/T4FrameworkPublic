@@ -1,4 +1,4 @@
-﻿// Copyright 2019 Tech4 Labs. All Rights Reserved.
+﻿// Copyright 2019 Tech4 Labs, Inc. All Rights Reserved.
 
 using UnrealBuildTool;
 using System.Collections.Generic;

@@ -1,16 +1,16 @@
-// Copyright 2019 Tech4 Labs. All Rights Reserved.
+// Copyright 2019 Tech4 Labs, Inc. All Rights Reserved.
 
 #pragma once
 
 #include "CoreMinimal.h"
 #include "Factories/Factory.h"
-#include "T4AnimSetFactory.generated.h"
+#include "T4ContiFactory.generated.h"
 
 /**
-  * #39
+  * #24
  */
 UCLASS()
-class UT4AnimSetFactory : public UFactory
+class UT4ContiFactory : public UFactory 
 {
 	GENERATED_UCLASS_BODY()
 

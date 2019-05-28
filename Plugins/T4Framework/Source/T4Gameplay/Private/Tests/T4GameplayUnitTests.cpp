@@ -1,4 +1,4 @@
-// Copyright 2019 Tech4 Labs. All Rights Reserved.
+// Copyright 2019 Tech4 Labs, Inc. All Rights Reserved.
 
 #include "Misc/AutomationTest.h"
 #include "T4Framework/Public/T4FrameworkNet.h"

@@ -1,4 +1,4 @@
-// Copyright 2019 Tech4 Labs. All Rights Reserved.
+// Copyright 2019 Tech4 Labs, Inc. All Rights Reserved.
 
 #pragma once
 
@@ -24,7 +24,7 @@ struct FT4NameInfo
 	FString Description;
 };
 
-class T4ASSETED_API IT4AnimSetNameTable
+class T4ENGINEED_API IT4AnimSetNameTable
 {
 public:
 	virtual ~IT4AnimSetNameTable() {}
@@ -39,6 +39,6 @@ public:
 	virtual TArray<FT4NameInfo>& GetInfoDatas(ET4AnimSetNameTableType InNameTable) = 0;
 };
 
-T4ASSETED_API IT4AnimSetNameTable* T4AssetEdAnimSetNameTableGet();
+T4ENGINEED_API IT4AnimSetNameTable* T4EngineEdAnimSetNameTableGet();
 
 #endif

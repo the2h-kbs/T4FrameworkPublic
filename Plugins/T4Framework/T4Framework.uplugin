@@ -4,7 +4,7 @@
 	"VersionName": "1.0",
 	"FriendlyName": "Tech4Labs",
 	"Description": "",
-	"Category": "Examples",
+	"Category": "",
 	"CreatedBy": "Tech4 Labs.",
 	"CreatedByURL": "https://blog.naver.com/niceofer",
 	"DocsURL": "",
@@ -36,9 +36,9 @@
 			"LoadingPhase": "PostDefault"
 		},
 		{
-			"Name": "T4AssetEd",
+			"Name": "T4EngineEd",
 			"Type": "Editor",
-			"LoadingPhase": "PostEngineInit"
+			"LoadingPhase": "PostDefault"
 		},
 		{
 			"Name": "T4RehearsalEd",

@@ -1,4 +1,4 @@
-// Copyright 2019 Tech4 Labs. All Rights Reserved.
+// Copyright 2019 Tech4 Labs, Inc. All Rights Reserved.
 
 namespace UnrealBuildTool.Rules
 {
@@ -37,7 +37,7 @@ namespace UnrealBuildTool.Rules
                     "T4Engine",
                     "T4Framework",
                     "T4Gameplay",
-                    "T4AssetEd"
+                    "T4EngineEd"
                 }
             );
         }

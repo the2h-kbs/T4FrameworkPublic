@@ -1,4 +1,4 @@
-// Copyright 2019 Tech4 Labs. All Rights Reserved.
+// Copyright 2019 Tech4 Labs, Inc. All Rights Reserved.
 
 #include "T4GameDB.h"
 #include "Classes/ContentTable/T4ContentTable_Master.h"

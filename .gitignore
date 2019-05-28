@@ -61,8 +61,8 @@ BuildRules/
 Saved/
 Content/
 Intermediate/
-Plugins/T4Framework/Source/T4AssetEd/Private
 Plugins/T4Framework/Source/T4Core/Private
 Plugins/T4Framework/Source/T4Engine/Private
+Plugins/T4Framework/Source/T4EngineEd/Private
 Plugins/T4Framework/Source/T4Framework/Private
 Plugins/T4Framework/Source/T4RehearsalEd/Private

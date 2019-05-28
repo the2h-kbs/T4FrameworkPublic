@@ -1,19 +1,19 @@
-// Copyright 2019 Tech4 Labs. All Rights Reserved.
+// Copyright 2019 Tech4 Labs, Inc. All Rights Reserved.
 
 namespace UnrealBuildTool.Rules
 {
-	public class T4AssetEd : ModuleRules
+	public class T4EngineEd : ModuleRules
 	{
         // http://api.unrealengine.com/KOR/Programming/UnrealBuildSystem/TargetFiles/
 
-        public T4AssetEd(ReadOnlyTargetRules Target) : base(Target)
+        public T4EngineEd(ReadOnlyTargetRules Target) : base(Target)
 		{
             // http://api.unrealengine.com/KOR/Programming/UnrealBuildSystem/IWYUReferenceGuide/
             PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
 			PrivateIncludePaths.AddRange(
 				new string[] {
-                    "T4AssetEd/Private",
+                    "T4EngineEd/Private",
 					// ... add other private include paths required here ...
 				}
 			);
@@ -25,9 +25,7 @@ namespace UnrealBuildTool.Rules
 					"CoreUObject",
 					"Engine",
                     "T4Core",
-                    "T4Engine",
-                    "T4Framework",
-                    "T4Gameplay"
+                    "T4Engine"
                 }
             );
 
