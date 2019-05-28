@@ -94,12 +94,6 @@ public:
 	DECLARE_MULTICAST_DELEGATE(FOnPropertiesChanged);
 	FOnPropertiesChanged& OnPropertiesChanged() { return OnPropertiesChangedDelegate; }
 
-	UAnimMontage* AutoGenAnimMontage(
-		ET4AnimMontageLayer InAnimMontageLayer,
-		TMap<FName, FT4AnimSequenceInfo>& InOutAnimSequenceInfo,
-		const FName& InObjectName
-	); // #39
-
 #endif // WITH_EDITOR
 
 public:
