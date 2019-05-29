@@ -59,11 +59,11 @@ T4Framework 를 도입해 게임 프로토타이핑과 매스 프로덕션을 �
 - **T4Framework Architecture** (2019.04.19)
   - <https://youtu.be/kq6mi8CEYi0>
 
-## 5. 라이선스
+## 5. 배포
 
-- 공개 버전(Public Repository)은 MIT License 입니다. 
-  - Win64 바이너리만 제공됩니다.
-  - Public Repository : <https://github.com/Tech4Labs/T4Framework>
-- 비공개 버전(Private Repository) 라이선스는 아래 메일 주소로 문의주시기 바랍니다.
-  - niceofer@hotmail.com (Tech4Labs, SoonBo Noh)
-  - Private Repository : <https://github.com/Tech4Labs/T4FrameworkPrivate>
+- 바이너리 버전은 아래 경로에서 다운로드 받으실 수 있습니다.
+  - <https://github.com/Tech4Labs/T4FrameworkPublic>
+
+## 6. 라이선스 문의
+
+- niceofer@hotmail.com 으로 문의주시기 바랍니다.
