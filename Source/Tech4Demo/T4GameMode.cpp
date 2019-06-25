@@ -2,11 +2,10 @@
 
 #include "T4GameMode.h"
 
-#include "T4Framework/Classes/Player/T4PlayerController.h"
-#include "T4Framework/Classes/Player/T4PlayerDefaultPawn.h"
-#include "T4Framework/Public/T4Framework.h"
-
 #include "T4Core/Public/T4CoreMinimal.h"
+#include "T4Framework/Public/T4Framework.h"
+#include "T4Gameplay/Classes/Player/T4GameplayPlayerController.h" // #42
+#include "T4Gameplay/Classes/Player/T4GameplayDefaultPawn.h" // #42
 
 #include "Kismet/GameplayStatics.h"
 
@@ -18,8 +17,8 @@
 AT4GameMode::AT4GameMode(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	PlayerControllerClass = AT4PlayerController::StaticClass();
-	DefaultPawnClass = AT4PlayerDefaultPawn::StaticClass();
+	PlayerControllerClass = AT4GameplayPlayerController::StaticClass(); // #42
+	DefaultPawnClass = AT4GameplayDefaultPawn::StaticClass(); // #42
 }
 
 void AT4GameMode::StartPlay()
