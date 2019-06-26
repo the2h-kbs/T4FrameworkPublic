@@ -5,4 +5,4 @@ T4Framework 를 도입해 게임 프로토타이핑과 매스 프로덕션을 �
 R&D 및 기능 구현에 소요되는 시간을 아이디어 검증과 신기술 개발에 투자하실 수 있습니다.
 ```
 
-https://github.com/Tech4Labs/T4FrameworkPublic/wiki
+https://tech4labs.github.io/T4Framework/

@@ -10,25 +10,23 @@
 #include "T4Engine/Public/T4Engine.h"
 
 #include "AIController.h"
-#include "T4NPCAIController.generated.h"
+#include "T4AIController.generated.h"
 
 /**
   * http://api.unrealengine.com/KOR/Gameplay/Framework/Controller/AIController/
  */
 
-class UBehaviorTree;
-class UBlackboardData;
 class UT4PathFollowingComponent;
 
 UCLASS()
-class T4FRAMEWORK_API AT4NPCAIController : public AAIController, public IT4AIController
+class T4FRAMEWORK_API AT4AIController : public AAIController, public IT4AIController
 {
 	GENERATED_UCLASS_BODY()
 
 public:
 	void PostInitializeComponents();
 
-	void TickActor(
+	virtual void TickActor(
 		float InDeltaTime,
 		enum ELevelTick InTickType,
 		FActorTickFunction& InThisTickFunction
@@ -51,15 +49,10 @@ protected:
 	void BeginInactiveState() override;
 	// End AController interface
 
-	// Begin AAIController interface
-	/** Update direction AI is looking based on FocalPoint */
-	void UpdateControlRotation(float DeltaTime, bool bUpdatePawn = true) override;
-	// End AAIController interface
-
 public:
 	// IT4GameController
 	ET4LayerType GetLayerType() const override { return LayerType; }
-	ET4ControllerType GetType() const override { return ET4ControllerType::NPCAI; }
+	virtual ET4ControllerType GetType() const override { return ET4ControllerType::None; }
 
 	bool SetTargetObject(const FT4ObjectID& InNewTargetID) override;
 	void ClearTargetObject(bool bInSetDefaultPawn) override;
@@ -78,40 +71,18 @@ public:
 	FName GetMainWeaponDataIDName() const override { return NAME_None; } // #48
 
 public:
-	bool SetTableData(
-		const FName& InTableName,
-		const FSoftObjectPath& InBehaviorTreePath,
-		const FSoftObjectPath& InBlackboardDataPath
-	); // #31
-
 	void SetNetID(const FT4NetID& InNetID) { NetID = InNetID;}
 	const FT4NetID& GetNetID() const { return NetID; }
 
-	IT4GameObject* FindBestNearestEnemy(float InMaxDistance); // #34
+protected:
+	virtual void Reset() {} // #50
 
 protected:
-	bool CheckAIDataLoading();
-
-private:
 	ET4LayerType LayerType;
 
 	FT4NetID NetID; // #15
 	FT4ObjectID TargetObjectID;
 
-	FName NPCTableName;
-	bool bAIDataLoaded;
-
-	FT4BlackboardAssetLoader BlackboardAssetLoader;
-	FT4BehaviorTreeAssetLoader BehaviorTreeAssetLoader;
-
-private:
 	UPROPERTY(transient)
-	UBlackboardData* BlackboardDataAsset;
-
-	/* Cached BT component */
-	UPROPERTY(transient)
-	UBehaviorTree* BehaviorTreeAsset;
-
-	UPROPERTY(transient)
-	UT4PathFollowingComponent* T4PathFollowingComponent; // #34
+	UT4PathFollowingComponent* OverridePathFollowingComponent; // #34
 };

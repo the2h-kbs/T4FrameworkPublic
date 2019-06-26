@@ -27,7 +27,6 @@ namespace UnrealBuildTool.Rules
                     "InputCore",
                     "AIModule",
                     "NavigationSystem",
-                    "GameplayTasks",
                     "T4Core",
                     "T4Engine"
                 }

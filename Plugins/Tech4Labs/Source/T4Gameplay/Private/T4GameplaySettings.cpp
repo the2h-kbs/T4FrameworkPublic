@@ -21,7 +21,7 @@ UT4GameplaySettings::UT4GameplaySettings()
 	PlayerDataRowName_Key2 = TEXT("T4DefaultPC_Parts");
 
 	NPCDataRowName_Key1 = TEXT("T4DefaultNPC");
-	NPCDataRowName_Key2 = NAME_None;
+	NPCDataRowName_Key2 = TEXT("T4CombatNPC"); // #50
 
 	WeaponDataRowName_Key1 = TEXT("T4DefaulSowrd"); // #45
 	WeaponDataRowName_Key2 = TEXT("T4SecondSowrd"); // #45

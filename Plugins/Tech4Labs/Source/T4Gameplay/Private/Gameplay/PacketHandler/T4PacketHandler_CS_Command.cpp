@@ -9,11 +9,12 @@
 
 #include "GameDB/T4GameDB.h"
 
+#include "Classes/AI/T4GameplayNPCAIController.h" // #31
+#include "Classes/AI/T4GameplayFOAIController.h" // #41
+#include "Classes/AI/T4GameplayItemAIController.h" // #41
+
 #include "T4Core/Public/T4CoreMinimal.h"
 #include "T4Engine/Public/T4Engine.h"
-#include "T4Framework/Classes/AI/T4NPCAIController.h" // #31
-#include "T4Framework/Classes/AI/T4FOAIController.h" // #41
-#include "T4Framework/Classes/AI/T4ItemAIController.h" // #41
 #include "T4Framework/Public/T4Framework.h"
 
 #include "Classes/Engine/World.h"
@@ -184,13 +185,13 @@ void FT4PacketHandlerCS::HandleCS_CmdNPCEnter(const FT4PacketCmdNPCEnterCS* InPa
 #if (WITH_EDITOR || WITH_SERVER_CODE)
 	// #31 : NPCAI
 	AAIController* NewAI = DoStartSpawnAIController(
-		AT4NPCAIController::StaticClass(),
+		AT4GameplayNPCAIController::StaticClass(),
 		InPacket->SpawnLocation,
 		InPacket->SpawnRotation
 	);
 	check(nullptr != NewAI);
 	{
-		AT4NPCAIController* NPCController = Cast<AT4NPCAIController>(NewAI);
+		AT4GameplayNPCAIController* NPCController = Cast<AT4GameplayNPCAIController>(NewAI);
 		if (nullptr == NPCController)
 		{
 			check(false); // ???
@@ -226,7 +227,7 @@ void FT4PacketHandlerCS::HandleCS_CmdNPCEnter(const FT4PacketCmdNPCEnterCS* InPa
 			return;
 		}
 		bool bBinded = NPCController->SetTableData(
-			InPacket->NPCDataID.RowName,
+			InPacket->NPCDataID,
 			BehaviorTreePath,
 			BlackboardDataPath
 		);
@@ -302,13 +303,13 @@ void FT4PacketHandlerCS::HandleCS_CmdFOEnter(const FT4PacketCmdFOEnterCS* InPack
 #if (WITH_EDITOR || WITH_SERVER_CODE)
 	// #41 : Item/FO AI
 	AAIController* NewAI = DoStartSpawnAIController(
-		AT4FOAIController::StaticClass(),
+		AT4GameplayFOAIController::StaticClass(),
 		InPacket->SpawnLocation,
 		InPacket->SpawnRotation
 	);
 	check(nullptr != NewAI);
 	{
-		AT4FOAIController* FOController = Cast<AT4FOAIController>(NewAI);
+		AT4GameplayFOAIController* FOController = Cast<AT4GameplayFOAIController>(NewAI);
 		if (nullptr == FOController)
 		{
 			check(false); // ???
@@ -333,7 +334,7 @@ void FT4PacketHandlerCS::HandleCS_CmdFOEnter(const FT4PacketCmdFOEnterCS* InPack
 		}
 
 		bool bBinded = FOController->SetTableData(
-			InPacket->FODataID.RowName,
+			InPacket->FODataID,
 			BehaviorTreePath,
 			BlackboardDataPath
 		);
@@ -435,13 +436,13 @@ void FT4PacketHandlerCS::HandleCS_CmdItemEnter(const FT4PacketCmdItemEnterCS* In
 #if (WITH_EDITOR || WITH_SERVER_CODE)
 	// #41 : Item/FO AI
 	AAIController* NewAI = DoStartSpawnAIController(
-		AT4ItemAIController::StaticClass(),
+		AT4GameplayItemAIController::StaticClass(),
 		InPacket->SpawnLocation,
 		InPacket->SpawnRotation
 	);
 	check(nullptr != NewAI);
 	{
-		AT4ItemAIController* ItemController = Cast<AT4ItemAIController>(NewAI);
+		AT4GameplayItemAIController* ItemController = Cast<AT4GameplayItemAIController>(NewAI);
 		if (nullptr == ItemController)
 		{
 			check(false); // ???
@@ -464,7 +465,7 @@ void FT4PacketHandlerCS::HandleCS_CmdItemEnter(const FT4PacketCmdItemEnterCS* In
 		}
 
 		bool bBinded = ItemController->SetTableData(
-			InPacket->ItemDataID.RowName,
+			InPacket->ItemDataID,
 			BehaviorTreePath,
 			BlackboardDataPath
 		);

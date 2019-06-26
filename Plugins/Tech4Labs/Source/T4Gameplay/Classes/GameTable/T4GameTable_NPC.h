@@ -34,4 +34,7 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = ClientOnly)
 	TSoftObjectPtr<UT4CharacterEntityAsset> EntityAsset;
+
+	UPROPERTY(EditAnywhere, Category = All)
+	FT4GameItemWeaponDataID MainWeaponDataID; // #50
 };

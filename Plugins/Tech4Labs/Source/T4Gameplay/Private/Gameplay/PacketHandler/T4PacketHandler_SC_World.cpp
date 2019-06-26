@@ -6,12 +6,13 @@
 #include "Network/Protocol/T4PacketSC_World.h"
 #include "GameDB/T4GameDB.h"
 
+#include "Classes/AI/T4GameplayNPCAIController.h" // #50
+#include "Classes/AI/T4GameplayFOAIController.h" // #41, #50
+#include "Classes/AI/T4GameplayItemAIController.h" // #41, #50
+
 #include "T4Core/Public/T4CoreMinimal.h"
 #include "T4Engine/Classes/Action/T4ActionMinimal.h"
 #include "T4Engine/Public/T4Engine.h"
-#include "T4Framework/Classes/AI/T4NPCAIController.h"
-#include "T4Framework/Classes/AI/T4FOAIController.h" // #41
-#include "T4Framework/Classes/AI/T4ItemAIController.h" // #41
 #include "T4Framework/Public/T4Framework.h"
 
 #include "Classes/Engine/World.h"
@@ -205,7 +206,7 @@ void FT4PacketHandlerSC::HandleSC_NPCEnter(const FT4PacketNPCEnterSC* InPacket)
 		IT4PlayerController* MyPC = GetPlayerController();
 		if (T4CoreLayer::IsServer(LayerType) || (nullptr != MyPC && MyPC->CheckAuthority())) // #15 : Only HasAuthority
 		{
-			AT4NPCAIController* NPCController = Cast<AT4NPCAIController>(
+			AT4GameplayNPCAIController* NPCController = Cast<AT4GameplayNPCAIController>(
 				GameFramework->GetAIController(InPacket->NetID)
 			);
 			check(nullptr != NPCController);
@@ -283,7 +284,7 @@ void FT4PacketHandlerSC::HandleSC_FOEnter(const FT4PacketFOEnterSC* InPacket)
 		if (T4CoreLayer::IsServer(LayerType) || (nullptr != MyPC && MyPC->CheckAuthority())) // #15 : Only HasAuthority
 		{
 			// #41
-			AT4FOAIController* FOController = Cast<AT4FOAIController>(
+			AT4GameplayFOAIController* FOController = Cast<AT4GameplayFOAIController>(
 				GameFramework->GetAIController(InPacket->NetID)
 			);
 			check(nullptr != FOController);
@@ -357,7 +358,7 @@ void FT4PacketHandlerSC::HandleSC_ItemEnter(const FT4PacketItemEnterSC* InPacket
 		if (T4CoreLayer::IsServer(LayerType) || (nullptr != MyPC && MyPC->CheckAuthority())) // #15 : Only HasAuthority
 		{
 			// #41
-			AT4ItemAIController* ItemController = Cast<AT4ItemAIController>(
+			AT4GameplayItemAIController* ItemController = Cast<AT4GameplayItemAIController>(
 				GameFramework->GetAIController(InPacket->NetID)
 			);
 			check(nullptr != ItemController);

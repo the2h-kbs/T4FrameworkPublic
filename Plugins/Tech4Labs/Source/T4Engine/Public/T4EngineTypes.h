@@ -37,9 +37,11 @@ UENUM()
 enum class ET4ControllerType : uint8
 {
 	Player,
-	NPCAI,
+	NPC,
+	FO,
+	Item,
 
-	All	UMETA(Hidden)
+	None UMETA(Hidden)
 };
 
 enum ET4InputMode

@@ -188,3 +188,23 @@ public:
 		return *this;
 	}
 };
+
+// #50
+USTRUCT()
+struct FT4GameItemWeaponDataID : public FT4GameDataID
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	FT4GameItemWeaponDataID()
+		: FT4GameDataID(ET4GameDataType::Item_Weapon)
+	{
+	}
+
+	FORCEINLINE FT4GameDataID operator=(const FT4GameItemWeaponDataID& InRhs)
+	{
+		Type = InRhs.Type;
+		RowName = InRhs.RowName;
+		return *this;
+	}
+};

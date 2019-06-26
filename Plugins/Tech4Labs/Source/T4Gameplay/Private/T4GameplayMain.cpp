@@ -116,6 +116,7 @@ void FT4GameplayMain::HandleOnCallbackMoveTo(
 	FT4PacketMoveToSC NewPacketSC;
 	NewPacketSC.ObjectID = InObjectID;
 	NewPacketSC.MoveVelocity = InMoveVelocity;
+	NewPacketSC.HeadYawAngle = InMoveVelocity.Rotation().Yaw; // #50 : 이동 방향으로 방향 수정
 	PacketHandlerSC->OnBroadcastPacket(&NewPacketSC);
 }
 
