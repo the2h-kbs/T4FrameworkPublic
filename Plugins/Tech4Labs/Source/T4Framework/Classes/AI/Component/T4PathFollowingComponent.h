@@ -10,6 +10,7 @@
 /**
   *
  */
+class IT4GameObject;
 UCLASS()
 class T4FRAMEWORK_API UT4PathFollowingComponent : public UPathFollowingComponent
 {
@@ -23,8 +24,8 @@ public:
 	) override;
 
 public:
-	void SetAIObjectID(const FT4ObjectID& InObjectID) { AIObjectID = InObjectID; }
-	void ClearAIObjectID() { AIObjectID.SetNone(); }
+	void SetTargetObjectID(const FT4ObjectID& InObjectID) { TargetObjectID = InObjectID; }
+	void ClearTargetObjectID() { TargetObjectID.SetNone(); }
 
 protected:
 	void BeginPlay() override;
@@ -35,7 +36,10 @@ protected:
 	/** check state of path following, update move segment if needed */
 	void UpdatePathSegment() override;
 
+protected:
+	IT4GameObject* GetTargetObject() const;
+
 private:
 	ET4LayerType LayerType;
-	FT4ObjectID AIObjectID;
+	FT4ObjectID TargetObjectID;
 };

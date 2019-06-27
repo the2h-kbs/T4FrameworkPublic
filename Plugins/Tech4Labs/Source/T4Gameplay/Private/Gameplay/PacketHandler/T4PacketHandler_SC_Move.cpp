@@ -38,6 +38,8 @@ void FT4PacketHandlerSC::HandleSC_MoveTo(const FT4PacketMoveToSC* InPacket)
 	FT4MoveSyncToAction NewAction;
 	NewAction.MoveVelocity = InPacket->MoveVelocity;
 	NewAction.HeadYawAngle = InPacket->HeadYawAngle; // #40
+	NewAction.bForceMaxSpeed = InPacket->bForceMaxSpeed; // #50
+
 	TargetObject->OnExecute(&NewAction);
 }
 

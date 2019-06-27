@@ -95,7 +95,8 @@ void FT4GameplayMain::HandleOnCreatePlayerController(IT4GameFramework* InGameFra
 void FT4GameplayMain::HandleOnCallbackMoveTo(
 	ET4LayerType InLayerType,
 	const FT4ObjectID& InObjectID,
-	const FVector& InMoveVelocity
+	const FVector& InMoveVelocity,
+	bool bInForceMaxSpeed // #50
 )
 {
 	// #42, #34
@@ -116,7 +117,10 @@ void FT4GameplayMain::HandleOnCallbackMoveTo(
 	FT4PacketMoveToSC NewPacketSC;
 	NewPacketSC.ObjectID = InObjectID;
 	NewPacketSC.MoveVelocity = InMoveVelocity;
-	NewPacketSC.HeadYawAngle = InMoveVelocity.Rotation().Yaw; // #50 : 이동 방향으로 방향 수정
+	FVector MoveVelocityNormal = InMoveVelocity;
+	MoveVelocityNormal.Normalize();
+	NewPacketSC.HeadYawAngle = MoveVelocityNormal.Rotation().Yaw; // #50 : 이동 방향으로 방향 수정
+	NewPacketSC.bForceMaxSpeed = bInForceMaxSpeed; // #50
 	PacketHandlerSC->OnBroadcastPacket(&NewPacketSC);
 }
 

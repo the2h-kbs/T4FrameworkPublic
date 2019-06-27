@@ -27,7 +27,8 @@ public:
 	void HandleOnCallbackMoveTo(
 		ET4LayerType InLayerType,
 		const FT4ObjectID& InObjectID,
-		const FVector& InMoveVelocity
+		const FVector& InMoveVelocity,
+		bool bInForceMaxSpeed // #50
 	); // #42, #34
 };
 

@@ -20,6 +20,10 @@ public:
 	virtual bool OnBroadcastPacket(FT4PacketStoC* InPacket) = 0;
 
 	virtual bool OnRecvPacket(const FT4PacketStoC* InPacket) = 0;
+
+#if (WITH_EDITOR || WITH_SERVER_CODE)
+	virtual bool DoBroadcastPacketForServer(FT4PacketStoC* InPacket) = 0; // #50
+#endif
 };
 
 class T4GAMEPLAY_API IT4PacketHandlerCS

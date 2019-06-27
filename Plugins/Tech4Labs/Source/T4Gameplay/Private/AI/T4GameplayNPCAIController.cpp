@@ -2,8 +2,14 @@
 
 #include "Classes/AI/T4GameplayNPCAIController.h"
 
+#include "Network/Protocol/T4PacketSC_Status.h"
+#include "Gameplay/T4GameplayInstance.h"
+
+#include "GameDB/T4GameDB.h"
+
 #include "T4Core/Public/T4CoreMinimal.h"
 #include "T4Engine/Public/T4Engine.h"
+#include "T4Framework/Public/T4Framework.h"
 
 #include "BehaviorTree/BehaviorTree.h"
 #include "BehaviorTree/BlackboardData.h"
@@ -18,15 +24,9 @@ static const FName HomePositionKey(TEXT("HomePosition"));
  */
 AT4GameplayNPCAIController::AT4GameplayNPCAIController(const FObjectInitializer& ObjectInitializer) 
 	: Super(ObjectInitializer)
-	, bAIDataLoaded(false)
+	, NPCGameData(nullptr)
+	, AIDataLoadState(ET4AIDataLoadState::AIDataLoad_Ready) // #50
 {
-}
-
-void AT4GameplayNPCAIController::Reset() // #50
-{
-	// WARN : AsyncLoad 가 걸렸을 수 있음으로 종료 시 명시적으로 Reset 을 호출해야 한다.
-	BlackboardAssetLoader.Reset();
-	BehaviorTreeAssetLoader.Reset();
 }
 
 void AT4GameplayNPCAIController::TickActor(
@@ -47,7 +47,7 @@ void AT4GameplayNPCAIController::TickActor(
 
 bool AT4GameplayNPCAIController::CheckAsyncLoading()
 {
-	if (bAIDataLoaded)
+	if (ET4AIDataLoadState::AIDataLoad_Loading != AIDataLoadState)
 	{
 		return true;
 	}
@@ -107,23 +107,94 @@ bool AT4GameplayNPCAIController::CheckAsyncLoading()
 		}
 #endif
 	}
-
-	bAIDataLoaded = true;
+	AIDataLoadState = ET4AIDataLoadState::AIDataLoad_Loaded;
 	return true;
 }
 
-bool AT4GameplayNPCAIController::SetTableData(
-	const FT4GameDataID& InNPCGameDataID,
-	const FSoftObjectPath& InBehaviorTreePath,
-	const FSoftObjectPath& InBlackboardDataPath
+void AT4GameplayNPCAIController::Reset() // #50
+{
+	// WARN : AsyncLoad 가 걸렸을 수 있음으로 종료 시 명시적으로 Reset 을 호출해야 한다.
+	BlackboardAssetLoader.Reset();
+	BehaviorTreeAssetLoader.Reset();
+}
+
+void AT4GameplayNPCAIController::AIStart() // #50
+{
+	IT4PacketHandlerSC* PacketHandlerSC = GetPacketHandlerSC();
+	if (nullptr == PacketHandlerSC)
+	{
+		return;
+	}
+	check(nullptr != NPCGameData);
+	if (NPCGameData->RawData.MainWeaponDataID.IsValid())
+	{
+		FT4PacketEquipSC NewPacketSC;
+		NewPacketSC.ObjectID = GetTargetObjectID();
+		NewPacketSC.ItemWeaponDataID = NPCGameData->RawData.MainWeaponDataID;
+		NewPacketSC.bMainWeapon = true; // #48
+
+		check(NewPacketSC.ObjectID.IsValid());
+
+		PacketHandlerSC->DoBroadcastPacketForServer(&NewPacketSC);
+	}
+}
+
+bool AT4GameplayNPCAIController::Bind(
+	const FT4GameDataID& InNPCGameDataID
 )
 {
-	// #31
-	const TCHAR* DebugTableName = *(NPCGameDataID.ToString());
-	BlackboardAssetLoader.Load(InBlackboardDataPath, false, DebugTableName);
-	BehaviorTreeAssetLoader.Load(InBehaviorTreePath, false, DebugTableName);
+	check(nullptr == NPCGameData);
+	FT4GameDB& GameDB = GetGameDB();
+	NPCGameData = GameDB.GetGameData<FT4GameNPCData>(InNPCGameDataID);
+	if (nullptr == NPCGameData)
+	{
+		UE_LOG(
+			LogT4Gameplay,
+			Warning,
+			TEXT("AT4GameplayNPCAIController : Failed to NPCBind. NPCGameDataID '%s' Not Found."),
+			*(InNPCGameDataID.ToString())
+		);
+		return false;
+	}
+
+	AIDataLoadState = ET4AIDataLoadState::AIDataLoad_NoData; // #50
+
+	for (;;)
+	{
+		const FSoftObjectPath BlackboardDataPath = NPCGameData->RawData.BlackboardDataPath.ToSoftObjectPath();
+		if (!BlackboardDataPath.IsValid())
+		{
+			// TODO : 없어도 스폰이 되도록 수정 필요!
+			UE_LOG(
+				LogT4Gameplay,
+				Error,
+				TEXT("FT4PacketHandlerCS : Failed to NPCBind. BlackboardData Not Found."),
+				*(InNPCGameDataID.ToString())
+			);
+			break;
+		}
+		const FSoftObjectPath BehaviorTreePath = NPCGameData->RawData.BehaviorTreePath.ToSoftObjectPath();
+		if (!BehaviorTreePath.IsValid())
+		{
+			// TODO : 없어도 스폰이 되도록 수정 필요!
+			UE_LOG(
+				LogT4Gameplay,
+				Error,
+				TEXT("FT4PacketHandlerCS : Failed to NPCBind. BehaviorTree Not Found."),
+				*(InNPCGameDataID.ToString())
+			);
+			break;
+		}
+
+		// #31
+		const TCHAR* DebugTableName = *(InNPCGameDataID.ToString());
+		BlackboardAssetLoader.Load(BlackboardDataPath, false, DebugTableName);
+		BehaviorTreeAssetLoader.Load(BehaviorTreePath, false, DebugTableName);
+		AIDataLoadState = ET4AIDataLoadState::AIDataLoad_Loading; // #50
+		break;
+	}
+
 	NPCGameDataID = InNPCGameDataID;
-	bAIDataLoaded = false;
 	return true;
 }
 
@@ -152,4 +223,19 @@ IT4GameObject* AT4GameplayNPCAIController::FindBestNearestEnemy(float InMaxDista
 
 	check(0 < TargetObjects.Num());
 	return TargetObjects[0];
+}
+
+IT4PacketHandlerSC* AT4GameplayNPCAIController::GetPacketHandlerSC() const
+{
+	check(ET4LayerType::Max > LayerType);
+	IT4GameFramework* GameFramework = T4FrameworkGet(LayerType);
+	check(nullptr != GameFramework);
+	FT4GameplayInstance* GameplayInstance = FT4GameplayInstance::CastGameplayInstance(
+		GameFramework->GetGameplayHandler()
+	);
+	if (nullptr == GameplayInstance)
+	{
+		return nullptr;
+	}
+	return GameplayInstance->GetPacketHandlerSC();
 }

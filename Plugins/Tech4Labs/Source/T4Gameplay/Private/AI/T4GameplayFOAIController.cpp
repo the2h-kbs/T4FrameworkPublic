@@ -2,6 +2,8 @@
 
 #include "Classes/AI/T4GameplayFOAIController.h"
 
+#include "GameDB/T4GameDB.h"
+
 #include "BehaviorTree/BehaviorTree.h"
 #include "BehaviorTree/BlackboardData.h"
 #include "BehaviorTree/BlackboardComponent.h"
@@ -13,6 +15,7 @@
  */
 AT4GameplayFOAIController::AT4GameplayFOAIController(const FObjectInitializer& ObjectInitializer) 
 	: Super(ObjectInitializer)
+	, AIDataLoadState(ET4AIDataLoadState::AIDataLoad_Ready) // #50
 {
 }
 
@@ -25,17 +28,41 @@ void AT4GameplayFOAIController::TickActor(
 	Super::TickActor(InDeltaTime, InTickType, InThisTickFunction);
 }
 
-bool AT4GameplayFOAIController::SetTableData(
-	const FT4GameDataID& InFOGameDataID,
-	const FSoftObjectPath& InBehaviorTreePath,
-	const FSoftObjectPath& InBlackboardDataPath
+void AT4GameplayFOAIController::Reset() // #50
+{
+	// WARN : AsyncLoad 가 걸렸을 수 있음으로 종료 시 명시적으로 Reset 을 호출해야 한다.
+	//BlackboardAssetLoader.Reset();
+	//BehaviorTreeAssetLoader.Reset();
+}
+
+void AT4GameplayFOAIController::AIStart() // #50
+{
+
+}
+
+bool AT4GameplayFOAIController::Bind(
+	const FT4GameDataID& InFOGameDataID
 )
 {
+	FT4GameDB& GameDB = GetGameDB();
+	const FT4GameNPCData* NPCData = GameDB.GetGameData<FT4GameNPCData>(InFOGameDataID);
+	if (nullptr == NPCData)
+	{
+		UE_LOG(
+			LogT4Gameplay,
+			Warning,
+			TEXT("AT4GameplayFOAIController : Failed to FOBind. FOGameDataID '%s' Not Found."),
+			*(InFOGameDataID.ToString())
+		);
+		return false;
+	}
+
+	AIDataLoadState = ET4AIDataLoadState::AIDataLoad_NoData; // #50
+
 	// #31
 	//const TCHAR* DebugTableName = *(InFOGameDataID.ToString());
 	//BlackboardAssetLoader.Load(InBlackboardDataPath, false, DebugTableName);
 	//BehaviorTreeAssetLoader.Load(InBehaviorTreePath, false, DebugTableName);
 	FOGameDataID = InFOGameDataID;
-	//bAIDataLoaded = false;
 	return true;
 }

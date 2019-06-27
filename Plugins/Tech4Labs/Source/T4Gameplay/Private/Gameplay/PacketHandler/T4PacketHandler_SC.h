@@ -24,6 +24,10 @@ public:
 
 	bool OnRecvPacket(const FT4PacketStoC* InPacket) override;
 
+#if (WITH_EDITOR || WITH_SERVER_CODE)
+	bool DoBroadcastPacketForServer(FT4PacketStoC* InPacket) override; // #50
+#endif
+
 public:
 	ET4LayerType GetLayerType() const { return LayerType; }
 

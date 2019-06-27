@@ -39,11 +39,15 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	float HeadYawAngle; // #40 : 필요할 때 3D 로 확장. 이동은 패킷량이 많음을 고려.
 
+	UPROPERTY(VisibleAnywhere)
+	bool bForceMaxSpeed; // #50 : AIController 만 제어
+
 public:
 	FT4PacketMoveToSC()
 		: FT4PacketStoC(ET4PacketStoC::MoveTo)
 		, MoveVelocity(FVector::ZeroVector)
 		, HeadYawAngle(TNumericLimits<float>::Max())
+		, bForceMaxSpeed(false) // #50 : AIController 만 제어
 	{
 	}
 

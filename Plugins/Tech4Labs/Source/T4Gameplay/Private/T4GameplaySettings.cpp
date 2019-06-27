@@ -23,8 +23,8 @@ UT4GameplaySettings::UT4GameplaySettings()
 	NPCDataRowName_Key1 = TEXT("T4DefaultNPC");
 	NPCDataRowName_Key2 = TEXT("T4CombatNPC"); // #50
 
-	WeaponDataRowName_Key1 = TEXT("T4DefaulSowrd"); // #45
-	WeaponDataRowName_Key2 = TEXT("T4SecondSowrd"); // #45
+	WeaponDataRowName_Key1 = TEXT("T4DefaultSword"); // #45
+	WeaponDataRowName_Key2 = TEXT("T4SecondSword"); // #45
 }
 
 #if WITH_EDITOR

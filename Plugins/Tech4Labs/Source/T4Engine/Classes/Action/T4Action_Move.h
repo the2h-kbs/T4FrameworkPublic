@@ -73,11 +73,15 @@ public:
 	UPROPERTY(EditAnywhere)
 	float HeadYawAngle; // #40 : degree, LockOn 일 경우 이동 방향과 달라진다.
 
+	UPROPERTY(EditAnywhere)
+	bool bForceMaxSpeed; // #50 : AIController 만 제어
+
 public:
 	FT4MoveSyncToAction()
 		: FT4ObjectAction(StaticActionType())
 		, MoveVelocity(FVector::ZeroVector)
 		, HeadYawAngle(TNumericLimits<float>::Max())
+		, bForceMaxSpeed(false) // #50 : AIController 만 제어
 	{
 	}
 

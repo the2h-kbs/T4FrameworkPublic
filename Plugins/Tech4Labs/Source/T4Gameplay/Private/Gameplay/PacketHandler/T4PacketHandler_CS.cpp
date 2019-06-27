@@ -144,11 +144,7 @@ bool FT4PacketHandlerCS::DoSendPacketForServer(FT4PacketStoC* InSendPacket)
 	}
 	IT4PacketHandlerSC* PacketHandlerSC = GetPacketHandlerSC();
 	check(nullptr != PacketHandlerSC);
-	if (T4CoreLayer::IsServer(LayerType))
-	{
-		PacketHandlerSC->OnRecvPacket(InSendPacket); // #15 : 서버 World 로 전달
-	}
-	GetPacketHandlerSC()->OnBroadcastPacket(InSendPacket);
+	PacketHandlerSC->OnBroadcastPacket(InSendPacket);
 	return true;
 }
 

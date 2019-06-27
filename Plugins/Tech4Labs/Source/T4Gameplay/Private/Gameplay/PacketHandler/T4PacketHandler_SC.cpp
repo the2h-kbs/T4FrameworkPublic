@@ -213,6 +213,13 @@ bool FT4PacketHandlerSC::OnBroadcastPacket(FT4PacketStoC* InPacket)
 		return false;
 	}
 
+#if (WITH_EDITOR || WITH_SERVER_CODE)
+	if (T4CoreLayer::IsServer(LayerType)) // #50
+	{
+		OnRecvPacket(InPacket); // #15 : 서버 World 로 전달
+	}
+#endif
+
 	bool bResult = true;
 	for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; ++It)
 	{
@@ -225,6 +232,16 @@ bool FT4PacketHandlerSC::OnBroadcastPacket(FT4PacketStoC* InPacket)
 
 	return bResult;
 }
+
+#if (WITH_EDITOR || WITH_SERVER_CODE)
+bool FT4PacketHandlerSC::DoBroadcastPacketForServer(
+	FT4PacketStoC* InPacket
+) // #50
+{
+	bool bResult = OnBroadcastPacket(InPacket);
+	return bResult;
+}
+#endif
 
 bool FT4PacketHandlerSC::OnRecvPacket(const FT4PacketStoC* InPacket)
 {

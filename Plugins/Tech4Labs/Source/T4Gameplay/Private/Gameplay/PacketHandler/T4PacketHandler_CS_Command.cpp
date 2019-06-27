@@ -202,35 +202,7 @@ void FT4PacketHandlerCS::HandleCS_CmdNPCEnter(const FT4PacketCmdNPCEnterCS* InPa
 		NewNetID = GameFramework->GetNewUniqueNetID();
 		NPCController->SetNetID(NewNetID);
 
-		const FSoftObjectPath BlackboardDataPath = NPCData->RawData.BlackboardDataPath.ToSoftObjectPath();
-		if (!BlackboardDataPath.IsValid())
-		{
-			// TODO : 없어도 스폰이 되도록 수정 필요!
-			UE_LOG(
-				LogT4Gameplay,
-				Error,
-				TEXT("FT4PacketHandlerCS : failed to NPC enter. BlackboardData Not Found."),
-				*(InPacket->NPCDataID.ToString())
-			);
-			return;
-		}
-		const FSoftObjectPath BehaviorTreePath = NPCData->RawData.BehaviorTreePath.ToSoftObjectPath();
-		if (!BehaviorTreePath.IsValid())
-		{
-			// TODO : 없어도 스폰이 되도록 수정 필요!
-			UE_LOG(
-				LogT4Gameplay,
-				Error,
-				TEXT("FT4PacketHandlerCS : failed to NPC enter. BehaviorTree Not Found."),
-				*(InPacket->NPCDataID.ToString())
-			);
-			return;
-		}
-		bool bBinded = NPCController->SetTableData(
-			InPacket->NPCDataID,
-			BehaviorTreePath,
-			BlackboardDataPath
-		);
+		bool bBinded = NPCController->Bind(InPacket->NPCDataID); // #50
 		if (!bBinded)
 		{
 			check(false); // ???
@@ -320,24 +292,7 @@ void FT4PacketHandlerCS::HandleCS_CmdFOEnter(const FT4PacketCmdFOEnterCS* InPack
 		NewNetID = GameFramework->GetNewUniqueNetID();
 		FOController->SetNetID(NewNetID);
 
-		const FSoftObjectPath BlackboardDataPath = FOData->RawData.BlackboardDataPath.ToSoftObjectPath();
-		if (!BlackboardDataPath.IsValid())
-		{
-			check(false); // ???
-			return;
-		}
-		const FSoftObjectPath BehaviorTreePath = FOData->RawData.BehaviorTreePath.ToSoftObjectPath();
-		if (!BehaviorTreePath.IsValid())
-		{
-			check(false); // ???
-			return;
-		}
-
-		bool bBinded = FOController->SetTableData(
-			InPacket->FODataID,
-			BehaviorTreePath,
-			BlackboardDataPath
-		);
+		bool bBinded = FOController->Bind(InPacket->FODataID); // #50
 		if (!bBinded)
 		{
 			check(false); // ???
@@ -392,9 +347,6 @@ void FT4PacketHandlerCS::HandleCS_CmdItemEnter(const FT4PacketCmdItemEnterCS* In
 	check(ET4PacketCtoS::CmdItemEnter == InPacket->PacketCS);
 	FT4GameDB& GameDB = GetGameDB();
 
-	FSoftObjectPath BlackboardDataPath;
-	FSoftObjectPath BehaviorTreePath;
-
 	// #48
 	bool bResult = false;
 	if (ET4GameDataType::Item_Weapon == InPacket->ItemDataID.Type)
@@ -402,8 +354,6 @@ void FT4PacketHandlerCS::HandleCS_CmdItemEnter(const FT4PacketCmdItemEnterCS* In
 		const FT4GameItemWeaponData* ItemWeaponData = GameDB.GetGameData<FT4GameItemWeaponData>(InPacket->ItemDataID);
 		if (nullptr != ItemWeaponData)
 		{
-			BlackboardDataPath = ItemWeaponData->RawData.BlackboardDataPath.ToSoftObjectPath();
-			BehaviorTreePath = ItemWeaponData->RawData.BehaviorTreePath.ToSoftObjectPath();
 			bResult = true;
 		}
 	}
@@ -412,8 +362,6 @@ void FT4PacketHandlerCS::HandleCS_CmdItemEnter(const FT4PacketCmdItemEnterCS* In
 		const FT4GameItemCostumeData* ItemCostumeData = GameDB.GetGameData<FT4GameItemCostumeData>(InPacket->ItemDataID);
 		if (nullptr != ItemCostumeData)
 		{
-			BlackboardDataPath = ItemCostumeData->RawData.BlackboardDataPath.ToSoftObjectPath();
-			BehaviorTreePath = ItemCostumeData->RawData.BehaviorTreePath.ToSoftObjectPath();
 			bResult = true;
 		}
 	}
@@ -453,22 +401,7 @@ void FT4PacketHandlerCS::HandleCS_CmdItemEnter(const FT4PacketCmdItemEnterCS* In
 		NewNetID = GameFramework->GetNewUniqueNetID();
 		ItemController->SetNetID(NewNetID);
 
-		if (!BlackboardDataPath.IsValid())
-		{
-			check(false); // ???
-			return;
-		}
-		if (!BehaviorTreePath.IsValid())
-		{
-			check(false); // ???
-			return;
-		}
-
-		bool bBinded = ItemController->SetTableData(
-			InPacket->ItemDataID,
-			BehaviorTreePath,
-			BlackboardDataPath
-		);
+		bool bBinded = ItemController->Bind(InPacket->ItemDataID); // #50
 		if (!bBinded)
 		{
 			check(false); // ???

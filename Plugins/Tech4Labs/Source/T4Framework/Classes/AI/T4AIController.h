@@ -16,6 +16,14 @@
   * http://api.unrealengine.com/KOR/Gameplay/Framework/Controller/AIController/
  */
 
+enum ET4AIDataLoadState // #50
+{
+	AIDataLoad_Ready,
+	AIDataLoad_Loading,
+	AIDataLoad_Loaded,
+	AIDataLoad_NoData,
+};
+
 class UT4PathFollowingComponent;
 
 UCLASS()
@@ -76,6 +84,7 @@ public:
 
 protected:
 	virtual void Reset() {} // #50
+	virtual void AIStart() {} // #50
 
 protected:
 	ET4LayerType LayerType;

@@ -27,12 +27,14 @@ public:
 	ET4ControllerType GetType() const override { return ET4ControllerType::FO; }
 
 public:
-	bool SetTableData(
-		const FT4GameDataID& InFOGameDataID,
-		const FSoftObjectPath& InBehaviorTreePath,
-		const FSoftObjectPath& InBlackboardDataPath
-	); // #31
+	bool Bind(const FT4GameDataID& InFOGameDataID); // #31, #50
+
+protected:
+	void Reset() override; // #50
+	void AIStart() override; // #50
 
 private:
 	FT4GameDataID FOGameDataID;
+
+	ET4AIDataLoadState AIDataLoadState; // #50
 };
