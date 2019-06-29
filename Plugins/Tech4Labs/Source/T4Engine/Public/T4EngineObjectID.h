@@ -8,8 +8,7 @@
 /**
   * http://api.unrealengine.com/KOR/Programming/UnrealArchitecture/Reference/Properties/
  */
-static const uint32 PLAYER_OBJECT_ID = 0;
-static const uint32 INVALID_OBJECT_ID = (uint32)-1;
+static const uint32 T4InvalidGameObjectID = (uint32)-1;
 
 USTRUCT()
 struct FT4ObjectID
@@ -22,7 +21,7 @@ public:
 
 public:
 	FT4ObjectID()
-		: Value(INVALID_OBJECT_ID)
+		: Value(T4InvalidGameObjectID)
 	{
 	}
 
@@ -44,9 +43,9 @@ public:
 	FORCEINLINE FT4ObjectID& operator++()
 	{
 		Value++;
-		if (INVALID_OBJECT_ID == Value)
+		if (T4InvalidGameObjectID == Value)
 		{
-			Value = 1; // reserved PLAYER_OBJECT_ID
+			Value = 1; // reserved 0
 		}
 		return *this;
 	}
@@ -54,7 +53,7 @@ public:
 	FORCEINLINE FT4ObjectID& operator++(int)
 	{
 		Value++;
-		if (INVALID_OBJECT_ID == Value)
+		if (T4InvalidGameObjectID == Value)
 		{
 			Value = 1;
 		}
@@ -83,12 +82,12 @@ public:
 
 	FORCEINLINE bool IsValid() const
 	{
-		return (INVALID_OBJECT_ID != Value) ? true : false;
+		return (0 != Value && T4InvalidGameObjectID != Value) ? true : false;
 	}
 
 	FORCEINLINE void SetNone()
 	{
-		Value = INVALID_OBJECT_ID;
+		Value = T4InvalidGameObjectID;
 	}
 
 	FORCEINLINE FString ToString() const

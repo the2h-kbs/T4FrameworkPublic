@@ -17,14 +17,14 @@ R&D 및 기능 구현에 소요되는 시간을 아이디어 검증과 신기술
 - 지원 UE4 버전 : 4.22
 - 지원 플랫폼 : Win64, Android
 - 릴리즈 버전 : 2019.10.01 (예정)
-- 공식 웹사이트 : https://tech4labs.github.io/T4Framework/
+- 공식 웹사이트 : <https://tech4labs.github.io/T4Framework/>
 
 ## 3. 마일스톤
 
 - [완료] Milestone 1 (2019.01.19 ~ 2019.04.19)
-  - https://github.com/Tech4Labs/T4Framework/milestone/1
+  - <https://github.com/Tech4Labs/T4Framework/milestone/1>
 - **[진행] Milestone 2 (2019.05.06 ~ 2019.07.26)**
-  - https://github.com/Tech4Labs/T4Framework/milestone/2
+  - <https://github.com/Tech4Labs/T4Framework/milestone/2>
 - [예정] Milestone 3 (2019.08.05 ~ 2019.09.27)
   - 레벨 제작에 필요한 관련 기능 및 툴 개발
 
@@ -47,9 +47,9 @@ R&D 및 기능 구현에 소요되는 시간을 아이디어 검증과 신기술
 ## 5. 배포
 
 - 바이너리 배포 및 기술 지원 (Public)
-  - https://github.com/Tech4Labs/T4FrameworkPublic
+  - <https://github.com/Tech4Labs/T4FrameworkPublic>
 - 소스 배포 및 기술 지원 (Private)
-  - https://github.com/Tech4Labs/T4Framework
+  - <https://github.com/Tech4Labs/T4Framework>
 
 ## 6. 라이선스
 
@@ -63,4 +63,4 @@ R&D 및 기능 구현에 소요되는 시간을 아이디어 검증과 신기술
   - 소스 라이선스 계약이 필요합니다.
   - 기술 지원을 위해서는 별도의 Maintenance 계약이 필요합니다.
 - 라이선스 및 신규 기능 구현에 대한 문의는 아래 메일로 문의 주시기 바랍니다.
-  - niceofer@hotmail.com
+  - <niceofer@hotmail.com>

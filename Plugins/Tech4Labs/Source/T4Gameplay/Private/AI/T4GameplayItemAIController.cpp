@@ -6,7 +6,6 @@
 
 #include "BehaviorTree/BehaviorTree.h"
 #include "BehaviorTree/BlackboardData.h"
-#include "BehaviorTree/BlackboardComponent.h"
 
 #include "T4GameplayInternal.h"
 

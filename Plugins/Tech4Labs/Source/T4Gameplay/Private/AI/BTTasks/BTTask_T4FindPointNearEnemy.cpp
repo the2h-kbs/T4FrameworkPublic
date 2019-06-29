@@ -3,13 +3,7 @@
 #include "Classes/AI/BTTasks/BTTask_T4FindPointNearEnemy.h"
 #include "Classes/AI/T4GameplayNPCAIController.h"
 
-#include "T4Framework/Public/T4Framework.h"
-
-#include "BehaviorTree/BlackboardComponent.h"
-
 #include "T4GameplayInternal.h"
-
-static const FName FindPointNearEnemyKey(TEXT("T4FindPointNearEnemy"));
 
 /**
   *
@@ -21,11 +15,11 @@ UBTTask_T4FindPointNearEnemy::UBTTask_T4FindPointNearEnemy(
 }
 
 EBTNodeResult::Type UBTTask_T4FindPointNearEnemy::ExecuteTask(
-	UBehaviorTreeComponent& OwnerComp, 
-	uint8* NodeMemory
+	UBehaviorTreeComponent& InOwnerComp,
+	uint8* InNodeMemory
 )
 {
-	AT4GameplayNPCAIController* NPCController = Cast<AT4GameplayNPCAIController>(OwnerComp.GetAIOwner());
+	AT4GameplayNPCAIController* NPCController = Cast<AT4GameplayNPCAIController>(InOwnerComp.GetAIOwner());
 	if (nullptr == NPCController)
 	{
 		return EBTNodeResult::Failed;
@@ -34,35 +28,27 @@ EBTNodeResult::Type UBTTask_T4FindPointNearEnemy::ExecuteTask(
 	{
 		return EBTNodeResult::Failed;
 	}
-
 	IT4GameObject* NPCGameObject = NPCController->GetTargetObject();
 	if (nullptr == NPCGameObject)
 	{
 		return EBTNodeResult::Failed;
 	}
-
-	const ET4LayerType LayerType = NPCController->GetLayerType();
-	IT4GameFramework* ServerFramework = T4FrameworkGet(LayerType);
-	check(nullptr != ServerFramework);
-
-	FVector OriginPosition = NPCGameObject->GetRootLocation();
-	IT4GameObject* NewTargetObject = NPCController->FindBestNearestEnemy(5000.0f);
-	if (nullptr != NewTargetObject)
-	{
-		OriginPosition = NewTargetObject->GetRootLocation();
-	}
-
-	IT4GameWorld* GameWorld = ServerFramework->GetGameWorld();
-	check(nullptr != GameWorld);
-
-	FVector TargetPosition = FVector::ZeroVector;
-	if (!GameWorld->GetRandomLocationInNavigableRadius(OriginPosition, 1000.0f, TargetPosition))
+	IT4GameObject* NewTargetObject = NPCController->FindNearestEnemyBySensoryRange();
+	if (nullptr == NewTargetObject)
 	{
 		return EBTNodeResult::Failed;
 	}
-	if (nullptr != OwnerComp.GetBlackboardComponent())
+	const FVector OriginPosition = NewTargetObject->GetRootLocation();
+	const FT4GameObjectProperty& TargetObjectProperty = NewTargetObject->GetPropertyConst();
+	FVector MoveTargetPosition = FVector::ZeroVector;
+	if (!NPCController->TryGoToAttackDistance(
+		OriginPosition, 
+		TargetObjectProperty.CapsuleRadius,
+		MoveTargetPosition
+	))
 	{
-		OwnerComp.GetBlackboardComponent()->SetValueAsVector(FindPointNearEnemyKey, TargetPosition);
+		return EBTNodeResult::Failed;
 	}
+	NPCController->GetAIMemory().NextMoveTargetLocation = MoveTargetPosition; // #50
 	return EBTNodeResult::Succeeded;
 }

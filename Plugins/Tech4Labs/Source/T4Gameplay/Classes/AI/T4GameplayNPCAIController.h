@@ -11,9 +11,36 @@
 /**
   * http://api.unrealengine.com/KOR/Gameplay/Framework/Controller/AIController/
  */
+struct FT4NPCAIMemory // #50
+{
+	FT4NPCAIMemory()
+	{
+		Reset();
+	}
+
+	void Reset()
+	{
+		InitSpawnLocation = FVector::ZeroVector;
+		NextMoveTargetLocation = FVector::ZeroVector;
+		AttackTargetObjectID.SetNone();
+
+		IdleWaitTime = 5.0f;
+
+		SkillPlayTimeLeft = 0.0f;
+	}
+
+	FVector InitSpawnLocation;
+	FVector NextMoveTargetLocation;
+	FT4ObjectID AttackTargetObjectID;
+
+	float IdleWaitTime;
+
+	float SkillPlayTimeLeft;
+};
+
 struct FT4GameNPCData;
+struct FT4GameItemWeaponData; // #50
 class UBehaviorTree;
-class UBlackboardData;
 class IT4GameObject;
 class IT4PacketHandlerSC;
 UCLASS()
@@ -35,7 +62,19 @@ public:
 public:
 	bool Bind(const FT4GameDataID& InNPCGameDataID); // #31, #50
 
-	IT4GameObject* FindBestNearestEnemy(float InMaxDistance); // #34
+	IT4GameObject* FindNearestEnemyByAttackRange(); // #50
+	IT4GameObject* FindNearestEnemyBySensoryRange(); // #34, #50
+
+	bool TryGoToAttackDistance(
+		const FVector& InOriginLocation,
+		float InTargetCapsuleRadius,
+		FVector& OutTargetLocation
+	); // #50
+
+	bool IsAttacking(); // #50
+	bool TryNormalAttack(const FT4ObjectID& InTargetGameObjectID); // #50
+
+	FT4NPCAIMemory& GetAIMemory() { return AIMemory; } // #50
 
 protected:
 	void Reset() override; // #50
@@ -48,17 +87,16 @@ private:
 
 private:
 	FT4GameDataID NPCGameDataID;
+
 	const FT4GameNPCData* NPCGameData; // #50
+	const FT4GameItemWeaponData* MainWeaponGameData; // #50
 
 	ET4AIDataLoadState AIDataLoadState; // #50
-
-	FT4BlackboardAssetLoader BlackboardAssetLoader;
 	FT4BehaviorTreeAssetLoader BehaviorTreeAssetLoader;
-
-	UPROPERTY(transient)
-	UBlackboardData* BlackboardDataAsset;
 
 	/* Cached BT component */
 	UPROPERTY(transient)
 	UBehaviorTree* BehaviorTreeAsset;
+
+	FT4NPCAIMemory AIMemory; // #50 : 필요하다면 Blackboard 로 변경하겠지만, 현재는 장점이 없어보인다.
 };

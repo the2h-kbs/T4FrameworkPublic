@@ -26,4 +26,9 @@ public:
 
 	UPROPERTY(EditAnywhere, Category= ClientOnly)
 	TSoftObjectPtr<UT4ContiAsset> ContiAsset;
+
+public:
+	FT4GameEffectTableRow()
+	{
+	}
 };

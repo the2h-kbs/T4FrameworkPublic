@@ -10,7 +10,6 @@
 /**
   * http://api.unrealengine.com/KOR/Gameplay/DataDriven/
  */
-class UBlackboardData;
 class UBehaviorTree;
 USTRUCT()
 struct FT4GameItemTableRow : public FTableRowBase
@@ -18,9 +17,6 @@ struct FT4GameItemTableRow : public FTableRowBase
 	GENERATED_USTRUCT_BODY()
 
 public:
-	UPROPERTY(EditAnywhere, Category= Common)
-	TSoftObjectPtr<UBlackboardData> BlackboardDataPath; // DropItem
-
 	UPROPERTY(EditAnywhere, Category= Common)
 	TSoftObjectPtr<UBehaviorTree> BehaviorTreePath; // DropItem
 };

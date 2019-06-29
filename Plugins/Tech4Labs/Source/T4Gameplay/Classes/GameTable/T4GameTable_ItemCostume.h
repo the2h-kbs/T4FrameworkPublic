@@ -28,4 +28,9 @@ public:
 
 	UPROPERTY(EditAnywhere, Category= ClientOnly)
 	FName ExchangePartName;
+
+public:
+	FT4GameItemCostumeTableRow()
+	{
+	}
 };

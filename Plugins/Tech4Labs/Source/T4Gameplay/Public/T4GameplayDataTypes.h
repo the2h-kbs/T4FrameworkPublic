@@ -20,6 +20,7 @@ enum class ET4GameDataType : uint8
 	Item_Costume, // #48
 
 	Skill,
+	SkillSet, // #50
 	Effect,
 
 	None,
@@ -133,6 +134,7 @@ public:
 			TEXT("Item_Weapon"), // #37
 			TEXT("Item_Costume"),
 			TEXT("Skill"),
+			TEXT("SkillSet"), // #50
 			TEXT("Effect"),
 			TEXT("None"),
 		};
@@ -202,6 +204,26 @@ public:
 	}
 
 	FORCEINLINE FT4GameDataID operator=(const FT4GameItemWeaponDataID& InRhs)
+	{
+		Type = InRhs.Type;
+		RowName = InRhs.RowName;
+		return *this;
+	}
+};
+
+// #50
+USTRUCT()
+struct FT4GameSkillSetDataID : public FT4GameDataID
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	FT4GameSkillSetDataID()
+		: FT4GameDataID(ET4GameDataType::SkillSet)
+	{
+	}
+
+	FORCEINLINE FT4GameDataID operator=(const FT4GameSkillSetDataID& InRhs)
 	{
 		Type = InRhs.Type;
 		RowName = InRhs.RowName;

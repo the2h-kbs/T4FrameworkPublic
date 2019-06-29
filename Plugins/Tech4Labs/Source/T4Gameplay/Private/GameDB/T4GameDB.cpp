@@ -238,6 +238,20 @@ bool FT4GameDB::Initialize(const FSoftObjectPath& InGameMasterTablePath)
 				}
 				break;
 
+			case ET4GameDataType::SkillSet: // #50
+				{
+					if (!LoadTableInternal<FT4GameSkillSetTableRow, FT4GameSkillSetData>(
+						*TableName,
+						*GameTablePath,
+						GameTableType,
+						GameSkillSetDatas
+					))
+					{
+						continue;
+					}
+				}
+				break;
+
 			case ET4GameDataType::Effect: // #25
 				{
 					if (!LoadTableInternal<FT4GameEffectTableRow, FT4GameEffectData>(
@@ -302,6 +316,7 @@ void FT4GameDB::Reset()
 	GameItemWeaponDatas.Reset();
 	GameItemCostumeDatas.Reset();
 	GameSkillDatas.Reset();
+	GameSkillSetDatas.Reset();
 	GameEffectDatas.Reset();
 }
 
@@ -344,6 +359,11 @@ void FT4GameDB::OnGameTableChanged()
 		TEXT("SkillTable")
 	);
 
+	CopyDataFromRawInternal<FT4GameSkillSetTableRow, FT4GameSkillSetData>(
+		GameSkillDatas,
+		TEXT("SkillSetTable")
+	); // #50
+
 	CopyDataFromRawInternal<FT4GameEffectTableRow, FT4GameEffectData>(
 		GameEffectDatas,
 		TEXT("EffectTable")
@@ -370,6 +390,8 @@ const T* FT4GameDB::GetGameData(const FT4GameDataID& InDataID) // #48
 			return GameItemCostumeDatas.GetRowByName<T>(InDataID.RowName);
 		case ET4GameDataType::Skill:
 			return GameSkillDatas.GetRowByName<T>(InDataID.RowName);
+		case ET4GameDataType::SkillSet: // #50
+			return GameSkillSetDatas.GetRowByName<T>(InDataID.RowName);
 		case ET4GameDataType::Effect:
 			return GameEffectDatas.GetRowByName<T>(InDataID.RowName);
 		default:

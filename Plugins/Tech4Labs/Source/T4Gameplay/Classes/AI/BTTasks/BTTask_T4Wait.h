@@ -3,15 +3,15 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "BehaviorTree/BTTaskNode.h"
-#include "BTTask_T4FindPointNearEnemy.generated.h"
+#include "BehaviorTree/Tasks/BTTask_Wait.h"
+#include "BTTask_T4Wait.generated.h"
 
 /**
-  *
+ * #50 refer BTTask_WaitBlackboardTime
  */
-class UBehaviorTreeComponent;
-UCLASS()
-class UBTTask_T4FindPointNearEnemy : public UBTTaskNode
+class UBehaviorTree;
+UCLASS(hidecategories=Wait)
+class UBTTask_T4Wait : public UBTTask_Wait
 {
 	GENERATED_UCLASS_BODY()
 

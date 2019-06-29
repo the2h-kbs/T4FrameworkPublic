@@ -256,7 +256,7 @@ public:
 	FT4RotationAction()
 		: FT4ObjectAction(StaticActionType())
 		, RotationType(ET4RotationType::Default)
-		, TargetYawAngle(TNumericLimits<float>::Max())
+		, TargetYawAngle(0.0f)
 		, RotationYawRate(0.0f)
 	{
 	}

@@ -37,7 +37,7 @@
 			"LoadingPhase": "PostDefault"
 		},
 		{
-			"Name": "T4RehearsalEd",
+			"Name": "T4Rehearsal",
 			"Type": "Editor",
 			"LoadingPhase": "PostEngineInit"
 		}

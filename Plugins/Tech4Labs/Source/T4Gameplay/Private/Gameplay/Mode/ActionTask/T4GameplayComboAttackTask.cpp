@@ -68,20 +68,26 @@ void FT4ComboAttackActionTask::Process(float InDeltaTime)
 		Reset();
 		return;
 	}
+	const FT4GameSkillSetData* SkillSetData = GameDB.GetGameData<FT4GameSkillSetData>(ItemData->RawData.SkillSetNameID);
+	if (nullptr == SkillSetData) // #50
+	{
+		Reset();
+		return;
+	}
 	FT4GameSkillDataID SkillDataIDSelected;
 	switch (ComboAttackSelected)
 	{
 		case ET4ComboAttackSeqeunce::Primary:
-			SkillDataIDSelected = ItemData->RawData.ComboPrimaryAttackNameID;
+			SkillDataIDSelected = SkillSetData->RawData.ComboPrimaryAttackNameID;
 			break;
 		case ET4ComboAttackSeqeunce::Secondary:
-			SkillDataIDSelected = ItemData->RawData.ComboSecondaryAttackNameID;
+			SkillDataIDSelected = SkillSetData->RawData.ComboSecondaryAttackNameID;
 			break;
 		case ET4ComboAttackSeqeunce::Tertiary:
-			SkillDataIDSelected = ItemData->RawData.ComboTertiaryAttackNameID;
+			SkillDataIDSelected = SkillSetData->RawData.ComboTertiaryAttackNameID;
 			break;
 		case ET4ComboAttackSeqeunce::Finish:
-			SkillDataIDSelected = ItemData->RawData.FinishAttackNameID;
+			SkillDataIDSelected = SkillSetData->RawData.FinishAttackNameID;
 			break;
 	}
 	const UT4EngineSettings* EngineSettings = GetDefault<UT4EngineSettings>();
@@ -101,19 +107,19 @@ void FT4ComboAttackActionTask::Process(float InDeltaTime)
 		case ET4ComboAttackSeqeunce::Ready:
 		case ET4ComboAttackSeqeunce::Finish:
 			ComboAttackSelected = ET4ComboAttackSeqeunce::Primary;
-			SkillDataIDSelected = ItemData->RawData.ComboPrimaryAttackNameID;
+			SkillDataIDSelected = SkillSetData->RawData.ComboPrimaryAttackNameID;
 			break;
 		case ET4ComboAttackSeqeunce::Primary:
 			ComboAttackSelected = ET4ComboAttackSeqeunce::Secondary;
-			SkillDataIDSelected = ItemData->RawData.ComboSecondaryAttackNameID;
+			SkillDataIDSelected = SkillSetData->RawData.ComboSecondaryAttackNameID;
 			break;
 		case ET4ComboAttackSeqeunce::Secondary:
 			ComboAttackSelected = ET4ComboAttackSeqeunce::Tertiary;
-			SkillDataIDSelected = ItemData->RawData.ComboTertiaryAttackNameID;
+			SkillDataIDSelected = SkillSetData->RawData.ComboTertiaryAttackNameID;
 			break;
 		case ET4ComboAttackSeqeunce::Tertiary:
 			ComboAttackSelected = ET4ComboAttackSeqeunce::Finish;
-			SkillDataIDSelected = ItemData->RawData.FinishAttackNameID;
+			SkillDataIDSelected = SkillSetData->RawData.FinishAttackNameID;
 			break;
 		default:
 			{

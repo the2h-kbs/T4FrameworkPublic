@@ -10,16 +10,16 @@
 /**
   *
  */
-class IT4RehearsalEdModule : public IModuleInterface
+class IT4RehearsalModule : public IModuleInterface
 {
 public:
-	static inline IT4RehearsalEdModule& Get()
+	static inline IT4RehearsalModule& Get()
 	{
-		return FModuleManager::LoadModuleChecked<IT4RehearsalEdModule>("T4RehearsalEd");
+		return FModuleManager::LoadModuleChecked<IT4RehearsalModule>("T4Rehearsal");
 	}
 
 	static inline bool IsAvailable()
 	{
-		return FModuleManager::Get().IsModuleLoaded("T4RehearsalEd");
+		return FModuleManager::Get().IsModuleLoaded("T4Rehearsal");
 	}
 };

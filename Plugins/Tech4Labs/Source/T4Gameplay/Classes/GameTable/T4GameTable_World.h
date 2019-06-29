@@ -26,4 +26,9 @@ public:
 
 	UPROPERTY(EditAnywhere, Category= ClientOnly)
 	TSoftObjectPtr<UT4WorldEntityAsset> EntityAsset;
+
+public:
+	FT4GameWorldTableRow()
+	{
+	}
 };

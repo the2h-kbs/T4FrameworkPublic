@@ -2,9 +2,9 @@
 
 namespace UnrealBuildTool.Rules
 {
-	public class T4RehearsalEd : ModuleRules
+	public class T4Rehearsal : ModuleRules
 	{
-		public T4RehearsalEd(ReadOnlyTargetRules Target) : base(Target)
+		public T4Rehearsal(ReadOnlyTargetRules Target) : base(Target)
 		{
             // http://api.unrealengine.com/KOR/Programming/UnrealBuildSystem/IWYUReferenceGuide/
             PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;

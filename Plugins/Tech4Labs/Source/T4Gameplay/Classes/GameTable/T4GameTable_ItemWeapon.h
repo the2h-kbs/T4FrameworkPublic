@@ -23,21 +23,20 @@ public:
 	UPROPERTY(EditAnywhere, Category= Common)
 	FGuid Guid;
 
-	UPROPERTY(EditAnywhere, Category= Common)
-	FT4GameSkillDataID ComboPrimaryAttackNameID;
-
-	UPROPERTY(EditAnywhere, Category= Common)
-	FT4GameSkillDataID ComboSecondaryAttackNameID;
-
-	UPROPERTY(EditAnywhere, Category= Common)
-	FT4GameSkillDataID ComboTertiaryAttackNameID;
-
-	UPROPERTY(EditAnywhere, Category= Common)
-	FT4GameSkillDataID FinishAttackNameID;
-
 	UPROPERTY(EditAnywhere, Category=ClientOnly)
 	TSoftObjectPtr<UT4WeaponEntityAsset> EntityAsset;
 
 	UPROPERTY(EditAnywhere, Category= ClientOnly)
 	FName EquipBoneOrSocketName;
+
+	UPROPERTY(EditAnywhere, Category= All)
+	FT4GameSkillSetDataID SkillSetNameID; // #50
+
+	UPROPERTY(EditAnywhere, Category= All)
+	float AttackRange; // #50
+
+public:
+	FT4GameItemWeaponTableRow()
+	{
+	}
 };

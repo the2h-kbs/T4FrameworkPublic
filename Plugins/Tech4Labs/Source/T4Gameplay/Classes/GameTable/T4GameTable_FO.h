@@ -10,7 +10,6 @@
 /**
   * http://api.unrealengine.com/KOR/Gameplay/DataDriven/
  */
-class UBlackboardData;
 class UBehaviorTree;
 class UT4PropEntityAsset;
 
@@ -27,11 +26,13 @@ public:
 	FGuid Guid;
 
 	UPROPERTY(EditAnywhere, Category= ServerOnly)
-	TSoftObjectPtr<UBlackboardData> BlackboardDataPath;
-
-	UPROPERTY(EditAnywhere, Category= ServerOnly)
 	TSoftObjectPtr<UBehaviorTree> BehaviorTreePath;
 
 	UPROPERTY(EditAnywhere, Category= ClientOnly)
 	TSoftObjectPtr<UT4PropEntityAsset> EntityAsset;
+
+public:
+	FT4GameFOTableRow()
+	{
+	}
 };

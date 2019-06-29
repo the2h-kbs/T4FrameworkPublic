@@ -11,7 +11,6 @@
   * http://api.unrealengine.com/KOR/Gameplay/DataDriven/
  */
 class UBehaviorTree;
-class UBlackboardData;
 class UT4CharacterEntityAsset;
 
 USTRUCT()
@@ -26,9 +25,6 @@ public:
 	UPROPERTY(EditAnywhere, Category= Common)
 	FGuid Guid;
 
-	UPROPERTY(EditAnywhere, Category=ServerOnly)
-	TSoftObjectPtr<UBlackboardData> BlackboardDataPath;
-
 	UPROPERTY(EditAnywhere, Category= ServerOnly)
 	TSoftObjectPtr<UBehaviorTree> BehaviorTreePath;
 
@@ -37,4 +33,13 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = All)
 	FT4GameItemWeaponDataID MainWeaponDataID; // #50
+
+	UPROPERTY(EditAnywhere, Category = ServerOnly)
+	float SensoryRange; // #50
+
+public:
+	FT4GameNPCTableRow()
+		: SensoryRange(1000.0f)
+	{
+	}
 };

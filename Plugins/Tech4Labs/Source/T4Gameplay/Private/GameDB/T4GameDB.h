@@ -12,6 +12,7 @@
 #include "Classes/GameTable/T4GameTable_ItemWeapon.h" // #27, #48
 #include "Classes/GameTable/T4GameTable_ItemCostume.h" // #27, #48
 #include "Classes/GameTable/T4GameTable_Skill.h" // #25
+#include "Classes/GameTable/T4GameTable_SkillSet.h" // #50
 #include "Classes/GameTable/T4GameTable_Effect.h" // #25
 
 /**
@@ -108,6 +109,17 @@ struct FT4GameSkillData : public FT4GameDataBase
 	FT4GameSkillTableRow RawData; // #27
 };
 
+struct FT4GameSkillSetData : public FT4GameDataBase
+{
+	FT4GameSkillSetData(const FName& InRawName)
+		: FT4GameDataBase(InRawName)
+	{
+	}
+	ET4GameDataType GetType() override { return ET4GameDataType::SkillSet; } // #50
+
+	FT4GameSkillSetTableRow RawData; // #27
+};
+
 struct FT4GameEffectData : public FT4GameDataBase
 {
 	FT4GameEffectData(const FName& InRawName)
@@ -184,6 +196,7 @@ private:
 	FT4GameDatas GameItemWeaponDatas;
 	FT4GameDatas GameItemCostumeDatas;
 	FT4GameDatas GameSkillDatas;
+	FT4GameDatas GameSkillSetDatas; // #50
 	FT4GameDatas GameEffectDatas;
 };
 
