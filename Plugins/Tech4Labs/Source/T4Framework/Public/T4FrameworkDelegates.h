@@ -21,9 +21,6 @@ public:
 	static FOnCreatePlayerController OnCreatePlayerController;
 #endif
 
-	DECLARE_DELEGATE_FourParams(FOnCallbackMoveTo, ET4LayerType, const FT4ObjectID&, const FVector&, bool); // #42, #50
-	static FOnCallbackMoveTo OnCallbackMoveTo;
-
 private:
 	FT4FrameworkDelegates() {}
 };

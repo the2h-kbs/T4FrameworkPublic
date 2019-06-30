@@ -6,6 +6,8 @@
 #include "Network/Protocol/T4PacketSC_Status.h"
 #include "GameDB/T4GameDB.h"
 
+#include "Classes/Player/T4GameplayPlayerController.h" // #42
+
 #include "T4Engine/Classes/Action/T4ActionMinimal.h"
 #include "T4Engine/Public/T4Engine.h"
 #include "T4Core/Public/T4CoreMinimal.h"
@@ -35,9 +37,9 @@ void FT4PacketHandlerSC::HandleSC_Equip(const FT4PacketEquipSC* InPacket)
 	}
 	if (TargetObject->IsPlayer() && InPacket->bMainWeapon) // #48
 	{
-		IT4PlayerController* PlayerController = GetPlayerController();
+		AT4GameplayPlayerController* PlayerController = GetPlayerController();
 		check(nullptr != PlayerController);
-		PlayerController->SetMainWeaponDataIDName(InPacket->ItemWeaponDataID.RowName);
+		PlayerController->SetMainWeaponDataID(InPacket->ItemWeaponDataID);
 	}
 	FT4EquipWeaponAction NewAction;
 	NewAction.ActionKey = InPacket->ItemWeaponDataID.ToPrimaryActionKey(); // #48
@@ -65,9 +67,9 @@ void FT4PacketHandlerSC::HandleSC_UnEquip(const FT4PacketUnEquipSC* InPacket)
 	}
 	if (TargetObject->IsPlayer() && InPacket->bMainWeapon) // #48
 	{
-		IT4PlayerController* PlayerController = GetPlayerController();
+		AT4GameplayPlayerController* PlayerController = GetPlayerController();
 		check(nullptr != PlayerController);
-		PlayerController->SetMainWeaponDataIDName(NAME_None);
+		PlayerController->SetMainWeaponDataID(InvalidGameDataID);
 	}
 	FT4UnEquipWeaponAction NewAction;
 	NewAction.ActionKey = InPacket->ItemWeaponDataID.ToPrimaryActionKey(); // #48

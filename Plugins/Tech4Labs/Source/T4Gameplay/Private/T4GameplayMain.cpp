@@ -34,11 +34,6 @@ bool FT4GameplayMain::Initialize()
 		&FT4GameplayMain::HandleOnCreatePlayerController
 	);
 #endif
-
-	FT4FrameworkDelegates::OnCallbackMoveTo.BindRaw(
-		this, 
-		&FT4GameplayMain::HandleOnCallbackMoveTo
-	);
 	// ~#42
 
 	return true;
@@ -91,38 +86,6 @@ void FT4GameplayMain::HandleOnCreatePlayerController(IT4GameFramework* InGameFra
 	UGameplayStatics::FinishSpawningActor(NewEditorPC, SpawnTransform);
 }
 #endif
-
-void FT4GameplayMain::HandleOnCallbackMoveTo(
-	ET4LayerType InLayerType,
-	const FT4ObjectID& InObjectID,
-	const FVector& InMoveVelocity,
-	bool bInForceMaxSpeed // #50
-)
-{
-	// #42, #34
-	IT4GameFramework* GameFramework = T4FrameworkGet(InLayerType);
-	if (nullptr == GameFramework)
-	{
-		return;
-	}
-	FT4GameplayInstance* GameplayInstance = FT4GameplayInstance::CastGameplayInstance(
-		GameFramework->GetGameplayHandler()
-	);
-	if (nullptr == GameplayInstance)
-	{
-		return;
-	}
-	IT4PacketHandlerSC* PacketHandlerSC = GameplayInstance->GetPacketHandlerSC();
-	check(nullptr != PacketHandlerSC);
-	FT4PacketMoveToSC NewPacketSC;
-	NewPacketSC.ObjectID = InObjectID;
-	NewPacketSC.MoveVelocity = InMoveVelocity;
-	FVector MoveVelocityNormal = InMoveVelocity;
-	MoveVelocityNormal.Normalize();
-	NewPacketSC.HeadYawAngle = MoveVelocityNormal.Rotation().Yaw; // #50 : 이동 방향으로 방향 수정
-	NewPacketSC.bForceMaxSpeed = bInForceMaxSpeed; // #50
-	PacketHandlerSC->OnBroadcastPacket(&NewPacketSC);
-}
 
 static FT4GameplayMain GT4GameplayMain;
 FT4GameplayMain& GetGameplayMain()

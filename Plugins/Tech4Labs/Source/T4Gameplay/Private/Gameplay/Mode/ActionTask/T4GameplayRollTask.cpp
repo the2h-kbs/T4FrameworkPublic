@@ -49,7 +49,7 @@ void FT4RollActionTask::Process(float InDeltaTime)
 
 bool FT4RollActionTask::Pressed(FString& OutErrorMsg)
 {
- 	IT4PlayerController* PlayerController = GetPlayerController();
+	AT4GameplayPlayerController* PlayerController = GetPlayerController();
 	check(nullptr != PlayerController);
 	if (PlayerController->HasPlayingAction(T4ActionRollPKey))
 	{
@@ -82,11 +82,11 @@ void FT4RollActionTask::DoRoll() // #46
 	IT4PacketHandlerCS* PacketHandlerCS = GetPacketHandlerCS();
 	if (nullptr != PacketHandlerCS)
 	{
-		IT4PlayerController* PlayerController = GetPlayerController();
+		AT4GameplayPlayerController* PlayerController = GetPlayerController();
 		check(nullptr != PlayerController);
-		if (PlayerController->HasTargetObject())
+		if (PlayerController->HasGameObject())
 		{
-			IT4GameObject* TargetObject = PlayerController->GetTargetObject();
+			IT4GameObject* TargetObject = PlayerController->GetGameObject();
 			check(nullptr != TargetObject);
 			FVector RollDirection = TargetObject->GetMovementVelocity();
 			if (RollDirection.IsNearlyZero())
@@ -99,7 +99,7 @@ void FT4RollActionTask::DoRoll() // #46
 				RollDirection.Normalize();
 			}
 			FT4PacketRollCS NewPacketCS; // #27
-			NewPacketCS.SenderID = PlayerController->GetTargetObjectID();
+			NewPacketCS.SenderID = PlayerController->GetGameObjectID();
 			NewPacketCS.RollDirection = RollDirection;
 			PacketHandlerCS->OnSendPacket(&NewPacketCS);
 		}

@@ -53,21 +53,19 @@ public:
 	ET4LayerType GetLayerType() const override { return LayerType; }
 	ET4ControllerType GetType() const override { return ET4ControllerType::Player; }
 
-	bool SetTargetObject(const FT4ObjectID& InNewTargetID) override;
-	void ClearTargetObject(bool bInSetDefaultPawn) override;
+	bool SetGameObject(const FT4ObjectID& InNewTargetID) override;
+	void ClearGameObject(bool bInSetDefaultPawn) override;
 
-	bool HasTargetObject() const override { return TargetObjectID.IsValid(); }
-	const FT4ObjectID& GetTargetObjectID() const override { return TargetObjectID; }
-	IT4GameObject* GetTargetObject() const override;
-	IT4ActionControl* GetTargetObjectActionRoot() const override; // #23
+	bool HasGameObject() const override { return GameObjectID.IsValid(); }
+	const FT4ObjectID& GetGameObjectID() const override { return GameObjectID; }
+	IT4GameObject* GetGameObject() const override;
+	IT4ActionControl* GetGameObjectActionControl() const override; // #23
 
 	bool HasPlayingAction(const FT4ActionKey& InActionKey) const override; // #20
 
-	IT4AIController* CastAIController() override { return nullptr; }
+	AController* GetAController() override;
 	IT4PlayerController* CastPlayerController() override;
-
-	void SetMainWeaponDataIDName(const FName& InMainWeaponDataIDName) override { MainWeaponDataIDName = InMainWeaponDataIDName; } // #48
-	FName GetMainWeaponDataIDName() const override { return MainWeaponDataIDName; } // #48
+	IT4NPCAIController* CastNPCAIController() override { return nullptr; }
 
 public:
 	// IT4PlayerController
@@ -134,7 +132,7 @@ protected:
 	ET4LayerType LayerType;
 
 private:
-	FT4ObjectID TargetObjectID;
+	FT4ObjectID GameObjectID;
 
 	TWeakObjectPtr<AT4PlayerDefaultPawn> CachedDefaultPawn;
 

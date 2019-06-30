@@ -68,7 +68,10 @@ struct T4ENGINE_API FT4MoveSyncToAction : public FT4ObjectAction
 
 public:
 	UPROPERTY(EditAnywhere)
-	FVector MoveVelocity;
+	FVector MoveDirection; // #50
+
+	UPROPERTY(EditAnywhere)
+	float MoveSpeed; // #50
 
 	UPROPERTY(EditAnywhere)
 	float HeadYawAngle; // #40 : degree, LockOn 일 경우 이동 방향과 달라진다.
@@ -79,7 +82,8 @@ public:
 public:
 	FT4MoveSyncToAction()
 		: FT4ObjectAction(StaticActionType())
-		, MoveVelocity(FVector::ZeroVector)
+		, MoveDirection(FVector::ZeroVector)
+		, MoveSpeed(0.0f)
 		, HeadYawAngle(TNumericLimits<float>::Max())
 		, bForceMaxSpeed(false) // #50 : AIController 만 제어
 	{
@@ -89,7 +93,7 @@ public:
 
 	bool Validate(FString& OutMsg) override
 	{
-		if (MoveVelocity.IsNearlyZero())
+		if (MoveDirection.IsNearlyZero())
 		{
 			OutMsg = TEXT("Invalid MoveVelocity");
 			return false;

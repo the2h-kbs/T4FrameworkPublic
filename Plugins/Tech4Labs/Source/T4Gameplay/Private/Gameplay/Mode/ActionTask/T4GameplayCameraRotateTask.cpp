@@ -74,14 +74,14 @@ void FT4CameraRotateActionTask::Released()
 
 void FT4CameraRotateActionTask::SetMouseCursor(bool bShow)
 {
-	IT4PlayerController* PlayerController = GetPlayerController();
+	AT4GameplayPlayerController* PlayerController = GetPlayerController();
 	check(nullptr != PlayerController);
 	PlayerController->ShowMouseCursor(bShow);
 }
 
 void FT4CameraRotateActionTask::SetMouseMoveLock(bool bLock)
 {
-	IT4PlayerController* PlayerController = GetPlayerController();
+	AT4GameplayPlayerController* PlayerController = GetPlayerController();
 	check(nullptr != PlayerController);
 	PlayerController->SetCameraLock(bLock);
 }

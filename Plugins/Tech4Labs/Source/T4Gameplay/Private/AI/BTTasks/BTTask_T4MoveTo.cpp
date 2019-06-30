@@ -1,7 +1,7 @@
 // Copyright 2019 Tech4 Labs, Inc. All Rights Reserved.
 
 #include "Classes/AI/BTTasks/BTTask_T4MoveTo.h"
-#include "Classes/AI/T4GameplayNPCAIController.h"
+#include "Classes/AI/T4GameplayCharacterAIController.h"
 
 #include "GameFramework/Actor.h"
 #include "AISystem.h"
@@ -45,7 +45,7 @@ EBTNodeResult::Type UBTTask_T4MoveTo::ExecuteTask(
 	MyMemory->PreviousGoalLocation = FAISystem::InvalidLocation;
 	MyMemory->MoveRequestID = FAIRequestID::InvalidRequest;
 
-	AT4GameplayNPCAIController* NPCController = Cast<AT4GameplayNPCAIController>(InOwnerComp.GetAIOwner());
+	AT4GameplayCharacterAIController* NPCController = Cast<AT4GameplayCharacterAIController>(InOwnerComp.GetAIOwner());
 	if (nullptr == NPCController)
 	{
 		return EBTNodeResult::Failed;
@@ -69,7 +69,7 @@ EBTNodeResult::Type UBTTask_T4MoveTo::PerformMoveTask(
 )
 {
 	FT4BTMoveToTaskMemory* MyMemory = reinterpret_cast<FT4BTMoveToTaskMemory*>(InNodeMemory);
-	AT4GameplayNPCAIController* NPCController = Cast<AT4GameplayNPCAIController>(InOwnerComp.GetAIOwner());
+	AT4GameplayCharacterAIController* NPCController = Cast<AT4GameplayCharacterAIController>(InOwnerComp.GetAIOwner());
 
 	EBTNodeResult::Type NodeResult = EBTNodeResult::Failed;
 	if (nullptr != NPCController)

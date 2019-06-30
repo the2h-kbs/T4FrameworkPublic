@@ -17,7 +17,7 @@ R&D 및 기능 구현에 소요되는 시간을 아이디어 검증과 신기술
 - 지원 UE4 버전 : 4.22
 - 지원 플랫폼 : Win64, Android
 - 릴리즈 버전 : 2019.10.01 (예정)
-- 공식 웹사이트 : <https://tech4labs.github.io/T4Framework/>
+- 웹사이트 : <https://www.tech4labs.com>
 
 ## 3. 마일스톤
 

@@ -47,9 +47,9 @@ bool FT4LockOnActionTask::Start(
 		OutErrorMsg = FString::Printf(TEXT("PacketHandler is Not set."));
 		return false;
 	}
-	IT4PlayerController* PlayerController = GetPlayerController();
+	AT4GameplayPlayerController* PlayerController = GetPlayerController();
 	check(nullptr != PlayerController);
-	if (!PlayerController->HasTargetObject())
+	if (!PlayerController->HasGameObject())
 	{
 		OutErrorMsg = FString::Printf(TEXT("PlayerObject is Not set."));
 		return false;
@@ -60,7 +60,7 @@ bool FT4LockOnActionTask::Start(
 		return false;
 	}
 	FT4PacketLockOnCS NewPacketCS; // #27
-	NewPacketCS.SenderID = PlayerController->GetTargetObjectID();
+	NewPacketCS.SenderID = PlayerController->GetGameObjectID();
 	NewPacketCS.HeadYawAngle = InSyncHeadYawAngle;
 	PacketHandlerCS->OnSendPacket(&NewPacketCS);
 	bStarted = true;
@@ -79,9 +79,9 @@ bool FT4LockOnActionTask::End(
 		OutErrorMsg = FString::Printf(TEXT("PacketHandler is Not set."));
 		return false;
 	}
-	IT4PlayerController* PlayerController = GetPlayerController();
+	AT4GameplayPlayerController* PlayerController = GetPlayerController();
 	check(nullptr != PlayerController);
-	if (!PlayerController->HasTargetObject())
+	if (!PlayerController->HasGameObject())
 	{
 		OutErrorMsg = FString::Printf(TEXT("PlayerObject is Not set."));
 		return false;
@@ -92,7 +92,7 @@ bool FT4LockOnActionTask::End(
 		return false;
 	}
 	FT4PacketLockOffCS NewPacketCS; // #27
-	NewPacketCS.SenderID = PlayerController->GetTargetObjectID();
+	NewPacketCS.SenderID = PlayerController->GetGameObjectID();
 	NewPacketCS.HeadYawAngle = InSyncHeadYawAngle; // #38
 	PacketHandlerCS->OnSendPacket(&NewPacketCS);
 	return true;

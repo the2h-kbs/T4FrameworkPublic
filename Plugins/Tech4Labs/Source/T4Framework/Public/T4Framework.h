@@ -95,7 +95,7 @@ public:
 	virtual IT4GameplayHandler* GetGameplayHandler() const = 0; // #42
 
 	// Client
-	virtual IT4PlayerController* GetPlayerController() const = 0;
+	virtual IT4PlayerController* GetPCInterface() const = 0;
 
 	virtual IT4GameObject* GetMouseOverGameObject() = 0;
 	virtual bool GetMousePickingLocation(FVector& OutLocation) = 0;

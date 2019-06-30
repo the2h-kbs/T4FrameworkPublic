@@ -1,7 +1,7 @@
 // Copyright 2019 Tech4 Labs, Inc. All Rights Reserved.
 
 #include "Classes/AI/BTTasks/BTTask_T4FindPointNearEnemy.h"
-#include "Classes/AI/T4GameplayNPCAIController.h"
+#include "Classes/AI/T4GameplayCharacterAIController.h"
 
 #include "T4GameplayInternal.h"
 
@@ -19,16 +19,20 @@ EBTNodeResult::Type UBTTask_T4FindPointNearEnemy::ExecuteTask(
 	uint8* InNodeMemory
 )
 {
-	AT4GameplayNPCAIController* NPCController = Cast<AT4GameplayNPCAIController>(InOwnerComp.GetAIOwner());
+	AT4GameplayCharacterAIController* NPCController = Cast<AT4GameplayCharacterAIController>(InOwnerComp.GetAIOwner());
 	if (nullptr == NPCController)
 	{
 		return EBTNodeResult::Failed;
 	}
-	if (!NPCController->HasTargetObject())
+	if (!NPCController->HasGameObject())
 	{
 		return EBTNodeResult::Failed;
 	}
-	IT4GameObject* NPCGameObject = NPCController->GetTargetObject();
+	if (!NPCController->IsCurrentAggressive())
+	{
+		return EBTNodeResult::Failed;
+	}
+	IT4GameObject* NPCGameObject = NPCController->GetGameObject();
 	if (nullptr == NPCGameObject)
 	{
 		return EBTNodeResult::Failed;
@@ -49,6 +53,8 @@ EBTNodeResult::Type UBTTask_T4FindPointNearEnemy::ExecuteTask(
 	{
 		return EBTNodeResult::Failed;
 	}
-	NPCController->GetAIMemory().NextMoveTargetLocation = MoveTargetPosition; // #50
+	FT4NPCAIMemory& AIMemory = NPCController->GetAIMemory();
+	AIMemory.MoveSpeedType = ET4MoveSpeedType::Run;
+	AIMemory.NextMoveTargetLocation = MoveTargetPosition; // #50
 	return EBTNodeResult::Succeeded;
 }

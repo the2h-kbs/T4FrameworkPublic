@@ -1,7 +1,7 @@
 // Copyright 2019 Tech4 Labs, Inc. All Rights Reserved.
 
 #include "Classes/AI/BTServices/BTService_T4DetectAttackable.h"
-#include "Classes/AI/T4GameplayNPCAIController.h"
+#include "Classes/AI/T4GameplayCharacterAIController.h"
 
 #include "T4GameplayInternal.h"
 
@@ -21,16 +21,19 @@ void UBTService_T4DetectAttackable::TickNode(
 )
 {
 	Super::TickNode(InOwnerComp, InNodeMemory, InDeltaTime);
-	AT4GameplayNPCAIController* NPCController = Cast<AT4GameplayNPCAIController>(InOwnerComp.GetAIOwner());
+	AT4GameplayCharacterAIController* NPCController = Cast<AT4GameplayCharacterAIController>(InOwnerComp.GetAIOwner());
 	if (nullptr == NPCController)
 	{
 		return;
 	}
 	FT4ObjectID TargetGameObjectID;
-	IT4GameObject* NewTargetObject = NPCController->FindNearestEnemyByAttackRange();
-	if (nullptr != NewTargetObject)
+	if (NPCController->IsCurrentAggressive())
 	{
-		TargetGameObjectID = NewTargetObject->GetObjectID();
+		IT4GameObject* NewTargetObject = NPCController->FindNearestEnemyByAttackRange();
+		if (nullptr != NewTargetObject)
+		{
+			TargetGameObjectID = NewTargetObject->GetObjectID();
+		}
 	}
 	NPCController->GetAIMemory().AttackTargetObjectID = TargetGameObjectID;
 }

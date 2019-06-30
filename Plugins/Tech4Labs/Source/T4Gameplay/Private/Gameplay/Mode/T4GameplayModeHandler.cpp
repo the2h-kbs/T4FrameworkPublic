@@ -443,7 +443,7 @@ IT4PlayerController* UT4GameplayModeHandler::GetPlayerController() const
 {
 	IT4GameWorld* GameWorld = T4EngineWorldGet(LayerType);
 	check(nullptr != GameWorld);
-	IT4PlayerController* PlayerController = GameWorld->GetPlayerController();
+	IT4PlayerController* PlayerController = GameWorld->GetPCInterface();
 	check(nullptr != PlayerController);
 	return PlayerController;
 }

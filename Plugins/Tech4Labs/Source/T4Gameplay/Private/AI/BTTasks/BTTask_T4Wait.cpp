@@ -1,7 +1,7 @@
 // Copyright 2019 Tech4 Labs, Inc. All Rights Reserved.
 
 #include "Classes/AI/BTTasks/BTTask_T4Wait.h"
-#include "Classes/AI/T4GameplayNPCAIController.h"
+#include "Classes/AI/T4GameplayCharacterAIController.h"
 
 #include "T4GameplayInternal.h"
 
@@ -20,11 +20,13 @@ EBTNodeResult::Type UBTTask_T4Wait::ExecuteTask(
 )
 {
 	// Update wait time based on current NPCAIMemory value
-	AT4GameplayNPCAIController* NPCController = Cast<AT4GameplayNPCAIController>(InOwnerComp.GetAIOwner());
+	AT4GameplayCharacterAIController* NPCController = Cast<AT4GameplayCharacterAIController>(InOwnerComp.GetAIOwner());
 	if (nullptr == NPCController)
 	{
 		return EBTNodeResult::Failed;
 	}
-	WaitTime = NPCController->GetAIMemory().IdleWaitTime;
+	FT4NPCAIMemory& AIMemory = NPCController->GetAIMemory();
+	AIMemory.MoveSpeedType = ET4MoveSpeedType::Stand;
+	WaitTime = AIMemory.IdleWaitTime;
 	return Super::ExecuteTask(InOwnerComp, InNodeMemory);
 }

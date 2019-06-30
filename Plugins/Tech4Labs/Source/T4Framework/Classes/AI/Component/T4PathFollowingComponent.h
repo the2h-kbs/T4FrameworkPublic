@@ -10,6 +10,8 @@
 /**
   *
  */
+DECLARE_DELEGATE_TwoParams(FOnCallbackMoveTo, const FVector&, bool); // #42, #50
+
 class IT4GameObject;
 UCLASS()
 class T4FRAMEWORK_API UT4PathFollowingComponent : public UPathFollowingComponent
@@ -24,8 +26,10 @@ public:
 	) override;
 
 public:
-	void SetTargetObjectID(const FT4ObjectID& InObjectID) { TargetObjectID = InObjectID; }
-	void ClearTargetObjectID() { TargetObjectID.SetNone(); }
+	FOnCallbackMoveTo& GetOnCallbackMoveTo() { return OnCallbackMoveTo; } // #42, #50
+
+	void SetGameObjectID(const FT4ObjectID& InObjectID) { TargetObjectID = InObjectID; }
+	void ClearGameObjectID() { TargetObjectID.SetNone(); }
 
 protected:
 	void BeginPlay() override;
@@ -37,9 +41,11 @@ protected:
 	void UpdatePathSegment() override;
 
 protected:
-	IT4GameObject* GetTargetObject() const;
+	IT4GameObject* GetGameObject() const;
 
 private:
 	ET4LayerType LayerType;
 	FT4ObjectID TargetObjectID;
+
+	FOnCallbackMoveTo OnCallbackMoveTo;
 };

@@ -38,8 +38,6 @@ enum class ET4ControllerType : uint8
 {
 	Player,
 	NPC,
-	FO,
-	Item,
 
 	None UMETA(Hidden)
 };

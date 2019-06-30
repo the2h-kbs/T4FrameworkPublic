@@ -69,21 +69,21 @@ IT4GameFramework* FT4ActionTask::GetGameFramework() const
 
 IT4GameObject* FT4ActionTask::GetPlayerObject() const
 {
-	IT4PlayerController* PlayerController = GetPlayerController();
-	if (nullptr == PlayerController || PlayerController->HasTargetObject())
+	AT4GameplayPlayerController* PlayerController = GetPlayerController();
+	if (nullptr == PlayerController || PlayerController->HasGameObject())
 	{
 		return nullptr;
 	}
-	return PlayerController->GetTargetObject();
+	return PlayerController->GetGameObject();
 }
 
-IT4PlayerController* FT4ActionTask::GetPlayerController() const
+AT4GameplayPlayerController* FT4ActionTask::GetPlayerController() const
 {
 	IT4GameWorld* GameWorld = T4EngineWorldGet(LayerType);
 	check(nullptr != GameWorld);
-	IT4PlayerController* PlayerController = GameWorld->GetPlayerController();
+	IT4PlayerController* PlayerController = GameWorld->GetPCInterface();
 	check(nullptr != PlayerController);
-	return PlayerController;
+	return Cast<AT4GameplayPlayerController>(PlayerController->GetAController());
 }
 
 IT4PacketHandlerCS* FT4ActionTask::GetPacketHandlerCS() const

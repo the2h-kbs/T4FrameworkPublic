@@ -59,7 +59,7 @@ void FT4JumpActionTask::Process(float InDeltaTime)
 
 bool FT4JumpActionTask::Pressed(FString& OutErrorMsg)
 {
-	IT4PlayerController* PlayerController = GetPlayerController();
+	AT4GameplayPlayerController* PlayerController = GetPlayerController();
 	check(nullptr != PlayerController);
 	if (PlayerController->HasPlayingAction(T4ActionRollPKey))
 	{
@@ -92,14 +92,14 @@ void FT4JumpActionTask::DoJump() // #46
 	IT4PacketHandlerCS* PacketHandlerCS = GetPacketHandlerCS();
 	if (nullptr != PacketHandlerCS)
 	{
-		IT4PlayerController* PlayerController = GetPlayerController();
+		AT4GameplayPlayerController* PlayerController = GetPlayerController();
 		check(nullptr != PlayerController);
-		if (PlayerController->HasTargetObject())
+		if (PlayerController->HasGameObject())
 		{
 			FRotator ControlRotation = PlayerController->GetViewControlRotation();
 			FVector JumpDirection = ControlRotation.RotateVector(FVector::ForwardVector);
 			FT4PacketJumpCS NewPacketCS; // #27
-			NewPacketCS.SenderID = PlayerController->GetTargetObjectID();
+			NewPacketCS.SenderID = PlayerController->GetGameObjectID();
 			NewPacketCS.JumpDirection = JumpDirection;
 			PacketHandlerCS->OnSendPacket(&NewPacketCS);
 		}

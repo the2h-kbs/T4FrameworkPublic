@@ -11,9 +11,10 @@
 /**
   * https://docs.unrealengine.com/ko/Gameplay/Framework/Controller/PlayerController/index.html
  */
+class AController;
 class IT4ActionControl;
 class IT4GameObject;
-class IT4AIController;
+class IT4NPCAIController;
 class IT4PlayerController;
 // #34
 class T4ENGINE_API IT4GameController
@@ -24,27 +25,25 @@ public:
 	virtual ET4LayerType GetLayerType() const = 0;
 	virtual ET4ControllerType GetType() const = 0;
 
-	virtual bool SetTargetObject(const FT4ObjectID& InNewTargetID) = 0;
-	virtual void ClearTargetObject(bool bInSetDefaultPawn) = 0;
+	virtual bool SetGameObject(const FT4ObjectID& InNewTargetID) = 0;
+	virtual void ClearGameObject(bool bInSetDefaultPawn) = 0;
 
-	virtual bool HasTargetObject() const = 0;
-	virtual const FT4ObjectID& GetTargetObjectID() const = 0;
-	virtual IT4GameObject* GetTargetObject() const = 0;
-	virtual IT4ActionControl* GetTargetObjectActionRoot() const = 0;
+	virtual bool HasGameObject() const = 0;
+	virtual const FT4ObjectID& GetGameObjectID() const = 0;
+	virtual IT4GameObject* GetGameObject() const = 0;
+	virtual IT4ActionControl* GetGameObjectActionControl() const = 0;
 
 	virtual bool HasPlayingAction(const FT4ActionKey& InActionKey) const = 0; // #20
 
-	virtual IT4AIController* CastAIController() = 0;
+	virtual AController* GetAController() = 0;
 	virtual IT4PlayerController* CastPlayerController() = 0;
-
-	virtual void SetMainWeaponDataIDName(const FName& InMainWeaponDataIDName) = 0; // #48
-	virtual FName GetMainWeaponDataIDName() const = 0; // #48
+	virtual IT4NPCAIController* CastNPCAIController() = 0;
 };
 
-class T4ENGINE_API IT4AIController : public IT4GameController
+class T4ENGINE_API IT4NPCAIController : public IT4GameController
 {
 public:
-	virtual ~IT4AIController() {}
+	virtual ~IT4NPCAIController() {}
 };
 
 class T4ENGINE_API IT4PlayerController : public IT4GameController

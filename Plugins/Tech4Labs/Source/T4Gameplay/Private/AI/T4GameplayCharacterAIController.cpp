@@ -1,9 +1,12 @@
 // Copyright 2019 Tech4 Labs, Inc. All Rights Reserved.
 
-#include "Classes/AI/T4GameplayNPCAIController.h"
+#include "Classes/AI/T4GameplayCharacterAIController.h"
 
 #include "Network/Protocol/T4PacketSC_Action.h" // #50
 #include "Network/Protocol/T4PacketSC_Status.h"
+#include "Network/Protocol/T4PacketSC_Move.h"
+#include "Network/Protocol/T4PacketSC.h"
+
 #include "Gameplay/T4GameplayInstance.h"
 
 #include "GameDB/T4GameDB.h"
@@ -11,6 +14,7 @@
 #include "T4Core/Public/T4CoreMinimal.h"
 #include "T4Engine/Public/T4Engine.h"
 #include "T4Framework/Public/T4Framework.h"
+#include "T4Framework/Classes/AI/Component/T4PathFollowingComponent.h"
 
 #include "BehaviorTree/BehaviorTree.h"
 #include "BehaviorTree/BlackboardData.h"
@@ -20,15 +24,20 @@
 /**
   * http://api.unrealengine.com/KOR/Gameplay/Framework/Controller/AIController/
  */
-AT4GameplayNPCAIController::AT4GameplayNPCAIController(const FObjectInitializer& ObjectInitializer) 
-	: Super(ObjectInitializer)
+AT4GameplayCharacterAIController::AT4GameplayCharacterAIController(
+	const FObjectInitializer& ObjectInitializer
+)	: Super(ObjectInitializer)
 	, NPCGameData(nullptr)
 	, MainWeaponGameData(nullptr) // #50
 	, AIDataLoadState(ET4AIDataLoadState::AIDataLoad_Ready) // #50
 {
+	check(nullptr != OverridePathFollowingComponent); // #50
+	OverridePathFollowingComponent->GetOnCallbackMoveTo().BindUObject(
+		this, &AT4GameplayCharacterAIController::HandleOnCallbackMoveTo
+	);
 }
 
-void AT4GameplayNPCAIController::TickActor(
+void AT4GameplayCharacterAIController::TickActor(
 	float InDeltaTime,
 	enum ELevelTick InTickType,
 	FActorTickFunction& InThisTickFunction
@@ -41,19 +50,33 @@ void AT4GameplayNPCAIController::TickActor(
 		return;
 	}
 
-	if (0.0f < GetAIMemory().SkillPlayTimeLeft) // #50
+	// TODO : Used Timer
+	FT4NPCAIMemory& NPCAIMemory = GetAIMemory();
+	if (NPCAIMemory.bActiveSkill) // #50
 	{
-		GetAIMemory().SkillPlayTimeLeft -= InDeltaTime;
+		NPCAIMemory.SkillPlayTimeLeft -= InDeltaTime;
+		if (0.0f >= NPCAIMemory.SkillPlayTimeLeft)
+		{
+			NPCAIMemory.bActiveSkill = false;
+		}
+	}
+	if (NPCAIMemory.bActiveAggressive)
+	{
+		NPCAIMemory.AggressiveClearTimeLeft -= InDeltaTime;
+		if (0.0f >= NPCAIMemory.AggressiveClearTimeLeft)
+		{
+			NPCAIMemory.bActiveAggressive = false;
+		}
 	}
 }
 
-bool AT4GameplayNPCAIController::CheckAsyncLoading()
+bool AT4GameplayCharacterAIController::CheckAsyncLoading()
 {
 	if (ET4AIDataLoadState::AIDataLoad_Loading != AIDataLoadState)
 	{
 		return true;
 	}
-	if (!TargetObjectID.IsValid())
+	if (!GameObjectID.IsValid())
 	{
 		return false;
 	}
@@ -68,7 +91,7 @@ bool AT4GameplayNPCAIController::CheckAsyncLoading()
 	}
 	check(nullptr != BehaviorTreeAsset);
 	{
-		IT4GameObject* TargetObject = GetTargetObject();
+		IT4GameObject* TargetObject = GetGameObject();
 		check(nullptr != TargetObject);
 		GetAIMemory().InitSpawnLocation = TargetObject->GetRootLocation();
 	}
@@ -77,7 +100,7 @@ bool AT4GameplayNPCAIController::CheckAsyncLoading()
 		UE_LOG(
 			LogT4Gameplay,
 			Error,
-			TEXT("AT4GameplayNPCAIController : failed to run behavior tree!")
+			TEXT("AT4GameplayCharacterAIController : failed to run behavior tree!")
 		);
 	}
 	else
@@ -94,19 +117,15 @@ bool AT4GameplayNPCAIController::CheckAsyncLoading()
 	return true;
 }
 
-void AT4GameplayNPCAIController::Reset() // #50
+void AT4GameplayCharacterAIController::AIReady() // #50
 {
-	// WARN : AsyncLoad 가 걸렸을 수 있음으로 종료 시 명시적으로 Reset 을 호출해야 한다.
-	BehaviorTreeAssetLoader.Reset();
+	check(nullptr != OverridePathFollowingComponent);
 }
 
-void AT4GameplayNPCAIController::AIStart() // #50
+void AT4GameplayCharacterAIController::AIStart() // #50
 {
 	IT4PacketHandlerSC* PacketHandlerSC = GetPacketHandlerSC();
-	if (nullptr == PacketHandlerSC)
-	{
-		return;
-	}
+	check(nullptr != PacketHandlerSC);
 	check(nullptr != NPCGameData);
 	FT4GameDB& GameDB = GetGameDB();
 	if (NPCGameData->RawData.MainWeaponDataID.IsValid())
@@ -116,7 +135,7 @@ void AT4GameplayNPCAIController::AIStart() // #50
 		if (nullptr != MainWeaponGameData)
 		{
 			FT4PacketEquipSC NewPacketSC;
-			NewPacketSC.ObjectID = GetTargetObjectID();
+			NewPacketSC.ObjectID = GetGameObjectID();
 			NewPacketSC.ItemWeaponDataID = NPCGameData->RawData.MainWeaponDataID;
 			NewPacketSC.bMainWeapon = true; // #48
 
@@ -129,14 +148,41 @@ void AT4GameplayNPCAIController::AIStart() // #50
 			UE_LOG(
 				LogT4Gameplay,
 				Warning,
-				TEXT("AT4GameplayNPCAIController : Failed to MainWeapon Equip. MainWeaponDataID '%s' Not Found."),
+				TEXT("AT4GameplayCharacterAIController : Failed to MainWeapon Equip. MainWeaponDataID '%s' Not Found."),
 				*(NPCGameData->RawData.MainWeaponDataID.ToString())
 			);
 		}
 	}
 }
 
-bool AT4GameplayNPCAIController::Bind(
+void AT4GameplayCharacterAIController::AIEnd() // #50
+{
+	// WARN : AsyncLoad 가 걸렸을 수 있음으로 종료 시 명시적으로 Reset 을 호출해야 한다.
+	BehaviorTreeAssetLoader.Reset();
+}
+
+void AT4GameplayCharacterAIController::HandleOnCallbackMoveTo(
+	const FVector& InMoveVelocity,
+	bool bInForceMaxSpeed // #50
+) // #42, #34
+{
+	if (!HasGameObject())
+	{
+		return;
+	}
+	IT4PacketHandlerSC* PacketHandlerSC = GetPacketHandlerSC();
+	check(nullptr != PacketHandlerSC);
+	FT4PacketMoveToSC NewPacketSC;
+	NewPacketSC.ObjectID = GetGameObjectID();
+	NewPacketSC.MoveDirection = InMoveVelocity; // #50
+	NewPacketSC.MoveDirection.Normalize();
+	NewPacketSC.MoveSpeed = GetCurrentMoveSpeed(); // #50
+	NewPacketSC.HeadYawAngle = NewPacketSC.MoveDirection.Rotation().Yaw; // #50 : 이동 방향으로 방향 수정
+	NewPacketSC.bForceMaxSpeed = bInForceMaxSpeed; // #50
+	PacketHandlerSC->OnBroadcastPacket(&NewPacketSC);
+}
+
+bool AT4GameplayCharacterAIController::Bind(
 	const FT4GameDataID& InNPCGameDataID
 )
 {
@@ -148,7 +194,7 @@ bool AT4GameplayNPCAIController::Bind(
 		UE_LOG(
 			LogT4Gameplay,
 			Warning,
-			TEXT("AT4GameplayNPCAIController : Failed to NPCBind. NPCGameDataID '%s' Not Found."),
+			TEXT("AT4GameplayCharacterAIController : Failed to NPCBind. NPCGameDataID '%s' Not Found."),
 			*(InNPCGameDataID.ToString())
 		);
 		return false;
@@ -182,77 +228,110 @@ bool AT4GameplayNPCAIController::Bind(
 	return true;
 }
 
-IT4GameObject* AT4GameplayNPCAIController::FindNearestEnemyByAttackRange() // #34
+bool AT4GameplayCharacterAIController::IsAttacking() const // #50
+{
+	return AIMemory.bActiveSkill;
+}
+
+float AT4GameplayCharacterAIController::GetCurrentMoveSpeed() const // #50
+{
+	check(nullptr != NPCGameData);
+	switch (AIMemory.MoveSpeedType)
+	{
+	case ET4MoveSpeedType::Walk:
+		return NPCGameData->RawData.WalkSpeed;
+	case ET4MoveSpeedType::Run:
+		return NPCGameData->RawData.RunSpeed;
+	case ET4MoveSpeedType::FastRun:
+		return (0.0f < NPCGameData->RawData.FastRunSpeed)
+			? NPCGameData->RawData.FastRunSpeed : NPCGameData->RawData.RunSpeed; // Temp
+	}
+	return 0.0f;
+}
+
+bool AT4GameplayCharacterAIController::IsCurrentAggressive() const // #50
+{
+	check(nullptr != NPCGameData);
+	if (NPCGameData->RawData.bAggressive)
+	{
+		return true;
+	}
+	return AIMemory.bActiveAggressive;
+}
+
+IT4GameObject* AT4GameplayCharacterAIController::FindNearestObject(
+	ET4AITargetType InAITargetType,
+	float InMaxDistance
+) // #50
+{
+	// TODO : InAITargetType::AITarget_Enemy
+	IT4GameObject* OwnerGameObject = GetGameObject();
+	if (nullptr == OwnerGameObject)
+	{
+		return nullptr;
+	}
+	IT4GameWorld* GameWorld = T4EngineWorldGet(LayerType);
+	check(nullptr != GameWorld);
+	TArray<IT4GameObject*> TargetObjects;
+	bool bResult = GameWorld->QueryNearestObjects(
+		OwnerGameObject->GetRootLocation(),
+		InMaxDistance, // #50
+		ET4ControllerType::Player,
+		TargetObjects
+	);
+	if (!bResult)
+	{
+		return nullptr;
+	}
+	check(0 < TargetObjects.Num());
+	return TargetObjects[0];
+}
+
+IT4GameObject* AT4GameplayCharacterAIController::FindNearestEnemyByAttackRange() // #34
 {
 	check(nullptr != NPCGameData);
 	if (nullptr == MainWeaponGameData)
 	{
 		return false;
 	}
-	IT4GameObject* OwnerGameObject = GetTargetObject();
+	IT4GameObject* OwnerGameObject = GetGameObject();
 	if (nullptr == OwnerGameObject)
 	{
 		return nullptr;
 	}
 	const FT4GameObjectProperty& OwnerObjectProperty = OwnerGameObject->GetPropertyConst();
-	IT4GameWorld* GameWorld = T4EngineWorldGet(LayerType);
-	check(nullptr != GameWorld);
-
 	// #50 : 대략적인 공격 가능한 거리는 나와 타겟의 Radius 에 무기의 공격거리, 나중에는 더 추가해주어야 한다.
 	const float TryAttackDistance = OwnerObjectProperty.CapsuleRadius
 								  + MainWeaponGameData->RawData.AttackRange;
-
-	TArray<IT4GameObject*> TargetObjects;
-	bool bResult = GameWorld->QueryNearestObjects(
-		OwnerGameObject->GetRootLocation(),
-		TryAttackDistance, // #50
-		ET4ControllerType::Player,
-		TargetObjects
+	IT4GameObject* TargetObject = FindNearestObject(
+		ET4AITargetType::AITarget_Enemy,
+		TryAttackDistance
 	);
-	if (!bResult)
-	{
-		return nullptr;
-	}
-	check(0 < TargetObjects.Num());
-	return TargetObjects[0];
+	return TargetObject;
 }
 
-IT4GameObject* AT4GameplayNPCAIController::FindNearestEnemyBySensoryRange() // #34
+IT4GameObject* AT4GameplayCharacterAIController::FindNearestEnemyBySensoryRange() // #34
 {
 	check(nullptr != NPCGameData);
-	IT4GameObject* OwnerGameObject = GetTargetObject();
-	if (nullptr == OwnerGameObject)
-	{
-		return nullptr;
-	}
-	IT4GameWorld* GameWorld = T4EngineWorldGet(LayerType);
-	check(nullptr != GameWorld);
-	TArray<IT4GameObject*> TargetObjects;
-	bool bResult = GameWorld->QueryNearestObjects(
-		OwnerGameObject->GetRootLocation(),
-		NPCGameData->RawData.SensoryRange, // #50
-		ET4ControllerType::Player,
-		TargetObjects
+	IT4GameObject* TargetObject = FindNearestObject(
+		ET4AITargetType::AITarget_Enemy,
+		NPCGameData->RawData.SensoryRange
 	);
-	if (!bResult)
-	{
-		return nullptr;
-	}
-	check(0 < TargetObjects.Num());
-	return TargetObjects[0];
+	return TargetObject;
 }
 
-bool AT4GameplayNPCAIController::TryGoToAttackDistance(
+bool AT4GameplayCharacterAIController::TryGoToAttackDistance(
 	const FVector& InOriginLocation,
 	float InTargetCapsuleRadius,
 	FVector& OutTargetLocation
 ) // #50
 {
+	check(nullptr != NPCGameData);
 	if (nullptr == MainWeaponGameData)
 	{
 		return false;
 	}
-	IT4GameObject* OwnerGameObject = GetTargetObject();
+	IT4GameObject* OwnerGameObject = GetGameObject();
 	if (nullptr == OwnerGameObject)
 	{
 		return false;
@@ -277,12 +356,34 @@ bool AT4GameplayNPCAIController::TryGoToAttackDistance(
 	return true;
 }
 
-bool AT4GameplayNPCAIController::IsAttacking() // #50
+bool AT4GameplayCharacterAIController::TryGoToRoaming(
+	FVector& OutTargetLocation
+) // #50
 {
-	return (0.0f < GetAIMemory().SkillPlayTimeLeft) ? true : false;
+	check(nullptr != NPCGameData);
+	IT4GameObject* OwnerGameObject = GetGameObject();
+	if (nullptr == OwnerGameObject)
+	{
+		return false;
+	}
+	const FVector OriginPosition = OwnerGameObject->GetRootLocation();
+	const FT4GameObjectProperty& OwnerObjectProperty = OwnerGameObject->GetPropertyConst();
+	IT4GameFramework* ServerFramework = T4FrameworkGet(LayerType);
+	check(nullptr != ServerFramework);
+	IT4GameWorld* GameWorld = ServerFramework->GetGameWorld();
+	check(nullptr != GameWorld);
+	if (!GameWorld->GetRandomLocationInNavigableRadius(
+		OriginPosition,
+		NPCGameData->RawData.RomaingRange,
+		OutTargetLocation
+	))
+	{
+		return false;
+	}
+	return true;
 }
 
-bool AT4GameplayNPCAIController::TryNormalAttack(
+bool AT4GameplayCharacterAIController::TryNormalAttack(
 	const FT4ObjectID& InTargetGameObjectID
 ) // #50
 {
@@ -321,16 +422,19 @@ bool AT4GameplayNPCAIController::TryNormalAttack(
 		return false;
 	}
 	FT4PacketAttackSC NewPacketSC;
-	NewPacketSC.ObjectID = GetTargetObjectID();
+	NewPacketSC.ObjectID = GetGameObjectID();
 	NewPacketSC.SkillDataID = SkillSetData->RawData.ComboPrimaryAttackNameID;
 	NewPacketSC.TargetrObjectID = InTargetGameObjectID;
 	check(NewPacketSC.ObjectID.IsValid());
 	PacketHandlerSC->DoBroadcastPacketForServer(&NewPacketSC);
-	GetAIMemory().SkillPlayTimeLeft = SkillData->RawData.DurationSec;
+
+	FT4NPCAIMemory& NPCAIMemory = GetAIMemory();
+	NPCAIMemory.bActiveSkill = true;
+	NPCAIMemory.SkillPlayTimeLeft = SkillData->RawData.DurationSec;
 	return true;
 }
 
-IT4PacketHandlerSC* AT4GameplayNPCAIController::GetPacketHandlerSC() const
+IT4PacketHandlerSC* AT4GameplayCharacterAIController::GetPacketHandlerSC() const
 {
 	check(ET4LayerType::Max > LayerType);
 	IT4GameFramework* GameFramework = T4FrameworkGet(LayerType);

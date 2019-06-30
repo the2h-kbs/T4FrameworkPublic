@@ -10,13 +10,16 @@
   * #43
  */
 class UDataTable;
-UCLASS(config = EditorSettings)
+UCLASS(config = Tech4Labs, defaultconfig)
 class UT4GameplaySettings : public UObject
 {
 	GENERATED_BODY()
 
 public:
 	UT4GameplaySettings();
+
+public:
+	// Plugins/Tech4Labs/Config/DefaultTech4Labs.ini
 
 	UPROPERTY(EditAnywhere, config, Category = "Gameplay Mode")
 	ET4GameplayModeType GameplayMode;
@@ -34,7 +37,7 @@ public:
 	FName PlayerDataRowName_Key2;
 
 	UPROPERTY(EditAnywhere, config, Category = "NPC QuickSpawn (CTRL + 1 ~ 9)")
-	FName NPCDataRowName_Key1;
+	FName NPCDataRowName_Key1; // #50
 	
 	UPROPERTY(EditAnywhere, config, Category = "NPC QuickSpawn (CTRL + 1 ~ 9)")
 	FName NPCDataRowName_Key2;

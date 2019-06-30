@@ -34,10 +34,13 @@ public:
 	FT4ObjectID ObjectID;
 
 	UPROPERTY(VisibleAnywhere)
-	FVector MoveVelocity;
+	FVector MoveDirection; // #50
 
 	UPROPERTY(VisibleAnywhere)
-	float HeadYawAngle; // #40 : 필요할 때 3D 로 확장. 이동은 패킷량이 많음을 고려.
+	float MoveSpeed; // #50
+
+	UPROPERTY(VisibleAnywhere)
+	float HeadYawAngle; // #40 : 필요할 때 3D 로 확장. #50 : 이동 방향과 Head 방향이 다를 경우를 대비해 존재
 
 	UPROPERTY(VisibleAnywhere)
 	bool bForceMaxSpeed; // #50 : AIController 만 제어
@@ -45,7 +48,8 @@ public:
 public:
 	FT4PacketMoveToSC()
 		: FT4PacketStoC(ET4PacketStoC::MoveTo)
-		, MoveVelocity(FVector::ZeroVector)
+		, MoveDirection(FVector::ZeroVector)
+		, MoveSpeed(0.0f)
 		, HeadYawAngle(TNumericLimits<float>::Max())
 		, bForceMaxSpeed(false) // #50 : AIController 만 제어
 	{
@@ -58,7 +62,7 @@ public:
 			OutMsg = TEXT("Invalid ObjectID");
 			return false;
 		}
-		if (MoveVelocity.IsNearlyZero())
+		if (MoveDirection.IsNearlyZero())
 		{
 			OutMsg = TEXT("Invalid MoveVelocity!");
 			return false;

@@ -56,7 +56,7 @@ void FT4GameplayModeShoulderView::ProcessMovement(float InDeltaTime)
 	// #33 : XY 축 이동이 있어 조작감 향상을 위해 모아서 한 프레임에 패킷으로 전송한다.
 	IT4PlayerController* PlayerController = GetPlayerController();
 	check(nullptr != PlayerController);
-	if (PlayerController->HasTargetObject())
+	if (PlayerController->HasGameObject())
 	{
 		IT4PacketHandlerCS* PacketHandlerCS = GetPacketHandlerCS();
 		if (nullptr != PacketHandlerCS)
@@ -75,7 +75,7 @@ void FT4GameplayModeShoulderView::ProcessMovement(float InDeltaTime)
 
 			{
 				// #33 : Player 는 조작감 향상을 위해 선이동을 한다.
-				IT4GameObject* PlayerObject = PlayerController->GetTargetObject();
+				IT4GameObject* PlayerObject = PlayerController->GetGameObject();
 				check(nullptr != PlayerObject);
 
 				FT4MoveAsyncToAction NewAction;
@@ -84,7 +84,7 @@ void FT4GameplayModeShoulderView::ProcessMovement(float InDeltaTime)
 				PlayerObject->OnExecute(&NewAction);
 
 				FT4PacketMoveCS NewPacketCS; // #27
-				NewPacketCS.SenderID = PlayerController->GetTargetObjectID();
+				NewPacketCS.SenderID = PlayerController->GetGameObjectID();
 				NewPacketCS.MoveDirection = MovementInputVector;
 				NewPacketCS.HeadYawAngle = SyncRotation.Yaw; // #40 : ShoulderView 에서 이동은 항상 락온 상황
 				PacketHandlerCS->OnSendPacket(&NewPacketCS);
@@ -107,9 +107,9 @@ void FT4GameplayModeShoulderView::ProcessLockOn(float InDeltaTime)
 		FRotator SyncRotation = FRotator::ZeroRotator;
 		IT4PlayerController* PlayerController = GetPlayerController();
 		check(nullptr != PlayerController);
-		if (PlayerController->HasTargetObject())
+		if (PlayerController->HasGameObject())
 		{
-			SyncRotation = PlayerController->GetTargetObject()->GetRotation();
+			SyncRotation = PlayerController->GetGameObject()->GetRotation();
 		}
 		FString ErrorMsg;
 		CallLockOnEnd(SyncRotation.Yaw, ErrorMsg);

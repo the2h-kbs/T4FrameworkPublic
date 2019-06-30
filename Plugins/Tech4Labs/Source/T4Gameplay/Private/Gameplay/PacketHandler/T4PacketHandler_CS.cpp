@@ -50,7 +50,7 @@ IT4PlayerController* FT4PacketHandlerCS::GetPlayerController() const
 	check(ET4LayerType::Max > LayerType);
 	IT4GameFramework* GameFramework = T4FrameworkGet(LayerType);
 	check(nullptr != GameFramework);
-	return GameFramework->GetPlayerController();
+	return GameFramework->GetPCInterface();
 }
 
 IT4GameObject* FT4PacketHandlerCS::GetGameObject(const FT4ObjectID& InObjectID) const

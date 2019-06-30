@@ -5,13 +5,14 @@
 #include "CoreMinimal.h"
 #include "T4Core/Public/T4CoreTypes.h"
 #include "Public/T4GameplayTypes.h"
+#include "Classes/Player/T4GameplayPlayerController.h" // #42
 
 /**
   * #48
  */
 class IT4GameObject;
 class IT4GameFramework;
-class IT4PlayerController;
+class AT4GameplayPlayerController;
 class IT4PacketHandlerCS;
 class FT4ActionTask
 {
@@ -45,7 +46,7 @@ protected:
 
 	IT4GameFramework* GetGameFramework() const;
 	IT4GameObject* GetPlayerObject() const;
-	IT4PlayerController* GetPlayerController() const;
+	AT4GameplayPlayerController* GetPlayerController() const;
 	IT4PacketHandlerCS* GetPacketHandlerCS() const;
 
 protected:

@@ -10,7 +10,7 @@
 #include "T4Engine/Public/T4Engine.h"
 
 #include "AIController.h"
-#include "T4AIController.generated.h"
+#include "T4NPCAIController.generated.h"
 
 /**
   * http://api.unrealengine.com/KOR/Gameplay/Framework/Controller/AIController/
@@ -27,7 +27,7 @@ enum ET4AIDataLoadState // #50
 class UT4PathFollowingComponent;
 
 UCLASS()
-class T4FRAMEWORK_API AT4AIController : public AAIController, public IT4AIController
+class T4FRAMEWORK_API AT4NPCAIController : public AAIController, public IT4NPCAIController
 {
 	GENERATED_UCLASS_BODY()
 
@@ -45,7 +45,7 @@ public:
 
 	void EndPlay(const EEndPlayReason::Type InEndPlayReason) override;
 
-	void OnMoveCompleted(FAIRequestID RequestID, const FPathFollowingResult& Result) override; // #34
+	void HandleOnMoveCompleted(FAIRequestID RequestID, const FPathFollowingResult& Result); // #34
 
 protected:
 	void BeginPlay() override;
@@ -60,37 +60,36 @@ protected:
 public:
 	// IT4GameController
 	ET4LayerType GetLayerType() const override { return LayerType; }
-	virtual ET4ControllerType GetType() const override { return ET4ControllerType::None; }
+	ET4ControllerType GetType() const override { return ET4ControllerType::NPC; }
 
-	bool SetTargetObject(const FT4ObjectID& InNewTargetID) override;
-	void ClearTargetObject(bool bInSetDefaultPawn) override;
+	bool SetGameObject(const FT4ObjectID& InNewTargetID) override;
+	void ClearGameObject(bool bInSetDefaultPawn) override;
 
-	bool HasTargetObject() const override  { return TargetObjectID.IsValid(); }
-	const FT4ObjectID& GetTargetObjectID() const override { return TargetObjectID; }
-	IT4GameObject* GetTargetObject() const override;
-	IT4ActionControl* GetTargetObjectActionRoot() const override;
+	bool HasGameObject() const override  { return GameObjectID.IsValid(); }
+	const FT4ObjectID& GetGameObjectID() const override { return GameObjectID; }
+	IT4GameObject* GetGameObject() const override;
+	IT4ActionControl* GetGameObjectActionControl() const override;
 
 	bool HasPlayingAction(const FT4ActionKey& InActionKey) const override; // #20
 
-	IT4AIController* CastAIController() override { return static_cast<IT4AIController*>(this); }
+	AController* GetAController() override;
 	IT4PlayerController* CastPlayerController() override { return nullptr; }
-
-	void SetMainWeaponDataIDName(const FName& InMainWeaponDataIDName) override {} // #48
-	FName GetMainWeaponDataIDName() const override { return NAME_None; } // #48
+	IT4NPCAIController* CastNPCAIController() override;
 
 public:
 	void SetNetID(const FT4NetID& InNetID) { NetID = InNetID;}
 	const FT4NetID& GetNetID() const { return NetID; }
 
 protected:
-	virtual void Reset() {} // #50
+	virtual void AIReady() {} // #50
 	virtual void AIStart() {} // #50
+	virtual void AIEnd() {} // #50
 
 protected:
 	ET4LayerType LayerType;
 
 	FT4NetID NetID; // #15
-	FT4ObjectID TargetObjectID;
+	FT4ObjectID GameObjectID;
 
 	UPROPERTY(transient)
 	UT4PathFollowingComponent* OverridePathFollowingComponent; // #34

@@ -27,19 +27,11 @@ void FT4PacketHandlerSC::HandleSC_MoveTo(const FT4PacketMoveToSC* InPacket)
 	{
 		return;
 	}
-	if (TargetObject->IsPlayer())
-	{
-		// #33, #40 : Player 는 선이동을 하였음으로 이동은 제외. 추후, 검증에 사용해야 함!
-		FT4MoveSpeedAction NewAction;
-		NewAction.MoveType = ET4MoveType::Sync;
-		NewAction.MoveSpeed = InPacket->MoveVelocity.Size();
-		return;
-	}
 	FT4MoveSyncToAction NewAction;
-	NewAction.MoveVelocity = InPacket->MoveVelocity;
+	NewAction.MoveDirection = InPacket->MoveDirection;
+	NewAction.MoveSpeed = InPacket->MoveSpeed;
 	NewAction.HeadYawAngle = InPacket->HeadYawAngle; // #40
 	NewAction.bForceMaxSpeed = InPacket->bForceMaxSpeed; // #50
-
 	TargetObject->OnExecute(&NewAction);
 }
 

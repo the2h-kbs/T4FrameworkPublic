@@ -21,7 +21,7 @@ namespace T4GameplayUtil
 	{
 		IT4GameWorld* GameWorld = T4EngineWorldGet(InLayerType);
 		check(nullptr != GameWorld);
-		IT4PlayerController* PlayerController = GameWorld->GetPlayerController();
+		IT4PlayerController* PlayerController = GameWorld->GetPCInterface();
 		check(nullptr != PlayerController);
 		return PlayerController;
 	}
@@ -82,7 +82,7 @@ namespace T4GameplayUtil
 		FT4PacketCmdPCEnterCS NewPacketCS; // #27
 		NewPacketCS.PlayerDataID = PlayerDataID;
 		NewPacketCS.SpawnLocation = PickingLocation;
-		NewPacketCS.bSetViewTarget = !PlayerController->HasTargetObject(); // WARN : 빙의된 캐릭터가 없으면 MyPC로 간주하도록 조치
+		NewPacketCS.bSetViewTarget = !PlayerController->HasGameObject(); // WARN : 빙의된 캐릭터가 없으면 MyPC로 간주하도록 조치
 		PacketHandlerCS->OnSendPacket(&NewPacketCS);
 		return true;
 	}
@@ -167,11 +167,11 @@ namespace T4GameplayUtil
 		{
 			return false;
 		}
-		const FT4ObjectID PlayerObjectID = PlayerController->GetTargetObjectID();
+		const FT4ObjectID PlayerObjectID = PlayerController->GetGameObjectID();
 		if (PlayerController->HasPlayingAction(WeaponDataID.ToPrimaryActionKey()))
 		{
 			FT4PacketUnEquipCS NewPacketCS; // #27
-			NewPacketCS.SenderID = PlayerController->GetTargetObjectID();
+			NewPacketCS.SenderID = PlayerController->GetGameObjectID();
 			NewPacketCS.ItemWeaponDataID = WeaponDataID;
 			NewPacketCS.bMainWeapon = bInMainWeapon; // #48
 			PacketHandlerCS->OnSendPacket(&NewPacketCS);
@@ -179,7 +179,7 @@ namespace T4GameplayUtil
 		else
 		{
 			FT4PacketEquipCS NewPacketCS; // #27
-			NewPacketCS.SenderID = PlayerController->GetTargetObjectID();
+			NewPacketCS.SenderID = PlayerController->GetGameObjectID();
 			NewPacketCS.ItemWeaponDataID = WeaponDataID;
 			NewPacketCS.bMainWeapon = bInMainWeapon; // #48
 			PacketHandlerCS->OnSendPacket(&NewPacketCS);

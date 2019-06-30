@@ -153,6 +153,8 @@ public:
 	}
 };
 
+static const FT4GameDataID InvalidGameDataID;
+
 USTRUCT()
 struct FT4GameSkillDataID : public FT4GameDataID
 {

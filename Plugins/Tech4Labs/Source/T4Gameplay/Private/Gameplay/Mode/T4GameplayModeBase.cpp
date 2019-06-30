@@ -118,7 +118,7 @@ bool FT4GameplayModeBase::DoMoveForward(float InAxisValue)
 	}
 	FRotator ControlRotation = PlayerController->GetViewControlRotation();
 	FVector MoveDirection = ControlRotation.RotateVector(FVector::ForwardVector) * InAxisValue;
-	if (!PlayerController->HasTargetObject())
+	if (!PlayerController->HasGameObject())
 	{
 		PlayerController->SetFreeCameraMoveDirection(MoveDirection); // free camera
 		return true;
@@ -142,7 +142,7 @@ bool FT4GameplayModeBase::DoMoveRight(float InAxisValue)
 	}
 	FRotator ControlRotation = PlayerController->GetViewControlRotation();
 	FVector MoveDirection = ControlRotation.RotateVector(FVector::RightVector) * InAxisValue;
-	if (!PlayerController->HasTargetObject())
+	if (!PlayerController->HasGameObject())
 	{
 		PlayerController->SetFreeCameraMoveDirection(MoveDirection); // free camera
 		return true;
@@ -274,7 +274,7 @@ bool FT4GameplayModeBase::DoLeaveObject()
 {
 	IT4PlayerController* PlayerController = GetPlayerController();
 	check(nullptr != PlayerController);
-	if (!PlayerController->HasTargetObject())
+	if (!PlayerController->HasGameObject())
 	{
 		return false;
 	}
@@ -284,7 +284,7 @@ bool FT4GameplayModeBase::DoLeaveObject()
 		return false;
 	}
 	FT4PacketCmdPCLeaveCS NewPacketCS; // #27
-	NewPacketCS.LeaveObjectID = PlayerController->GetTargetObjectID();
+	NewPacketCS.LeaveObjectID = PlayerController->GetGameObjectID();
 	PacketHandlerCS->OnSendPacket(&NewPacketCS);
 	return true;
 }
@@ -402,7 +402,7 @@ IT4PlayerController* FT4GameplayModeBase::GetPlayerController() const
 {
 	IT4GameWorld* GameWorld = T4EngineWorldGet(LayerType);
 	check(nullptr != GameWorld);
-	IT4PlayerController* PlayerController = GameWorld->GetPlayerController();
+	IT4PlayerController* PlayerController = GameWorld->GetPCInterface();
 	check(nullptr != PlayerController);
 	return PlayerController;
 }

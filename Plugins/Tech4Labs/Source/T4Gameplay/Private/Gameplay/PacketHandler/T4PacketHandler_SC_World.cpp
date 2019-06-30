@@ -6,7 +6,7 @@
 #include "Network/Protocol/T4PacketSC_World.h"
 #include "GameDB/T4GameDB.h"
 
-#include "Classes/AI/T4GameplayNPCAIController.h" // #50
+#include "Classes/AI/T4GameplayCharacterAIController.h" // #50
 #include "Classes/AI/T4GameplayFOAIController.h" // #41, #50
 #include "Classes/AI/T4GameplayItemAIController.h" // #41, #50
 
@@ -89,7 +89,7 @@ void FT4PacketHandlerSC::HandleSC_MyPCEnter(const FT4PacketMyPCEnterSC* InPacket
 	{
 		IT4PlayerController* MyPC = GetPlayerController();
 		check(nullptr != MyPC);
-		MyPC->SetTargetObject(InPacket->EnterObjectID);
+		MyPC->SetGameObject(InPacket->EnterObjectID);
 	}
 }
 
@@ -153,7 +153,7 @@ void FT4PacketHandlerSC::HandleSC_PCLeave(const FT4PacketPCLeaveSC* InPacket)
 	{
 		IT4PlayerController* MyPC = GetPlayerController();
 		check(nullptr != MyPC);
-		MyPC->ClearTargetObject(true);
+		MyPC->ClearGameObject(true);
 	}
 	FT4ObjectLeaveAction NewAction;
 	NewAction.ObjectID = InPacket->LeaveObjectID;
@@ -206,11 +206,11 @@ void FT4PacketHandlerSC::HandleSC_NPCEnter(const FT4PacketNPCEnterSC* InPacket)
 		IT4PlayerController* MyPC = GetPlayerController();
 		if (T4CoreLayer::IsServer(LayerType) || (nullptr != MyPC && MyPC->CheckAuthority())) // #15 : Only HasAuthority
 		{
-			AT4GameplayNPCAIController* NPCController = Cast<AT4GameplayNPCAIController>(
+			AT4GameplayCharacterAIController* NPCController = Cast<AT4GameplayCharacterAIController>(
 				GameFramework->GetAIController(InPacket->NetID)
 			);
 			check(nullptr != NPCController);
-			NPCController->SetTargetObject(InPacket->EnterObjectID);
+			NPCController->SetGameObject(InPacket->EnterObjectID);
 		}
 	}
 #endif
@@ -288,7 +288,7 @@ void FT4PacketHandlerSC::HandleSC_FOEnter(const FT4PacketFOEnterSC* InPacket)
 				GameFramework->GetAIController(InPacket->NetID)
 			);
 			check(nullptr != FOController);
-			FOController->SetTargetObject(InPacket->EnterObjectID);
+			FOController->SetGameObject(InPacket->EnterObjectID);
 		}
 	}
 #endif
@@ -362,7 +362,7 @@ void FT4PacketHandlerSC::HandleSC_ItemEnter(const FT4PacketItemEnterSC* InPacket
 				GameFramework->GetAIController(InPacket->NetID)
 			);
 			check(nullptr != ItemController);
-			ItemController->SetTargetObject(InPacket->EnterObjectID);
+			ItemController->SetGameObject(InPacket->EnterObjectID);
 		}
 	}
 #endif

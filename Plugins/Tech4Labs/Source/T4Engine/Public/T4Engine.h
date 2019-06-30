@@ -260,8 +260,8 @@ public:
 	virtual FVector GetCameraLocation() const = 0;
 	virtual FRotator GetCameraRotation() const = 0;
 
-	virtual IT4PlayerController* GetPlayerController() = 0;
-	virtual bool SetPlayerController(IT4PlayerController* InPlayerController) = 0;
+	virtual IT4PlayerController* GetPCInterface() = 0;
+	virtual bool SetPCInterface(IT4PlayerController* InPlayerController) = 0;
 
 	virtual bool HasPlayerObject() const = 0;
 	virtual bool IsPlayerObject(const FT4ObjectID& InObjectID) const = 0;

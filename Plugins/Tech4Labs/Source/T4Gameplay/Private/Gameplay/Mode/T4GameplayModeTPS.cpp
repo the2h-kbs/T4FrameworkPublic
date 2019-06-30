@@ -58,7 +58,7 @@ void FT4GameplayModeTPS::ProcessMovement(float InDeltaTime)
 	// #33 : XY 축 이동이 있어 조작감 향상을 위해 모아서 한 프레임에 패킷으로 전송한다.
 	IT4PlayerController* PlayerController = GetPlayerController();
 	check(nullptr != PlayerController);
-	if (PlayerController->HasTargetObject())
+	if (PlayerController->HasGameObject())
 	{
 		IT4PacketHandlerCS* PacketHandlerCS = GetPacketHandlerCS();
 		if (nullptr != PacketHandlerCS)
@@ -66,7 +66,7 @@ void FT4GameplayModeTPS::ProcessMovement(float InDeltaTime)
 			MovementInputVector.Normalize();
 			{
 				// #33 : Player 는 조작감 향상을 위해 선이동을 한다.
-				IT4GameObject* PlayerObject = PlayerController->GetTargetObject();
+				IT4GameObject* PlayerObject = PlayerController->GetGameObject();
 				check(nullptr != PlayerObject);
 
 				float ApplyHeadYawAngle = 0.0f;
@@ -87,7 +87,7 @@ void FT4GameplayModeTPS::ProcessMovement(float InDeltaTime)
 				PlayerObject->OnExecute(&NewAction);
 
 				FT4PacketMoveCS NewPacketCS; // #27
-				NewPacketCS.SenderID = PlayerController->GetTargetObjectID();
+				NewPacketCS.SenderID = PlayerController->GetGameObjectID();
 				NewPacketCS.MoveDirection = MovementInputVector;
 				NewPacketCS.HeadYawAngle = ApplyHeadYawAngle;
 				PacketHandlerCS->OnSendPacket(&NewPacketCS);
@@ -106,13 +106,13 @@ void FT4GameplayModeTPS::ProcessTurn(float InDeltaTime)
 	IT4PlayerController* PlayerController = GetPlayerController();
 	check(nullptr != PlayerController);
 	// #40 : TODO : dirty check
-	if (PlayerController->HasTargetObject())
+	if (PlayerController->HasGameObject())
 	{
 		IT4PacketHandlerCS* PacketHandlerCS = GetPacketHandlerCS();
 		if (nullptr != PacketHandlerCS)
 		{
 			FT4PacketTurnCS NewPacketCS; // #40
-			NewPacketCS.SenderID = PlayerController->GetTargetObjectID();
+			NewPacketCS.SenderID = PlayerController->GetGameObjectID();
 			NewPacketCS.TargetYawAngle = PlayerController->GetCameraRotation().Yaw;
 			PacketHandlerCS->OnSendPacket(&NewPacketCS);
 		}
@@ -140,9 +140,9 @@ bool FT4GameplayModeTPS::DoLockOnReleased()
 	check(nullptr != PlayerController);
 	// #40 : 락온 해제는 캐릭터 현재 방향으로 동기화 해준다.
 	FRotator SyncRotation = FRotator::ZeroRotator;
-	if (PlayerController->HasTargetObject())
+	if (PlayerController->HasGameObject())
 	{
-		SyncRotation = PlayerController->GetTargetObject()->GetRotation();
+		SyncRotation = PlayerController->GetGameObject()->GetRotation();
 	}
 	FString ErrorMsg;
 	bool bResult = CallLockOnEnd(SyncRotation.Yaw, ErrorMsg);

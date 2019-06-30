@@ -38,12 +38,14 @@ UWorld* FT4PacketHandlerSC::GetWorld() const
 	return GameWorld->GetWorld();
 }
 
-IT4PlayerController* FT4PacketHandlerSC::GetPlayerController() const
+AT4GameplayPlayerController* FT4PacketHandlerSC::GetPlayerController() const
 {
 	check(ET4LayerType::Max > LayerType);
 	IT4GameFramework* GameFramework = T4FrameworkGet(LayerType);
 	check(nullptr != GameFramework);
-	return GameFramework->GetPlayerController();
+	IT4PlayerController* PlayerController = GameFramework->GetPCInterface();
+	check(nullptr != PlayerController);
+	return Cast<AT4GameplayPlayerController>(PlayerController->GetAController());
 }
 
 IT4GameObject* FT4PacketHandlerSC::GetGameObject(const FT4ObjectID& InObjectID) const

@@ -11,7 +11,6 @@
  */
 struct FT4PacketStoC;
 class IT4GameObject;
-class IT4PlayerController;
 class AT4GameplayPlayerController;
 class FT4PacketHandlerSC : public IT4PacketHandlerSC
 {
@@ -62,7 +61,7 @@ private:
 	void HandleSC_Effect(const struct FT4PacketEffectSC* InPacket);
 
 	UWorld* GetWorld() const;
-	IT4PlayerController* GetPlayerController() const;
+	AT4GameplayPlayerController* GetPlayerController() const;
 	IT4GameObject* GetGameObject(const FT4ObjectID& InObjectID) const;
 
 private:

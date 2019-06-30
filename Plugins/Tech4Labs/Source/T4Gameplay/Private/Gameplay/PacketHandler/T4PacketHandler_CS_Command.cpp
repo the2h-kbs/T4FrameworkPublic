@@ -9,7 +9,7 @@
 
 #include "GameDB/T4GameDB.h"
 
-#include "Classes/AI/T4GameplayNPCAIController.h" // #31
+#include "Classes/AI/T4GameplayCharacterAIController.h" // #31
 #include "Classes/AI/T4GameplayFOAIController.h" // #41
 #include "Classes/AI/T4GameplayItemAIController.h" // #41
 
@@ -98,7 +98,7 @@ void FT4PacketHandlerCS::HandleCS_CmdPCEnter(
 		PacketHandlerSC->OnRecvPacket(&NewPCEnterPacketSC); // #15
 		if (bMyPCEntered)
 		{
-			InSenderPC->SetTargetObject(NewSpawnObjectID);
+			InSenderPC->SetGameObject(NewSpawnObjectID);
 		}
 	}
 
@@ -150,9 +150,9 @@ void FT4PacketHandlerCS::HandleCS_CmdPCLeave(
 
 	if (T4CoreLayer::IsServer(LayerType))
 	{
-		if (InPacket->LeaveObjectID == InSenderPC->GetTargetObjectID())
+		if (InPacket->LeaveObjectID == InSenderPC->GetGameObjectID())
 		{
-			InSenderPC->ClearTargetObject(true);
+			InSenderPC->ClearGameObject(true);
 		}
 	}
 
@@ -185,13 +185,13 @@ void FT4PacketHandlerCS::HandleCS_CmdNPCEnter(const FT4PacketCmdNPCEnterCS* InPa
 #if (WITH_EDITOR || WITH_SERVER_CODE)
 	// #31 : NPCAI
 	AAIController* NewAI = DoStartSpawnAIController(
-		AT4GameplayNPCAIController::StaticClass(),
+		AT4GameplayCharacterAIController::StaticClass(),
 		InPacket->SpawnLocation,
 		InPacket->SpawnRotation
 	);
 	check(nullptr != NewAI);
 	{
-		AT4GameplayNPCAIController* NPCController = Cast<AT4GameplayNPCAIController>(NewAI);
+		AT4GameplayCharacterAIController* NPCController = Cast<AT4GameplayCharacterAIController>(NewAI);
 		if (nullptr == NPCController)
 		{
 			check(false); // ???

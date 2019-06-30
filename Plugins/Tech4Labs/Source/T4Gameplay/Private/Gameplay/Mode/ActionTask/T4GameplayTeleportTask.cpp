@@ -44,9 +44,9 @@ bool FT4TeleportActionTask::Pressed(FString& OutErrorMsg)
 		OutErrorMsg = FString::Printf(TEXT("PacketHandler is Not set."));
 		return false;
 	}
-	IT4PlayerController* PlayerController = GetPlayerController();
+	AT4GameplayPlayerController* PlayerController = GetPlayerController();
 	check(nullptr != PlayerController);
-	if (!PlayerController->HasTargetObject())
+	if (!PlayerController->HasGameObject())
 	{
 		OutErrorMsg = FString::Printf(TEXT("PlayerObject is Not set."));
 		return false;
@@ -58,7 +58,7 @@ bool FT4TeleportActionTask::Pressed(FString& OutErrorMsg)
 		return false;
 	}
 	FT4PacketCmdTeleportCS NewPacketCS; // #27
-	NewPacketCS.SenderID = PlayerController->GetTargetObjectID();
+	NewPacketCS.SenderID = PlayerController->GetGameObjectID();
 	NewPacketCS.TargetLocation = PickingLocation;
 	PacketHandlerCS->OnSendPacket(&NewPacketCS);
 	return true;

@@ -31,6 +31,8 @@ public:
 #endif
 
 public:
+	// Plugins/Tech4Labs/Config/DefaultTech4Labs.ini
+
 	UPROPERTY(config, EditAnywhere, Category = GeneralControlSettting)
 	float ComboAttackKeepTimeSec; // #45
 

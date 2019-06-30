@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 
+#include "Public/T4GameplayDataTypes.h"
+
 #include "Classes/Network/Protocol/T4PacketCSMinimal.h" // #25
 #include "Classes/Network/Protocol/T4PacketSCMinimal.h" // #25
 
@@ -18,6 +20,13 @@ UCLASS()
 class T4GAMEPLAY_API AT4GameplayPlayerController : public AT4PlayerController
 {
 	GENERATED_UCLASS_BODY()
+
+public:
+	void SetMainWeaponDataID(const FT4GameDataID& InMainWeaponDataID) { MainWeaponDataID = InMainWeaponDataID; } // #48
+	const FT4GameDataID& GetMainWeaponDataID() const { return MainWeaponDataID; } // #48
+
+private:
+	FT4GameDataID MainWeaponDataID; // #48
 
 protected:
 	// #27 : Protocol

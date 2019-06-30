@@ -24,12 +24,6 @@ public:
 #if WITH_EDITOR
 	void HandleOnCreatePlayerController(IT4GameFramework* InGameFramework); // #42
 #endif
-	void HandleOnCallbackMoveTo(
-		ET4LayerType InLayerType,
-		const FT4ObjectID& InObjectID,
-		const FVector& InMoveVelocity,
-		bool bInForceMaxSpeed // #50
-	); // #42, #34
 };
 
 FT4GameplayMain& GetGameplayMain();

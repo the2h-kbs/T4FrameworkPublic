@@ -7,6 +7,8 @@
 
 #include "Network/Protocol/T4PacketCSMinimal.h"
 
+#include "Classes/Player/T4GameplayPlayerController.h" // #42
+
 #include "T4Engine/Classes/Action/T4ActionMinimal.h"
 #include "T4Engine/Public/T4Engine.h"
 #include "T4Engine/Public/T4EngineSettings.h"
@@ -47,21 +49,20 @@ void FT4ComboAttackActionTask::Process(float InDeltaTime)
 	}
 	ComboAttackPendingClearTimeLeft -= InDeltaTime;
 	ComboAttackPlayTimeLeft -= InDeltaTime;
-	IT4PlayerController* PlayerController = GetPlayerController();
+	AT4GameplayPlayerController* PlayerController = GetPlayerController();
 	check(nullptr != PlayerController);
-	if (!PlayerController->HasTargetObject())
+	if (!PlayerController->HasGameObject())
 	{
 		Reset();
 		return;
 	}
-	const FName MainWeaponDataIDName = PlayerController->GetMainWeaponDataIDName();
-	if (MainWeaponDataIDName == NAME_None)
+	const FT4GameDataID& MainWeaponDataID = PlayerController->GetMainWeaponDataID();
+	if (!MainWeaponDataID.IsValid())
 	{
 		Reset();
 		return;
 	}
 	FT4GameDB& GameDB = GetGameDB();
-	const FT4GameDataID MainWeaponDataID(ET4GameDataType::Item_Weapon, MainWeaponDataIDName);
 	const FT4GameItemWeaponData* ItemData = GameDB.GetGameData<FT4GameItemWeaponData>(MainWeaponDataID);
 	if (nullptr == ItemData)
 	{
@@ -147,7 +148,7 @@ void FT4ComboAttackActionTask::Process(float InDeltaTime)
 		return;
 	}
 	FT4PacketAttackCS NewPacketCS;
-	NewPacketCS.SenderID = PlayerController->GetTargetObjectID();
+	NewPacketCS.SenderID = PlayerController->GetGameObjectID();
 	NewPacketCS.SkillDataID = SkillDataIDSelected;
 	IT4GameObject* MouseOverObject = GetGameFramework()->GetMouseOverGameObject();
 	if (nullptr != MouseOverObject)
@@ -161,23 +162,22 @@ void FT4ComboAttackActionTask::Process(float InDeltaTime)
 
 bool FT4ComboAttackActionTask::Pressed(FString& OutErrorMsg)
 {
-	IT4PlayerController* PlayerController = GetPlayerController();
+	AT4GameplayPlayerController* PlayerController = GetPlayerController();
 	check(nullptr != PlayerController);
-	if (!PlayerController->HasTargetObject())
+	if (!PlayerController->HasGameObject())
 	{
 		OutErrorMsg = FString::Printf(TEXT("PlayerObject is Not set."));
 		Reset();
 		return false;
 	}
-	const FName MainWeaponDataIDName = PlayerController->GetMainWeaponDataIDName();
-	if (MainWeaponDataIDName == NAME_None)
+	const FT4GameDataID& MainWeaponDataID = PlayerController->GetMainWeaponDataID();
+	if (!MainWeaponDataID.IsValid())
 	{
 		OutErrorMsg = FString::Printf(TEXT("No Weapon Equipped."));
 		Reset();
 		return false;
 	}
 	FT4GameDB& GameDB = GetGameDB();
-	const FT4GameDataID MainWeaponDataID(ET4GameDataType::Item_Weapon, MainWeaponDataIDName);
 	const FT4GameItemWeaponData* ItemData = GameDB.GetGameData<FT4GameItemWeaponData>(MainWeaponDataID);
 	if (nullptr == ItemData)
 	{

@@ -38,7 +38,8 @@ void FT4PacketHandlerCS::HandleCS_Move(const FT4PacketMoveCS* InPacket)
 
 	FT4PacketMoveToSC NewPacketSC;
 	NewPacketSC.ObjectID = InPacket->SenderID;
-	NewPacketSC.MoveVelocity = InPacket->MoveDirection * ObjectAttribute.MaxRunSpeed;
+	NewPacketSC.MoveDirection = InPacket->MoveDirection;
+	NewPacketSC.MoveSpeed = ObjectAttribute.MaxRunSpeed;
 	NewPacketSC.HeadYawAngle = InPacket->HeadYawAngle; // #40
 
 	check(NewPacketSC.ObjectID.IsValid());
