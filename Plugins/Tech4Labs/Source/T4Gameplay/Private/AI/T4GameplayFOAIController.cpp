@@ -27,14 +27,14 @@ void AT4GameplayFOAIController::TickActor(
 	Super::TickActor(InDeltaTime, InTickType, InThisTickFunction);
 }
 
-void AT4GameplayFOAIController::Reset() // #50
+void AT4GameplayFOAIController::NotifyAIEnd() // #50
 {
 	// WARN : AsyncLoad 가 걸렸을 수 있음으로 종료 시 명시적으로 Reset 을 호출해야 한다.
 	//BlackboardAssetLoader.Reset();
 	//BehaviorTreeAssetLoader.Reset();
 }
 
-void AT4GameplayFOAIController::AIStart() // #50
+void AT4GameplayFOAIController::NotifyAIStart() // #50
 {
 
 }

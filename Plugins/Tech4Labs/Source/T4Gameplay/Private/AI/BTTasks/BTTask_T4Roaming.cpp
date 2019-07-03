@@ -25,7 +25,7 @@ EBTNodeResult::Type UBTTask_T4Roaming::ExecuteTask(
 		return EBTNodeResult::Failed;
 	}
 	FVector MoveTargetPosition = FVector::ZeroVector;
-	if (!NPCController->TryGoToRoaming(MoveTargetPosition))
+	if (!NPCController->DoRoaming(MoveTargetPosition))
 	{
 		return EBTNodeResult::Failed;
 	}

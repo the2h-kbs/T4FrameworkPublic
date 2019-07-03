@@ -73,6 +73,7 @@ public:
 	bool Bind(const FT4GameDataID& InNPCGameDataID); // #31, #50
 
 	bool IsAttacking() const; // #50
+
 	float GetCurrentMoveSpeed() const; // #50
 	bool IsCurrentAggressive() const; // #50
 
@@ -80,20 +81,32 @@ public:
 	IT4GameObject* FindNearestEnemyBySensoryRange(); // #34, #50
 
 	bool TryGoToAttackDistance(
-		const FVector& InOriginLocation,
+		const FVector& InStartLocation,
+		const FVector& InEndLocation,
 		float InTargetCapsuleRadius,
 		FVector& OutTargetLocation
 	); // #50
 
-	bool TryGoToRoaming(FVector& OutTargetLocation); // #50
-	bool TryNormalAttack(const FT4ObjectID& InTargetGameObjectID); // #50
+	bool DoRoaming(FVector& OutTargetLocation); // #50
+	bool DoNormalAttack(const FT4ObjectID& InTargetGameObjectID); // #50
+	
+	bool TakeEffectDamage(
+		const FT4GameEffectDataID& InEffectDataID,
+		const FT4ObjectID& InAttackerObjectID
+	); // #50
 
 	FT4NPCAIMemory& GetAIMemory() { return AIMemory; } // #50
 
 protected:
-	void AIReady() override; // #50
-	void AIStart() override; // #50
-	void AIEnd() override; // #50
+	void NotifyAIReady() override; // #50
+	void NotifyAIStart() override; // #50
+	void NotifyAIEnd() override; // #50
+
+	void HandleOnHitOverlap(
+		const FName& InEventName,
+		IT4GameObject* InHitGameObject,
+		const FHitResult& InSweepResult
+	); // #49 : Only Server
 
 	void HandleOnCallbackMoveTo(const FVector& InMoveVelocity, bool bInForceMaxSpeed); // #42, #34
 
@@ -106,6 +119,8 @@ private:
 	); // #50
 
 	IT4PacketHandlerSC* GetPacketHandlerSC() const; // #45
+
+	void UpdateAggressive();
 
 private:
 	FT4GameDataID NPCGameDataID;
@@ -121,4 +136,8 @@ private:
 	UBehaviorTree* BehaviorTreeAsset;
 
 	FT4NPCAIMemory AIMemory; // #50 : 필요하다면 Blackboard 로 변경하겠지만, 현재는 장점이 없어보인다.
+
+#if (WITH_EDITOR || WITH_SERVER_CODE)
+	FDelegateHandle HitOverlapDelegateHandle; // #49
+#endif
 };

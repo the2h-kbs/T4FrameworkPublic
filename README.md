@@ -6,7 +6,7 @@ R&D 및 기능 구현에 소요되는 시간을 아이디어 검증과 신기술
 ```
 
 - 웹사이트
-  - <https://www.tech4labs.com>
+  - <https://tech4labs.com>
 - 바이너리 배포 및 기술 지원 (Public)
   - <https://github.com/Tech4Labs/T4FrameworkPublic>
 - 소스 배포 및 기술 지원 (Private)

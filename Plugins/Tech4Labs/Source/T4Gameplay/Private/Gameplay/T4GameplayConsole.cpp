@@ -355,9 +355,9 @@ void FT4GameplayConsole::OnTakeSnapshotFrom(IConsoleVariable* InVariable)
 IT4PlayerController* FT4GameplayConsole::GetPlayerController() const
 {
 	check(ET4LayerType::Max > LayerType);
-	IT4GameWorld* GameWorld = T4EngineWorldGet(LayerType);
-	check(nullptr != GameWorld);
-	return GameWorld->GetPCInterface();
+	IT4GameFramework* GameFramework = T4FrameworkGet(LayerType);
+	check(nullptr != GameFramework);
+	return GameFramework->GetPCInterface();
 }
 
 IT4PacketHandlerCS* FT4GameplayConsole::GetPacketHandlerCS() const

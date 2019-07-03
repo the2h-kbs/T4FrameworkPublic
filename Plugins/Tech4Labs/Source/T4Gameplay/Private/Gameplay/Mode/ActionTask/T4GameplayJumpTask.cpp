@@ -19,8 +19,8 @@
 /**
   * #48
  */
-FT4JumpActionTask::FT4JumpActionTask(ET4LayerType InLayerType)
-	: FT4ActionTask(InLayerType)
+FT4JumpActionTask::FT4JumpActionTask(FT4GameplayModeBase* InGameplayMode)
+	: FT4ActionTask(InGameplayMode)
 	, bDoublePressed(false)
 	, JumpHoldTimeLeft(0.0f)
 {
@@ -59,7 +59,7 @@ void FT4JumpActionTask::Process(float InDeltaTime)
 
 bool FT4JumpActionTask::Pressed(FString& OutErrorMsg)
 {
-	AT4GameplayPlayerController* PlayerController = GetPlayerController();
+	IT4PlayerController* PlayerController = GetPlayerController();
 	check(nullptr != PlayerController);
 	if (PlayerController->HasPlayingAction(T4ActionRollPKey))
 	{
@@ -92,7 +92,7 @@ void FT4JumpActionTask::DoJump() // #46
 	IT4PacketHandlerCS* PacketHandlerCS = GetPacketHandlerCS();
 	if (nullptr != PacketHandlerCS)
 	{
-		AT4GameplayPlayerController* PlayerController = GetPlayerController();
+		IT4PlayerController* PlayerController = GetPlayerController();
 		check(nullptr != PlayerController);
 		if (PlayerController->HasGameObject())
 		{

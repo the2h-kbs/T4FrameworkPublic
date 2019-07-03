@@ -14,6 +14,12 @@ typedef int32 FT4AnimInstanceID;
 
 static const float DefaultLineTraceMaxDistance = 10000.0f;
 
+#if (WITH_EDITOR || WITH_SERVER_CODE)
+// DefaultEngine.ini [/Script/Engine.CollisionProfile]
+#define T4COLLISION_GAMEOBJECT		ECC_GameTraceChannel1
+#define T4COLLISION_WEAPON			ECC_GameTraceChannel2
+#endif
+
 UENUM()
 enum class ET4WorldType : uint8
 {

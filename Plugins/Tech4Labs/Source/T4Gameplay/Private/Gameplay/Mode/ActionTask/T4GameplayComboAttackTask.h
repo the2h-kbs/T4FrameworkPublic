@@ -11,7 +11,7 @@
 class FT4ComboAttackActionTask : public FT4ActionTask
 {
 public:
-	explicit FT4ComboAttackActionTask(ET4LayerType InLayerType);
+	explicit FT4ComboAttackActionTask(FT4GameplayModeBase* InGameplayMode);
 	~FT4ComboAttackActionTask();
 
 protected:
@@ -19,6 +19,9 @@ protected:
 	void Process(float InDeltaTime) override;
 
 	bool Pressed(FString& OutErrorMsg) override;
+
+private:
+	FT4GameDataID GetMainWeaponDataID();
 
 private:
 	bool bPendingComboAttack;

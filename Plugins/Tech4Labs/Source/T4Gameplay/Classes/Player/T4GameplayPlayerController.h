@@ -25,10 +25,38 @@ public:
 	void SetMainWeaponDataID(const FT4GameDataID& InMainWeaponDataID) { MainWeaponDataID = InMainWeaponDataID; } // #48
 	const FT4GameDataID& GetMainWeaponDataID() const { return MainWeaponDataID; } // #48
 
+	bool DoAttack(const FT4PacketAttackCS& InPacket); // #49
+
+	bool TakeEffectDamage(
+		const FT4GameEffectDataID& InEffectDataID,
+		const FT4ObjectID& InAttackerObjectID
+	); // #50
+
+protected:
+	void NotifyAdvance(float InDeltaTime) override; // #49
+	void NotifyPossess(IT4GameObject* InNewGameObject) override; // #49
+	void NotifyUnPossess(IT4GameObject* InOldGameObject) override; // #49
+
+	void HandleOnHitOverlap(
+		const FName& InEventName,
+		IT4GameObject* InHitGameObject, 
+		const FHitResult& InSweepResult
+	); // #49 : Only Server
+
 private:
 	FT4GameDataID MainWeaponDataID; // #48
 
+#if (WITH_EDITOR || WITH_SERVER_CODE)
+	bool bHitOverlapEventStarted;
+	FT4GameSkillDataID UseSkillDataID;
+	float HitOverlapEventDelayTimeSec;
+	float HitOverlapEventClearTimeLeft;
+	FDelegateHandle HitOverlapDelegateHandle; // #49
+#endif
+
 protected:
+	IT4PacketHandlerSC* GetPacketHandlerSC() const; // #49
+
 	// #27 : Protocol
 	bool CS_RecvPacket_Validate(const FT4PacketCtoS* InPacket);
 	void CS_RecvPacket_Implementation(const FT4PacketCtoS* InPacket);

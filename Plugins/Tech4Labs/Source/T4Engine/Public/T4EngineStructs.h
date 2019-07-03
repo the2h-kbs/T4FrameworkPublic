@@ -75,6 +75,12 @@ struct FT4ServerGameObjectAttribute // #46
 	float MaxRollZVelocity;
 	float MaxRotationYawRate;
 };
+
+struct FT4ServerGameObjectDelegates // #49
+{
+	DECLARE_MULTICAST_DELEGATE_ThreeParams(FOnHitOverlap, const FName&, IT4GameObject*, const FHitResult&);
+	FOnHitOverlap OnHitOverlap;
+};
 #endif
 
 struct FT4AnimParameters // #38

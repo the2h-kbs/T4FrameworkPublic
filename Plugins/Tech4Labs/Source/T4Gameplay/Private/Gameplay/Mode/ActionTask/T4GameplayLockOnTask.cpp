@@ -19,8 +19,8 @@
 /**
   * #48
  */
-FT4LockOnActionTask::FT4LockOnActionTask(ET4LayerType InLayerType)
-	: FT4ActionTask(InLayerType)
+FT4LockOnActionTask::FT4LockOnActionTask(FT4GameplayModeBase* InGameplayMode)
+	: FT4ActionTask(InGameplayMode)
 {
 }
 
@@ -47,7 +47,7 @@ bool FT4LockOnActionTask::Start(
 		OutErrorMsg = FString::Printf(TEXT("PacketHandler is Not set."));
 		return false;
 	}
-	AT4GameplayPlayerController* PlayerController = GetPlayerController();
+	IT4PlayerController* PlayerController = GetPlayerController();
 	check(nullptr != PlayerController);
 	if (!PlayerController->HasGameObject())
 	{
@@ -79,7 +79,7 @@ bool FT4LockOnActionTask::End(
 		OutErrorMsg = FString::Printf(TEXT("PacketHandler is Not set."));
 		return false;
 	}
-	AT4GameplayPlayerController* PlayerController = GetPlayerController();
+	IT4PlayerController* PlayerController = GetPlayerController();
 	check(nullptr != PlayerController);
 	if (!PlayerController->HasGameObject())
 	{

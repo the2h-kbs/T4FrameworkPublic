@@ -12,12 +12,13 @@
  */
 class IT4GameObject;
 class IT4GameFramework;
-class AT4GameplayPlayerController;
+class IT4PlayerController;
 class IT4PacketHandlerCS;
+class FT4GameplayModeBase;
 class FT4ActionTask
 {
 public:
-	explicit FT4ActionTask(ET4LayerType InLayerType);
+	explicit FT4ActionTask(FT4GameplayModeBase* InGameplayMode);
 	virtual ~FT4ActionTask();
 
 	void OnReset();
@@ -44,13 +45,16 @@ protected:
 	virtual bool Start(const float InParam, FString& OutErrorMsg) { return false; }
 	virtual bool End(const float InParam, FString& OutErrorMsg) { return false; }
 
+	ET4GameplayModeType GetModeType() const;
+
+	FT4GameplayModeBase* GetGameplayMode() const { return GameplayMode; }
 	IT4GameFramework* GetGameFramework() const;
 	IT4GameObject* GetPlayerObject() const;
-	AT4GameplayPlayerController* GetPlayerController() const;
+	IT4PlayerController* GetPlayerController() const;
 	IT4PacketHandlerCS* GetPacketHandlerCS() const;
 
 protected:
-	ET4LayerType LayerType;
+	FT4GameplayModeBase* GameplayMode;
 	bool bPressed;
 	bool bStarted;
 	bool bMovementLcoked;

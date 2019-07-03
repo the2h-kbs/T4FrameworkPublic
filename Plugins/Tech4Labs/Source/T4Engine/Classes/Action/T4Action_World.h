@@ -45,29 +45,6 @@ public:
 };
 
 USTRUCT()
-struct T4ENGINE_API FT4ChangePlayerAction : public FT4WorldAction
-{
-	GENERATED_USTRUCT_BODY()
-
-public:
-	UPROPERTY(EditAnywhere)
-	FT4ObjectID ObjectID;
-
-public:
-	FT4ChangePlayerAction()
-		: FT4WorldAction(StaticActionType())
-	{
-	}
-
-	static ET4ActionType StaticActionType() { return ET4ActionType::ChangePlayer; }
-
-	FString ToString() const override
-	{
-		return FString(TEXT("WAction:ChangePlayer"));
-	}
-};
-
-USTRUCT()
 struct T4ENGINE_API FT4ObjectEnterAction : public FT4WorldAction
 {
 	GENERATED_USTRUCT_BODY()

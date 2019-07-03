@@ -251,17 +251,17 @@ public:
 	ET4RotationType RotationType;
 
 	UPROPERTY(EditAnywhere)
-	float TargetYawAngle; // #40 : LockOn 에서 방향을 맞출 경우 사용 (ET4RotationType::TargetYawAngle)
+	float RotationYawRate; // #44 : 초당 회전 단위, Yaw
 
 	UPROPERTY(EditAnywhere)
-	float RotationYawRate; // #44 : 초당 회전 단위, Yaw
+	float TargetYawAngle; // #40 : LockOn 에서 방향을 맞출 경우 사용 (only ET4RotationType::TargetYawAngle)
 
 public:
 	FT4RotationAction()
 		: FT4ObjectAction(StaticActionType())
 		, RotationType(ET4RotationType::Default)
-		, TargetYawAngle(0.0f)
 		, RotationYawRate(0.0f)
+		, TargetYawAngle(0.0f)
 	{
 	}
 

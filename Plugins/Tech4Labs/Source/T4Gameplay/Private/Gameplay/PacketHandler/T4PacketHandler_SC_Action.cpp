@@ -34,10 +34,16 @@ void FT4PacketHandlerSC::HandleSC_Attack(const FT4PacketAttackSC* InPacket)
 		return;
 	}
 	FT4ActionParameters ActionParameters;
-	ActionParameters.SetTargetObjectID(InPacket->TargetrObjectID);
+	ActionParameters.SetTargetDirection(InPacket->UseDirection);
+
+	FT4RotationAction NewRotAction; // #49
+	NewRotAction.RotationType = ET4RotationType::TargetDirection;
+	NewRotAction.RotationYawRate = AttackerObject->GetPropertyConst().RotationYawRate; // #46
+	AttackerObject->OnExecute(&NewRotAction, &ActionParameters);
 
 	FT4ContiAction NewAction;
 	NewAction.ActionKey = InPacket->SkillDataID.ToPrimaryActionKey();
+	NewAction.ActionKey.bOverrideExisting = true; // #49 : 동기화가 중요하니 무조건 플레이를 보장한다.
 	NewAction.ContiAsset = SkillData->RawData.ContiAsset.ToSoftObjectPath();
 	AttackerObject->OnExecute(&NewAction, &ActionParameters);
 }
@@ -58,7 +64,7 @@ void FT4PacketHandlerSC::HandleSC_Effect(const FT4PacketEffectSC* InPacket)
 		return;
 	}
 	FT4ContiAction NewAction;
-	NewAction.ActionKey = InPacket->EffectDataID.ToPrimaryActionKey();
+	NewAction.ActionKey = InPacket->EffectDataID.ToOverlapActionKey(); // #49 : 이팩트는 중첩과 관계 없이 플레이
 	NewAction.ContiAsset = EffectData->RawData.ContiAsset.ToSoftObjectPath();
 	TargetObject->OnExecute(&NewAction);
 }

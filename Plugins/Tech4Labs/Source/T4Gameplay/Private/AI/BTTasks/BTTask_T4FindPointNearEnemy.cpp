@@ -42,11 +42,11 @@ EBTNodeResult::Type UBTTask_T4FindPointNearEnemy::ExecuteTask(
 	{
 		return EBTNodeResult::Failed;
 	}
-	const FVector OriginPosition = NewTargetObject->GetRootLocation();
 	const FT4GameObjectProperty& TargetObjectProperty = NewTargetObject->GetPropertyConst();
 	FVector MoveTargetPosition = FVector::ZeroVector;
 	if (!NPCController->TryGoToAttackDistance(
-		OriginPosition, 
+		NPCGameObject->GetRootLocation(),
+		NewTargetObject->GetRootLocation(),
 		TargetObjectProperty.CapsuleRadius,
 		MoveTargetPosition
 	))

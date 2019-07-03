@@ -11,7 +11,7 @@
 UBTTask_T4Wait::UBTTask_T4Wait(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	NodeName = "Wait NPC Property Time";
+	NodeName = "T4WaitTime";
 }
 
 EBTNodeResult::Type UBTTask_T4Wait::ExecuteTask(
@@ -29,4 +29,22 @@ EBTNodeResult::Type UBTTask_T4Wait::ExecuteTask(
 	AIMemory.MoveSpeedType = ET4MoveSpeedType::Stand;
 	WaitTime = AIMemory.IdleWaitTime;
 	return Super::ExecuteTask(InOwnerComp, InNodeMemory);
+}
+
+void UBTTask_T4Wait::TickTask(
+	UBehaviorTreeComponent& InOwnerComp,
+	uint8* InNodeMemory,
+	float InDeltaSeconds
+)
+{
+	Super::TickTask(InOwnerComp, InNodeMemory, InDeltaSeconds);
+	AT4GameplayCharacterAIController* NPCController = Cast<AT4GameplayCharacterAIController>(InOwnerComp.GetAIOwner());
+	if (nullptr != NPCController)
+	{
+		// 어그로가 끌리면 Wait 를 강제로 종료한다.
+		if (NPCController->IsCurrentAggressive())
+		{
+			FinishLatentTask(InOwnerComp, EBTNodeResult::Succeeded);
+		}
+	}
 }

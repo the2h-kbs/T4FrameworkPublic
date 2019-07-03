@@ -6,8 +6,7 @@
 #include "Public/Action/T4EngineActionTypes.h"
 #include "Public/T4EngineTypes.h"
 #include "Public/T4EngineStructs.h"
-#include "Public/T4EngineController.h"
-#include "T4Engine/Public/T4EngineEntityTypes.h"
+#include "Public/T4EngineEntityTypes.h"
 
 #include "Components/SceneComponent.h"
 #include "CollisionQueryParams.h"
@@ -15,12 +14,10 @@
 /**
   * http://api.unrealengine.com/KOR/Gameplay/Networking/Travelling/
  */
-struct FT4WorldAction;
-struct FT4ActionParameters; // #28
-
 class IT4GameWorld;
 class IT4GameObject;
 
+struct FT4WorldAction;
 struct FT4ObjectAction;
 struct FT4StopAction;
 struct FT4ObjectEnterAction;
@@ -33,9 +30,8 @@ class UT4EntityAsset;
 
 struct FWorldContext;
 class UAnimSequence;
-class UInputComponent;
-class UT4NetComponent; // #42
 class AController;
+class APlayerController; // #42
 
 class T4ENGINE_API IT4AnimState
 {
@@ -151,11 +147,14 @@ public:
 
 	virtual bool IsPlayer() const = 0;
 
-	// #34 : for Server All or Client Only Player
-	virtual IT4GameController* GetGameController() const = 0; // #34
-	virtual void SetGameController(IT4GameController* InController) = 0; // #34
-
 	virtual APawn* GetPawn() = 0;
+
+	// #34 : for Server All or Client Only Player
+	virtual ET4ControllerType GetControllerType() const = 0;
+	virtual void SetControllerType(ET4ControllerType InControllerType) = 0; // #34, #42
+
+	virtual AController* GetAController() = 0; // #34, #42
+	virtual void SetAController(AController* InController) = 0; // #34, #42
 
 	virtual IT4AnimControl* GetAnimControl() const = 0; // #14
 	virtual IT4ActionControl* GetActionControl() const = 0; // #20
@@ -163,6 +162,11 @@ public:
 
 #if (WITH_EDITOR || WITH_SERVER_CODE)
 	virtual FT4ServerGameObjectAttribute& GetServerAttribute() = 0; // #46 : TODO : Gameplay 테이블에서 읽어서 채울 것!
+	virtual FT4ServerGameObjectDelegates& GetServerDelegates() = 0; // #49
+
+	virtual bool IsWeaponHitOverlapEventEnabled() const = 0; // #49
+	virtual void BeginWeaponHitOverlapEvent(const FName& InHitOverlapEventName) = 0; // $49
+	virtual void EndWeaponHitOverlapEvent() = 0; // #49
 #endif
 
 	virtual bool HasPlayingAnimState(const FName& InAnimStateName) const = 0; // #47
@@ -260,18 +264,18 @@ public:
 	virtual FVector GetCameraLocation() const = 0;
 	virtual FRotator GetCameraRotation() const = 0;
 
-	virtual IT4PlayerController* GetPCInterface() = 0;
-	virtual bool SetPCInterface(IT4PlayerController* InPlayerController) = 0;
+	virtual APlayerController* GetPCController() = 0;
+	virtual bool SetPCController(APlayerController* InPlayerController) = 0;
 
 	virtual bool HasPlayerObject() const = 0;
 	virtual bool IsPlayerObject(const FT4ObjectID& InObjectID) const = 0;
 	virtual bool IsPlayerObject(IT4GameObject* InGameObject) const = 0;
+	virtual IT4GameObject* GetPlayerObject() const = 0;
 
 	// Server Only
 	virtual bool QueryNearestObjects(
 		const FVector& InOriginLocation,
 		const float InMaxDistance,
-		const ET4ControllerType InControllerType,
 		TArray<IT4GameObject*>& OutObjects
 	) = 0; // #34
 };

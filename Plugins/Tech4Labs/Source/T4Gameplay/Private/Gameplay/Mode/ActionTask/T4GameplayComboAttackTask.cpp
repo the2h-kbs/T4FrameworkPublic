@@ -19,8 +19,8 @@
 /**
   * #48
  */
-FT4ComboAttackActionTask::FT4ComboAttackActionTask(ET4LayerType InLayerType)
-	: FT4ActionTask(InLayerType)
+FT4ComboAttackActionTask::FT4ComboAttackActionTask(FT4GameplayModeBase* InGameplayMode)
+	: FT4ActionTask(InGameplayMode)
 	, bPendingComboAttack(false) // #48
 	, ComboAttackPendingClearTimeLeft(0.0f) // #48
 	, ComboAttackSelected(ET4ComboAttackSeqeunce::Ready) // #48
@@ -49,14 +49,14 @@ void FT4ComboAttackActionTask::Process(float InDeltaTime)
 	}
 	ComboAttackPendingClearTimeLeft -= InDeltaTime;
 	ComboAttackPlayTimeLeft -= InDeltaTime;
-	AT4GameplayPlayerController* PlayerController = GetPlayerController();
+	IT4PlayerController* PlayerController = GetPlayerController();
 	check(nullptr != PlayerController);
 	if (!PlayerController->HasGameObject())
 	{
 		Reset();
 		return;
 	}
-	const FT4GameDataID& MainWeaponDataID = PlayerController->GetMainWeaponDataID();
+	const FT4GameDataID MainWeaponDataID = GetMainWeaponDataID();
 	if (!MainWeaponDataID.IsValid())
 	{
 		Reset();
@@ -147,22 +147,47 @@ void FT4ComboAttackActionTask::Process(float InDeltaTime)
 		Reset();
 		return;
 	}
-	FT4PacketAttackCS NewPacketCS;
-	NewPacketCS.SenderID = PlayerController->GetGameObjectID();
-	NewPacketCS.SkillDataID = SkillDataIDSelected;
+
+	IT4GameObject* PlayerObject = PlayerController->GetGameObject();
+	check(nullptr != PlayerObject);
+
+	FVector PickingLocation = FVector::ZeroVector;
+	FVector UseDirection = FVector::ZeroVector;
+	ET4GameplayModeType CurrentMode = GetModeType();
 	IT4GameObject* MouseOverObject = GetGameFramework()->GetMouseOverGameObject();
 	if (nullptr != MouseOverObject)
 	{
-		NewPacketCS.TargetObjectID = MouseOverObject->GetObjectID();
+		UseDirection = FVector(
+			MouseOverObject->GetRootLocation() - PlayerObject->GetRootLocation()
+		);
+		UseDirection.Normalize();
 	}
+	else if (GetGameFramework()->GetMousePickingLocation(PickingLocation))
+	{
+		const FVector PlayerRootLocation = PlayerObject->GetRootLocation();
+		UseDirection = FVector(
+			PickingLocation.X - PlayerRootLocation.X, PickingLocation.Y - PlayerRootLocation.Y, 0.0f
+		);
+		UseDirection.Normalize();
+	}
+	else
+	{
+		UseDirection = PlayerObject->GetFrontVector();
+	}
+
+	FT4PacketAttackCS NewPacketCS;
+	NewPacketCS.SenderID = PlayerController->GetGameObjectID();
+	NewPacketCS.SkillDataID = SkillDataIDSelected;
+	NewPacketCS.UseDirection = UseDirection; // #49
 	PacketHandlerCS->OnSendPacket(&NewPacketCS);
+
 	ComboAttackPlayTimeLeft = SkillData->RawData.DurationSec;
 	bMovementLcoked = !SkillData->RawData.bMoveable;
 }
 
 bool FT4ComboAttackActionTask::Pressed(FString& OutErrorMsg)
 {
-	AT4GameplayPlayerController* PlayerController = GetPlayerController();
+	IT4PlayerController* PlayerController = GetPlayerController();
 	check(nullptr != PlayerController);
 	if (!PlayerController->HasGameObject())
 	{
@@ -170,7 +195,7 @@ bool FT4ComboAttackActionTask::Pressed(FString& OutErrorMsg)
 		Reset();
 		return false;
 	}
-	const FT4GameDataID& MainWeaponDataID = PlayerController->GetMainWeaponDataID();
+	const FT4GameDataID MainWeaponDataID = GetMainWeaponDataID();
 	if (!MainWeaponDataID.IsValid())
 	{
 		OutErrorMsg = FString::Printf(TEXT("No Weapon Equipped."));
@@ -190,4 +215,19 @@ bool FT4ComboAttackActionTask::Pressed(FString& OutErrorMsg)
 	check(nullptr != EngineSettings);
 	ComboAttackPendingClearTimeLeft = EngineSettings->ComboAttackKeepTimeSec; // #48 : 콤보 공격, 시간 경과시 Primary 로 변경
 	return true;
+}
+
+FT4GameDataID FT4ComboAttackActionTask::GetMainWeaponDataID() // #49
+{
+	IT4PlayerController* PlayerController = GetPlayerController();
+	if (nullptr == PlayerController)
+	{
+		return FT4GameDataID();
+	}
+	AT4GameplayPlayerController* GamePC = Cast<AT4GameplayPlayerController>(PlayerController->GetAController());
+	if (nullptr == GamePC)
+	{
+		return FT4GameDataID();
+	}
+	return GamePC->GetMainWeaponDataID();
 }

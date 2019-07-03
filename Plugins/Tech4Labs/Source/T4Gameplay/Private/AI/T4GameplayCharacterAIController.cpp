@@ -11,6 +11,8 @@
 
 #include "GameDB/T4GameDB.h"
 
+#include "Gameplay/Server/T4ServerEventTranslator.h" // #49
+
 #include "T4Core/Public/T4CoreMinimal.h"
 #include "T4Engine/Public/T4Engine.h"
 #include "T4Framework/Public/T4Framework.h"
@@ -57,6 +59,7 @@ void AT4GameplayCharacterAIController::TickActor(
 		NPCAIMemory.SkillPlayTimeLeft -= InDeltaTime;
 		if (0.0f >= NPCAIMemory.SkillPlayTimeLeft)
 		{
+			GetGameObject()->EndWeaponHitOverlapEvent(); // #49
 			NPCAIMemory.bActiveSkill = false;
 		}
 	}
@@ -117,12 +120,12 @@ bool AT4GameplayCharacterAIController::CheckAsyncLoading()
 	return true;
 }
 
-void AT4GameplayCharacterAIController::AIReady() // #50
+void AT4GameplayCharacterAIController::NotifyAIReady() // #50
 {
 	check(nullptr != OverridePathFollowingComponent);
 }
 
-void AT4GameplayCharacterAIController::AIStart() // #50
+void AT4GameplayCharacterAIController::NotifyAIStart() // #50
 {
 	IT4PacketHandlerSC* PacketHandlerSC = GetPacketHandlerSC();
 	check(nullptr != PacketHandlerSC);
@@ -153,12 +156,57 @@ void AT4GameplayCharacterAIController::AIStart() // #50
 			);
 		}
 	}
+#if (WITH_EDITOR || WITH_SERVER_CODE)
+	// #49
+	FT4ServerGameObjectDelegates& GameObjectDelegates = GetGameObject()->GetServerDelegates();
+	HitOverlapDelegateHandle = GameObjectDelegates.OnHitOverlap.AddUObject(
+		this,
+		&AT4GameplayCharacterAIController::HandleOnHitOverlap
+	);
+#endif
 }
 
-void AT4GameplayCharacterAIController::AIEnd() // #50
+void AT4GameplayCharacterAIController::NotifyAIEnd() // #50
 {
 	// WARN : AsyncLoad 가 걸렸을 수 있음으로 종료 시 명시적으로 Reset 을 호출해야 한다.
 	BehaviorTreeAssetLoader.Reset();
+
+#if (WITH_EDITOR || WITH_SERVER_CODE)
+	if (HitOverlapDelegateHandle.IsValid())
+	{
+		HitOverlapDelegateHandle.Reset();
+	}
+#endif
+}
+
+void AT4GameplayCharacterAIController::HandleOnHitOverlap(
+	const FName& InEventName,
+	IT4GameObject* InHitGameObject,
+	const FHitResult& InSweepResult
+) // #49
+{
+#if (WITH_EDITOR || WITH_SERVER_CODE)
+	if (nullptr == InHitGameObject)
+	{
+		return;
+	}
+	FT4GameSkillDataID SkillDataID(InEventName);
+	FT4GameDB& GameDB = GetGameDB();
+	const FT4GameSkillData* SkillData = GameDB.GetGameData<FT4GameSkillData>(SkillDataID);
+	if (nullptr == SkillData)
+	{
+		return;
+	}
+	if (!SkillData->RawData.ResultEffectDataID.IsValid())
+	{
+		return;
+	}
+	GetServerEventTranslator().EventTakeEffectDamage(
+		InHitGameObject->GetAController(),
+		SkillData->RawData.ResultEffectDataID,
+		GetGameObjectID()
+	);
+#endif
 }
 
 void AT4GameplayCharacterAIController::HandleOnCallbackMoveTo(
@@ -276,15 +324,30 @@ IT4GameObject* AT4GameplayCharacterAIController::FindNearestObject(
 	bool bResult = GameWorld->QueryNearestObjects(
 		OwnerGameObject->GetRootLocation(),
 		InMaxDistance, // #50
-		ET4ControllerType::Player,
 		TargetObjects
 	);
 	if (!bResult)
 	{
 		return nullptr;
 	}
-	check(0 < TargetObjects.Num());
-	return TargetObjects[0];
+	IT4GameObject* NearestObject = nullptr;
+	for (IT4GameObject* TargetObject : TargetObjects)
+	{
+		if (ET4AITargetType::AITarget_Enemy)
+		{
+			if (ET4ControllerType::Player == TargetObject->GetControllerType())
+			{
+				NearestObject = TargetObject;
+				break;
+			}
+		}
+		else
+		{
+			NearestObject = TargetObject;
+			break;
+		}
+	}
+	return NearestObject;
 }
 
 IT4GameObject* AT4GameplayCharacterAIController::FindNearestEnemyByAttackRange() // #34
@@ -300,7 +363,7 @@ IT4GameObject* AT4GameplayCharacterAIController::FindNearestEnemyByAttackRange()
 		return nullptr;
 	}
 	const FT4GameObjectProperty& OwnerObjectProperty = OwnerGameObject->GetPropertyConst();
-	// #50 : 대략적인 공격 가능한 거리는 나와 타겟의 Radius 에 무기의 공격거리, 나중에는 더 추가해주어야 한다.
+	// #50 : 대략적인 공격 가능한 거리는 나의 Radius 에 무기의 공격거리, 나중에는 더 추가해주어야 할 수도 있다.
 	const float TryAttackDistance = OwnerObjectProperty.CapsuleRadius
 								  + MainWeaponGameData->RawData.AttackRange;
 	IT4GameObject* TargetObject = FindNearestObject(
@@ -321,7 +384,8 @@ IT4GameObject* AT4GameplayCharacterAIController::FindNearestEnemyBySensoryRange(
 }
 
 bool AT4GameplayCharacterAIController::TryGoToAttackDistance(
-	const FVector& InOriginLocation,
+	const FVector& InStartLocation,
+	const FVector& InEndLocation,
 	float InTargetCapsuleRadius,
 	FVector& OutTargetLocation
 ) // #50
@@ -341,26 +405,36 @@ bool AT4GameplayCharacterAIController::TryGoToAttackDistance(
 	check(nullptr != ServerFramework);
 	IT4GameWorld* GameWorld = ServerFramework->GetGameWorld();
 	check(nullptr != GameWorld);
-	// #50 : 대략적인 공격 가능한 거리는 나와 타겟의 Radius 에 무기의 공격거리, 나중에는 더 추가해주어야 한다.
-	const float TryAttackDistance = InTargetCapsuleRadius
-						  	      + OwnerObjectProperty.CapsuleRadius
-								  + MainWeaponGameData->RawData.AttackRange;
+
+	FVector MoveDirection = InStartLocation - InEndLocation;
+	MoveDirection.Normalize();
+
+	// #50 : 공격 가능한 거리로 다가가야 한다. 일단, 무기의 AttachRange 로 임시 설정
+	const float MaxRandomRadius = 10.0f;
+	const float TryAttackDistance = (MainWeaponGameData->RawData.AttackRange * 0.9f) - MaxRandomRadius;
+	FVector OriginLocation = InEndLocation + (TryAttackDistance * MoveDirection);
+
 	if (!GameWorld->GetRandomLocationInNavigableRadius(
-		InOriginLocation, 
-		TryAttackDistance,
+		OriginLocation,
+		MaxRandomRadius,
 		OutTargetLocation
 	))
 	{
 		return false;
 	}
+	UpdateAggressive();
 	return true;
 }
 
-bool AT4GameplayCharacterAIController::TryGoToRoaming(
+bool AT4GameplayCharacterAIController::DoRoaming(
 	FVector& OutTargetLocation
 ) // #50
 {
 	check(nullptr != NPCGameData);
+	if (FMath::RandRange(0.0f, 100.0f) > NPCGameData->RawData.RoamingRateRatio)
+	{
+		return false; // CHECK : Rand
+	}
 	IT4GameObject* OwnerGameObject = GetGameObject();
 	if (nullptr == OwnerGameObject)
 	{
@@ -383,7 +457,7 @@ bool AT4GameplayCharacterAIController::TryGoToRoaming(
 	return true;
 }
 
-bool AT4GameplayCharacterAIController::TryNormalAttack(
+bool AT4GameplayCharacterAIController::DoNormalAttack(
 	const FT4ObjectID& InTargetGameObjectID
 ) // #50
 {
@@ -396,7 +470,6 @@ bool AT4GameplayCharacterAIController::TryNormalAttack(
 	{
 		return false;
 	}
-	// TODO : CombaAttack
 	FT4GameDB& GameDB = GetGameDB();
 	const FT4GameSkillSetData* SkillSetData = GameDB.GetGameData<FT4GameSkillSetData>(
 		MainWeaponGameData->RawData.SkillSetNameID
@@ -405,14 +478,37 @@ bool AT4GameplayCharacterAIController::TryNormalAttack(
 	{
 		return false;
 	}
-	if (!SkillSetData->RawData.ComboPrimaryAttackNameID.IsValid())
+	// TODO : CombaAttack
+	FT4GameSkillDataID AttackSelected;
+	uint32 AttackIndex = FMath::RandRange(0, 10);
+	if (0 == AttackIndex)
+	{
+		AttackSelected = SkillSetData->RawData.FinishAttackNameID;
+	}
+	else if (1 <= AttackIndex && 3 >= AttackIndex)
+	{
+		AttackSelected = SkillSetData->RawData.ComboSecondaryAttackNameID;
+	}
+	else if (4 <= AttackIndex && 6 >= AttackIndex)
+	{
+		AttackSelected = SkillSetData->RawData.ComboTertiaryAttackNameID;
+	}
+	else
+	{
+		AttackSelected = SkillSetData->RawData.ComboPrimaryAttackNameID;
+	}
+	if (!AttackSelected.IsValid())
 	{
 		return false;
 	}
-	const FT4GameSkillData* SkillData = GameDB.GetGameData<FT4GameSkillData>(
-		SkillSetData->RawData.ComboPrimaryAttackNameID
-	);
+	const FT4GameSkillData* SkillData = GameDB.GetGameData<FT4GameSkillData>(AttackSelected);
 	if (nullptr == SkillData)
+	{
+		return false;
+	}
+
+	IT4GameObject* TargetGameObject = FindGameObject(InTargetGameObjectID);
+	if (nullptr == TargetGameObject)
 	{
 		return false;
 	}
@@ -421,16 +517,52 @@ bool AT4GameplayCharacterAIController::TryNormalAttack(
 	{
 		return false;
 	}
+
 	FT4PacketAttackSC NewPacketSC;
 	NewPacketSC.ObjectID = GetGameObjectID();
-	NewPacketSC.SkillDataID = SkillSetData->RawData.ComboPrimaryAttackNameID;
-	NewPacketSC.TargetrObjectID = InTargetGameObjectID;
+	NewPacketSC.SkillDataID = AttackSelected;
+	NewPacketSC.UseDirection = FVector(
+		TargetGameObject->GetRootLocation() - GetGameObject()->GetRootLocation()
+	);
+	NewPacketSC.UseDirection.Normalize();
 	check(NewPacketSC.ObjectID.IsValid());
 	PacketHandlerSC->DoBroadcastPacketForServer(&NewPacketSC);
 
 	FT4NPCAIMemory& NPCAIMemory = GetAIMemory();
 	NPCAIMemory.bActiveSkill = true;
 	NPCAIMemory.SkillPlayTimeLeft = SkillData->RawData.DurationSec;
+
+	GetGameObject()->BeginWeaponHitOverlapEvent(NewPacketSC.SkillDataID.RowName); // #49
+
+	UpdateAggressive();
+	return true;
+}
+
+bool AT4GameplayCharacterAIController::TakeEffectDamage(
+	const FT4GameEffectDataID& InEffectDataID,
+	const FT4ObjectID& InAttackerObjectID
+) // #50
+{
+	IT4PacketHandlerSC* PacketHandlerSC = GetPacketHandlerSC();
+	if (nullptr == PacketHandlerSC)
+	{
+		return false;
+	}
+
+	FT4PacketEffectSC NewPacketSC;
+	NewPacketSC.ObjectID = GetGameObjectID();
+	NewPacketSC.EffectDataID = InEffectDataID; // #48
+	NewPacketSC.AttackerObjectID = InAttackerObjectID;
+	check(NewPacketSC.ObjectID.IsValid());
+	PacketHandlerSC->DoBroadcastPacketForServer(&NewPacketSC);
+
+	// 이동중이면 멈춘다.
+	StopMovement(); 
+
+	// Waiting 중이면 UBTTask_T4Wait::TickTask 에서 어그로를 체크해 Waiting 을 해제한다.
+
+	// Aggressive 를 갱신한다.
+	UpdateAggressive();
 	return true;
 }
 
@@ -447,4 +579,16 @@ IT4PacketHandlerSC* AT4GameplayCharacterAIController::GetPacketHandlerSC() const
 		return nullptr;
 	}
 	return GameplayInstance->GetPacketHandlerSC();
+}
+
+void AT4GameplayCharacterAIController::UpdateAggressive()
+{
+	check(nullptr != NPCGameData);
+	if (NPCGameData->RawData.bAggressive)
+	{
+		return; // 기본 옵션으로 어그로가 켜져 있음으로 처리하지 않는다.
+	}
+	FT4NPCAIMemory& NPCAIMemory = GetAIMemory();
+	NPCAIMemory.bActiveAggressive = true;
+	NPCAIMemory.AggressiveClearTimeLeft = NPCGameData->RawData.PassiveApproachTimeSec;
 }

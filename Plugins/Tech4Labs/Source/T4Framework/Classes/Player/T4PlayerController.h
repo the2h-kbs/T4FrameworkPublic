@@ -4,9 +4,9 @@
 
 #include "CoreMinimal.h"
 
-#include "T4Engine/Classes/Action/T4ActionMinimal.h"
+#include "Public/T4FrameworkController.h"
 
-#include "T4Engine/Public/T4Engine.h"
+#include "T4Engine/Classes/Action/T4ActionMinimal.h"
 
 #include "GameFramework/PlayerController.h"
 
@@ -51,7 +51,7 @@ protected:
 public:
 	// IT4GameController
 	ET4LayerType GetLayerType() const override { return LayerType; }
-	ET4ControllerType GetType() const override { return ET4ControllerType::Player; }
+	ET4GameControllerType GetGameControllerType() const override { return ET4GameControllerType::GameController_Player; }
 
 	bool SetGameObject(const FT4ObjectID& InNewTargetID) override;
 	void ClearGameObject(bool bInSetDefaultPawn) override;
@@ -64,8 +64,6 @@ public:
 	bool HasPlayingAction(const FT4ActionKey& InActionKey) const override; // #20
 
 	AController* GetAController() override;
-	IT4PlayerController* CastPlayerController() override;
-	IT4NPCAIController* CastNPCAIController() override { return nullptr; }
 
 public:
 	// IT4PlayerController
@@ -119,9 +117,14 @@ public:
 	FOnViewTargetChanged& GetOnViewTargetChanged() override { return OnViewTargetChanged; } // #39
 #endif
 
-private:
-	IT4GameObject* GetGameObject(const FT4ObjectID& InObjectID) const;
+protected:
+	virtual void NotifyAdvance(float InDeltaTime) {} // #49
+	virtual void NotifyPossess(IT4GameObject* InNewGameObject) {} // #49
+	virtual void NotifyUnPossess(IT4GameObject* InOldGameObject) {} // #49
 
+	IT4GameObject* FindGameObject(const FT4ObjectID& InObjectID) const; // #49
+
+private:
 	void AttachCameraComponent(APawn* InOuter, USceneComponent* InParentComponent);
 	void DetachCameraComponent();
 

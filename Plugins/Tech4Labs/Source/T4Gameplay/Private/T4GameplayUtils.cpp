@@ -19,9 +19,9 @@ namespace T4GameplayUtil
 {
 	IT4PlayerController* GetPlayerController(ET4LayerType InLayerType)
 	{
-		IT4GameWorld* GameWorld = T4EngineWorldGet(InLayerType);
-		check(nullptr != GameWorld);
-		IT4PlayerController* PlayerController = GameWorld->GetPCInterface();
+		IT4GameFramework* GameFramework = T4FrameworkGet(InLayerType);
+		check(nullptr != GameFramework);
+		IT4PlayerController* PlayerController = GameFramework->GetPCInterface();
 		check(nullptr != PlayerController);
 		return PlayerController;
 	}

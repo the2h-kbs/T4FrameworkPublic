@@ -24,7 +24,7 @@ public:
 	bool bPrimary; // #20 : 꼭 하나만 실행되어야 할 경우 사용...
 
 	UPROPERTY(Transient)
-	bool bForceOverrideExisting; // #44 : 이미 플레이중인 Primary Key 가 있으면 삭제하고 플레이...
+	bool bOverrideExisting; // #44 : 이미 플레이중인 Primary Key 가 있으면 삭제하고 플레이...
 
 	UPROPERTY(Transient)
 	FName DebugKeyName; // #20 : 스트링으로 Key 를 만들경우 디버깅을 위해 보존...
@@ -33,47 +33,47 @@ public:
 	FT4ActionKey()
 		: Value(INVALID_ACTION_KEY)
 		, bPrimary(false)
-		, bForceOverrideExisting(false)
+		, bOverrideExisting(false)
 		, DebugKeyName(NAME_None)
 	{
 	}
 
-	FT4ActionKey(const uint32& InValue, bool bInPrimary = false, bool bInForceOverrideExisting = false)
+	FT4ActionKey(const uint32& InValue, bool bInPrimary = false, bool bInOverrideExisting = false)
 		: Value(InValue)
 		, bPrimary(bInPrimary)
-		, bForceOverrideExisting(bInForceOverrideExisting)
+		, bOverrideExisting(bInOverrideExisting)
 		, DebugKeyName(NAME_None)
 	{
 	}
 
-	FT4ActionKey(const uint64* InValue, bool bInPrimary = false, bool bInForceOverrideExisting = false)
+	FT4ActionKey(const uint64* InValue, bool bInPrimary = false, bool bInOverrideExisting = false)
 		: Value(GetTypeHash(InValue))
 		, bPrimary(bInPrimary)
-		, bForceOverrideExisting(bInForceOverrideExisting)
+		, bOverrideExisting(bInOverrideExisting)
 		, DebugKeyName(NAME_None)
 	{
 	}
 
-	FT4ActionKey(const TCHAR* InValue, bool bInPrimary = false, bool bInForceOverrideExisting = false)
+	FT4ActionKey(const TCHAR* InValue, bool bInPrimary = false, bool bInOverrideExisting = false)
 		: Value(GetTypeHash(InValue))
 		, bPrimary(bInPrimary)
-		, bForceOverrideExisting(bInForceOverrideExisting)
+		, bOverrideExisting(bInOverrideExisting)
 	{
 		DebugKeyName = InValue;
 	}
 
-	FT4ActionKey(const FName& InValue, bool bInPrimary = false, bool bInForceOverrideExisting = false)
+	FT4ActionKey(const FName& InValue, bool bInPrimary = false, bool bInOverrideExisting = false)
 		: Value(GetTypeHash(InValue))
 		, bPrimary(bInPrimary)
-		, bForceOverrideExisting(bInForceOverrideExisting)
+		, bOverrideExisting(bInOverrideExisting)
 	{
 		DebugKeyName = InValue;
 	}
 
-	FT4ActionKey(const FString& InValue, bool bInPrimary = false, bool bInForceOverrideExisting = false)
+	FT4ActionKey(const FString& InValue, bool bInPrimary = false, bool bInOverrideExisting = false)
 		: Value(GetTypeHash(InValue))
 		, bPrimary(bInPrimary)
-		, bForceOverrideExisting(bInForceOverrideExisting)
+		, bOverrideExisting(bInOverrideExisting)
 	{
 		DebugKeyName = *InValue;
 	}
@@ -81,7 +81,7 @@ public:
 	FT4ActionKey(const FT4ActionKey& InValue)
 		: Value(InValue.Value)
 		, bPrimary(InValue.bPrimary)
-		, bForceOverrideExisting(InValue.bForceOverrideExisting)
+		, bOverrideExisting(InValue.bOverrideExisting)
 		, DebugKeyName(InValue.DebugKeyName)
 	{
 	}
@@ -95,7 +95,7 @@ public:
 	{
 		Value = InRhs.Value;
 		bPrimary = InRhs.bPrimary;
-		bForceOverrideExisting = InRhs.bForceOverrideExisting;
+		bOverrideExisting = InRhs.bOverrideExisting;
 		DebugKeyName = InRhs.DebugKeyName;
 		return *this;
 	}

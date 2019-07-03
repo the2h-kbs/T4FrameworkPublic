@@ -49,6 +49,8 @@ public:
 	bool DoCameraYaw(float InAxisValue);
 
 protected:
+	friend class FT4ActionTask;
+
 	virtual void Enter() {}
 	virtual void Leave() {}
 
@@ -62,6 +64,7 @@ protected:
 	bool IsMovementLocked() const; // #48
 
 	IT4GameFramework* GetGameFramework() const;
+	IT4GameObject* GetPlayerObject() const;
 	IT4PlayerController* GetPlayerController() const;
 	IT4PacketHandlerCS* GetPacketHandlerCS() const;
 

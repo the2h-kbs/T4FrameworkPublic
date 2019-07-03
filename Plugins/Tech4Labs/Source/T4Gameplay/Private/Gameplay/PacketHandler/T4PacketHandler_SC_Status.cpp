@@ -37,7 +37,9 @@ void FT4PacketHandlerSC::HandleSC_Equip(const FT4PacketEquipSC* InPacket)
 	}
 	if (TargetObject->IsPlayer() && InPacket->bMainWeapon) // #48
 	{
-		AT4GameplayPlayerController* PlayerController = GetPlayerController();
+		AT4GameplayPlayerController* PlayerController = Cast<AT4GameplayPlayerController>(
+			GetPlayerController()->GetAController()
+		);
 		check(nullptr != PlayerController);
 		PlayerController->SetMainWeaponDataID(InPacket->ItemWeaponDataID);
 	}
@@ -67,8 +69,9 @@ void FT4PacketHandlerSC::HandleSC_UnEquip(const FT4PacketUnEquipSC* InPacket)
 	}
 	if (TargetObject->IsPlayer() && InPacket->bMainWeapon) // #48
 	{
-		AT4GameplayPlayerController* PlayerController = GetPlayerController();
-		check(nullptr != PlayerController);
+		AT4GameplayPlayerController* PlayerController = Cast<AT4GameplayPlayerController>(
+			GetPlayerController()->GetAController()
+		);
 		PlayerController->SetMainWeaponDataID(InvalidGameDataID);
 	}
 	FT4UnEquipWeaponAction NewAction;

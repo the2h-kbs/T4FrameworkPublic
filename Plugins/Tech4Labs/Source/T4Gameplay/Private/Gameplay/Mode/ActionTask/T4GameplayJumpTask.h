@@ -11,7 +11,7 @@
 class FT4JumpActionTask : public FT4ActionTask
 {
 public:
-	explicit FT4JumpActionTask(ET4LayerType InLayerType);
+	explicit FT4JumpActionTask(FT4GameplayModeBase* InGameplayMode);
 	~FT4JumpActionTask();
 
 protected:

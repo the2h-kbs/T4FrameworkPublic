@@ -441,9 +441,9 @@ void UT4GameplayModeHandler::SwitchModeStrategy(ET4GameplayModeType InChangeMode
 
 IT4PlayerController* UT4GameplayModeHandler::GetPlayerController() const
 {
-	IT4GameWorld* GameWorld = T4EngineWorldGet(LayerType);
-	check(nullptr != GameWorld);
-	IT4PlayerController* PlayerController = GameWorld->GetPCInterface();
+	IT4GameFramework* GameFramework = T4FrameworkGet(LayerType);
+	check(nullptr != GameFramework);
+	IT4PlayerController* PlayerController = GameFramework->GetPCInterface();
 	check(nullptr != PlayerController);
 	return PlayerController;
 }

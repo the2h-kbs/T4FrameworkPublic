@@ -24,13 +24,13 @@ EBTNodeResult::Type UBTTask_T4NormalAttack::ExecuteTask(
 	{
 		return EBTNodeResult::Failed;
 	}
-	if (!NPCController->IsCurrentAggressive())
-	{
-		return EBTNodeResult::Failed;
-	}
 	if (NPCController->IsAttacking())
 	{
 		return EBTNodeResult::Succeeded; // 공격중이라, 더이상 진행이 안되도록 처리!
+	}
+	if (!NPCController->IsCurrentAggressive())
+	{
+		return EBTNodeResult::Failed;
 	}
 	FT4NPCAIMemory& AIMemory = NPCController->GetAIMemory();
 	FT4ObjectID AttackTargetObjectID = AIMemory.AttackTargetObjectID; // #50
@@ -39,7 +39,7 @@ EBTNodeResult::Type UBTTask_T4NormalAttack::ExecuteTask(
 		return EBTNodeResult::Failed;
 	}
 	AIMemory.MoveSpeedType = ET4MoveSpeedType::Stand;
-	bool bResult = NPCController->TryNormalAttack(AttackTargetObjectID);
+	bool bResult = NPCController->DoNormalAttack(AttackTargetObjectID);
 	if (!bResult)
 	{
 		return EBTNodeResult::Failed;

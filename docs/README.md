@@ -17,7 +17,7 @@ R&D 및 기능 구현에 소요되는 시간을 아이디어 검증과 신기술
 - 지원 UE4 버전 : 4.22
 - 지원 플랫폼 : Win64, Android
 - 릴리즈 버전 : 2019.10.01 (예정)
-- 웹사이트 : <https://www.tech4labs.com>
+- 웹사이트 : <https://tech4labs.com>
 
 ## 3. 마일스톤
 
@@ -41,8 +41,10 @@ R&D 및 기능 구현에 소요되는 시간을 아이디어 검증과 신기술
     - <https://youtu.be/KjuzWBJAGOQ>
   - [2019.06.14] Control Mode (TPS & ShoulderView) & Locomotion
     - <https://youtu.be/gGSFkACqXNU>
-  - **[2019.06.23] Layer Animation & Rolling & Combo Attack**
+  - [2019.06.23] Layer Animation & Rolling & Combo Attack
     - <https://youtu.be/IUq6cL5ZYy8>
+  - **[2019.07.03] NPC Combat AI Testing (Step-1, UE4 BehaviorTree)**
+    - <https://youtu.be/4GPOaHegEK4>
 
 ## 5. 배포
 

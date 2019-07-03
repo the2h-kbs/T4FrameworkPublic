@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "T4FrameworkNet.h"
 #include "T4FrameworkDelegates.h" // #42
+#include "T4FrameworkController.h" // #42
 
 #include "T4Core/Public/T4CoreTypes.h"
 #include "T4Engine/Public/T4EngineTypes.h"
@@ -16,7 +17,6 @@
 /**
   * 
  */
-class IT4PlayerController;
 class IT4GameWorld;
 class IT4GameObject;
 class AAIController;

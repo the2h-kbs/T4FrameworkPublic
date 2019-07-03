@@ -27,8 +27,8 @@ public:
 	bool Bind(const FT4GameDataID& InItemGameDataID); // #31, #50
 
 protected:
-	void Reset() override; // #50
-	void AIStart() override; // #50
+	void NotifyAIStart() override; // #50
+	void NotifyAIEnd() override; // #50
 
 private:
 	FT4GameDataID ItemGameDataID;

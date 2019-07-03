@@ -3,27 +3,38 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Public/T4EngineTypes.h"
+#include "T4Engine/Public/T4EngineTypes.h"
+#include "T4Engine/Public/Action/T4EngineActionKey.h"
 
+#include "Engine/EngineBaseTypes.h"
 #include "InputCoreTypes.h"
 #include "GenericPlatform/ICursor.h"
 
 /**
   * https://docs.unrealengine.com/ko/Gameplay/Framework/Controller/PlayerController/index.html
  */
+enum ET4GameControllerType
+{
+	GameController_Player,
+	GameController_NPC,
+
+	GameController_None
+};
+
 class AController;
+class UInputComponent;
 class IT4ActionControl;
 class IT4GameObject;
 class IT4NPCAIController;
 class IT4PlayerController;
 // #34
-class T4ENGINE_API IT4GameController
+class T4FRAMEWORK_API IT4GameController
 {
 public:
 	virtual ~IT4GameController() {}
 
 	virtual ET4LayerType GetLayerType() const = 0;
-	virtual ET4ControllerType GetType() const = 0;
+	virtual ET4GameControllerType GetGameControllerType() const = 0;
 
 	virtual bool SetGameObject(const FT4ObjectID& InNewTargetID) = 0;
 	virtual void ClearGameObject(bool bInSetDefaultPawn) = 0;
@@ -36,17 +47,15 @@ public:
 	virtual bool HasPlayingAction(const FT4ActionKey& InActionKey) const = 0; // #20
 
 	virtual AController* GetAController() = 0;
-	virtual IT4PlayerController* CastPlayerController() = 0;
-	virtual IT4NPCAIController* CastNPCAIController() = 0;
 };
 
-class T4ENGINE_API IT4NPCAIController : public IT4GameController
+class T4FRAMEWORK_API IT4NPCAIController : public IT4GameController
 {
 public:
 	virtual ~IT4NPCAIController() {}
 };
 
-class T4ENGINE_API IT4PlayerController : public IT4GameController
+class T4FRAMEWORK_API IT4PlayerController : public IT4GameController
 {
 public:
 	virtual ~IT4PlayerController() {}

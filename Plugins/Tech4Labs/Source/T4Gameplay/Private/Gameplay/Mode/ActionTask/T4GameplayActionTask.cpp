@@ -2,6 +2,8 @@
 
 #include "T4GameplayActionTask.h"
 
+#include "Gameplay/Mode/T4GameplayModeBase.h" // #49
+
 #include "Gameplay/T4GameplayInstance.h"
 #include "GameDB/T4GameDB.h"
 
@@ -13,8 +15,8 @@
 /**
   * #48
  */
-FT4ActionTask::FT4ActionTask(ET4LayerType InLayerType)
-	: LayerType(InLayerType)
+FT4ActionTask::FT4ActionTask(FT4GameplayModeBase* InGameplayMode)
+	: GameplayMode(InGameplayMode)
 	, bPressed(false)
 	, bStarted(false)
 	, bMovementLcoked(false)
@@ -60,43 +62,32 @@ bool FT4ActionTask::OnEnd(const float InParam, FString& OutErrorMsg)
 	return bResult;
 }
 
+ET4GameplayModeType FT4ActionTask::GetModeType() const
+{
+	check(nullptr != GameplayMode);
+	return GameplayMode->GetModeType();
+}
+
 IT4GameFramework* FT4ActionTask::GetGameFramework() const
 {
-	IT4GameFramework* GameFramework = T4FrameworkGet(LayerType);
-	check(nullptr != GameFramework);
-	return GameFramework;
+	check(nullptr != GameplayMode);
+	return GameplayMode->GetGameFramework();
 }
 
 IT4GameObject* FT4ActionTask::GetPlayerObject() const
 {
-	AT4GameplayPlayerController* PlayerController = GetPlayerController();
-	if (nullptr == PlayerController || PlayerController->HasGameObject())
-	{
-		return nullptr;
-	}
-	return PlayerController->GetGameObject();
+	check(nullptr != GameplayMode);
+	return GameplayMode->GetPlayerObject();
 }
 
-AT4GameplayPlayerController* FT4ActionTask::GetPlayerController() const
+IT4PlayerController* FT4ActionTask::GetPlayerController() const
 {
-	IT4GameWorld* GameWorld = T4EngineWorldGet(LayerType);
-	check(nullptr != GameWorld);
-	IT4PlayerController* PlayerController = GameWorld->GetPCInterface();
-	check(nullptr != PlayerController);
-	return Cast<AT4GameplayPlayerController>(PlayerController->GetAController());
+	check(nullptr != GameplayMode);
+	return GameplayMode->GetPlayerController();
 }
 
 IT4PacketHandlerCS* FT4ActionTask::GetPacketHandlerCS() const
 {
-	check(ET4LayerType::Max > LayerType);
-	IT4GameFramework* GameFramework = T4FrameworkGet(LayerType);
-	check(nullptr != GameFramework);
-	FT4GameplayInstance* GameplayInstance = FT4GameplayInstance::CastGameplayInstance(
-		GameFramework->GetGameplayHandler()
-	);
-	if (nullptr == GameplayInstance)
-	{
-		return nullptr;
-	}
-	return GameplayInstance->GetPacketHandlerCS();
+	check(nullptr != GameplayMode);
+	return GameplayMode->GetPacketHandlerCS();
 }

@@ -27,7 +27,7 @@ public:
 	FT4GameDataID SkillDataID;
 
 	UPROPERTY(VisibleAnywhere)
-	FT4ObjectID TargetrObjectID;
+	FVector UseDirection; // #49
 
 public:
 	FT4PacketAttackSC()
@@ -40,6 +40,11 @@ public:
 		if (!ObjectID.IsValid())
 		{
 			OutMsg = TEXT("Invalid ObjectID");
+			return false;
+		}
+		if (UseDirection.IsNearlyZero())
+		{
+			OutMsg = TEXT("Invalid UseDirection!");
 			return false;
 		}
 		return true;

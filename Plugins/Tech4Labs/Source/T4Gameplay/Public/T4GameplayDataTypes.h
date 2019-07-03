@@ -118,6 +118,11 @@ public:
 		return FT4ActionKey(RowName, true);
 	}
 
+	FORCEINLINE FT4ActionKey ToOverlapActionKey() const // #49
+	{
+		return FT4ActionKey(RowName, false);
+	}
+
 	FORCEINLINE FString ToNameString() const
 	{
 		return RowName.ToString();
@@ -166,7 +171,19 @@ public:
 	{
 	}
 
+	FT4GameSkillDataID(const FName& InRowName)
+		: FT4GameDataID(ET4GameDataType::Skill, InRowName)
+	{
+	}
+
 	FORCEINLINE FT4GameDataID operator=(const FT4GameSkillDataID& InRhs)
+	{
+		Type = InRhs.Type;
+		RowName = InRhs.RowName;
+		return *this;
+	}
+
+	FORCEINLINE FT4GameSkillDataID operator=(const FT4GameDataID& InRhs)
 	{
 		Type = InRhs.Type;
 		RowName = InRhs.RowName;

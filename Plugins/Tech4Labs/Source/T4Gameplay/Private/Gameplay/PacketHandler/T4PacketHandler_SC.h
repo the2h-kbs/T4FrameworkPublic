@@ -61,7 +61,7 @@ private:
 	void HandleSC_Effect(const struct FT4PacketEffectSC* InPacket);
 
 	UWorld* GetWorld() const;
-	AT4GameplayPlayerController* GetPlayerController() const;
+	IT4PlayerController* GetPlayerController() const;
 	IT4GameObject* GetGameObject(const FT4ObjectID& InObjectID) const;
 
 private:

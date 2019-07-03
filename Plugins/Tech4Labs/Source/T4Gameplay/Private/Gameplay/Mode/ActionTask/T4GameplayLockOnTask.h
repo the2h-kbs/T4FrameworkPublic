@@ -11,7 +11,7 @@
 class FT4LockOnActionTask : public FT4ActionTask
 {
 public:
-	explicit FT4LockOnActionTask(ET4LayerType InLayerType);
+	explicit FT4LockOnActionTask(FT4GameplayModeBase* InGameplayMode);
 	~FT4LockOnActionTask();
 
 	bool Start(const float InSyncHeadYawAngle, FString& OutErrorMsg);

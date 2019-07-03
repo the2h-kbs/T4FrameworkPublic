@@ -11,7 +11,7 @@
 class FT4CameraRotateActionTask : public FT4ActionTask
 {
 public:
-	explicit FT4CameraRotateActionTask(ET4LayerType InLayerType);
+	explicit FT4CameraRotateActionTask(FT4GameplayModeBase* InGameplayMode);
 	~FT4CameraRotateActionTask();
 
 protected:

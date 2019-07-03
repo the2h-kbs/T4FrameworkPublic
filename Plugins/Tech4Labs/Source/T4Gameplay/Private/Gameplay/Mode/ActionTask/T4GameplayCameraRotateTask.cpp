@@ -17,8 +17,8 @@
 /**
   * #48
  */
-FT4CameraRotateActionTask::FT4CameraRotateActionTask(ET4LayerType InLayerType)
-	: FT4ActionTask(InLayerType)
+FT4CameraRotateActionTask::FT4CameraRotateActionTask(FT4GameplayModeBase* InGameplayMode)
+	: FT4ActionTask(InGameplayMode)
 	, bCameraRotateHoldStart(false)
 	, CameraRotateHoldTimeLeft(0.0f)
 {
@@ -74,14 +74,14 @@ void FT4CameraRotateActionTask::Released()
 
 void FT4CameraRotateActionTask::SetMouseCursor(bool bShow)
 {
-	AT4GameplayPlayerController* PlayerController = GetPlayerController();
+	IT4PlayerController* PlayerController = GetPlayerController();
 	check(nullptr != PlayerController);
 	PlayerController->ShowMouseCursor(bShow);
 }
 
 void FT4CameraRotateActionTask::SetMouseMoveLock(bool bLock)
 {
-	AT4GameplayPlayerController* PlayerController = GetPlayerController();
+	IT4PlayerController* PlayerController = GetPlayerController();
 	check(nullptr != PlayerController);
 	PlayerController->SetCameraLock(bLock);
 }

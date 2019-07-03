@@ -27,14 +27,14 @@ void AT4GameplayItemAIController::TickActor(
 	Super::TickActor(InDeltaTime, InTickType, InThisTickFunction);
 }
 
-void AT4GameplayItemAIController::Reset() // #50
+void AT4GameplayItemAIController::NotifyAIEnd() // #50
 {
 	// WARN : AsyncLoad 가 걸렸을 수 있음으로 종료 시 명시적으로 Reset 을 호출해야 한다.
 	//BlackboardAssetLoader.Reset();
 	//BehaviorTreeAssetLoader.Reset();
 }
 
-void AT4GameplayItemAIController::AIStart() // #50
+void AT4GameplayItemAIController::NotifyAIStart() // #50
 {
 
 }

@@ -6,6 +6,7 @@
 
 #include "Public/T4FrameworkNet.h" // #25, #42
 #include "Public/T4FrameworkAssetLoader.h" // #42
+#include "Public/T4FrameworkController.h"
 
 #include "T4Engine/Public/T4Engine.h"
 
@@ -60,7 +61,7 @@ protected:
 public:
 	// IT4GameController
 	ET4LayerType GetLayerType() const override { return LayerType; }
-	ET4ControllerType GetType() const override { return ET4ControllerType::NPC; }
+	ET4GameControllerType GetGameControllerType() const override { return ET4GameControllerType::GameController_NPC; }
 
 	bool SetGameObject(const FT4ObjectID& InNewTargetID) override;
 	void ClearGameObject(bool bInSetDefaultPawn) override;
@@ -73,17 +74,17 @@ public:
 	bool HasPlayingAction(const FT4ActionKey& InActionKey) const override; // #20
 
 	AController* GetAController() override;
-	IT4PlayerController* CastPlayerController() override { return nullptr; }
-	IT4NPCAIController* CastNPCAIController() override;
 
 public:
 	void SetNetID(const FT4NetID& InNetID) { NetID = InNetID;}
 	const FT4NetID& GetNetID() const { return NetID; }
 
 protected:
-	virtual void AIReady() {} // #50
-	virtual void AIStart() {} // #50
-	virtual void AIEnd() {} // #50
+	virtual void NotifyAIReady() {} // #50
+	virtual void NotifyAIStart() {} // #50
+	virtual void NotifyAIEnd() {} // #50
+
+	IT4GameObject* FindGameObject(const FT4ObjectID& InObjectID) const; // #49
 
 protected:
 	ET4LayerType LayerType;

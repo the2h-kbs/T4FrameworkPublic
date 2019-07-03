@@ -48,22 +48,22 @@ void FT4GameplayModeBase::OnEnter()
 
 	// #48
 	check(nullptr == ActionTasks[ActionTask_Attack]); 
-	ActionTasks[ActionTask_Attack] = new FT4ComboAttackActionTask(LayerType);
+	ActionTasks[ActionTask_Attack] = new FT4ComboAttackActionTask(this);
 
 	check(nullptr == ActionTasks[ActionTask_CameraRotate]);
-	ActionTasks[ActionTask_CameraRotate] = new FT4CameraRotateActionTask(LayerType);
+	ActionTasks[ActionTask_CameraRotate] = new FT4CameraRotateActionTask(this);
 
 	check(nullptr == ActionTasks[ActionTask_Jump]);
-	ActionTasks[ActionTask_Jump] = new FT4JumpActionTask(LayerType);
+	ActionTasks[ActionTask_Jump] = new FT4JumpActionTask(this);
 
 	check(nullptr == ActionTasks[ActionTask_Roll]);
-	ActionTasks[ActionTask_Roll] = new FT4RollActionTask(LayerType);
+	ActionTasks[ActionTask_Roll] = new FT4RollActionTask(this);
 
 	check(nullptr == ActionTasks[ActionTask_Teleport]);
-	ActionTasks[ActionTask_Teleport] = new FT4TeleportActionTask(LayerType);
+	ActionTasks[ActionTask_Teleport] = new FT4TeleportActionTask(this);
 
 	check(nullptr == ActionTasks[ActionTask_LockOn]);
-	ActionTasks[ActionTask_LockOn] = new FT4LockOnActionTask(LayerType);
+	ActionTasks[ActionTask_LockOn] = new FT4LockOnActionTask(this);
 	// ~#48
 
 	Enter();
@@ -264,9 +264,9 @@ bool FT4GameplayModeBase::DoChangePlayer()
 	{
 		return false;
 	}
-	FT4ChangePlayerAction NewAction;
-	NewAction.ObjectID = MouseOverObject->GetObjectID();
-	GameWorld->OnExecute(&NewAction);
+	IT4PlayerController* PlayerController = GetPlayerController();
+	check(nullptr != PlayerController);
+	PlayerController->SetGameObject(MouseOverObject->GetObjectID());
 	return true;
 }
 
@@ -398,11 +398,21 @@ IT4GameFramework* FT4GameplayModeBase::GetGameFramework() const
 	return GameFramework;
 }
 
+IT4GameObject* FT4GameplayModeBase::GetPlayerObject() const
+{
+	IT4PlayerController* PlayerController = GetPlayerController();
+	if (nullptr == PlayerController || PlayerController->HasGameObject())
+	{
+		return nullptr;
+	}
+	return PlayerController->GetGameObject();
+}
+
 IT4PlayerController* FT4GameplayModeBase::GetPlayerController() const
 {
-	IT4GameWorld* GameWorld = T4EngineWorldGet(LayerType);
-	check(nullptr != GameWorld);
-	IT4PlayerController* PlayerController = GameWorld->GetPCInterface();
+	IT4GameFramework* GameFramework = T4FrameworkGet(LayerType);
+	check(nullptr != GameFramework);
+	IT4PlayerController* PlayerController = GameFramework->GetPCInterface();
 	check(nullptr != PlayerController);
 	return PlayerController;
 }

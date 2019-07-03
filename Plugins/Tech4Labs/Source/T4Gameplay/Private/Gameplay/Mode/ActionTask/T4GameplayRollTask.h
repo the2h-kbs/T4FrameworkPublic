@@ -11,7 +11,7 @@
 class FT4RollActionTask : public FT4ActionTask
 {
 public:
-	explicit FT4RollActionTask(ET4LayerType InLayerType);
+	explicit FT4RollActionTask(FT4GameplayModeBase* InGameplayMode);
 	~FT4RollActionTask();
 
 protected:

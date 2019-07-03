@@ -55,15 +55,19 @@ public:
 	UPROPERTY(EditAnywhere, Category = ServerOnly)
 	float RomaingRange; // #50
 
+	UPROPERTY(EditAnywhere, Category = ServerOnly, meta = (ClampMin = "0.0", ClampMax = "100.0"))
+	float RoamingRateRatio; // #50
+
 public:
 	FT4GameNPCTableRow()
 		: bAggressive(false)
-		, PassiveApproachTimeSec(5.0f)
+		, PassiveApproachTimeSec(5.0f/*60.0f * 5.0f*/)
 		, RunSpeed(600.0f)
 		, WalkSpeed(200.0f)
 		, FastRunSpeed(0.0f)
 		, SensoryRange(1000.0f)
 		, RomaingRange(1000.0f)
+		, RoamingRateRatio(30.0f)
 	{
 	}
 };

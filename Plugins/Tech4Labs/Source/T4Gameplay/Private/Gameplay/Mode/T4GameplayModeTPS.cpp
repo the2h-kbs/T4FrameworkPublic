@@ -8,15 +8,11 @@
 #include "T4Engine/Classes/Action/T4ActionMinimal.h"
 #include "T4Engine/Public/T4Engine.h"
 #include "T4Framework/Public/T4Framework.h"
+#include "T4Framework/Public/T4FrameworkUtils.h"
 
 #include "Public/T4Gameplay.h"
 
 #include "T4GameplayInternal.h"
-
-inline float GetHeadYawAngle2D(const FVector& InDirection)
-{
-	return FMath::Atan2(InDirection.Y, InDirection.X) * (180.f / PI); // #40
-}
 
 /**
   * #40
@@ -78,7 +74,7 @@ void FT4GameplayModeTPS::ProcessMovement(float InDeltaTime)
 				else
 				{
 					// #40 : 락온이 아니면 캐릭터 방향으로...
-					ApplyHeadYawAngle = GetHeadYawAngle2D(MovementInputVector);
+					ApplyHeadYawAngle = T4FrameworkUtil::GetHeadYawAngle2D(MovementInputVector);
 				}
 
 				FT4MoveAsyncToAction NewAction;

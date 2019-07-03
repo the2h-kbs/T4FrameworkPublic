@@ -19,8 +19,8 @@
 /**
   * #48
  */
-FT4RollActionTask::FT4RollActionTask(ET4LayerType InLayerType)
-	: FT4ActionTask(InLayerType)
+FT4RollActionTask::FT4RollActionTask(FT4GameplayModeBase* InGameplayMode)
+	: FT4ActionTask(InGameplayMode)
 	, RollHoldTimeLeft(0.0f) // #46
 {
 }
@@ -49,7 +49,7 @@ void FT4RollActionTask::Process(float InDeltaTime)
 
 bool FT4RollActionTask::Pressed(FString& OutErrorMsg)
 {
-	AT4GameplayPlayerController* PlayerController = GetPlayerController();
+	IT4PlayerController* PlayerController = GetPlayerController();
 	check(nullptr != PlayerController);
 	if (PlayerController->HasPlayingAction(T4ActionRollPKey))
 	{
@@ -82,7 +82,7 @@ void FT4RollActionTask::DoRoll() // #46
 	IT4PacketHandlerCS* PacketHandlerCS = GetPacketHandlerCS();
 	if (nullptr != PacketHandlerCS)
 	{
-		AT4GameplayPlayerController* PlayerController = GetPlayerController();
+		IT4PlayerController* PlayerController = GetPlayerController();
 		check(nullptr != PlayerController);
 		if (PlayerController->HasGameObject())
 		{
