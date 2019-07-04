@@ -8,10 +8,10 @@ R&D 및 기능 구현에 소요되는 시간을 아이디어 검증과 신기술
 - Website
   - <https://www.tech4labs.com>
 - Reference Manual
-  - https://github.com/Tech4Labs/Tech4Labs_Website/wiki
-- Binary Repository and Technical Support (Public)
+  - <https://github.com/Tech4Labs/T4FrameworkPublic/wiki>
+- Public Repository (Free License)
   - <https://github.com/Tech4Labs/T4FrameworkPublic>
-- Source Code Repository and Technical Support (Private)
+- Private Repository (Professional License)
   - <https://github.com/Tech4Labs/T4Framework>
-- Contact Us (Licenses or Technical Support)
+- Contact Us
   - SoonBo Noh (<niceofer@hotmail.com>)
