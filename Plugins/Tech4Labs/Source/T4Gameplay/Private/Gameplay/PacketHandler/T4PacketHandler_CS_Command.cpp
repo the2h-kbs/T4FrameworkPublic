@@ -35,6 +35,14 @@ void FT4PacketHandlerCS::HandleCS_CmdChangeWorld(const FT4PacketCmdChangeWorldCS
 	const FT4GameWorldData* WorldData = GameDB.GetGameData<FT4GameWorldData>(InPacket->WorldDataID);
 	if (nullptr == WorldData)
 	{
+		UE_LOG(
+			LogT4Gameplay,
+			Warning,
+			TEXT("[SL:%u] HandleCS_CmdChangeWorld '%' failed. WorldData '%s' not found."),
+			uint32(LayerType),
+			*(InPacket->ToString()),
+			*(InPacket->WorldDataID.ToString())
+		);
 		return;
 	}
 
@@ -171,7 +179,7 @@ void FT4PacketHandlerCS::HandleCS_CmdNPCEnter(const FT4PacketCmdNPCEnterCS* InPa
 		UE_LOG(
 			LogT4Gameplay,
 			Warning,
-			TEXT("FT4PacketHandlerCS : failed to npc enter. NPCDataID '%s' Not Found."),
+			TEXT("FT4PacketHandlerCS : failed to npc enter. NPCData '%s' Not Found."),
 			*(InPacket->NPCDataID.ToString())
 		);
 		return;
@@ -261,7 +269,7 @@ void FT4PacketHandlerCS::HandleCS_CmdFOEnter(const FT4PacketCmdFOEnterCS* InPack
 		UE_LOG(
 			LogT4Gameplay,
 			Warning,
-			TEXT("FT4PacketHandlerCS : failed to FO enter. FODataID '%s' Not Found."),
+			TEXT("FT4PacketHandlerCS : failed to FO enter. FOData '%s' Not Found."),
 			*(InPacket->FODataID.ToString())
 		);
 		return;
@@ -370,7 +378,7 @@ void FT4PacketHandlerCS::HandleCS_CmdItemEnter(const FT4PacketCmdItemEnterCS* In
 		UE_LOG(
 			LogT4Gameplay,
 			Warning,
-			TEXT("FT4PacketHandlerCS : failed to Item enter. ItemDataID '%s' Not Found."),
+			TEXT("FT4PacketHandlerCS : failed to Item enter. ItemData '%s' Not Found."),
 			*(InPacket->ItemDataID.ToString())
 		);
 		return;

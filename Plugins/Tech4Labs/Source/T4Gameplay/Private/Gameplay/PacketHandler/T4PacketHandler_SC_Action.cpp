@@ -26,11 +26,26 @@ void FT4PacketHandlerSC::HandleSC_Attack(const FT4PacketAttackSC* InPacket)
 	const FT4GameSkillData* SkillData = GameDB.GetGameData<FT4GameSkillData>(InPacket->SkillDataID);
 	if (nullptr == SkillData)
 	{
+		UE_LOG(
+			LogT4Gameplay,
+			Warning,
+			TEXT("[SL:%u] HandleSC_Attack '%' failed. SkillData '%s' not found."),
+			uint32(LayerType),
+			*(InPacket->ToString()),
+			*(InPacket->SkillDataID.ToString())
+		);
 		return;
 	}
 	IT4GameObject* AttackerObject = GetGameObject(InPacket->ObjectID);
 	if (nullptr == AttackerObject)
 	{
+		UE_LOG(
+			LogT4Gameplay,
+			Warning,
+			TEXT("[SL:%u] HandleSC_Attack '%' failed. AttackerObject not found."),
+			uint32(LayerType),
+			*(InPacket->ToString())
+		);
 		return;
 	}
 	FT4ActionParameters ActionParameters;
@@ -56,11 +71,26 @@ void FT4PacketHandlerSC::HandleSC_Effect(const FT4PacketEffectSC* InPacket)
 	const FT4GameEffectData* EffectData = GameDB.GetGameData<FT4GameEffectData>(InPacket->EffectDataID);
 	if (nullptr == EffectData)
 	{
+		UE_LOG(
+			LogT4Gameplay,
+			Warning,
+			TEXT("[SL:%u] HandleSC_Effect '%' failed. EffectData '%s' not found."),
+			uint32(LayerType),
+			*(InPacket->ToString()),
+			*(InPacket->EffectDataID.ToString())
+		);
 		return;
 	}
 	IT4GameObject* TargetObject = GetGameObject(InPacket->ObjectID);
 	if (nullptr == TargetObject)
 	{
+		UE_LOG(
+			LogT4Gameplay,
+			Warning,
+			TEXT("[SL:%u] HandleSC_Effect '%' failed. TargetObject not found."),
+			uint32(LayerType),
+			*(InPacket->ToString())
+		);
 		return;
 	}
 	FT4ContiAction NewAction;

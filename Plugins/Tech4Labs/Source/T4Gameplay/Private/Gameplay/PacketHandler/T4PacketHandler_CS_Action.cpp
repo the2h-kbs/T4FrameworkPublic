@@ -31,7 +31,7 @@ void FT4PacketHandlerCS::HandleCS_Attack(const FT4PacketAttackCS* InPacket)
 	{
 		UE_LOG(
 			LogT4Gameplay,
-			Error,
+			Warning,
 			TEXT("[SL:%u] HandleCS_Attack '%' failed. AttackerObject not found."),
 			uint32(LayerType),
 			*(InPacket->ToString())

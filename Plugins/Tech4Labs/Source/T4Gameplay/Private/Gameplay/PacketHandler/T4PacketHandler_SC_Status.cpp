@@ -28,11 +28,26 @@ void FT4PacketHandlerSC::HandleSC_Equip(const FT4PacketEquipSC* InPacket)
 	const FT4GameItemWeaponData* ItemData = GameDB.GetGameData<FT4GameItemWeaponData>(InPacket->ItemWeaponDataID);
 	if (nullptr == ItemData)
 	{
+		UE_LOG(
+			LogT4Gameplay,
+			Warning,
+			TEXT("[SL:%u] HandleSC_Equip '%' failed. ItemWeaponData '%s' not found."),
+			uint32(LayerType),
+			*(InPacket->ToString()),
+			*(InPacket->ItemWeaponDataID.ToString())
+		);
 		return;
 	}
 	IT4GameObject* TargetObject = GetGameObject(InPacket->ObjectID);
 	if (nullptr == TargetObject)
 	{
+		UE_LOG(
+			LogT4Gameplay,
+			Warning,
+			TEXT("[SL:%u] HandleSC_Equip '%' failed. TargetObject not found."),
+			uint32(LayerType),
+			*(InPacket->ToString())
+		);
 		return;
 	}
 	if (TargetObject->IsPlayer() && InPacket->bMainWeapon) // #48
@@ -60,11 +75,26 @@ void FT4PacketHandlerSC::HandleSC_UnEquip(const FT4PacketUnEquipSC* InPacket)
 	const FT4GameItemWeaponData* ItemData = GameDB.GetGameData<FT4GameItemWeaponData>(InPacket->ItemWeaponDataID);
 	if (nullptr == ItemData)
 	{
+		UE_LOG(
+			LogT4Gameplay,
+			Warning,
+			TEXT("[SL:%u] HandleSC_UnEquip '%' failed. ItemWeaponData '%s' not found."),
+			uint32(LayerType),
+			*(InPacket->ToString()),
+			*(InPacket->ItemWeaponDataID.ToString())
+		);
 		return;
 	}
 	IT4GameObject* TargetObject = GetGameObject(InPacket->ObjectID);
 	if (nullptr == TargetObject)
 	{
+		UE_LOG(
+			LogT4Gameplay,
+			Warning,
+			TEXT("[SL:%u] HandleSC_UnEquip '%' failed. TargetObject not found."),
+			uint32(LayerType),
+			*(InPacket->ToString())
+		);
 		return;
 	}
 	if (TargetObject->IsPlayer() && InPacket->bMainWeapon) // #48
@@ -88,11 +118,26 @@ void FT4PacketHandlerSC::HandleSC_Exchange(const FT4PacketExchangeSC* InPacket)
 	const FT4GameItemCostumeData* ItemData = GameDB.GetGameData<FT4GameItemCostumeData>(InPacket->ItemCostumeDataID);
 	if (nullptr == ItemData)
 	{
+		UE_LOG(
+			LogT4Gameplay,
+			Warning,
+			TEXT("[SL:%u] HandleSC_Exchange '%' failed. ItemData '%s' not found."),
+			uint32(LayerType),
+			*(InPacket->ToString()),
+			*(InPacket->ItemCostumeDataID.ToString())
+		);
 		return;
 	}
 	IT4GameObject* TargetObject = GetGameObject(InPacket->ObjectID);
 	if (nullptr == TargetObject)
 	{
+		UE_LOG(
+			LogT4Gameplay,
+			Warning,
+			TEXT("[SL:%u] HandleSC_Exchange '%' failed. TargetObject not found."),
+			uint32(LayerType),
+			*(InPacket->ToString())
+		);
 		return;
 	}
 	FT4ExchangeCostumeAction NewAction;

@@ -25,6 +25,13 @@ void FT4PacketHandlerSC::HandleSC_MoveTo(const FT4PacketMoveToSC* InPacket)
 	IT4GameObject* TargetObject = GetGameObject(InPacket->ObjectID);
 	if (nullptr == TargetObject)
 	{
+		UE_LOG(
+			LogT4Gameplay,
+			Warning,
+			TEXT("[SL:%u] HandleSC_MoveTo '%' failed. TargetObject not found."),
+			uint32(LayerType),
+			*(InPacket->ToString())
+		);
 		return;
 	}
 	FT4MoveSyncToAction NewAction;
@@ -42,6 +49,13 @@ void FT4PacketHandlerSC::HandleSC_JumpTo(const FT4PacketJumpToSC* InPacket)
 	IT4GameObject* TargetObject = GetGameObject(InPacket->ObjectID);
 	if (nullptr == TargetObject)
 	{
+		UE_LOG(
+			LogT4Gameplay,
+			Warning,
+			TEXT("[SL:%u] HandleSC_JumpTo '%' failed. TargetObject not found."),
+			uint32(LayerType),
+			*(InPacket->ToString())
+		);
 		return;
 	}
 	FT4JumpToAction NewAction;
@@ -57,6 +71,13 @@ void FT4PacketHandlerSC::HandleSC_RollTo(const FT4PacketRollToSC* InPacket) // #
 	IT4GameObject* TargetObject = GetGameObject(InPacket->ObjectID);
 	if (nullptr == TargetObject)
 	{
+		UE_LOG(
+			LogT4Gameplay,
+			Warning,
+			TEXT("[SL:%u] HandleSC_RollTo '%' failed. TargetObject not found."),
+			uint32(LayerType),
+			*(InPacket->ToString())
+		);
 		return;
 	}
 	const bool bIsLockOn = TargetObject->HasPlayingAction(T4ActionLockOnPKey);
@@ -73,6 +94,13 @@ void FT4PacketHandlerSC::HandleSC_TurnTo(const FT4PacketTurnToSC* InPacket)
 	IT4GameObject* TargetObject = GetGameObject(InPacket->ObjectID);
 	if (nullptr == TargetObject)
 	{
+		UE_LOG(
+			LogT4Gameplay,
+			Warning,
+			TEXT("[SL:%u] HandleSC_TurnTo '%' failed. TargetObject not found."),
+			uint32(LayerType),
+			*(InPacket->ToString())
+		);
 		return;
 	}
 	if (TargetObject->IsPlayer())
@@ -93,6 +121,13 @@ void FT4PacketHandlerSC::HandleSC_TeleportTo(const FT4PacketTeleportToSC* InPack
 	IT4GameObject* TargetObject = GetGameObject(InPacket->ObjectID);
 	if (nullptr == TargetObject)
 	{
+		UE_LOG(
+			LogT4Gameplay,
+			Warning,
+			TEXT("[SL:%u] HandleSC_TeleportTo '%' failed. TargetObject not found."),
+			uint32(LayerType),
+			*(InPacket->ToString())
+		);
 		return;
 	}
 	FT4TeleportToAction NewAction;
@@ -107,6 +142,13 @@ void FT4PacketHandlerSC::HandleSC_LockOn(const FT4PacketLockOnSC* InPacket)
 	IT4GameObject* TargetObject = GetGameObject(InPacket->ObjectID);
 	if (nullptr == TargetObject)
 	{
+		UE_LOG(
+			LogT4Gameplay,
+			Warning,
+			TEXT("[SL:%u] HandleSC_LockOn '%' failed. TargetObject not found."),
+			uint32(LayerType),
+			*(InPacket->ToString())
+		);
 		return;
 	}
 	FT4LockOnAction NewAction;
@@ -124,6 +166,13 @@ void FT4PacketHandlerSC::HandleSC_LockOff(const FT4PacketLockOffSC* InPacket)
 	IT4GameObject* TargetObject = GetGameObject(InPacket->ObjectID);
 	if (nullptr == TargetObject)
 	{
+		UE_LOG(
+			LogT4Gameplay,
+			Warning,
+			TEXT("[SL:%u] HandleSC_LockOff '%' failed. TargetObject not found."),
+			uint32(LayerType),
+			*(InPacket->ToString())
+		);
 		return;
 	}
 	FT4LockOnAction NewAction;

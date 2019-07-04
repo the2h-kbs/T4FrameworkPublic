@@ -33,6 +33,14 @@ void FT4PacketHandlerSC::HandleSC_ChangeWorld(const FT4PacketChangeWorldSC* InPa
 	const FT4GameWorldData* WorldData = GameDB.GetGameData<FT4GameWorldData>(InPacket->WorldDataID);
 	if (nullptr == WorldData)
 	{
+		UE_LOG(
+			LogT4Gameplay,
+			Warning,
+			TEXT("[SL:%u] HandleSC_ChangeWorld '%' failed. WorldData '%s' not found."),
+			uint32(LayerType),
+			*(InPacket->ToString()),
+			*(InPacket->WorldDataID.ToString())
+		);
 		return;
 	}
 
@@ -57,7 +65,7 @@ void FT4PacketHandlerSC::HandleSC_MyPCEnter(const FT4PacketMyPCEnterSC* InPacket
 	{
 		UE_LOG(
 			LogT4Gameplay,
-			Error,
+			Warning,
 			TEXT("FT4PacketHandlerSC : failed to MyPC enter. PlayerDataID '%s' Not Found."),
 			*(InPacket->PlayerDataID.ToString())
 		);
@@ -103,7 +111,7 @@ void FT4PacketHandlerSC::HandleSC_PCEnter(const FT4PacketPCEnterSC* InPacket)
 	{
 		UE_LOG(
 			LogT4Gameplay,
-			Error,
+			Warning,
 			TEXT("FT4PacketHandlerSC : failed to player enter. PlayerDataID '%s' Not Found."),
 			*(InPacket->PlayerDataID.ToString())
 		);
@@ -170,8 +178,8 @@ void FT4PacketHandlerSC::HandleSC_NPCEnter(const FT4PacketNPCEnterSC* InPacket)
 	{
 		UE_LOG(
 			LogT4Gameplay,
-			Error,
-			TEXT("FT4PacketHandlerSC : failed to NPC enter. NPCDataID '%s' Not Found."),
+			Warning,
+			TEXT("FT4PacketHandlerSC : failed to NPC enter. NPCData '%s' Not Found."),
 			*(InPacket->NPCDataID.ToString())
 		);
 		return;
@@ -247,8 +255,8 @@ void FT4PacketHandlerSC::HandleSC_FOEnter(const FT4PacketFOEnterSC* InPacket)
 	{
 		UE_LOG(
 			LogT4Gameplay,
-			Error,
-			TEXT("FT4PacketHandlerSC : failed to FO enter. FODataID '%s' Not Found."),
+			Warning,
+			TEXT("FT4PacketHandlerSC : failed to FO enter. FOData '%s' Not Found."),
 			*(InPacket->FODataID.ToString())
 		);
 		return;
@@ -321,8 +329,8 @@ void FT4PacketHandlerSC::HandleSC_ItemEnter(const FT4PacketItemEnterSC* InPacket
 	{
 		UE_LOG(
 			LogT4Gameplay,
-			Error,
-			TEXT("FT4PacketHandlerSC : failed to Item enter. ItemDataID '%s' Not Found."),
+			Warning,
+			TEXT("FT4PacketHandlerSC : failed to Item enter. ItemData '%s' Not Found."),
 			*(InPacket->ItemDataID.ToString())
 		);
 		return;
