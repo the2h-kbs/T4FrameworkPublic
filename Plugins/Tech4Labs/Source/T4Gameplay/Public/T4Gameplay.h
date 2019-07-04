@@ -16,12 +16,10 @@ class T4GAMEPLAY_API IT4PacketHandlerSC
 public:
 	virtual ~IT4PacketHandlerSC() {}
 
-	virtual bool OnSendPacket(FT4PacketStoC* InPacket, IT4PlayerController* InRecvPC) = 0;
-	virtual bool OnBroadcastPacket(FT4PacketStoC* InPacket) = 0;
-
 	virtual bool OnRecvPacket(const FT4PacketStoC* InPacket) = 0;
 
 #if (WITH_EDITOR || WITH_SERVER_CODE)
+	virtual bool DoSendPacketForServer(FT4PacketStoC* InPacket, IT4PlayerController* InRecvPC) = 0;
 	virtual bool DoBroadcastPacketForServer(FT4PacketStoC* InPacket) = 0; // #50
 #endif
 };
@@ -31,7 +29,7 @@ class T4GAMEPLAY_API IT4PacketHandlerCS
 public:
 	virtual ~IT4PacketHandlerCS() {}
 
-	virtual bool OnSendPacket(FT4PacketCtoS* InPacket) = 0; // Client, Reliable
+	virtual bool DoSendPacket(FT4PacketCtoS* InPacket) = 0; // Client, Reliable
 
 	virtual bool OnRecvPacket_Validation(const FT4PacketCtoS* InPacket) = 0;
 	virtual bool OnRecvPacket(const FT4PacketCtoS* InPacket, IT4PlayerController* InSenderPC) = 0;

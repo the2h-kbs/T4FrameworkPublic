@@ -13,5 +13,5 @@ R&D 및 기능 구현에 소요되는 시간을 아이디어 검증과 신기술
   - <https://github.com/Tech4Labs/T4FrameworkPublic>
 - Source Code Repository and Technical Support (Private)
   - <https://github.com/Tech4Labs/T4Framework>
-- 라이선스 문의
+- Contact Us (Licenses or Technical Support)
   - SoonBo Noh (<niceofer@hotmail.com>)

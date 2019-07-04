@@ -285,7 +285,7 @@ bool FT4GameplayModeBase::DoLeaveObject()
 	}
 	FT4PacketCmdPCLeaveCS NewPacketCS; // #27
 	NewPacketCS.LeaveObjectID = PlayerController->GetGameObjectID();
-	PacketHandlerCS->OnSendPacket(&NewPacketCS);
+	PacketHandlerCS->DoSendPacket(&NewPacketCS);
 	return true;
 }
 

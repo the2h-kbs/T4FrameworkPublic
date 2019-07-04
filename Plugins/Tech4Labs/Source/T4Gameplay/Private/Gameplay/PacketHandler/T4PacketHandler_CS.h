@@ -18,7 +18,7 @@ public:
 	explicit FT4PacketHandlerCS(ET4LayerType InLayerType);
 	~FT4PacketHandlerCS();
 
-	bool OnSendPacket(FT4PacketCtoS* InPacket) override; // Client, Reliable
+	bool DoSendPacket(FT4PacketCtoS* InPacket) override; // Client, Reliable
 
 	bool OnRecvPacket_Validation(const FT4PacketCtoS* InPacket) override;
 	bool OnRecvPacket(const FT4PacketCtoS* InPacket, IT4PlayerController* InSenderPC) override;
@@ -71,8 +71,6 @@ private:
 #endif
 
 	IT4PacketHandlerSC* GetPacketHandlerSC() const;
-
-	bool DoSendPacketForServer(FT4PacketStoC* InSendPacket);
 
 private:
 	ET4LayerType LayerType;

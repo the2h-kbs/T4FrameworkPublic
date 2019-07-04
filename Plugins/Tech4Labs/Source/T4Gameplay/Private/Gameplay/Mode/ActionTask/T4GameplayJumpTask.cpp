@@ -101,7 +101,7 @@ void FT4JumpActionTask::DoJump() // #46
 			FT4PacketJumpCS NewPacketCS; // #27
 			NewPacketCS.SenderID = PlayerController->GetGameObjectID();
 			NewPacketCS.JumpDirection = JumpDirection;
-			PacketHandlerCS->OnSendPacket(&NewPacketCS);
+			PacketHandlerCS->DoSendPacket(&NewPacketCS);
 		}
 	}
 	OnReset();

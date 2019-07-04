@@ -127,28 +127,7 @@ IT4PacketHandlerSC* FT4PacketHandlerCS::GetPacketHandlerSC() const
 	return GameplayInstance->GetPacketHandlerSC();
 }
 
-bool FT4PacketHandlerCS::DoSendPacketForServer(FT4PacketStoC* InSendPacket)
-{
-	FString OutString;
-	if (!InSendPacket->Validate(OutString))
-	{
-		UE_LOG(
-			LogT4Gameplay,
-			Error,
-			TEXT("[SL:%u] DoSendPacket '%s' failed. error msg '%s'"),
-			uint32(LayerType),
-			*(InSendPacket->ToString()),
-			*OutString
-		);
-		return false;
-	}
-	IT4PacketHandlerSC* PacketHandlerSC = GetPacketHandlerSC();
-	check(nullptr != PacketHandlerSC);
-	PacketHandlerSC->OnBroadcastPacket(InSendPacket);
-	return true;
-}
-
-bool FT4PacketHandlerCS::OnSendPacket(FT4PacketCtoS* InPacket) 
+bool FT4PacketHandlerCS::DoSendPacket(FT4PacketCtoS* InPacket)
 {
 	FString OutString;
 	if (!InPacket->Validate(OutString))
@@ -156,7 +135,7 @@ bool FT4PacketHandlerCS::OnSendPacket(FT4PacketCtoS* InPacket)
 		UE_LOG(
 			LogT4Gameplay,
 			Error,
-			TEXT("[SL:%u] OnSendPacket '%s' failed. error msg '%s'"),
+			TEXT("[SL:%u] DoSendPacket '%s' failed. error msg '%s'"),
 			uint32(LayerType),
 			*(InPacket->ToString()),
 			*OutString

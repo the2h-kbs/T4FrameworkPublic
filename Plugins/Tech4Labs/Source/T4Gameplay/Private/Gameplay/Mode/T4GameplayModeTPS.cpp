@@ -86,7 +86,7 @@ void FT4GameplayModeTPS::ProcessMovement(float InDeltaTime)
 				NewPacketCS.SenderID = PlayerController->GetGameObjectID();
 				NewPacketCS.MoveDirection = MovementInputVector;
 				NewPacketCS.HeadYawAngle = ApplyHeadYawAngle;
-				PacketHandlerCS->OnSendPacket(&NewPacketCS);
+				PacketHandlerCS->DoSendPacket(&NewPacketCS);
 			}
 		}
 	}
@@ -110,7 +110,7 @@ void FT4GameplayModeTPS::ProcessTurn(float InDeltaTime)
 			FT4PacketTurnCS NewPacketCS; // #40
 			NewPacketCS.SenderID = PlayerController->GetGameObjectID();
 			NewPacketCS.TargetYawAngle = PlayerController->GetCameraRotation().Yaw;
-			PacketHandlerCS->OnSendPacket(&NewPacketCS);
+			PacketHandlerCS->DoSendPacket(&NewPacketCS);
 		}
 	}
 }

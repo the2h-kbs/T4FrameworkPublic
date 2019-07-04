@@ -158,7 +158,7 @@ void FT4GameplayConsole::OnChangeToWorld(IConsoleVariable* InVariable)
 	}
 	FT4PacketCmdChangeWorldCS NewPacketCS; // #27
 	NewPacketCS.WorldDataID = WorldDataID;
-	PacketHandlerCS->OnSendPacket(&NewPacketCS);
+	PacketHandlerCS->DoSendPacket(&NewPacketCS);
 }
 
 bool FT4GameplayConsole::GetSpawnLocation(FVector& OutLocation)
@@ -222,7 +222,7 @@ void FT4GameplayConsole::OnSpawnProp(IConsoleVariable* InVariable)
 	FT4PacketCmdFOEnterCS NewPacketCS; // #27
 	NewPacketCS.FODataID = FODataID;
 	NewPacketCS.SpawnLocation = SpawnLocation;
-	PacketHandlerCS->OnSendPacket(&NewPacketCS);
+	PacketHandlerCS->DoSendPacket(&NewPacketCS);
 }
 
 static void DoSpawnCharacter(
@@ -248,7 +248,7 @@ static void DoSpawnCharacter(
 	FT4PacketCmdPCEnterCS NewPacketCS; // #27
 	NewPacketCS.PlayerDataID = PlayerDataID;
 	NewPacketCS.SpawnLocation = InSpawnLocation;
-	PacketHandlerCS->OnSendPacket(&NewPacketCS);
+	PacketHandlerCS->DoSendPacket(&NewPacketCS);
 }
 
 void FT4GameplayConsole::OnSpawnCharacter(IConsoleVariable* InVariable)
@@ -321,7 +321,7 @@ void FT4GameplayConsole::OnTakeSnapshotFrom(IConsoleVariable* InVariable)
 				NewPacketCS.PlayerDataID = TestGameDataID;
 				NewPacketCS.SpawnLocation = RootLocation;
 				NewPacketCS.SpawnRotation = Rotation;
-				PacketHandlerCS->OnSendPacket(&NewPacketCS);
+				PacketHandlerCS->DoSendPacket(&NewPacketCS);
 				continue;
 			}
 			TestGameDataID = FT4GameDataID(ET4GameDataType::NPC, GameDataIDName);
@@ -332,7 +332,7 @@ void FT4GameplayConsole::OnTakeSnapshotFrom(IConsoleVariable* InVariable)
 				NewPacketCS.NPCDataID = TestGameDataID;
 				NewPacketCS.SpawnLocation = RootLocation;
 				NewPacketCS.SpawnRotation = Rotation;
-				PacketHandlerCS->OnSendPacket(&NewPacketCS);
+				PacketHandlerCS->DoSendPacket(&NewPacketCS);
 				continue;
 			}
 		}
@@ -346,7 +346,7 @@ void FT4GameplayConsole::OnTakeSnapshotFrom(IConsoleVariable* InVariable)
 				NewPacketCS.FODataID = TestGameDataID;
 				NewPacketCS.SpawnLocation = RootLocation;
 				NewPacketCS.SpawnRotation = Rotation;
-				PacketHandlerCS->OnSendPacket(&NewPacketCS);
+				PacketHandlerCS->DoSendPacket(&NewPacketCS);
 			}
 		}
 	}

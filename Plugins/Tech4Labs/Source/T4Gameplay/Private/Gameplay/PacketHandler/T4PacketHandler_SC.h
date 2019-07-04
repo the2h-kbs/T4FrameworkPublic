@@ -18,12 +18,10 @@ public:
 	explicit FT4PacketHandlerSC(ET4LayerType InLayerType);
 	~FT4PacketHandlerSC();
 
-	bool OnSendPacket(FT4PacketStoC* InPacket, IT4PlayerController* InRecvPC) override;
-	bool OnBroadcastPacket(FT4PacketStoC* InPacket) override;
-
 	bool OnRecvPacket(const FT4PacketStoC* InPacket) override;
 
 #if (WITH_EDITOR || WITH_SERVER_CODE)
+	bool DoSendPacketForServer(FT4PacketStoC* InPacket, IT4PlayerController* InRecvPC) override;
 	bool DoBroadcastPacketForServer(FT4PacketStoC* InPacket) override; // #50
 #endif
 

@@ -101,7 +101,7 @@ void FT4RollActionTask::DoRoll() // #46
 			FT4PacketRollCS NewPacketCS; // #27
 			NewPacketCS.SenderID = PlayerController->GetGameObjectID();
 			NewPacketCS.RollDirection = RollDirection;
-			PacketHandlerCS->OnSendPacket(&NewPacketCS);
+			PacketHandlerCS->DoSendPacket(&NewPacketCS);
 		}
 	}
 	OnReset();

@@ -87,7 +87,7 @@ void FT4GameplayModeShoulderView::ProcessMovement(float InDeltaTime)
 				NewPacketCS.SenderID = PlayerController->GetGameObjectID();
 				NewPacketCS.MoveDirection = MovementInputVector;
 				NewPacketCS.HeadYawAngle = SyncRotation.Yaw; // #40 : ShoulderView 에서 이동은 항상 락온 상황
-				PacketHandlerCS->OnSendPacket(&NewPacketCS);
+				PacketHandlerCS->DoSendPacket(&NewPacketCS);
 			}
 		}
 	}

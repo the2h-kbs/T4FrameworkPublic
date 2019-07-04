@@ -44,7 +44,7 @@ void FT4PacketHandlerCS::HandleCS_Move(const FT4PacketMoveCS* InPacket)
 
 	check(NewPacketSC.ObjectID.IsValid());
 
-	DoSendPacketForServer(&NewPacketSC); // #15, #17, #29
+	GetPacketHandlerSC()->DoBroadcastPacketForServer(&NewPacketSC); // #15, #17, #29
 }
 
 void FT4PacketHandlerCS::HandleCS_Jump(const FT4PacketJumpCS* InPacket)
@@ -74,7 +74,7 @@ void FT4PacketHandlerCS::HandleCS_Jump(const FT4PacketJumpCS* InPacket)
 
 	check(NewPacketSC.ObjectID.IsValid());
 
-	DoSendPacketForServer(&NewPacketSC); // #15, #17, #29
+	GetPacketHandlerSC()->DoBroadcastPacketForServer(&NewPacketSC); // #15, #17, #29
 }
 
 // #46
@@ -105,7 +105,7 @@ void FT4PacketHandlerCS::HandleCS_Roll(const FT4PacketRollCS* InPacket)
 
 	check(NewPacketSC.ObjectID.IsValid());
 
-	DoSendPacketForServer(&NewPacketSC); // #15, #17, #29
+	GetPacketHandlerSC()->DoBroadcastPacketForServer(&NewPacketSC); // #15, #17, #29
 }
 
 void FT4PacketHandlerCS::HandleCS_Turn(const FT4PacketTurnCS* InPacket)
@@ -133,7 +133,7 @@ void FT4PacketHandlerCS::HandleCS_Turn(const FT4PacketTurnCS* InPacket)
 
 	check(NewPacketSC.ObjectID.IsValid());
 
-	DoSendPacketForServer(&NewPacketSC); // #15, #17, #29
+	GetPacketHandlerSC()->DoBroadcastPacketForServer(&NewPacketSC); // #15, #17, #29
 }
 
 void FT4PacketHandlerCS::HandleCS_LockOn(const FT4PacketLockOnCS* InPacket)
@@ -160,7 +160,7 @@ void FT4PacketHandlerCS::HandleCS_LockOn(const FT4PacketLockOnCS* InPacket)
 
 	check(NewPacketSC.ObjectID.IsValid());
 
-	DoSendPacketForServer(&NewPacketSC); // #15, #17, #29
+	GetPacketHandlerSC()->DoBroadcastPacketForServer(&NewPacketSC); // #15, #17, #29
 }
 
 void FT4PacketHandlerCS::HandleCS_LockOff(const FT4PacketLockOffCS* InPacket)
@@ -187,7 +187,7 @@ void FT4PacketHandlerCS::HandleCS_LockOff(const FT4PacketLockOffCS* InPacket)
 
 	check(NewPacketSC.ObjectID.IsValid());
 
-	DoSendPacketForServer(&NewPacketSC); // #15, #17, #29
+	GetPacketHandlerSC()->DoBroadcastPacketForServer(&NewPacketSC); // #15, #17, #29
 }
 
 void FT4PacketHandlerCS::HandleCS_CmdTeleport(const FT4PacketCmdTeleportCS* InPacket)
@@ -214,5 +214,5 @@ void FT4PacketHandlerCS::HandleCS_CmdTeleport(const FT4PacketCmdTeleportCS* InPa
 
 	check(NewPacketSC.ObjectID.IsValid());
 
-	DoSendPacketForServer(&NewPacketSC); // #15, #17, #29
+	GetPacketHandlerSC()->DoBroadcastPacketForServer(&NewPacketSC); // #15, #17, #29
 }

@@ -60,6 +60,6 @@ bool FT4TeleportActionTask::Pressed(FString& OutErrorMsg)
 	FT4PacketCmdTeleportCS NewPacketCS; // #27
 	NewPacketCS.SenderID = PlayerController->GetGameObjectID();
 	NewPacketCS.TargetLocation = PickingLocation;
-	PacketHandlerCS->OnSendPacket(&NewPacketCS);
+	PacketHandlerCS->DoSendPacket(&NewPacketCS);
 	return true;
 }

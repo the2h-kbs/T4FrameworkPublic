@@ -83,7 +83,7 @@ namespace T4GameplayUtil
 		NewPacketCS.PlayerDataID = PlayerDataID;
 		NewPacketCS.SpawnLocation = PickingLocation;
 		NewPacketCS.bSetViewTarget = !PlayerController->HasGameObject(); // WARN : 빙의된 캐릭터가 없으면 MyPC로 간주하도록 조치
-		PacketHandlerCS->OnSendPacket(&NewPacketCS);
+		PacketHandlerCS->DoSendPacket(&NewPacketCS);
 		return true;
 	}
 
@@ -128,7 +128,7 @@ namespace T4GameplayUtil
 		FT4PacketCmdNPCEnterCS NewPacketCS; // #31
 		NewPacketCS.NPCDataID = NPCDataID;
 		NewPacketCS.SpawnLocation = PickingLocation;
-		PacketHandlerCS->OnSendPacket(&NewPacketCS);
+		PacketHandlerCS->DoSendPacket(&NewPacketCS);
 		return true;
 	}
 
@@ -174,7 +174,7 @@ namespace T4GameplayUtil
 			NewPacketCS.SenderID = PlayerController->GetGameObjectID();
 			NewPacketCS.ItemWeaponDataID = WeaponDataID;
 			NewPacketCS.bMainWeapon = bInMainWeapon; // #48
-			PacketHandlerCS->OnSendPacket(&NewPacketCS);
+			PacketHandlerCS->DoSendPacket(&NewPacketCS);
 		}
 		else
 		{
@@ -182,7 +182,7 @@ namespace T4GameplayUtil
 			NewPacketCS.SenderID = PlayerController->GetGameObjectID();
 			NewPacketCS.ItemWeaponDataID = WeaponDataID;
 			NewPacketCS.bMainWeapon = bInMainWeapon; // #48
-			PacketHandlerCS->OnSendPacket(&NewPacketCS);
+			PacketHandlerCS->DoSendPacket(&NewPacketCS);
 		}
 		return true;
 	}

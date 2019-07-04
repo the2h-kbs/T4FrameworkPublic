@@ -62,7 +62,7 @@ bool FT4LockOnActionTask::Start(
 	FT4PacketLockOnCS NewPacketCS; // #27
 	NewPacketCS.SenderID = PlayerController->GetGameObjectID();
 	NewPacketCS.HeadYawAngle = InSyncHeadYawAngle;
-	PacketHandlerCS->OnSendPacket(&NewPacketCS);
+	PacketHandlerCS->DoSendPacket(&NewPacketCS);
 	bStarted = true;
 	return true;
 }
@@ -94,6 +94,6 @@ bool FT4LockOnActionTask::End(
 	FT4PacketLockOffCS NewPacketCS; // #27
 	NewPacketCS.SenderID = PlayerController->GetGameObjectID();
 	NewPacketCS.HeadYawAngle = InSyncHeadYawAngle; // #38
-	PacketHandlerCS->OnSendPacket(&NewPacketCS);
+	PacketHandlerCS->DoSendPacket(&NewPacketCS);
 	return true;
 }

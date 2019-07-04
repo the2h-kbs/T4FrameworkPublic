@@ -227,7 +227,7 @@ void AT4GameplayCharacterAIController::HandleOnCallbackMoveTo(
 	NewPacketSC.MoveSpeed = GetCurrentMoveSpeed(); // #50
 	NewPacketSC.HeadYawAngle = NewPacketSC.MoveDirection.Rotation().Yaw; // #50 : 이동 방향으로 방향 수정
 	NewPacketSC.bForceMaxSpeed = bInForceMaxSpeed; // #50
-	PacketHandlerSC->OnBroadcastPacket(&NewPacketSC);
+	PacketHandlerSC->DoBroadcastPacketForServer(&NewPacketSC);
 }
 
 bool AT4GameplayCharacterAIController::Bind(

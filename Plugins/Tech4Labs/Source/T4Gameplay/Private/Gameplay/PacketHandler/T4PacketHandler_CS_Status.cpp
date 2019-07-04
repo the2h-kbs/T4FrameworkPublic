@@ -49,7 +49,7 @@ void FT4PacketHandlerCS::HandleCS_Equip(const FT4PacketEquipCS* InPacket)
 
 	check(NewPacketSC.ObjectID.IsValid());
 
-	DoSendPacketForServer(&NewPacketSC); // #15, #17, #29
+	GetPacketHandlerSC()->DoBroadcastPacketForServer(&NewPacketSC); // #15, #17, #29
 }
 
 void FT4PacketHandlerCS::HandleCS_UnEquip(const FT4PacketUnEquipCS* InPacket)
@@ -83,7 +83,7 @@ void FT4PacketHandlerCS::HandleCS_UnEquip(const FT4PacketUnEquipCS* InPacket)
 
 	check(NewPacketSC.ObjectID.IsValid());
 
-	DoSendPacketForServer(&NewPacketSC); // #15, #17, #29
+	GetPacketHandlerSC()->DoBroadcastPacketForServer(&NewPacketSC); // #15, #17, #29
 }
 
 void FT4PacketHandlerCS::HandleCS_Exchange(const FT4PacketExchangeCS* InPacket)
@@ -116,5 +116,5 @@ void FT4PacketHandlerCS::HandleCS_Exchange(const FT4PacketExchangeCS* InPacket)
 
 	check(NewPacketSC.ObjectID.IsValid());
 
-	DoSendPacketForServer(&NewPacketSC); // #15, #17, #29
+	GetPacketHandlerSC()->DoBroadcastPacketForServer(&NewPacketSC); // #15, #17, #29
 }

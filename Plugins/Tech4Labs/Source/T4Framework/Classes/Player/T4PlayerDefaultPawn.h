@@ -9,6 +9,7 @@
 /**
   *
  */
+class UPlayerInput;
 UCLASS()
 class T4FRAMEWORK_API AT4PlayerDefaultPawn : public ADefaultPawn
 {
@@ -17,6 +18,5 @@ class T4FRAMEWORK_API AT4PlayerDefaultPawn : public ADefaultPawn
 public:
 	void Tick(float InDeltaTime) override;
 
-	// Begin Pawn overrides
 	void SetupPlayerInputComponent(UInputComponent* InInputComponent) override;
 };

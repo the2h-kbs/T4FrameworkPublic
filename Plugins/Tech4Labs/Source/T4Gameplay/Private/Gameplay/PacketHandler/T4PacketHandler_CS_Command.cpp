@@ -48,17 +48,7 @@ void FT4PacketHandlerCS::HandleCS_CmdChangeWorld(const FT4PacketCmdChangeWorldCS
 
 	FT4PacketChangeWorldSC NewPacketSC;
 	NewPacketSC.WorldDataID = InPacket->WorldDataID;
-
-	GetPacketHandlerSC()->OnRecvPacket(&NewPacketSC); // #15
-
-#if WITH_EDITOR
-	if (T4CoreLayer::IsToolSide(LayerType))
-	{
-		return; // WARN : #29, #17 : Only Editor LayerType
-	}
-#endif
-
-	GetPacketHandlerSC()->OnBroadcastPacket(&NewPacketSC);
+	GetPacketHandlerSC()->DoBroadcastPacketForServer(&NewPacketSC);
 }
 
 void FT4PacketHandlerCS::HandleCS_CmdPCEnter(
@@ -118,16 +108,17 @@ void FT4PacketHandlerCS::HandleCS_CmdPCEnter(
 		{
 			if (bMyPCEntered && TargetPC == InSenderPC)
 			{
+				// WARN : MyPC 의 경우 별도의 패킷 처리가 필요함으로 분리
 				FT4PacketMyPCEnterSC NewMyPCEnterPacketSC;
 				NewMyPCEnterPacketSC.EnterObjectID = NewSpawnObjectID;
 				NewMyPCEnterPacketSC.PlayerDataID = InPacket->PlayerDataID;
 				NewMyPCEnterPacketSC.SpawnLocation = InPacket->SpawnLocation;
 				NewMyPCEnterPacketSC.SpawnRotation = InPacket->SpawnRotation;
-				PacketHandlerSC->OnSendPacket(&NewMyPCEnterPacketSC, TargetPC);
+				PacketHandlerSC->DoSendPacketForServer(&NewMyPCEnterPacketSC, TargetPC);
 			}
 			else
 			{
-				PacketHandlerSC->OnSendPacket(&NewPCEnterPacketSC, TargetPC);
+				PacketHandlerSC->DoSendPacketForServer(&NewPCEnterPacketSC, TargetPC);
 			}
 		}
 	}
@@ -164,7 +155,7 @@ void FT4PacketHandlerCS::HandleCS_CmdPCLeave(
 		}
 	}
 
-	DoSendPacketForServer(&NewPacketSC); // #15, #17, #29
+	GetPacketHandlerSC()->DoBroadcastPacketForServer(&NewPacketSC); // #15, #17, #29
 }
 
 // #31
@@ -230,7 +221,7 @@ void FT4PacketHandlerCS::HandleCS_CmdNPCEnter(const FT4PacketCmdNPCEnterCS* InPa
 
 	check(NewPacketSC.EnterObjectID.IsValid());
 
-	DoSendPacketForServer(&NewPacketSC); // #15, #17, #29
+	GetPacketHandlerSC()->DoBroadcastPacketForServer(&NewPacketSC); // #15, #17, #29
 }
 
 // #31
@@ -254,7 +245,7 @@ void FT4PacketHandlerCS::HandleCS_CmdNPCLeave(const FT4PacketCmdNPCLeaveCS* InPa
 
 	check(NewPacketSC.LeaveObjectID.IsValid());
 
-	DoSendPacketForServer(&NewPacketSC); // #15, #17, #29
+	GetPacketHandlerSC()->DoBroadcastPacketForServer(&NewPacketSC); // #15, #17, #29
 }
 
 // #31
@@ -321,7 +312,7 @@ void FT4PacketHandlerCS::HandleCS_CmdFOEnter(const FT4PacketCmdFOEnterCS* InPack
 
 	check(NewPacketSC.EnterObjectID.IsValid());
 
-	DoSendPacketForServer(&NewPacketSC); // #15, #17, #29
+	GetPacketHandlerSC()->DoBroadcastPacketForServer(&NewPacketSC); // #15, #17, #29
 }
 
 // #31
@@ -345,7 +336,7 @@ void FT4PacketHandlerCS::HandleCS_CmdFOLeave(const FT4PacketCmdFOLeaveCS* InPack
 
 	check(NewPacketSC.LeaveObjectID.IsValid());
 
-	DoSendPacketForServer(&NewPacketSC); // #15, #17, #29
+	GetPacketHandlerSC()->DoBroadcastPacketForServer(&NewPacketSC); // #15, #17, #29
 }
 
 // #41
@@ -430,7 +421,7 @@ void FT4PacketHandlerCS::HandleCS_CmdItemEnter(const FT4PacketCmdItemEnterCS* In
 
 	check(NewPacketSC.EnterObjectID.IsValid());
 
-	DoSendPacketForServer(&NewPacketSC); // #15, #17, #29
+	GetPacketHandlerSC()->DoBroadcastPacketForServer(&NewPacketSC); // #15, #17, #29
 }
 
 // #41
@@ -454,5 +445,5 @@ void FT4PacketHandlerCS::HandleCS_CmdItemLeave(const FT4PacketCmdItemLeaveCS* In
 
 	check(NewPacketSC.LeaveObjectID.IsValid());
 
-	DoSendPacketForServer(&NewPacketSC); // #15, #17, #29
+	GetPacketHandlerSC()->DoBroadcastPacketForServer(&NewPacketSC); // #15, #17, #29
 }

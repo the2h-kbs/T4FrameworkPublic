@@ -179,7 +179,7 @@ void FT4ComboAttackActionTask::Process(float InDeltaTime)
 	NewPacketCS.SenderID = PlayerController->GetGameObjectID();
 	NewPacketCS.SkillDataID = SkillDataIDSelected;
 	NewPacketCS.UseDirection = UseDirection; // #49
-	PacketHandlerCS->OnSendPacket(&NewPacketCS);
+	PacketHandlerCS->DoSendPacket(&NewPacketCS);
 
 	ComboAttackPlayTimeLeft = SkillData->RawData.DurationSec;
 	bMovementLcoked = !SkillData->RawData.bMoveable;

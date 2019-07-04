@@ -173,7 +173,8 @@ bool FT4PacketHandlerSC::SendPacketInternal(
 	return bResult;
 }
 
-bool FT4PacketHandlerSC::OnSendPacket(
+#if (WITH_EDITOR || WITH_SERVER_CODE)
+bool FT4PacketHandlerSC::DoSendPacketForServer(
 	FT4PacketStoC* InPacket,
 	IT4PlayerController* InRecvPC
 )
@@ -184,7 +185,7 @@ bool FT4PacketHandlerSC::OnSendPacket(
 		UE_LOG(
 			LogT4Gameplay,
 			Error,
-			TEXT("[SL:%u] OnSendPacket '%s' failed. error msg '%s'"),
+			TEXT("[SL:%u] DoSendPacketForServer '%s' failed. error msg '%s'"),
 			uint32(LayerType),
 			*(InPacket->ToString()),
 			*OutString
@@ -197,7 +198,7 @@ bool FT4PacketHandlerSC::OnSendPacket(
 	return bResult;
 }
 
-bool FT4PacketHandlerSC::OnBroadcastPacket(FT4PacketStoC* InPacket)
+bool FT4PacketHandlerSC::DoBroadcastPacketForServer(FT4PacketStoC* InPacket)
 {
 	FString OutString;
 	if (!InPacket->Validate(OutString))
@@ -205,20 +206,13 @@ bool FT4PacketHandlerSC::OnBroadcastPacket(FT4PacketStoC* InPacket)
 		UE_LOG(
 			LogT4Gameplay,
 			Error,
-			TEXT("[SL:%u] OnBroadcastPacket '%s' failed. error msg '%s'"),
+			TEXT("[SL:%u] DoBroadcastPacketForServer '%s' failed. error msg '%s'"),
 			uint32(LayerType),
 			*(InPacket->ToString()),
 			*OutString
 		);
 		return false;
 	}
-
-#if (WITH_EDITOR || WITH_SERVER_CODE)
-	if (T4CoreLayer::IsServer(LayerType)) // #50
-	{
-		OnRecvPacket(InPacket); // #15 : 서버 World 로 전달
-	}
-#endif
 
 	bool bResult = true;
 	for (FConstPlayerControllerIterator It = GetWorld()->GetPlayerControllerIterator(); It; ++It)
@@ -230,15 +224,13 @@ bool FT4PacketHandlerSC::OnBroadcastPacket(FT4PacketStoC* InPacket)
 		}
 	}
 
-	return bResult;
-}
+	// #49 : WARN : 클라이언트로 패킷 전송 후 서버 로직이 처리되도록 순서 변경.
+	//       NPC Spawn 후 EquipWeapon 처리가 패킷 순서가 바뀌며 처리되지 못하는 문제가 있었음.
+	if (T4CoreLayer::IsServer(LayerType)) // #50
+	{
+		OnRecvPacket(InPacket); // #15 : 서버 World 로 전달
+	}
 
-#if (WITH_EDITOR || WITH_SERVER_CODE)
-bool FT4PacketHandlerSC::DoBroadcastPacketForServer(
-	FT4PacketStoC* InPacket
-) // #50
-{
-	bool bResult = OnBroadcastPacket(InPacket);
 	return bResult;
 }
 #endif
