@@ -15,6 +15,9 @@
 // ET4PacketStoC::JumpTo
 // ET4PacketStoC::RollTo // #46
 // ET4PacketStoC::TurnTo // #40
+// ET4PacketStoC::TeleportTo
+
+// ET4PacketStoC::MoveStop // #52
 
 // ET4PacketStoC::LockOn
 // ET4PacketStoC::LockOff
@@ -45,6 +48,11 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	bool bForceMaxSpeed; // #50 : AIController 만 제어
 
+#if WITH_EDITORONLY_DATA
+	UPROPERTY(VisibleAnywhere)
+	FVector ServerLocation; // #52
+#endif
+
 public:
 	FT4PacketMoveToSC()
 		: FT4PacketStoC(ET4PacketStoC::MoveTo)
@@ -52,6 +60,9 @@ public:
 		, MoveSpeed(0.0f)
 		, HeadYawAngle(TNumericLimits<float>::Max())
 		, bForceMaxSpeed(false) // #50 : AIController 만 제어
+#if WITH_EDITORONLY_DATA
+		, ServerLocation(FVector::ZeroVector) // #52
+#endif
 	{
 	}
 
@@ -224,6 +235,50 @@ public:
 	FString ToString() const override
 	{
 		return FString(TEXT("SC_Packet:TeleportTo"));
+	}
+};
+
+// #52
+USTRUCT()
+struct FT4PacketMoveStopSC : public FT4PacketStoC
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	UPROPERTY(VisibleAnywhere)
+	FT4ObjectID ObjectID;
+
+	UPROPERTY(VisibleAnywhere)
+	FVector StopLocation;
+
+	UPROPERTY(VisibleAnywhere)
+	float HeadYawAngle; // #40 : 필요할 때 3D 로 확장. #50 : 이동 방향과 Head 방향이 다를 경우를 대비해 존재
+
+	UPROPERTY(VisibleAnywhere)
+	bool bSyncLocation;
+
+public:
+	FT4PacketMoveStopSC()
+		: FT4PacketStoC(ET4PacketStoC::MoveStop)
+		, StopLocation(FVector::ZeroVector)
+		, HeadYawAngle(TNumericLimits<float>::Max())
+		, bSyncLocation(false)
+	{
+	}
+
+	bool Validate(FString& OutMsg) override
+	{
+		if (!ObjectID.IsValid())
+		{
+			OutMsg = TEXT("Invalid ObjectID");
+			return false;
+		}
+		return true;
+	}
+
+	FString ToString() const override
+	{
+		return FString(TEXT("SC_Packet:MoveStop"));
 	}
 };
 

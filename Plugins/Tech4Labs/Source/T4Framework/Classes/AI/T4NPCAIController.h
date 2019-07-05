@@ -84,7 +84,7 @@ protected:
 	virtual void NotifyAIStart() {} // #50
 	virtual void NotifyAIEnd() {} // #50
 
-	IT4GameObject* FindGameObject(const FT4ObjectID& InObjectID) const; // #49
+	IT4GameObject* FindGameObjectForServer(const FT4ObjectID& InObjectID) const; // #49
 
 protected:
 	ET4LayerType LayerType;

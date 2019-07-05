@@ -9,6 +9,7 @@
 #include "T4GameplayFOAIController.generated.h"
 
 /**
+  * WARN : AI Controller 는 서버에서만 사용하고, 클라리언트에서는 사용하지 않음에 유의할 것!
   * http://api.unrealengine.com/KOR/Gameplay/Framework/Controller/AIController/
  */
 UCLASS()

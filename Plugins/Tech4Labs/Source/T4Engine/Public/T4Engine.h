@@ -174,9 +174,12 @@ public:
 
 	virtual const FVector GetCOMLocation() const = 0; // #18 : WARN : Center of mass 캐릭터의 경우 Coll Capsule 의 중점이다.
 	virtual const FVector GetRootLocation() const = 0;
+	virtual const FVector GetMovementLocation() const = 0; // #52
+
 	virtual const FRotator GetRotation() const = 0;
 	virtual const FVector GetFrontVector() const = 0; // #38
 	virtual const FVector GetRightVector() const = 0; // #38
+
 	virtual const FVector GetMovementVelocity() const = 0;
 	virtual const float GetMovementSpeed() const = 0;
 

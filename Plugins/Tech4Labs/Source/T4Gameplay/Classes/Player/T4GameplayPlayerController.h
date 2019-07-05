@@ -37,11 +37,15 @@ protected:
 	void NotifyPossess(IT4GameObject* InNewGameObject) override; // #49
 	void NotifyUnPossess(IT4GameObject* InOldGameObject) override; // #49
 
-	void HandleOnHitOverlap(
+#if (WITH_EDITOR || WITH_SERVER_CODE)
+	void HandleOnHitOverlapForServer(
 		const FName& InEventName,
 		IT4GameObject* InHitGameObject, 
 		const FHitResult& InSweepResult
 	); // #49 : Only Server
+
+	void ClearHitOverlapEventForServer(); // #49 : Only Server
+#endif
 
 private:
 	FT4GameDataID MainWeaponDataID; // #48
@@ -175,6 +179,9 @@ private:
 
 	UFUNCTION(Reliable, client)
 	void SC_RecvPacket_TeleportTo(const FT4PacketTeleportToSC& InPacket);
+
+	UFUNCTION(Reliable, client)
+	void SC_RecvPacket_MoveStop(const FT4PacketMoveStopSC& InPacket); // #52
 
 	UFUNCTION(Reliable, client)
 	void SC_RecvPacket_LockOn(const FT4PacketLockOnSC& InPacket);

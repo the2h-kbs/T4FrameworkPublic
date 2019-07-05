@@ -10,6 +10,7 @@
 #include "T4GameplayCharacterAIController.generated.h"
 
 /**
+  * WARN : AI Controller 는 서버에서만 사용하고, 클라리언트에서는 사용하지 않음에 유의할 것!
   * http://api.unrealengine.com/KOR/Gameplay/Framework/Controller/AIController/
  */
 struct FT4NPCAIMemory // #50
@@ -89,7 +90,8 @@ public:
 
 	bool DoRoaming(FVector& OutTargetLocation); // #50
 	bool DoNormalAttack(const FT4ObjectID& InTargetGameObjectID); // #50
-	
+	bool DoMoveStop(); // #52
+
 	bool TakeEffectDamage(
 		const FT4GameEffectDataID& InEffectDataID,
 		const FT4ObjectID& InAttackerObjectID
@@ -106,7 +108,9 @@ protected:
 		const FName& InEventName,
 		IT4GameObject* InHitGameObject,
 		const FHitResult& InSweepResult
-	); // #49 : Only Server
+	); // #49
+
+	void ClearHitOverlapEvent(); // #49
 
 	void HandleOnCallbackMoveTo(const FVector& InMoveVelocity, bool bInForceMaxSpeed); // #42, #34
 
@@ -138,6 +142,10 @@ private:
 	FT4NPCAIMemory AIMemory; // #50 : 필요하다면 Blackboard 로 변경하겠지만, 현재는 장점이 없어보인다.
 
 #if (WITH_EDITOR || WITH_SERVER_CODE)
+	bool bHitOverlapEventStarted;
+	FT4GameSkillDataID UseSkillDataID;
+	float HitOverlapEventDelayTimeSec;
+	float HitOverlapEventClearTimeLeft;
 	FDelegateHandle HitOverlapDelegateHandle; // #49
 #endif
 };

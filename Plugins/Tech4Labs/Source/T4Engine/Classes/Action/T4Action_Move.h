@@ -79,6 +79,11 @@ public:
 	UPROPERTY(EditAnywhere)
 	bool bForceMaxSpeed; // #50 : AIController 만 제어
 
+#if WITH_EDITORONLY_DATA
+	UPROPERTY(EditAnywhere)
+	FVector ServerLocation; // #52
+#endif
+
 public:
 	FT4MoveSyncToAction()
 		: FT4ObjectAction(StaticActionType())
@@ -86,6 +91,9 @@ public:
 		, MoveSpeed(0.0f)
 		, HeadYawAngle(TNumericLimits<float>::Max())
 		, bForceMaxSpeed(false) // #50 : AIController 만 제어
+#if WITH_EDITORONLY_DATA
+		, ServerLocation(FVector::ZeroVector) // #52
+#endif
 	{
 	}
 
@@ -236,6 +244,39 @@ public:
 	FString ToString() const override
 	{
 		return FString(TEXT("OAction:MoveSpeed"));
+	}
+};
+
+// #52
+USTRUCT()
+struct T4ENGINE_API FT4MoveStopAction : public FT4ObjectAction
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	UPROPERTY(EditAnywhere)
+	FVector StopLocation;
+
+	UPROPERTY(EditAnywhere)
+	float HeadYawAngle; // #40 : degree, LockOn 일 경우 이동 방향과 달라진다.
+
+	UPROPERTY(EditAnywhere)
+	bool bSyncLocation;
+
+public:
+	FT4MoveStopAction()
+		: FT4ObjectAction(StaticActionType())
+		, StopLocation(FVector::ZeroVector)
+		, HeadYawAngle(TNumericLimits<float>::Max())
+		, bSyncLocation(false)
+	{
+	}
+
+	static ET4ActionType StaticActionType() { return ET4ActionType::MoveStop; }
+
+	FString ToString() const override
+	{
+		return FString(TEXT("OAction:MoveStop"));
 	}
 };
 

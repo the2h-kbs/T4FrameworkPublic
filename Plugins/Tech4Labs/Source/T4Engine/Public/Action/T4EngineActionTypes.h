@@ -35,13 +35,14 @@ enum class ET4ActionType : uint32
 	RollTo, // #46
 	TeleportTo,
 
-	EquipWeapon, // #22
-	UnEquipWeapon, // #48
-	ExchangeCostume, // #37
+	MoveSpeed,
+	MoveStop, // #52
 
 	LockOn,
 
-	MoveSpeed,
+	EquipWeapon, // #22
+	UnEquipWeapon, // #48
+	ExchangeCostume, // #37
 
 	Rotation,
 	Animation,

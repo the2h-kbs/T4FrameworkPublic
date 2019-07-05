@@ -75,6 +75,8 @@ enum class ET4PacketStoC : uint32
 	TurnTo, // #40
 	TeleportTo,
 
+	MoveStop, // #52
+
 	LockOn, // #40
 	LockOff, // #40
 
