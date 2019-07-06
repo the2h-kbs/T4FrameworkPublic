@@ -10,13 +10,14 @@
 /**
   *
  */
-DECLARE_DELEGATE_TwoParams(FOnCallbackMoveTo, const FVector&, bool); // #42, #50
-
 class IT4GameObject;
 UCLASS()
 class T4FRAMEWORK_API UT4PathFollowingComponent : public UPathFollowingComponent
 {
 	GENERATED_UCLASS_BODY()
+
+	DECLARE_DELEGATE_OneParam(FOnCallbackMoveTo, const FVector&); // #42, #50
+	DECLARE_DELEGATE(FOnCallbackMoveStop); // #52
 
 public:
 	void TickComponent(
@@ -25,8 +26,13 @@ public:
 		FActorComponentTickFunction* ThisTickFunction
 	) override;
 
+	void OnPathFinished(const FPathFollowingResult& Result) override; // #52
+	void OnSegmentFinished() override; // #52
+	void OnPathUpdated() override; // #52
+
 public:
 	FOnCallbackMoveTo& GetOnCallbackMoveTo() { return OnCallbackMoveTo; } // #42, #50
+	FOnCallbackMoveStop& GetOnCallbackMoveStop() { return OnCallbackMoveStop; } // #52
 
 	void SetGameObjectID(const FT4ObjectID& InObjectID) { TargetObjectID = InObjectID; }
 	void ClearGameObjectID() { TargetObjectID.SetNone(); }
@@ -48,4 +54,5 @@ private:
 	FT4ObjectID TargetObjectID;
 
 	FOnCallbackMoveTo OnCallbackMoveTo;
+	FOnCallbackMoveStop OnCallbackMoveStop; // #52
 };

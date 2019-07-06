@@ -45,9 +45,6 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	float HeadYawAngle; // #40 : 필요할 때 3D 로 확장. #50 : 이동 방향과 Head 방향이 다를 경우를 대비해 존재
 
-	UPROPERTY(VisibleAnywhere)
-	bool bForceMaxSpeed; // #50 : AIController 만 제어
-
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(VisibleAnywhere)
 	FVector ServerLocation; // #52
@@ -59,7 +56,6 @@ public:
 		, MoveDirection(FVector::ZeroVector)
 		, MoveSpeed(0.0f)
 		, HeadYawAngle(TNumericLimits<float>::Max())
-		, bForceMaxSpeed(false) // #50 : AIController 만 제어
 #if WITH_EDITORONLY_DATA
 		, ServerLocation(FVector::ZeroVector) // #52
 #endif

@@ -6,7 +6,7 @@
 
 #include "Public/T4FrameworkController.h"
 
-#include "T4Engine/Classes/Action/T4ActionMinimal.h"
+#include "T4Engine/Public/Action/T4EngineActionKey.h"
 
 #include "GameFramework/PlayerController.h"
 

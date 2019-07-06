@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Public/T4GameplayTypes.h"
-#include "T4Framework/Classes//AI/T4NPCAIController.h"
+#include "T4Framework/Classes/Controller/AI/T4NPCAIController.h"
 #include "T4Framework/Public/T4FrameworkAssetLoader.h" // #42
 #include "Public/T4GameplayDataTypes.h" // #48
 #include "T4GameplayCharacterAIController.generated.h"
@@ -90,7 +90,7 @@ public:
 
 	bool DoRoaming(FVector& OutTargetLocation); // #50
 	bool DoNormalAttack(const FT4ObjectID& InTargetGameObjectID); // #50
-	bool DoMoveStop(); // #52
+	bool DoMoveStop(bool bSyncLocation); // #52
 
 	bool TakeEffectDamage(
 		const FT4GameEffectDataID& InEffectDataID,
@@ -112,7 +112,8 @@ protected:
 
 	void ClearHitOverlapEvent(); // #49
 
-	void HandleOnCallbackMoveTo(const FVector& InMoveVelocity, bool bInForceMaxSpeed); // #42, #34
+	void HandleOnCallbackMoveTo(const FVector& InMoveDirection); // #42, #34
+	void HandleOnCallbackMoveStop(); // #52
 
 private:
 	bool CheckAsyncLoading();

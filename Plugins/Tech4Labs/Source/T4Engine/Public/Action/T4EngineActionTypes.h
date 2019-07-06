@@ -35,7 +35,6 @@ enum class ET4ActionType : uint32
 	RollTo, // #46
 	TeleportTo,
 
-	MoveSpeed,
 	MoveStop, // #52
 
 	LockOn,

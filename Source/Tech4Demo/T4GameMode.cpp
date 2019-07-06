@@ -4,8 +4,8 @@
 
 #include "T4Core/Public/T4CoreMinimal.h"
 #include "T4Framework/Public/T4Framework.h"
-#include "T4Gameplay/Classes/Player/T4GameplayPlayerController.h" // #42
-#include "T4Gameplay/Classes/Player/T4GameplayDefaultPawn.h" // #42
+#include "T4Gameplay/Classes/Controller/Player/T4GameplayPlayerController.h" // #42
+#include "T4Gameplay/Classes/Controller/Player/T4GameplayDefaultPawn.h" // #42
 
 #include "Kismet/GameplayStatics.h"
 

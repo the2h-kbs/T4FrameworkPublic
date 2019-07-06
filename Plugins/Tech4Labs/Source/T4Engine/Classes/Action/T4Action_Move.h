@@ -17,7 +17,7 @@
 // ET4ActionType::JumpTo
 // ET4ActionType::RollTo
 
-// ET4ActionType::MoveSpeed
+// ET4ActionType::MoveMaxSpeed
 
 // ET4ActionType::Rotation
 
@@ -76,9 +76,6 @@ public:
 	UPROPERTY(EditAnywhere)
 	float HeadYawAngle; // #40 : degree, LockOn 일 경우 이동 방향과 달라진다.
 
-	UPROPERTY(EditAnywhere)
-	bool bForceMaxSpeed; // #50 : AIController 만 제어
-
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditAnywhere)
 	FVector ServerLocation; // #52
@@ -90,7 +87,6 @@ public:
 		, MoveDirection(FVector::ZeroVector)
 		, MoveSpeed(0.0f)
 		, HeadYawAngle(TNumericLimits<float>::Max())
-		, bForceMaxSpeed(false) // #50 : AIController 만 제어
 #if WITH_EDITORONLY_DATA
 		, ServerLocation(FVector::ZeroVector) // #52
 #endif
@@ -216,34 +212,6 @@ public:
 	FString ToString() const override
 	{
 		return FString(TEXT("OAction:TeleportTo"));
-	}
-};
-
-USTRUCT()
-struct T4ENGINE_API FT4MoveSpeedAction : public FT4ObjectAction
-{
-	GENERATED_USTRUCT_BODY()
-
-public:
-	UPROPERTY(EditAnywhere)
-	ET4MoveType MoveType;
-
-	UPROPERTY(EditAnywhere)
-	float MoveSpeed;
-
-public:
-	FT4MoveSpeedAction()
-		: FT4ObjectAction(StaticActionType())
-		, MoveType(ET4MoveType::Sync)
-		, MoveSpeed(0.0f)
-	{
-	}
-
-	static ET4ActionType StaticActionType() { return ET4ActionType::MoveSpeed; }
-
-	FString ToString() const override
-	{
-		return FString(TEXT("OAction:MoveSpeed"));
 	}
 };
 

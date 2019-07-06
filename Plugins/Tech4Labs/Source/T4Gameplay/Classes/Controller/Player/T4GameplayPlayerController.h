@@ -6,10 +6,17 @@
 
 #include "Public/T4GameplayDataTypes.h"
 
-#include "Classes/Network/Protocol/T4PacketCSMinimal.h" // #25
-#include "Classes/Network/Protocol/T4PacketSCMinimal.h" // #25
+#include "Classes/Network/Protocol/T4PacketCS_Status.h"
+#include "Classes/Network/Protocol/T4PacketCS_Move.h"
+#include "Classes/Network/Protocol/T4PacketCS_Action.h"
+#include "Classes/Network/Protocol/T4PacketCS_Command.h"
 
-#include "T4Framework/Classes/Player/T4PlayerController.h"
+#include "Classes/Network/Protocol/T4PacketSC_Action.h"
+#include "Classes/Network/Protocol/T4PacketSC_Move.h"
+#include "Classes/Network/Protocol/T4PacketSC_Status.h"
+#include "Classes/Network/Protocol/T4PacketSC_World.h"
+
+#include "T4Framework/Classes/Controller/Player/T4PlayerController.h"
 
 #include "T4GameplayPlayerController.generated.h"
 

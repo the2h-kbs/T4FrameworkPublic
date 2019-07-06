@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 
-#include "T4Framework/Classes/Player/T4PlayerDefaultPawn.h"
+#include "T4Framework/Classes/Controller/Player/T4PlayerDefaultPawn.h"
 
 #include "T4GameplayDefaultPawn.generated.h"
 

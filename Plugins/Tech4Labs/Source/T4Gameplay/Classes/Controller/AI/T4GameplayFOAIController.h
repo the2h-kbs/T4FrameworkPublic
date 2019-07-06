@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Public/T4GameplayTypes.h"
-#include "T4Framework/Classes//AI/T4NPCAIController.h"
+#include "T4Framework/Classes/Controller/AI/T4NPCAIController.h"
 #include "Public/T4GameplayDataTypes.h" // #48
 #include "T4GameplayFOAIController.generated.h"
 
