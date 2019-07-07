@@ -9,10 +9,13 @@
 /**
   *
  */
- // #T4_ADD_PACKET_TAG
+ // #T4_ADD_PACKET_TAG_SC
 
 // ET4PacketStoC::ChangeWorld
+
 // ET4PacketStoC::MyPCEnter
+// ET4PacketStoC::MyPCChange // #11, #52
+
 // ET4PacketStoC::PCEnter
 // ET4PacketStoC::PCLeave
 
@@ -75,6 +78,28 @@ public:
 	FString ToString() const override
 	{
 		return FString(TEXT("SC_Packet:MyPCEnter"));
+	}
+};
+
+// #11, #52
+USTRUCT()
+struct FT4PacketMyPCChangeSC : public FT4PacketStoC
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	UPROPERTY(VisibleAnywhere)
+	FT4ObjectID NewPlayerObjectID;
+
+public:
+	FT4PacketMyPCChangeSC()
+		: FT4PacketStoC(ET4PacketStoC::MyPCChange)
+	{
+	}
+
+	FString ToString() const override
+	{
+		return FString(TEXT("SC_Packet:MyPCChange"));
 	}
 };
 

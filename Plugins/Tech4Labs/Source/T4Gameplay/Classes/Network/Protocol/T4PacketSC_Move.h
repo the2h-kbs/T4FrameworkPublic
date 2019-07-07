@@ -9,7 +9,7 @@
 /**
   *
  */
- // #T4_ADD_PACKET_TAG
+ // #T4_ADD_PACKET_TAG_SC
 
 // ET4PacketStoC::MoveTo
 // ET4PacketStoC::JumpTo
@@ -18,6 +18,7 @@
 // ET4PacketStoC::TeleportTo
 
 // ET4PacketStoC::MoveStop // #52
+// ET4PacketStoC::MoveSpeedSync // #52
 
 // ET4PacketStoC::LockOn
 // ET4PacketStoC::LockOff
@@ -37,13 +38,13 @@ public:
 	FT4ObjectID ObjectID;
 
 	UPROPERTY(VisibleAnywhere)
-	FVector MoveDirection; // #50
-
-	UPROPERTY(VisibleAnywhere)
-	float MoveSpeed; // #50
+	FVector MoveVelocity; // #52
 
 	UPROPERTY(VisibleAnywhere)
 	float HeadYawAngle; // #40 : 필요할 때 3D 로 확장. #50 : 이동 방향과 Head 방향이 다를 경우를 대비해 존재
+
+	UPROPERTY(VisibleAnywhere)
+	bool bForceMaxSpeed; // #52 : MovementComponet::MaxSpeed 를 사용할지에 대한 Flag, 기본값이 false 로 Velocity 에서 Speed 를 얻는다. 동기화 이슈!!
 
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(VisibleAnywhere)
@@ -53,9 +54,9 @@ public:
 public:
 	FT4PacketMoveToSC()
 		: FT4PacketStoC(ET4PacketStoC::MoveTo)
-		, MoveDirection(FVector::ZeroVector)
-		, MoveSpeed(0.0f)
+		, MoveVelocity(FVector::ZeroVector)
 		, HeadYawAngle(TNumericLimits<float>::Max())
+		, bForceMaxSpeed(false) // #52
 #if WITH_EDITORONLY_DATA
 		, ServerLocation(FVector::ZeroVector) // #52
 #endif
@@ -69,7 +70,7 @@ public:
 			OutMsg = TEXT("Invalid ObjectID");
 			return false;
 		}
-		if (MoveDirection.IsNearlyZero())
+		if (MoveVelocity.IsNearlyZero())
 		{
 			OutMsg = TEXT("Invalid MoveVelocity!");
 			return false;
@@ -275,6 +276,42 @@ public:
 	FString ToString() const override
 	{
 		return FString(TEXT("SC_Packet:MoveStop"));
+	}
+};
+
+// #52
+USTRUCT()
+struct FT4PacketMoveSpeedSyncSC : public FT4PacketStoC
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	UPROPERTY(VisibleAnywhere)
+	FT4ObjectID ObjectID;
+
+	UPROPERTY(VisibleAnywhere)
+	float MoveSpeed;
+
+public:
+	FT4PacketMoveSpeedSyncSC()
+		: FT4PacketStoC(ET4PacketStoC::MoveSpeedSync)
+		, MoveSpeed(0.0f)
+	{
+	}
+
+	bool Validate(FString& OutMsg) override
+	{
+		if (!ObjectID.IsValid())
+		{
+			OutMsg = TEXT("Invalid ObjectID");
+			return false;
+		}
+		return true;
+	}
+
+	FString ToString() const override
+	{
+		return FString(TEXT("SC_Packet:MoveSpeedSync"));
 	}
 };
 

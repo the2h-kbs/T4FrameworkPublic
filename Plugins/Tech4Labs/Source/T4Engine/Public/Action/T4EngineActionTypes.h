@@ -36,6 +36,7 @@ enum class ET4ActionType : uint32
 	TeleportTo,
 
 	MoveStop, // #52
+	MoveSpeedSync, // #52
 
 	LockOn,
 
@@ -73,6 +74,7 @@ enum class ET4MoveType : uint8
 	Sync,
 	Async,
 
+	Current, // #52
 	Count,
 };
 

@@ -9,7 +9,7 @@
 /**
   *
  */
- // #T4_ADD_PACKET_TAG
+ // #T4_ADD_PACKET_TAG_CS
 
 // ET4PacketCtoS::Equip
 // ET4PacketCtoS::UnEquip

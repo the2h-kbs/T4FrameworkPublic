@@ -23,7 +23,7 @@ struct FT4NPCAIMemory // #50
 	void Reset()
 	{
 		InitSpawnLocation = FVector::ZeroVector;
-		NextMoveTargetLocation = FVector::ZeroVector;
+		MoveTargetLocation = FVector::ZeroVector;
 		AttackTargetObjectID.SetNone();
 
 		IdleWaitTime = 5.0f;
@@ -38,7 +38,7 @@ struct FT4NPCAIMemory // #50
 	}
 
 	FVector InitSpawnLocation;
-	FVector NextMoveTargetLocation;
+	FVector MoveTargetLocation;
 
 	FT4ObjectID AttackTargetObjectID;
 
@@ -74,8 +74,6 @@ public:
 	bool Bind(const FT4GameDataID& InNPCGameDataID); // #31, #50
 
 	bool IsAttacking() const; // #50
-
-	float GetCurrentMoveSpeed() const; // #50
 	bool IsCurrentAggressive() const; // #50
 
 	IT4GameObject* FindNearestEnemyByAttackRange(); // #50
@@ -91,13 +89,23 @@ public:
 	bool DoRoaming(FVector& OutTargetLocation); // #50
 	bool DoNormalAttack(const FT4ObjectID& InTargetGameObjectID); // #50
 	bool DoMoveStop(bool bSyncLocation); // #52
+	bool DoUpdateMoveSpeed(ET4MoveSpeedType InMoveSpeedType); // #52
 
 	bool TakeEffectDamage(
 		const FT4GameEffectDataID& InEffectDataID,
 		const FT4ObjectID& InAttackerObjectID
 	); // #50
 
-	FT4NPCAIMemory& GetAIMemory() { return AIMemory; } // #50
+	const FT4NPCAIMemory& GetAIMemoryConst() const { return AIMemory; } // #50
+
+	void SetMoveTargetLocation(const FVector& InMoveTargetLocation) // #52
+	{
+		AIMemory.MoveTargetLocation = InMoveTargetLocation;
+	}
+	void SetAttackTargetObjectID(const FT4ObjectID& InTargetObjectID) // #52
+	{
+		AIMemory.AttackTargetObjectID = InTargetObjectID;
+	}
 
 protected:
 	void NotifyAIReady() override; // #50
@@ -112,7 +120,10 @@ protected:
 
 	void ClearHitOverlapEvent(); // #49
 
-	void HandleOnCallbackMoveTo(const FVector& InMoveDirection); // #42, #34
+	void HandleOnCallbackMoveTo(
+		const FVector& InMoveVelocity,
+		bool bForceMaxSpeed // #52 : MovementComponet::MaxSpeed 를 사용할지에 대한 Flag, 기본값이 false 로 Velocity 에서 Speed 를 얻는다. 동기화 이슈!!
+	); // #42, #34
 	void HandleOnCallbackMoveStop(); // #52
 
 private:
@@ -124,6 +135,8 @@ private:
 	); // #50
 
 	IT4PacketHandlerSC* GetPacketHandlerSC() const; // #45
+
+	float GetMoveSpeedSelected() const; // #50
 
 	void UpdateAggressive();
 

@@ -11,7 +11,7 @@
  */
 
 // WARN : Packet 추가 시는 아래 테그를 찾아 추가된 패킷을 모두 구현해주어야 함!!
-// #T4_ADD_PACKET_TAG
+// #T4_ADD_PACKET_TAG_CS
 
 UENUM()
 enum class ET4PacketCtoS : uint32
@@ -33,6 +33,7 @@ enum class ET4PacketCtoS : uint32
 
 	// Test
 	CmdChangeWorld,
+	CmdChangePlayer, // #11, #52
 
 	CmdPCEnter,
 	CmdPCLeave,
@@ -51,12 +52,15 @@ enum class ET4PacketCtoS : uint32
 	None,
 };
 
+// #T4_ADD_PACKET_TAG_SC
 UENUM()
 enum class ET4PacketStoC : uint32
 {
 	ChangeWorld,
 
 	MyPCEnter,
+	MyPCChange, // #11, #52
+
 	PCEnter,
 	PCLeave,
 
@@ -76,6 +80,7 @@ enum class ET4PacketStoC : uint32
 	TeleportTo,
 
 	MoveStop, // #52
+	MoveSpeedSync, // #52
 
 	LockOn, // #40
 	LockOff, // #40

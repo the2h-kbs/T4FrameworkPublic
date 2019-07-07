@@ -17,7 +17,8 @@
 // ET4ActionType::JumpTo
 // ET4ActionType::RollTo
 
-// ET4ActionType::MoveMaxSpeed
+// ET4ActionType::MoveStop // #52
+// ET4ActionType::MoveSpeedSync // #52
 
 // ET4ActionType::Rotation
 
@@ -68,13 +69,13 @@ struct T4ENGINE_API FT4MoveSyncToAction : public FT4ObjectAction
 
 public:
 	UPROPERTY(EditAnywhere)
-	FVector MoveDirection; // #50
-
-	UPROPERTY(EditAnywhere)
-	float MoveSpeed; // #50
+	FVector MoveVelocity; // #50
 
 	UPROPERTY(EditAnywhere)
 	float HeadYawAngle; // #40 : degree, LockOn 일 경우 이동 방향과 달라진다.
+
+	UPROPERTY(EditAnywhere)
+	bool bForceMaxSpeed; // #52 : MovementComponet::MaxSpeed 를 사용할지에 대한 Flag, 기본값이 false 로 Velocity 에서 Speed 를 얻는다. 동기화 이슈!!
 
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditAnywhere)
@@ -84,9 +85,9 @@ public:
 public:
 	FT4MoveSyncToAction()
 		: FT4ObjectAction(StaticActionType())
-		, MoveDirection(FVector::ZeroVector)
-		, MoveSpeed(0.0f)
+		, MoveVelocity(FVector::ZeroVector)
 		, HeadYawAngle(TNumericLimits<float>::Max())
+		, bForceMaxSpeed(false) // #52
 #if WITH_EDITORONLY_DATA
 		, ServerLocation(FVector::ZeroVector) // #52
 #endif
@@ -97,7 +98,7 @@ public:
 
 	bool Validate(FString& OutMsg) override
 	{
-		if (MoveDirection.IsNearlyZero())
+		if (MoveVelocity.IsNearlyZero())
 		{
 			OutMsg = TEXT("Invalid MoveVelocity");
 			return false;
@@ -245,6 +246,31 @@ public:
 	FString ToString() const override
 	{
 		return FString(TEXT("OAction:MoveStop"));
+	}
+};
+
+// #52
+USTRUCT()
+struct T4ENGINE_API FT4MoveSpeedSyncAction : public FT4ObjectAction
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	UPROPERTY(EditAnywhere)
+	float MoveSpeed;
+
+public:
+	FT4MoveSpeedSyncAction()
+		: FT4ObjectAction(StaticActionType())
+		, MoveSpeed(0.0f)
+	{
+	}
+
+	static ET4ActionType StaticActionType() { return ET4ActionType::MoveSpeedSync; }
+
+	FString ToString() const override
+	{
+		return FString(TEXT("OAction:MoveSpeedSync"));
 	}
 };
 

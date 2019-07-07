@@ -32,7 +32,7 @@ public:
 	void SetMainWeaponDataID(const FT4GameDataID& InMainWeaponDataID) { MainWeaponDataID = InMainWeaponDataID; } // #48
 	const FT4GameDataID& GetMainWeaponDataID() const { return MainWeaponDataID; } // #48
 
-	bool DoAttack(const FT4PacketAttackCS& InPacket); // #49
+	bool DoAttackForServer(const FT4PacketAttackCS& InPacket); // #49
 
 	bool TakeEffectDamage(
 		const FT4GameEffectDataID& InEffectDataID,
@@ -77,7 +77,7 @@ protected:
 private:
 	friend class FT4PacketHandlerCS;
 
-	// #T4_ADD_PACKET_TAG
+	// #T4_ADD_PACKET_TAG_CS
 	UFUNCTION(Reliable, server, WithValidation)
 	void CS_RecvPacket_Move(const FT4PacketMoveCS& InPacket);
 
@@ -112,6 +112,9 @@ private:
 	void CS_RecvPacket_CmdChangeWorld(const FT4PacketCmdChangeWorldCS& InPacket);
 
 	UFUNCTION(Reliable, server, WithValidation)
+	void CS_RecvPacket_CmdChangePlayer(const FT4PacketCmdChangePlayerCS& InPacket); // #11, #52
+
+	UFUNCTION(Reliable, server, WithValidation)
 	void CS_RecvPacket_CmdPCEnter(const FT4PacketCmdPCEnterCS& InPacket);
 
 	UFUNCTION(Reliable, server, WithValidation)
@@ -141,12 +144,15 @@ private:
 private:
 	friend class FT4PacketHandlerSC;
 
-	// #T4_ADD_PACKET_TAG
+	// #T4_ADD_PACKET_TAG_SC
 	UFUNCTION(Reliable, client)
 	void SC_RecvPacket_ChangeWorld(const FT4PacketChangeWorldSC& InPacket);
 
 	UFUNCTION(Reliable, client)
 	void SC_RecvPacket_MyPCEnter(const FT4PacketMyPCEnterSC& InPacket);
+
+	UFUNCTION(Reliable, client)
+	void SC_RecvPacket_MyPCChange(const FT4PacketMyPCChangeSC& InPacket); // #11, #52
 
 	UFUNCTION(Reliable, client)
 	void SC_RecvPacket_PCEnter(const FT4PacketPCEnterSC& InPacket);
@@ -189,6 +195,9 @@ private:
 
 	UFUNCTION(Reliable, client)
 	void SC_RecvPacket_MoveStop(const FT4PacketMoveStopSC& InPacket); // #52
+
+	UFUNCTION(Reliable, client)
+	void SC_RecvPacket_MoveSpeedSync(const FT4PacketMoveSpeedSyncSC& InPacket); // #52
 
 	UFUNCTION(Reliable, client)
 	void SC_RecvPacket_LockOn(const FT4PacketLockOnSC& InPacket);

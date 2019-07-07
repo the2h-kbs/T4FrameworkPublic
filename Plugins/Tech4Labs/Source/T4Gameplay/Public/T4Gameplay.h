@@ -16,12 +16,14 @@ class T4GAMEPLAY_API IT4PacketHandlerSC
 public:
 	virtual ~IT4PacketHandlerSC() {}
 
-	virtual bool OnRecvPacket(const FT4PacketStoC* InPacket) = 0;
-
 #if (WITH_EDITOR || WITH_SERVER_CODE)
 	virtual bool DoSendPacketForServer(FT4PacketStoC* InPacket, IT4PlayerController* InRecvPC) = 0;
-	virtual bool DoBroadcastPacketForServer(FT4PacketStoC* InPacket) = 0; // #50
+	virtual bool DoBroadcastPacketForServer(FT4PacketStoC* InPacket, bool bProcessServerPacket) = 0; // #50
+
+	virtual bool DoProcessPacketOnlyServer(FT4PacketStoC* InPacket, bool bCheckValidate) = 0; // #52
 #endif
+
+	virtual bool OnRecvPacket(const FT4PacketStoC* InPacket) = 0;
 };
 
 class T4GAMEPLAY_API IT4PacketHandlerCS

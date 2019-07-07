@@ -9,7 +9,7 @@
 /**
   *
  */
- // #T4_ADD_PACKET_TAG
+ // #T4_ADD_PACKET_TAG_SC
 
 // ET4PacketStoC::Attack
 // ET4PacketStoC::Effect

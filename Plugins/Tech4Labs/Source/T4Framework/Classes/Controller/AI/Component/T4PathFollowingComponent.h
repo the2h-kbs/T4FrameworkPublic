@@ -16,7 +16,7 @@ class T4FRAMEWORK_API UT4PathFollowingComponent : public UPathFollowingComponent
 {
 	GENERATED_UCLASS_BODY()
 
-	DECLARE_DELEGATE_OneParam(FOnCallbackMoveTo, const FVector&); // #42, #50
+	DECLARE_DELEGATE_TwoParams(FOnCallbackMoveTo, const FVector&, bool); // #42, #50
 	DECLARE_DELEGATE(FOnCallbackMoveStop); // #52
 
 public:

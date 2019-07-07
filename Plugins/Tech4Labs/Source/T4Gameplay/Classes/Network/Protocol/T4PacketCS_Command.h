@@ -9,9 +9,11 @@
 /**
   *
  */
- // #T4_ADD_PACKET_TAG
+ // #T4_ADD_PACKET_TAG_CS
 
 // ET4PacketCtoS::CmdChangeWorld
+// ET4PacketCtoS::CmdChangePlayer // #11, #52
+
 // ET4PacketCtoS::CmdPCEnter
 // ET4PacketCtoS::CmdPCLeave
 
@@ -44,6 +46,28 @@ public:
 	FString ToString() const override
 	{
 		return FString(TEXT("CS_Packet:CmdChangeWorld"));
+	}
+};
+
+// #11, #52
+USTRUCT()
+struct FT4PacketCmdChangePlayerCS : public FT4PacketCtoS
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	UPROPERTY(VisibleAnywhere)
+	FT4ObjectID NewPlayerObjectID;
+
+public:
+	FT4PacketCmdChangePlayerCS()
+		: FT4PacketCtoS(ET4PacketCtoS::CmdChangePlayer)
+	{
+	}
+
+	FString ToString() const override
+	{
+		return FString(TEXT("CS_Packet:CmdChangePlayer"));
 	}
 };
 
