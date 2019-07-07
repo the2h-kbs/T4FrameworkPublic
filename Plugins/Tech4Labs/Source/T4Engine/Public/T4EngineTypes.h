@@ -20,6 +20,8 @@ static const float DefaultLineTraceMaxDistance = 10000.0f;
 #define T4COLLISION_WEAPON			ECC_GameTraceChannel2
 #endif
 
+#define T4_INVALID_NAVEXTENT		(FVector::ZeroVector)
+
 UENUM()
 enum class ET4WorldType : uint8
 {

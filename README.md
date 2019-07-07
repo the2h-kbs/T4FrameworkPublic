@@ -1,4 +1,4 @@
-# T4Framework Plugin for UE4
+# T4Framework for UE4
 
 - Website
   - <https://www.tech4labs.com>

@@ -71,6 +71,8 @@ public:
 	IT4GameObject* GetGameObject() const override;
 	IT4ActionControl* GetGameObjectActionControl() const override;
 
+	IT4GameWorld* GetGameWorld() const override; // #52
+
 	bool HasPlayingAction(const FT4ActionKey& InActionKey) const override; // #20
 
 	AController* GetAController() override;

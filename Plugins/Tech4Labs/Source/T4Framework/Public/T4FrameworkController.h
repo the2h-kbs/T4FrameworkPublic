@@ -25,6 +25,7 @@ class AController;
 class UInputComponent;
 class IT4ActionControl;
 class IT4GameObject;
+class IT4GameWorld;
 class IT4NPCAIController;
 class IT4PlayerController;
 // #34
@@ -43,6 +44,8 @@ public:
 	virtual const FT4ObjectID& GetGameObjectID() const = 0;
 	virtual IT4GameObject* GetGameObject() const = 0;
 	virtual IT4ActionControl* GetGameObjectActionControl() const = 0;
+
+	virtual IT4GameWorld* GetGameWorld() const = 0; // #52
 
 	virtual bool HasPlayingAction(const FT4ActionKey& InActionKey) const = 0; // #20
 
