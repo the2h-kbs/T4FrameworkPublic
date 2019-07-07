@@ -1,0 +1,11 @@
+{
+	"BuildId": "5660361",
+	"Modules": 
+	{
+		"T4Core": "UE4Editor-T4Core.dll",
+		"T4Engine": "UE4Editor-T4Engine.dll",
+		"T4Framework": "UE4Editor-T4Framework.dll",
+		"T4Gameplay": "UE4Editor-T4Gameplay.dll",
+		"T4Rehearsal": "UE4Editor-T4Rehearsal.dll"
+	}
+}
