@@ -79,7 +79,10 @@ public:
 
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditAnywhere)
-	FVector ServerLocation; // #52
+	FVector ServerNavPoint; // #52
+
+	UPROPERTY(EditAnywhere)
+	FVector ServerDirection; // #52
 #endif
 
 public:
@@ -89,7 +92,8 @@ public:
 		, HeadYawAngle(TNumericLimits<float>::Max())
 		, bForceMaxSpeed(false) // #52
 #if WITH_EDITORONLY_DATA
-		, ServerLocation(FVector::ZeroVector) // #52
+		, ServerNavPoint(FVector::ZeroVector) // #52
+		, ServerDirection(FVector::ForwardVector) // #52
 #endif
 	{
 	}

@@ -34,7 +34,7 @@ public:
 	FT4ObjectID SenderID;
 
 	UPROPERTY(VisibleAnywhere)
-	FVector MoveDirection;
+	FVector MoveToLocation; // #52 : Normal + (MoveSpeed * GameplayDefaultNetworkLatencySec) / 레이턴시 감안 거리
 
 	UPROPERTY(VisibleAnywhere)
 	float HeadYawAngle; // #40 : 필요하다면 3D 로 확장. 이동 패킷은 량이 많음을 고려.
@@ -42,7 +42,7 @@ public:
 public:
 	FT4PacketMoveCS()
 		: FT4PacketCtoS(ET4PacketCtoS::Move)
-		, MoveDirection(FVector::ZeroVector)
+		, MoveToLocation(FVector::ZeroVector)
 		, HeadYawAngle(TNumericLimits<float>::Max()) // #40
 	{
 	}
@@ -54,9 +54,9 @@ public:
 			OutMsg = TEXT("Invalid Send ObjectID!");
 			return false;
 		}
-		if (MoveDirection.IsNearlyZero())
+		if (MoveToLocation.IsNearlyZero())
 		{
-			OutMsg = TEXT("Invalid MoveDirection!");
+			OutMsg = TEXT("Invalid MoveToLocation!");
 			return false;
 		}
 		return true;

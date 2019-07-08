@@ -25,7 +25,7 @@ struct FT4GameObjectProperty // #34
 		// #33
 		MoveSpeed[(uint8)ET4MoveType::Sync] = 0.0f;
 		MoveSpeed[(uint8)ET4MoveType::Async] = 0.0f;
-
+		MoveAccelerationScale = 1.0f; // #38, #52 (0.1 ~ 1)
 		RotationYawRate = 520.0f; // #44, #46
 
 		CapsuleRadius = 0.0f;
@@ -47,6 +47,7 @@ struct FT4GameObjectProperty // #34
 	bool bIsLockOn;
 
 	float MoveSpeed[(uint8)ET4MoveType::Count]; // #33
+	float MoveAccelerationScale; // #38, #52 (0.1 ~ 1)
 	float RotationYawRate; // #46
 
 	float CapsuleRadius;

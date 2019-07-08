@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "T4CoreMacros.h"
 #include "T4CoreTypes.generated.h"
 
 /**

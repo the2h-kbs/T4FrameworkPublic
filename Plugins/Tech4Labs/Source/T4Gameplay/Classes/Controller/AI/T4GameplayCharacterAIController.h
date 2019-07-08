@@ -88,6 +88,7 @@ public:
 
 	bool DoRoaming(FVector& OutTargetLocation); // #50
 	bool DoNormalAttack(const FT4ObjectID& InTargetGameObjectID); // #50
+	bool DoMoveTo(const FVector& InMoveVelocity, bool bForceMaxSpeed); // #52
 	bool DoMoveStop(bool bSyncLocation); // #52
 	bool DoUpdateMoveSpeed(ET4MoveSpeedType InMoveSpeedType); // #52
 

@@ -38,7 +38,7 @@ public:
 	FT4ObjectID ObjectID;
 
 	UPROPERTY(VisibleAnywhere)
-	FVector MoveToLocation; // #52
+	FVector MoveToLocation; // #52 : Velocity * (1.0f / GameplayDefaultNetworkLatencySec) / 레이턴시 감안 복원
 
 	UPROPERTY(VisibleAnywhere)
 	float HeadYawAngle; // #40 : 필요할 때 3D 로 확장. #50 : 이동 방향과 Head 방향이 다를 경우를 대비해 존재
@@ -48,7 +48,10 @@ public:
 
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(VisibleAnywhere)
-	FVector ServerLocation; // #52
+	FVector ServerNavPoint; // #52
+
+	UPROPERTY(EditAnywhere)
+	FVector ServerDirection; // #52
 #endif
 
 public:
@@ -58,7 +61,8 @@ public:
 		, HeadYawAngle(TNumericLimits<float>::Max())
 		, bForceMaxSpeed(false) // #52
 #if WITH_EDITORONLY_DATA
-		, ServerLocation(FVector::ZeroVector) // #52
+		, ServerNavPoint(FVector::ZeroVector) // #52
+		, ServerDirection(FVector::ForwardVector) // #52
 #endif
 	{
 	}
