@@ -59,7 +59,10 @@ public:
 	bool HasGameObject() const override { return GameObjectID.IsValid(); }
 	const FT4ObjectID& GetGameObjectID() const override { return GameObjectID; }
 	IT4GameObject* GetGameObject() const override;
-	IT4ActionControl* GetGameObjectActionControl() const override; // #23
+
+	bool HasObserverObject() const override { return ObserverObjectID.IsValid(); } // #52
+	bool SetObserverObject(const FT4ObjectID& InNewObserverID) override; // #52
+	void ClearObserverObject() override; // #52
 
 	IT4GameWorld* GetGameWorld() const override; // #52
 
@@ -127,17 +130,20 @@ protected:
 	IT4GameObject* FindGameObject(const FT4ObjectID& InObjectID) const; // #49
 
 private:
-	void AttachCameraComponent(APawn* InOuter, USceneComponent* InParentComponent);
+	void AttachCameraComponent(APawn* InOuter);
 	void DetachCameraComponent();
 
 	void T4SetMouseLocation(const int InX, const int InY); // #30
 	bool T4GetMousePosition(float& InLocationX, float& InLocationY) const; // #30
+
+	APawn* GetTargetPawnSelected(); // #52
 
 protected:
 	ET4LayerType LayerType;
 
 private:
 	FT4ObjectID GameObjectID;
+	FT4ObjectID ObserverObjectID; // #52
 
 	TWeakObjectPtr<AT4PlayerDefaultPawn> CachedDefaultPawn;
 

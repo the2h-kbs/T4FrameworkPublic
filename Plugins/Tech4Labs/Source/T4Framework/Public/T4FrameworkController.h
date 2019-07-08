@@ -43,7 +43,10 @@ public:
 	virtual bool HasGameObject() const = 0;
 	virtual const FT4ObjectID& GetGameObjectID() const = 0;
 	virtual IT4GameObject* GetGameObject() const = 0;
-	virtual IT4ActionControl* GetGameObjectActionControl() const = 0;
+
+	virtual bool HasObserverObject() const = 0; // #52
+	virtual bool SetObserverObject(const FT4ObjectID& InNewObserverID) = 0; // #52
+	virtual void ClearObserverObject() = 0; // #52
 
 	virtual IT4GameWorld* GetGameWorld() const = 0; // #52
 

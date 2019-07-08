@@ -69,7 +69,10 @@ public:
 	bool HasGameObject() const override  { return GameObjectID.IsValid(); }
 	const FT4ObjectID& GetGameObjectID() const override { return GameObjectID; }
 	IT4GameObject* GetGameObject() const override;
-	IT4ActionControl* GetGameObjectActionControl() const override;
+
+	bool HasObserverObject() const override { return false; } // #52
+	bool SetObserverObject(const FT4ObjectID& InNewObserverID) override { return false; } // #52 : 서버는 필요없다!
+	void ClearObserverObject() override {} // #52 : 서버는 필요없다!
 
 	IT4GameWorld* GetGameWorld() const override; // #52
 
