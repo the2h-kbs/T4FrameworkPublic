@@ -17,6 +17,7 @@ UENUM()
 enum class ET4ActionType : uint32
 {
 	Root, // #24
+	Branch, // #54
 
 	// begin World
 

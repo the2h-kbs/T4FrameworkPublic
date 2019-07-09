@@ -42,7 +42,7 @@ struct T4ENGINE_API FT4AnimSetLocomotionAttribute
 public:
 	FT4AnimSetLocomotionAttribute()
 		: MinAccelerationScale(0.1f)
-		, MaxAcceleratedMoveTimeSec(0.25f)
+		, MaxAcceleratedMoveTimeSec(0.75f)
 		, MaxFootStanceIdlePlayCount(3)
 	{
 	}

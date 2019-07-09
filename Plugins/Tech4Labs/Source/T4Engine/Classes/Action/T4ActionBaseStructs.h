@@ -6,7 +6,7 @@
 #include "Public/Action/T4EngineActionTypes.h"
 #include "Public/Action/T4EngineActionParameters.h"
 #include "Public/T4EngineTypes.h"
-#include "T4Action_Base.generated.h"
+#include "T4ActionBaseStructs.generated.h"
 
 /**
   *
@@ -72,7 +72,7 @@ public:
 
 	// #24 : Composite 일 경우 사용됨!
 	UPROPERTY(VisibleAnywhere)
-	int32 HierarchyIndex;
+	int32 HeaderKey;
 
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditAnywhere)
@@ -85,7 +85,7 @@ public:
 		, LifecyclePolicy(ET4LifecyclePolicy::Default)
 		, DelayTimeSec(0.0f)
 		, DurationSec(0.0f)
-		, HierarchyIndex(INDEX_NONE) // #24
+		, HeaderKey(INDEX_NONE) // #24
 #if WITH_EDITORONLY_DATA
 		, DisplayName(NAME_None)
 #endif
@@ -97,7 +97,7 @@ public:
 		, LifecyclePolicy(ET4LifecyclePolicy::Default)
 		, DelayTimeSec(0.0f)
 		, DurationSec(0.0f)
-		, HierarchyIndex(INDEX_NONE) // #24
+		, HeaderKey(INDEX_NONE) // #24
 #if WITH_EDITORONLY_DATA
 		, DisplayName(NAME_None)
 #endif
