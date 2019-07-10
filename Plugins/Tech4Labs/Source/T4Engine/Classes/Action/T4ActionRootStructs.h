@@ -5,7 +5,8 @@
 #include "CoreMinimal.h"
 #include "T4ActionMoveStructs.h"
 #include "T4ActionVFXStructs.h"
-#include "T4ActionCompositeStructs.generated.h"
+#include "T4ActionCommonStructs.h"
+#include "T4ActionRootStructs.generated.h"
 
 /**
   *
@@ -13,7 +14,6 @@
  // #T4_ADD_ACTION_TAG
 
 // ET4ActionType::Root
-// ET4ActionType::Branch // #54
 
 // #24
 USTRUCT()
@@ -53,7 +53,10 @@ public:
 	// #T4_ADD_ACTION_TAG_CONTI
 
 	UPROPERTY(EditAnywhere)
-	TArray<FT4RotationAction> RotationActions;
+	TArray<FT4BranchAction> BranchActions; // #54
+
+	UPROPERTY(EditAnywhere)
+	TArray<FT4SpecialMoveAction> SpecialMoveActions; // #54
 
 	UPROPERTY(EditAnywhere)
 	TArray<FT4AnimationAction> AnimationActions;
@@ -111,29 +114,10 @@ public:
 
 	static ET4ActionType StaticActionType() { return ET4ActionType::Root; }
 
-	FORCEINLINE void Reset()
+	FString ToString() const override
 	{
-		CompositeData.Reset();
+		return FString(TEXT("OAction:Root"));
 	}
-};
-
-// #54
-USTRUCT()
-struct T4ENGINE_API FT4BranchAction : public FT4ObjectAction
-{
-	GENERATED_USTRUCT_BODY()
-
-public:
-	UPROPERTY(VisibleAnywhere)
-	FT4ActionCompositeData CompositeData;
-
-public:
-	FT4BranchAction()
-		: FT4ObjectAction(StaticActionType())
-	{
-	}
-
-	static ET4ActionType StaticActionType() { return ET4ActionType::Branch; }
 
 	FORCEINLINE void Reset()
 	{

@@ -30,11 +30,14 @@ enum class ET4ActionType : uint32
 
 	Possess,
 
-	MoveAsyncTo, // #40
-	MoveSyncTo, // #40
-	JumpTo,
-	RollTo, // #46
-	TeleportTo,
+	MoveAsync, // #40
+	MoveSync, // #40
+	Jump,
+	Roll, // #46
+	Teleport,
+	Turn,
+
+	SpecialMove, // #54
 
 	MoveStop, // #52
 	MoveSpeedSync, // #52
@@ -45,7 +48,6 @@ enum class ET4ActionType : uint32
 	UnEquipWeapon, // #48
 	ExchangeCostume, // #37
 
-	Rotation,
 	Animation,
 	Particle,
 
@@ -70,6 +72,26 @@ enum class ET4LifecyclePolicy : uint8
 };
 
 UENUM()
+enum class ET4LoadingPolicy : uint8
+{
+	Async, // Default
+	AsyncAndPreloading,
+
+	AsyncFast, // Fast Async
+
+	Default UMETA(Hidden) // Default = Async
+};
+
+// #54
+UENUM()
+enum class ET4BranchCondition : uint8
+{
+	Always,
+
+	Default, // Default = Auto
+};
+
+UENUM()
 enum class ET4MoveType : uint8
 {
 	Sync,
@@ -80,7 +102,7 @@ enum class ET4MoveType : uint8
 };
 
 UENUM()
-enum class ET4RotationType : uint8
+enum class ET4TurnType : uint8
 {
 	Current,
 

@@ -78,14 +78,14 @@ public:
 	bool bOverrideEquipped; // #48 : 기존 장비의 해제 여부
 
 	UPROPERTY(EditAnywhere)
-	bool bUsePreloading;
+	ET4LoadingPolicy LoadingPolicy;
 
 public:
 	FT4EquipWeaponAction()
 		: FT4ObjectAction(StaticActionType())
 		, BoneOrSocketName(NAME_None)
 		, bOverrideEquipped(false) // #48
-		, bUsePreloading(false)
+		, LoadingPolicy(ET4LoadingPolicy::Default)
 	{
 	}
 

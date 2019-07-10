@@ -11,10 +11,57 @@
  */
  // #T4_ADD_ACTION_TAG
 
+// ET4ActionType::Branch // #54
 // ET4ActionType::Conti
 // ET4ActionType::Stop
 
-class UT4ContiAsset;
+// #54
+USTRUCT()
+struct T4ENGINE_API FT4ContiData
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	UPROPERTY(EditAnywhere)
+	TSoftObjectPtr<class UT4ContiAsset> ContiAsset;
+
+	UPROPERTY(EditAnywhere)
+	ET4LoadingPolicy LoadingPolicy;
+
+public:
+	FT4ContiData()
+		: LoadingPolicy(ET4LoadingPolicy::Default)
+	{
+	}
+};
+
+// #54
+USTRUCT()
+struct T4ENGINE_API FT4BranchAction : public FT4ObjectAction
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	UPROPERTY(EditAnywhere)
+	ET4BranchCondition Contition;
+
+	UPROPERTY(EditAnywhere)
+	TArray<FT4ContiData> ContiDatas;
+
+public:
+	FT4BranchAction()
+		: FT4ObjectAction(StaticActionType())
+		, Contition(ET4BranchCondition::Default)
+	{
+	}
+
+	static ET4ActionType StaticActionType() { return ET4ActionType::Branch; }
+
+	FString ToString() const override
+	{
+		return FString(TEXT("OAction:Branch"));
+	}
+};
 
 USTRUCT()
 struct T4ENGINE_API FT4ContiAction : public FT4ObjectAction
@@ -23,15 +70,11 @@ struct T4ENGINE_API FT4ContiAction : public FT4ObjectAction
 
 public:
 	UPROPERTY(EditAnywhere)
-	TSoftObjectPtr<UT4ContiAsset> ContiAsset;
-
-	UPROPERTY(EditAnywhere)
-	bool bUsePreloading;
+	FT4ContiData ContiData;
 
 public:
 	FT4ContiAction()
 		: FT4ObjectAction(StaticActionType())
-		, bUsePreloading(true)
 	{
 	}
 

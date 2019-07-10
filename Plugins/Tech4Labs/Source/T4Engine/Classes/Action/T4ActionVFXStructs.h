@@ -72,13 +72,13 @@ public:
 	TSoftObjectPtr<UParticleSystem> ParticleAsset;
 
 	UPROPERTY(EditAnywhere)
-	bool bUsePreloading;
+	ET4LoadingPolicy LoadingPolicy;
 
 public:
 	FT4ParticleAction()
 		: FT4ObjectAction(StaticActionType())
 		, BoneOrSocketName(NAME_None)
-		, bUsePreloading(false)
+		, LoadingPolicy(ET4LoadingPolicy::Default)
 	{
 	}
 

@@ -11,11 +11,11 @@
  */
  // #T4_ADD_ACTION_TAG
 
-// ET4ActionType::MoveAsyncTo
-// ET4ActionType::MoveSyncTo
-// ET4ActionType::TeleportTo
-// ET4ActionType::JumpTo
-// ET4ActionType::RollTo
+// ET4ActionType::MoveAsync
+// ET4ActionType::MoveSync
+// ET4ActionType::Teleport
+// ET4ActionType::Jump
+// ET4ActionType::Roll
 
 // ET4ActionType::MoveStop // #52
 // ET4ActionType::MoveSpeedSync // #52
@@ -24,7 +24,7 @@
 
 // #40
 USTRUCT()
-struct T4ENGINE_API FT4MoveAsyncToAction : public FT4ObjectAction
+struct T4ENGINE_API FT4MoveAsyncAction : public FT4ObjectAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -36,14 +36,14 @@ public:
 	float HeadYawAngle; // #44 : degree, LockOn 일 경우 이동 방향과 달라진다.
 
 public:
-	FT4MoveAsyncToAction()
+	FT4MoveAsyncAction()
 		: FT4ObjectAction(StaticActionType())
 		, MoveDirection(FVector::ZeroVector)
 		, HeadYawAngle(TNumericLimits<float>::Max())
 	{
 	}
 
-	static ET4ActionType StaticActionType() { return ET4ActionType::MoveAsyncTo; }
+	static ET4ActionType StaticActionType() { return ET4ActionType::MoveAsync; }
 
 	bool Validate(FString& OutMsg) override
 	{
@@ -63,7 +63,7 @@ public:
 
 // #33, #40
 USTRUCT()
-struct T4ENGINE_API FT4MoveSyncToAction : public FT4ObjectAction
+struct T4ENGINE_API FT4MoveSyncAction : public FT4ObjectAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -86,7 +86,7 @@ public:
 #endif
 
 public:
-	FT4MoveSyncToAction()
+	FT4MoveSyncAction()
 		: FT4ObjectAction(StaticActionType())
 		, MoveVelocity(FVector::ZeroVector)
 		, HeadYawAngle(TNumericLimits<float>::Max())
@@ -98,7 +98,7 @@ public:
 	{
 	}
 
-	static ET4ActionType StaticActionType() { return ET4ActionType::MoveSyncTo; }
+	static ET4ActionType StaticActionType() { return ET4ActionType::MoveSync; }
 
 	bool Validate(FString& OutMsg) override
 	{
@@ -117,7 +117,7 @@ public:
 };
 
 USTRUCT()
-struct T4ENGINE_API FT4JumpToAction : public FT4ObjectAction
+struct T4ENGINE_API FT4JumpAction : public FT4ObjectAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -126,13 +126,13 @@ public:
 	FVector JumpVelocity;
 
 public:
-	FT4JumpToAction()
+	FT4JumpAction()
 		: FT4ObjectAction(StaticActionType())
 		, JumpVelocity(FVector::ZeroVector)
 	{
 	}
 
-	static ET4ActionType StaticActionType() { return ET4ActionType::JumpTo; }
+	static ET4ActionType StaticActionType() { return ET4ActionType::Jump; }
 
 	bool Validate(FString& OutMsg) override
 	{
@@ -152,7 +152,7 @@ public:
 
 // #46
 USTRUCT()
-struct T4ENGINE_API FT4RollToAction : public FT4ObjectAction
+struct T4ENGINE_API FT4RollAction : public FT4ObjectAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -161,13 +161,13 @@ public:
 	FVector RollVelocity;
 
 public:
-	FT4RollToAction()
+	FT4RollAction()
 		: FT4ObjectAction(StaticActionType())
 		, RollVelocity(FVector::ZeroVector)
 	{
 	}
 
-	static ET4ActionType StaticActionType() { return ET4ActionType::RollTo; }
+	static ET4ActionType StaticActionType() { return ET4ActionType::Roll; }
 
 	bool Validate(FString& OutMsg) override
 	{
@@ -187,7 +187,7 @@ public:
 
 // #34
 USTRUCT()
-struct T4ENGINE_API FT4TeleportToAction : public FT4ObjectAction
+struct T4ENGINE_API FT4TeleportAction : public FT4ObjectAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -196,13 +196,13 @@ public:
 	FVector TargetLocation;
 
 public:
-	FT4TeleportToAction()
+	FT4TeleportAction()
 		: FT4ObjectAction(StaticActionType())
 		, TargetLocation(FVector::ZeroVector)
 	{
 	}
 
-	static ET4ActionType StaticActionType() { return ET4ActionType::TeleportTo; }
+	static ET4ActionType StaticActionType() { return ET4ActionType::Teleport; }
 
 	bool Validate(FString& OutMsg) override
 	{
@@ -217,6 +217,61 @@ public:
 	FString ToString() const override
 	{
 		return FString(TEXT("OAction:TeleportTo"));
+	}
+};
+
+USTRUCT()
+struct T4ENGINE_API FT4TurnAction : public FT4ObjectAction
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	UPROPERTY(EditAnywhere)
+	ET4TurnType TurnType;
+
+	UPROPERTY(EditAnywhere)
+	float RotationYawRate; // #44 : 초당 회전 단위, Yaw
+
+	UPROPERTY(EditAnywhere)
+	float TargetYawAngle; // #40 : LockOn 에서 방향을 맞출 경우 사용 (only ET4TurnType::TargetYawAngle)
+
+public:
+	FT4TurnAction()
+		: FT4ObjectAction(StaticActionType())
+		, TurnType(ET4TurnType::Default)
+		, RotationYawRate(0.0f)
+		, TargetYawAngle(0.0f)
+	{
+	}
+
+	static ET4ActionType StaticActionType() { return ET4ActionType::Turn; }
+
+	FString ToString() const override
+	{
+		return FString(TEXT("OAction:Turn"));
+	}
+};
+
+// #54
+USTRUCT()
+struct T4ENGINE_API FT4SpecialMoveAction : public FT4ObjectAction
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	// #39 : FT4ContiCustomizeDetails::CustomizeSpecialMoveActionDetails
+
+public:
+	FT4SpecialMoveAction()
+		: FT4ObjectAction(StaticActionType())
+	{
+	}
+
+	static ET4ActionType StaticActionType() { return ET4ActionType::SpecialMove; }
+
+	FString ToString() const override
+	{
+		return FString(TEXT("OAction:SpecialMove"));
 	}
 };
 
@@ -275,39 +330,5 @@ public:
 	FString ToString() const override
 	{
 		return FString(TEXT("OAction:MoveSpeedSync"));
-	}
-};
-
-USTRUCT()
-struct T4ENGINE_API FT4RotationAction : public FT4ObjectAction
-{
-	GENERATED_USTRUCT_BODY()
-
-public:
-	// #39 : FT4ContiCustomizeDetails::CustomizeRotationActionDetails
-
-	UPROPERTY(EditAnywhere)
-	ET4RotationType RotationType;
-
-	UPROPERTY(EditAnywhere)
-	float RotationYawRate; // #44 : 초당 회전 단위, Yaw
-
-	UPROPERTY(EditAnywhere)
-	float TargetYawAngle; // #40 : LockOn 에서 방향을 맞출 경우 사용 (only ET4RotationType::TargetYawAngle)
-
-public:
-	FT4RotationAction()
-		: FT4ObjectAction(StaticActionType())
-		, RotationType(ET4RotationType::Default)
-		, RotationYawRate(0.0f)
-		, TargetYawAngle(0.0f)
-	{
-	}
-
-	static ET4ActionType StaticActionType() { return ET4ActionType::Rotation; }
-
-	FString ToString() const override
-	{
-		return FString(TEXT("OAction:Rotation"));
 	}
 };

@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 
-#include "T4ActionCompositeStructs.h" // #54
+#include "T4ActionRootStructs.h" // #54
 #include "T4ActionWorldStructs.h"
 #include "T4ActionStatusStructs.h"
 #include "T4ActionMoveStructs.h"

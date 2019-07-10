@@ -5,9 +5,9 @@
 - 웹사이트
   - <https://www.tech4labs.com>
 - 사용자 메뉴얼 (All)
-  - <https://github.com/Tech4Labs/T4FrameworkPublic/wiki>
+  - <https://github.com/Tech4Labs/T4FrameworkPublic/wiki> <= 준비중
 - API 레퍼런스 메뉴얼 (Professional)
-  - <https://github.com/Tech4Labs/T4Framework/wiki>
+  - <https://github.com/Tech4Labs/T4Framework/wiki> <= 준비중
 - 공개 저장소 (Free License)
   - <https://github.com/Tech4Labs/T4FrameworkPublic>
 - 비공개 저장소 (Professional License)

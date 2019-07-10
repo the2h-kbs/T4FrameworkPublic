@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Classes/Action/T4ActionCompositeStructs.h"
+#include "Classes/Action/T4ActionRootStructs.h"
 #include "T4ContiAsset.generated.h"
 
 /**
