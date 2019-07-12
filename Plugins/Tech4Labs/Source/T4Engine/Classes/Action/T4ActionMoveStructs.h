@@ -16,11 +16,10 @@
 // ET4ActionType::Teleport
 // ET4ActionType::Jump
 // ET4ActionType::Roll
+// ET4ActionType::Turn
 
 // ET4ActionType::MoveStop // #52
 // ET4ActionType::MoveSpeedSync // #52
-
-// ET4ActionType::Rotation
 
 // #40
 USTRUCT()

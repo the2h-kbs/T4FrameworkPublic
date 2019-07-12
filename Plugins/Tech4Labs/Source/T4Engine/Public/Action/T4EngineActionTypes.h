@@ -28,8 +28,6 @@ enum class ET4ActionType : uint32
 
 	// begin Object
 
-	Possess,
-
 	MoveAsync, // #40
 	MoveSync, // #40
 	Jump,
@@ -50,6 +48,10 @@ enum class ET4ActionType : uint32
 
 	Animation,
 	Particle,
+	Decal, // #54
+
+	TimeScale, // #54
+	CameraWork, // #54
 
 	Conti, // #24
 

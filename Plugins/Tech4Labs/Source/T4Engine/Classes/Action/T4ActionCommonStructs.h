@@ -23,6 +23,9 @@ struct T4ENGINE_API FT4ContiData
 
 public:
 	UPROPERTY(EditAnywhere)
+	float LocalOffsetTimeSec;
+
+	UPROPERTY(EditAnywhere)
 	TSoftObjectPtr<class UT4ContiAsset> ContiAsset;
 
 	UPROPERTY(EditAnywhere)
@@ -30,7 +33,8 @@ public:
 
 public:
 	FT4ContiData()
-		: LoadingPolicy(ET4LoadingPolicy::Default)
+		: LocalOffsetTimeSec(0.0f)
+		, LoadingPolicy(ET4LoadingPolicy::Default)
 	{
 	}
 };
@@ -70,11 +74,15 @@ struct T4ENGINE_API FT4ContiAction : public FT4ObjectAction
 
 public:
 	UPROPERTY(EditAnywhere)
-	FT4ContiData ContiData;
+	TSoftObjectPtr<class UT4ContiAsset> ContiAsset;
+
+	UPROPERTY(EditAnywhere)
+	ET4LoadingPolicy LoadingPolicy;
 
 public:
 	FT4ContiAction()
 		: FT4ObjectAction(StaticActionType())
+		, LoadingPolicy(ET4LoadingPolicy::Default)
 	{
 	}
 

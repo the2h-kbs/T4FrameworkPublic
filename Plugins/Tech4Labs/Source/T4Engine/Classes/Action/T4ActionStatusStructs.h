@@ -11,28 +11,8 @@
  */
  // #T4_ADD_ACTION_TAG
 
-// ET4ActionType::Possess
 // ET4ActionType::LockOn
 // ET4ActionType::EquipWeapon
-
-USTRUCT()
-struct T4ENGINE_API FT4PossessAction : public FT4ObjectAction
-{
-	GENERATED_USTRUCT_BODY()
-
-public:
-	FT4PossessAction()
-		: FT4ObjectAction(StaticActionType())
-	{
-	}
-
-	static ET4ActionType StaticActionType() { return ET4ActionType::Possess; }
-
-	FString ToString() const override
-	{
-		return FString(TEXT("OAction:Possess"));
-	}
-};
 
 USTRUCT()
 struct T4ENGINE_API FT4LockOnAction : public FT4ObjectAction

@@ -22,6 +22,7 @@ namespace UnrealBuildTool.Rules
                     "UnrealEd",
                     "LevelEditor",
                     "PropertyEditor",
+                    "Projects",
                     "MovieScene",
                     "Sequencer",
                     "AdvancedPreviewScene",

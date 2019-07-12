@@ -102,6 +102,7 @@ public:
 
 #if WITH_EDITOR
 	virtual void SetInputControlLock(bool bLock) = 0; // #30
+	virtual void SetEditoAISystemPaused(bool bInPaused) = 0; // #52
 	virtual void SetEditorPlayerController(AT4PlayerController* InPlayerController) = 0; // #42
 	virtual void SetEditorViewportClient(IT4EditorViewportClient* InViewportClient) = 0; // #30
 #endif

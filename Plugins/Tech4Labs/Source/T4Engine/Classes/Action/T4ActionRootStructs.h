@@ -64,6 +64,15 @@ public:
 	UPROPERTY(EditAnywhere)
 	TArray<FT4ParticleAction> ParticleActions;
 
+	UPROPERTY(EditAnywhere)
+	TArray<FT4DecalAction> DecalActions; // #54
+
+	UPROPERTY(EditAnywhere)
+	TArray<FT4TimeScaleAction> TimeScaleActions; // #54
+
+	UPROPERTY(EditAnywhere)
+	TArray<FT4CameraWorkAction> CameraWorkActions; // #54
+
 public:
 	void Reset();
 

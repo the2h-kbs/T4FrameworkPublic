@@ -14,6 +14,9 @@
 
 // ET4ActionType::Animation
 // ET4ActionType::Particle
+// ET4ActionType::Decal // #52
+// ET4ActionType::TimeScale // #52
+// ET4ActionType::CameraWork // #52
 
 USTRUCT()
 struct T4ENGINE_API FT4AnimationAction : public FT4ObjectAction
@@ -87,5 +90,74 @@ public:
 	FString ToString() const override
 	{
 		return FString(TEXT("OAction:Particle"));
+	}
+};
+
+// #54
+USTRUCT()
+struct T4ENGINE_API FT4DecalAction : public FT4ObjectAction
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	// #39 : FT4ContiCustomizeDetails::CustomizeDecalActionDetails
+
+public:
+	FT4DecalAction()
+		: FT4ObjectAction(StaticActionType())
+	{
+	}
+
+	static ET4ActionType StaticActionType() { return ET4ActionType::Decal; }
+
+	FString ToString() const override
+	{
+		return FString(TEXT("OAction:Decal"));
+	}
+};
+
+// #54
+USTRUCT()
+struct T4ENGINE_API FT4TimeScaleAction : public FT4ObjectAction
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	// #39 : FT4ContiCustomizeDetails::CustomizeTimeScaleActionDetails
+
+public:
+	FT4TimeScaleAction()
+		: FT4ObjectAction(StaticActionType())
+	{
+	}
+
+	static ET4ActionType StaticActionType() { return ET4ActionType::TimeScale; }
+
+	FString ToString() const override
+	{
+		return FString(TEXT("OAction:TimeScale"));
+	}
+};
+
+// #54
+USTRUCT()
+struct T4ENGINE_API FT4CameraWorkAction : public FT4ObjectAction
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	// #39 : FT4ContiCustomizeDetails::CustomizeDecalActionDetails
+
+public:
+	FT4CameraWorkAction()
+		: FT4ObjectAction(StaticActionType())
+	{
+	}
+
+	static ET4ActionType StaticActionType() { return ET4ActionType::CameraWork; }
+
+	FString ToString() const override
+	{
+		return FString(TEXT("OAction:CameraWork"));
 	}
 };
