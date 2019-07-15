@@ -15,40 +15,7 @@ class IT4GameWorld;
 class IT4GameObject;
 
 USTRUCT()
-struct T4ENGINE_API FT4WorldAction
-{
-	GENERATED_USTRUCT_BODY()
-
-public:
-	UPROPERTY(EditAnywhere)
-	ET4ActionType ActionType;
-
-public:
-	FT4WorldAction()
-		: ActionType(ET4ActionType::None)
-	{
-	}
-
-	FT4WorldAction(ET4ActionType InWorldAction)
-		: ActionType(InWorldAction)
-	{
-	}
-
-	virtual ~FT4WorldAction() {}
-
-	virtual bool Validate(FString& OutMsg)
-	{
-		return true;
-	}
-
-	virtual FString ToString() const
-	{
-		return FString(TEXT("WAction:None"));
-	}
-};
-
-USTRUCT()
-struct T4ENGINE_API FT4ObjectAction
+struct T4ENGINE_API FT4BaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -70,6 +37,9 @@ public:
 	UPROPERTY(EditAnywhere)
 	float DurationSec; // #20 : TotalTimeSec = DelayTimeSec + DurationSec;
 
+	UPROPERTY(VisibleAnywhere)
+	uint32 SortOrder; // #56 : lower win
+
 	// #24 : Composite 일 경우 사용됨!
 	UPROPERTY(VisibleAnywhere)
 	int32 HeaderKey;
@@ -80,11 +50,12 @@ public:
 #endif
 
 public:
-	FT4ObjectAction()
+	FT4BaseAction()
 		: ActionType(ET4ActionType::None)
 		, LifecyclePolicy(ET4LifecyclePolicy::Default)
 		, DelayTimeSec(0.0f)
 		, DurationSec(0.0f)
+		, SortOrder(TNumericLimits<uint32>::Max()) // #56 : lower win
 		, HeaderKey(INDEX_NONE) // #24
 #if WITH_EDITORONLY_DATA
 		, DisplayName(NAME_None)
@@ -92,11 +63,12 @@ public:
 	{
 	}
 
-	FT4ObjectAction(ET4ActionType InObjectAction)
+	FT4BaseAction(ET4ActionType InObjectAction)
 		: ActionType(InObjectAction)
 		, LifecyclePolicy(ET4LifecyclePolicy::Default)
 		, DelayTimeSec(0.0f)
 		, DurationSec(0.0f)
+		, SortOrder(TNumericLimits<uint32>::Max()) // #56 : lower win
 		, HeaderKey(INDEX_NONE) // #24
 #if WITH_EDITORONLY_DATA
 		, DisplayName(NAME_None)
@@ -104,7 +76,7 @@ public:
 	{
 	}
 
-	virtual ~FT4ObjectAction() {}
+	virtual ~FT4BaseAction() {}
 
 	virtual bool Validate(FString& OutMsg)
 	{
@@ -113,6 +85,6 @@ public:
 
 	virtual FString ToString() const
 	{
-		return FString(TEXT("OAction:None"));
+		return FString(TEXT("Action:None"));
 	}
 };

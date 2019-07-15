@@ -15,7 +15,7 @@
 // ET4ActionType::EquipWeapon
 
 USTRUCT()
-struct T4ENGINE_API FT4LockOnAction : public FT4ObjectAction
+struct T4ENGINE_API FT4LockOnAction : public FT4BaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -28,7 +28,7 @@ public:
 
 public:
 	FT4LockOnAction()
-		: FT4ObjectAction(StaticActionType())
+		: FT4BaseAction(StaticActionType())
 		, bSetLocked(false)
 		, HeadYawAngle(TNumericLimits<float>::Max())
 	{
@@ -38,12 +38,12 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("OAction:LockOn"));
+		return FString(TEXT("Action:LockOn"));
 	}
 };
 
 USTRUCT()
-struct T4ENGINE_API FT4EquipWeaponAction : public FT4ObjectAction
+struct T4ENGINE_API FT4EquipWeaponAction : public FT4BaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -62,7 +62,7 @@ public:
 
 public:
 	FT4EquipWeaponAction()
-		: FT4ObjectAction(StaticActionType())
+		: FT4BaseAction(StaticActionType())
 		, BoneOrSocketName(NAME_None)
 		, bOverrideEquipped(false) // #48
 		, LoadingPolicy(ET4LoadingPolicy::Default)
@@ -88,19 +88,19 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("OAction:EquipWeapon"));
+		return FString(TEXT("Action:EquipWeapon"));
 	}
 };
 
 // #48
 USTRUCT()
-struct T4ENGINE_API FT4UnEquipWeaponAction : public FT4ObjectAction
+struct T4ENGINE_API FT4UnEquipWeaponAction : public FT4BaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
 public:
 	FT4UnEquipWeaponAction()
-		: FT4ObjectAction(StaticActionType())
+		: FT4BaseAction(StaticActionType())
 	{
 	}
 
@@ -113,13 +113,13 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("OAction:UnEquipWeapon"));
+		return FString(TEXT("Action:UnEquipWeapon"));
 	}
 };
 
 // #37
 USTRUCT()
-struct T4ENGINE_API FT4ExchangeCostumeAction : public FT4ObjectAction
+struct T4ENGINE_API FT4ExchangeCostumeAction : public FT4BaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -132,7 +132,7 @@ public:
 	
 public:
 	FT4ExchangeCostumeAction()
-		: FT4ObjectAction(StaticActionType())
+		: FT4BaseAction(StaticActionType())
 		, TargetPartsName(NAME_None)
 	{
 	}
@@ -156,6 +156,6 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("OAction:ExchangeCostume"));
+		return FString(TEXT("Action:ExchangeCostume"));
 	}
 };

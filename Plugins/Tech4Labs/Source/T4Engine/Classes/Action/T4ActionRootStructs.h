@@ -100,14 +100,14 @@ public:
 private:
 	uint32 GetNewHeaderKey() const;
 
-	FT4ObjectAction* AddChildInternal(
+	FT4BaseAction* AddChildInternal(
 		ET4ActionType InNewActionType,
 		int32 InParentHeaderKey
 	); // #24
 };
 
 USTRUCT()
-struct T4ENGINE_API FT4RootAction : public FT4ObjectAction
+struct T4ENGINE_API FT4RootAction : public FT4BaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -117,7 +117,7 @@ public:
 
 public:
 	FT4RootAction()
-		: FT4ObjectAction(StaticActionType())
+		: FT4BaseAction(StaticActionType())
 	{
 	}
 
@@ -125,7 +125,7 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("OAction:Root"));
+		return FString(TEXT("Action:Root"));
 	}
 
 	FORCEINLINE void Reset()

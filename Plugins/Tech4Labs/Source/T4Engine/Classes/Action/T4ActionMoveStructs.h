@@ -23,7 +23,7 @@
 
 // #40
 USTRUCT()
-struct T4ENGINE_API FT4MoveAsyncAction : public FT4ObjectAction
+struct T4ENGINE_API FT4MoveAsyncAction : public FT4BaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -36,7 +36,7 @@ public:
 
 public:
 	FT4MoveAsyncAction()
-		: FT4ObjectAction(StaticActionType())
+		: FT4BaseAction(StaticActionType())
 		, MoveDirection(FVector::ZeroVector)
 		, HeadYawAngle(TNumericLimits<float>::Max())
 	{
@@ -56,13 +56,13 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("OAction:MoveAsyncTo"));
+		return FString(TEXT("Action:MoveAsyncTo"));
 	}
 };
 
 // #33, #40
 USTRUCT()
-struct T4ENGINE_API FT4MoveSyncAction : public FT4ObjectAction
+struct T4ENGINE_API FT4MoveSyncAction : public FT4BaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -86,7 +86,7 @@ public:
 
 public:
 	FT4MoveSyncAction()
-		: FT4ObjectAction(StaticActionType())
+		: FT4BaseAction(StaticActionType())
 		, MoveVelocity(FVector::ZeroVector)
 		, HeadYawAngle(TNumericLimits<float>::Max())
 		, bForceMaxSpeed(false) // #52
@@ -111,12 +111,12 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("OAction:MoveSyncTo"));
+		return FString(TEXT("Action:MoveSyncTo"));
 	}
 };
 
 USTRUCT()
-struct T4ENGINE_API FT4JumpAction : public FT4ObjectAction
+struct T4ENGINE_API FT4JumpAction : public FT4BaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -126,7 +126,7 @@ public:
 
 public:
 	FT4JumpAction()
-		: FT4ObjectAction(StaticActionType())
+		: FT4BaseAction(StaticActionType())
 		, JumpVelocity(FVector::ZeroVector)
 	{
 	}
@@ -145,13 +145,13 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("OAction:JumpTo"));
+		return FString(TEXT("Action:JumpTo"));
 	}
 };
 
 // #46
 USTRUCT()
-struct T4ENGINE_API FT4RollAction : public FT4ObjectAction
+struct T4ENGINE_API FT4RollAction : public FT4BaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -161,7 +161,7 @@ public:
 
 public:
 	FT4RollAction()
-		: FT4ObjectAction(StaticActionType())
+		: FT4BaseAction(StaticActionType())
 		, RollVelocity(FVector::ZeroVector)
 	{
 	}
@@ -180,13 +180,13 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("OAction:RollTo"));
+		return FString(TEXT("Action:RollTo"));
 	}
 };
 
 // #34
 USTRUCT()
-struct T4ENGINE_API FT4TeleportAction : public FT4ObjectAction
+struct T4ENGINE_API FT4TeleportAction : public FT4BaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -196,7 +196,7 @@ public:
 
 public:
 	FT4TeleportAction()
-		: FT4ObjectAction(StaticActionType())
+		: FT4BaseAction(StaticActionType())
 		, TargetLocation(FVector::ZeroVector)
 	{
 	}
@@ -215,12 +215,12 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("OAction:TeleportTo"));
+		return FString(TEXT("Action:TeleportTo"));
 	}
 };
 
 USTRUCT()
-struct T4ENGINE_API FT4TurnAction : public FT4ObjectAction
+struct T4ENGINE_API FT4TurnAction : public FT4BaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -236,7 +236,7 @@ public:
 
 public:
 	FT4TurnAction()
-		: FT4ObjectAction(StaticActionType())
+		: FT4BaseAction(StaticActionType())
 		, TurnType(ET4TurnType::Default)
 		, RotationYawRate(0.0f)
 		, TargetYawAngle(0.0f)
@@ -247,13 +247,13 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("OAction:Turn"));
+		return FString(TEXT("Action:Turn"));
 	}
 };
 
 // #54
 USTRUCT()
-struct T4ENGINE_API FT4SpecialMoveAction : public FT4ObjectAction
+struct T4ENGINE_API FT4SpecialMoveAction : public FT4BaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -262,7 +262,7 @@ public:
 
 public:
 	FT4SpecialMoveAction()
-		: FT4ObjectAction(StaticActionType())
+		: FT4BaseAction(StaticActionType())
 	{
 	}
 
@@ -270,13 +270,13 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("OAction:SpecialMove"));
+		return FString(TEXT("Action:SpecialMove"));
 	}
 };
 
 // #52
 USTRUCT()
-struct T4ENGINE_API FT4MoveStopAction : public FT4ObjectAction
+struct T4ENGINE_API FT4MoveStopAction : public FT4BaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -292,7 +292,7 @@ public:
 
 public:
 	FT4MoveStopAction()
-		: FT4ObjectAction(StaticActionType())
+		: FT4BaseAction(StaticActionType())
 		, StopLocation(FVector::ZeroVector)
 		, HeadYawAngle(TNumericLimits<float>::Max())
 		, bSyncLocation(false)
@@ -303,13 +303,13 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("OAction:MoveStop"));
+		return FString(TEXT("Action:MoveStop"));
 	}
 };
 
 // #52
 USTRUCT()
-struct T4ENGINE_API FT4MoveSpeedSyncAction : public FT4ObjectAction
+struct T4ENGINE_API FT4MoveSpeedSyncAction : public FT4BaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -319,7 +319,7 @@ public:
 
 public:
 	FT4MoveSpeedSyncAction()
-		: FT4ObjectAction(StaticActionType())
+		: FT4BaseAction(StaticActionType())
 		, MoveSpeed(0.0f)
 	{
 	}
@@ -328,6 +328,6 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("OAction:MoveSpeedSync"));
+		return FString(TEXT("Action:MoveSpeedSync"));
 	}
 };

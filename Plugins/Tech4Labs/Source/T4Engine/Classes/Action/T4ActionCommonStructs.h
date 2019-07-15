@@ -17,31 +17,7 @@
 
 // #54
 USTRUCT()
-struct T4ENGINE_API FT4ContiData
-{
-	GENERATED_USTRUCT_BODY()
-
-public:
-	UPROPERTY(EditAnywhere)
-	float LocalOffsetTimeSec;
-
-	UPROPERTY(EditAnywhere)
-	TSoftObjectPtr<class UT4ContiAsset> ContiAsset;
-
-	UPROPERTY(EditAnywhere)
-	ET4LoadingPolicy LoadingPolicy;
-
-public:
-	FT4ContiData()
-		: LocalOffsetTimeSec(0.0f)
-		, LoadingPolicy(ET4LoadingPolicy::Default)
-	{
-	}
-};
-
-// #54
-USTRUCT()
-struct T4ENGINE_API FT4BranchAction : public FT4ObjectAction
+struct T4ENGINE_API FT4BranchAction : public FT4BaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -50,12 +26,20 @@ public:
 	ET4BranchCondition Contition;
 
 	UPROPERTY(EditAnywhere)
-	TArray<FT4ContiData> ContiDatas;
+	FName ContitionName;
+
+	UPROPERTY(EditAnywhere)
+	TSoftObjectPtr<class UT4ContiAsset> ContiAsset;
+
+	UPROPERTY(EditAnywhere)
+	ET4LoadingPolicy LoadingPolicy;
 
 public:
 	FT4BranchAction()
-		: FT4ObjectAction(StaticActionType())
+		: FT4BaseAction(StaticActionType())
 		, Contition(ET4BranchCondition::Default)
+		, ContitionName(NAME_None)
+		, LoadingPolicy(ET4LoadingPolicy::Default)
 	{
 	}
 
@@ -63,12 +47,12 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("OAction:Branch"));
+		return FString(TEXT("Action:Branch"));
 	}
 };
 
 USTRUCT()
-struct T4ENGINE_API FT4ContiAction : public FT4ObjectAction
+struct T4ENGINE_API FT4ContiAction : public FT4BaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -81,7 +65,7 @@ public:
 
 public:
 	FT4ContiAction()
-		: FT4ObjectAction(StaticActionType())
+		: FT4BaseAction(StaticActionType())
 		, LoadingPolicy(ET4LoadingPolicy::Default)
 	{
 	}
@@ -90,12 +74,12 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("OAction:Conti"));
+		return FString(TEXT("Action:Conti"));
 	}
 };
 
 USTRUCT()
-struct T4ENGINE_API FT4StopAction : public FT4ObjectAction
+struct T4ENGINE_API FT4StopAction : public FT4BaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -105,7 +89,7 @@ public:
 
 public:
 	FT4StopAction()
-		: FT4ObjectAction(StaticActionType())
+		: FT4BaseAction(StaticActionType())
 		, bSameKeyNameRemoveAll(false)
 	{
 	}
@@ -114,6 +98,6 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("OAction:Stop"));
+		return FString(TEXT("Action:Stop"));
 	}
 };

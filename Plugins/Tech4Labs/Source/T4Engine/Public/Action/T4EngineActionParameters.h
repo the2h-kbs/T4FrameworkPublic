@@ -18,6 +18,7 @@ UENUM(Meta = (Bitflags))
 enum class ET4DefaultParamBits
 {
 	ActionKeyBit,
+	ContidionNameBit, // #54
 };
 
 UENUM(Meta = (Bitflags))
@@ -46,9 +47,13 @@ public:
 	UPROPERTY(EditAnywhere)
 	FT4ActionKey ActionKey; // #32
 
+	UPROPERTY(EditAnywhere)
+	FName ActiveConditionName; // #54
+
 public:
 	FT4ActionDefaultParameters()
 		: SetBits(0)
+		, ActiveConditionName(NAME_None)
 	{
 	}
 };
@@ -125,46 +130,52 @@ public:
 		*this = InParameters;
 	}
 
-	bool CheckBits(ET4DefaultParamBits InCheckBit) const
+	FORCEINLINE bool CheckBits(ET4DefaultParamBits InCheckBit) const
 	{
 		return (DefaultParams.SetBits & BIT_LEFTSHIFT(InCheckBit)) ? true : false;
 	}
 
-	bool CheckBits(ET4TimeParamBits InCheckBit) const
+	FORCEINLINE bool CheckBits(ET4TimeParamBits InCheckBit) const
 	{
 		return (TimeParams.SetBits & BIT_LEFTSHIFT(InCheckBit)) ? true : false;
 	}
 
-	bool CheckBits(ET4TargetParamBits InCheckBit) const
+	FORCEINLINE bool CheckBits(ET4TargetParamBits InCheckBit) const
 	{
 		return (TargetParams.SetBits & BIT_LEFTSHIFT(InCheckBit)) ? true : false;
 	}
 
-	void SetActionKey(const FT4ActionKey& InActionKey)
+	FORCEINLINE void SetActionKey(const FT4ActionKey& InActionKey)
 	{
 		DefaultParams.ActionKey = InActionKey;
 		DefaultParams.SetBits |= BIT_LEFTSHIFT(ET4DefaultParamBits::ActionKeyBit);
 	}
 
-	void SetDurationSec(float InDurationSec)
+	FORCEINLINE void SetConditionName(const FName& InConditionName)
+	{
+		DefaultParams.ActiveConditionName = InConditionName;
+		DefaultParams.SetBits |= BIT_LEFTSHIFT(ET4DefaultParamBits::ContidionNameBit);
+	}
+
+	FORCEINLINE void SetDurationSec(float InDurationSec)
 	{
 		TimeParams.DurectionSec = InDurationSec;
 		TimeParams.SetBits |= BIT_LEFTSHIFT(ET4TimeParamBits::DurationBit);
 	}
 
-	void SetTargetObjectID(const FT4ObjectID& InTargetObjectID)
+	FORCEINLINE void SetTargetObjectID(const FT4ObjectID& InTargetObjectID)
 	{
 		TargetParams.TargetObjectID = InTargetObjectID;
 		TargetParams.SetBits |= BIT_LEFTSHIFT(ET4TargetParamBits::ObjectIDBit);
 	}
 
-	void SetTargetLocation(const FVector& InTargetLocation)
+	FORCEINLINE void SetTargetLocation(const FVector& InTargetLocation)
 	{
 		TargetParams.TargetLocation = InTargetLocation;
 		TargetParams.SetBits |= BIT_LEFTSHIFT(ET4TargetParamBits::LocationBit);
 	}
 
-	void SetTargetDirection(const FVector& InTargetDirection)
+	FORCEINLINE void SetTargetDirection(const FVector& InTargetDirection)
 	{
 		TargetParams.TargetDirection = InTargetDirection;
 		TargetParams.SetBits |= BIT_LEFTSHIFT(ET4TargetParamBits::DirectionBit);

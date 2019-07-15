@@ -19,7 +19,7 @@
 // ET4ActionType::CameraWork // #52
 
 USTRUCT()
-struct T4ENGINE_API FT4AnimationAction : public FT4ObjectAction
+struct T4ENGINE_API FT4AnimationAction : public FT4BaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -43,7 +43,7 @@ public:
 
 public:
 	FT4AnimationAction()
-		: FT4ObjectAction(StaticActionType())
+		: FT4BaseAction(StaticActionType())
 		, SectionName(NAME_None)
 		, BlendInTimeSec(T4AnimSetBlendInTimeSec)
 		, BlendOutTimeSec(T4AnimSetBlendOutTimeSec)
@@ -56,12 +56,12 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("OAction:Animation"));
+		return FString(TEXT("Action:Animation"));
 	}
 };
 
 USTRUCT()
-struct T4ENGINE_API FT4ParticleAction : public FT4ObjectAction
+struct T4ENGINE_API FT4ParticleAction : public FT4BaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -79,7 +79,7 @@ public:
 
 public:
 	FT4ParticleAction()
-		: FT4ObjectAction(StaticActionType())
+		: FT4BaseAction(StaticActionType())
 		, BoneOrSocketName(NAME_None)
 		, LoadingPolicy(ET4LoadingPolicy::Default)
 	{
@@ -89,13 +89,13 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("OAction:Particle"));
+		return FString(TEXT("Action:Particle"));
 	}
 };
 
 // #54
 USTRUCT()
-struct T4ENGINE_API FT4DecalAction : public FT4ObjectAction
+struct T4ENGINE_API FT4DecalAction : public FT4BaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -104,7 +104,7 @@ public:
 
 public:
 	FT4DecalAction()
-		: FT4ObjectAction(StaticActionType())
+		: FT4BaseAction(StaticActionType())
 	{
 	}
 
@@ -112,13 +112,13 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("OAction:Decal"));
+		return FString(TEXT("Action:Decal"));
 	}
 };
 
 // #54
 USTRUCT()
-struct T4ENGINE_API FT4TimeScaleAction : public FT4ObjectAction
+struct T4ENGINE_API FT4TimeScaleAction : public FT4BaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -127,7 +127,7 @@ public:
 
 public:
 	FT4TimeScaleAction()
-		: FT4ObjectAction(StaticActionType())
+		: FT4BaseAction(StaticActionType())
 	{
 	}
 
@@ -135,13 +135,13 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("OAction:TimeScale"));
+		return FString(TEXT("Action:TimeScale"));
 	}
 };
 
 // #54
 USTRUCT()
-struct T4ENGINE_API FT4CameraWorkAction : public FT4ObjectAction
+struct T4ENGINE_API FT4CameraWorkAction : public FT4BaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -150,7 +150,7 @@ public:
 
 public:
 	FT4CameraWorkAction()
-		: FT4ObjectAction(StaticActionType())
+		: FT4BaseAction(StaticActionType())
 	{
 	}
 
@@ -158,6 +158,6 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("OAction:CameraWork"));
+		return FString(TEXT("Action:CameraWork"));
 	}
 };

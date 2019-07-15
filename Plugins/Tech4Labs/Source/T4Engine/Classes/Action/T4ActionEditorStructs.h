@@ -11,7 +11,7 @@
  */
  // #T4_ADD_ACTION_TAG
 USTRUCT()
-struct T4ENGINE_API FT4EditorReloadAction : public FT4ObjectAction
+struct T4ENGINE_API FT4EditorReloadAction : public FT4BaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -21,7 +21,7 @@ public:
 
 public:
 	FT4EditorReloadAction()
-		: FT4ObjectAction(StaticActionType())
+		: FT4BaseAction(StaticActionType())
 		, ReloadType(ET4EditorReloadType::None)
 	{
 	}
@@ -40,6 +40,6 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("OAction:EditorReload"));
+		return FString(TEXT("Action:EditorReload"));
 	}
 };

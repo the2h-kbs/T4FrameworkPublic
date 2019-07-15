@@ -67,6 +67,7 @@ enum class ET4ActionType : uint32
 UENUM()
 enum class ET4LifecyclePolicy : uint8
 {
+	Auto, // #56
 	Duration,
 	Looping,
 
@@ -77,9 +78,8 @@ UENUM()
 enum class ET4LoadingPolicy : uint8
 {
 	Async, // Default
-	AsyncAndPreloading,
 
-	AsyncFast, // Fast Async
+	Sync, // #8, #56 : 사용 제한 필요!!! 만약을 대비해 준비는 해둔 것!
 
 	Default UMETA(Hidden) // Default = Async
 };
@@ -89,6 +89,8 @@ UENUM()
 enum class ET4BranchCondition : uint8
 {
 	Always,
+	
+	CompareActiveName,
 
 	Default, // Default = Auto
 };

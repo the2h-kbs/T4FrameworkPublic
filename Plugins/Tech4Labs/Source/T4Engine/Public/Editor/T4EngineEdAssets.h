@@ -25,6 +25,10 @@ T4ENGINE_API UObject* T4EngineEdAssetNew(
 	const FString& InPackagePath
 );
 
+T4ENGINE_API bool T4EngineEdAssetIsDirty(
+	UObject* InCheckObject
+); // #56
+
 T4ENGINE_API bool T4EngineEdAssetSave(
 	UObject* InSaveObject,
 	bool bInCheckDirty

@@ -17,8 +17,7 @@
 class IT4GameWorld;
 class IT4GameObject;
 
-struct FT4WorldAction;
-struct FT4ObjectAction;
+struct FT4BaseAction;
 struct FT4StopAction;
 struct FT4ObjectEnterAction;
 struct FT4ActionParameters; // #28
@@ -96,7 +95,7 @@ public:
 
 	virtual IT4ActionNode* GetParentNode() const = 0;
 
-	virtual IT4ActionNode* AddChildNode(const FT4ObjectAction* InAction) = 0;
+	virtual IT4ActionNode* AddChildNode(const FT4BaseAction* InAction) = 0;
 	virtual bool RemoveChildNode(const FT4StopAction* InAction) = 0;
 
 	virtual uint32 NumChildActions() const = 0;
@@ -141,7 +140,7 @@ public:
 	virtual void OnSetZombie() = 0; // #36 : Leave 시의 Zombie 처리. Coll 충돌 제외 등...
 
 	virtual bool OnExecute(
-		const FT4ObjectAction* InAction, // WARN : only reference
+		const FT4BaseAction* InAction, // WARN : only reference
 		const FT4ActionParameters* InActionParam = nullptr // WARN : only reference
 	) = 0;
 
@@ -222,7 +221,7 @@ public:
 	virtual void OnProcessPost(float InDeltaTime) = 0; // #34 : OnWorldPostActorTick
 
 	virtual bool OnExecute(
-		const FT4WorldAction* InAction, // WARN : only reference
+		const FT4BaseAction* InAction, // WARN : only reference
 		const FT4ActionParameters* InActionParam = nullptr // WARN : only reference
 	) = 0;
 

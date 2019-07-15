@@ -12,7 +12,7 @@
  */
  // #T4_ADD_ACTION_TAG
 USTRUCT()
-struct T4ENGINE_API FT4ChangeWorldAction : public FT4WorldAction
+struct T4ENGINE_API FT4ChangeWorldAction : public FT4BaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -22,7 +22,7 @@ public:
 
 public:
 	FT4ChangeWorldAction()
-		: FT4WorldAction(StaticActionType())
+		: FT4BaseAction(StaticActionType())
 	{
 	}
 
@@ -40,12 +40,12 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("WAction:ChangeWorld"));
+		return FString(TEXT("Action:ChangeWorld"));
 	}
 };
 
 USTRUCT()
-struct T4ENGINE_API FT4ObjectEnterAction : public FT4WorldAction
+struct T4ENGINE_API FT4ObjectEnterAction : public FT4BaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -73,7 +73,7 @@ public:
 
 public:
 	FT4ObjectEnterAction()
-		: FT4WorldAction(StaticActionType())
+		: FT4BaseAction(StaticActionType())
 		, Name(NAME_None)
 		, EntityType(ET4EntityType::None)
 		, GameDataIDName(NAME_None)
@@ -101,12 +101,12 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("WAction:ObjectEnter"));
+		return FString(TEXT("Action:ObjectEnter"));
 	}
 };
 
 USTRUCT()
-struct T4ENGINE_API FT4ObjectLeaveAction : public FT4WorldAction
+struct T4ENGINE_API FT4ObjectLeaveAction : public FT4BaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -116,7 +116,7 @@ public:
 
 public:
 	FT4ObjectLeaveAction()
-		: FT4WorldAction(StaticActionType())
+		: FT4BaseAction(StaticActionType())
 	{
 	}
 
@@ -134,6 +134,6 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("WAction:ObjectLeave"));
+		return FString(TEXT("Action:ObjectLeave"));
 	}
 };
