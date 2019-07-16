@@ -3,9 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "T4ActionBaseStructs.h"
+#include "T4ActionBase.h"
 #include "T4Engine/Public/T4EngineEntityTypes.h"
-#include "T4ActionWorldStructs.generated.h"
+#include "T4ActionWorld.generated.h"
 
 /**
   *

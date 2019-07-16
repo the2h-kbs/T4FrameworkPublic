@@ -3,10 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "T4ActionMoveStructs.h"
-#include "T4ActionVFXStructs.h"
-#include "T4ActionCommonStructs.h"
-#include "T4ActionRootStructs.generated.h"
+#include "T4ActionMove.h"
+#include "T4ActionVFX.h"
+#include "T4ActionCommon.h"
+#include "T4ActionRoot.generated.h"
 
 /**
   *

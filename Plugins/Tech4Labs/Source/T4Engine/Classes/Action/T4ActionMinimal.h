@@ -4,12 +4,12 @@
 
 #include "CoreMinimal.h"
 
-#include "T4ActionRootStructs.h" // #54
-#include "T4ActionWorldStructs.h"
-#include "T4ActionStatusStructs.h"
-#include "T4ActionMoveStructs.h"
-#include "T4ActionVFXStructs.h"
-#include "T4ActionCommonStructs.h"
+#include "T4ActionRoot.h" // #54
+#include "T4ActionWorld.h"
+#include "T4ActionStatus.h"
+#include "T4ActionMove.h"
+#include "T4ActionVFX.h"
+#include "T4ActionCommon.h"
 #if WITH_EDITOR
-#include "T4ActionEditorStructs.h" // #37
+#include "T4ActionEditor.h" // #37
 #endif

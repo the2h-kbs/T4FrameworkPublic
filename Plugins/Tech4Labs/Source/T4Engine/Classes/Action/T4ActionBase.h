@@ -6,7 +6,7 @@
 #include "Public/Action/T4EngineActionTypes.h"
 #include "Public/Action/T4EngineActionParameters.h"
 #include "Public/T4EngineTypes.h"
-#include "T4ActionBaseStructs.generated.h"
+#include "T4ActionBase.generated.h"
 
 /**
   *

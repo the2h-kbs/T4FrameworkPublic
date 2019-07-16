@@ -3,8 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "T4ActionBaseStructs.h"
-#include "T4ActionStatusStructs.generated.h"
+#include "T4ActionBase.h"
+#include "T4ActionStatus.generated.h"
 
 /**
   *
