@@ -31,11 +31,44 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	int32 ActionArrayIndex;
 
+#if WITH_EDITORONLY_DATA
+	UPROPERTY(VisibleAnywhere)
+	FName FolderName; // #56
+#endif
+
 public:
 	FT4ActionHeaderInfo()
 		: ParentHeaderKey(INDEX_NONE)
 		, ActionType(ET4ActionType::None)
 		, ActionArrayIndex(INDEX_NONE)
+#if WITH_EDITORONLY_DATA
+		, FolderName(NAME_None) // #56
+#endif
+	{
+	}
+};
+
+// #56
+USTRUCT()
+struct T4ENGINE_API FT4ActionFolderInfo
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+#if WITH_EDITORONLY_DATA
+	UPROPERTY(VisibleAnywhere)
+	FName ParentFolderName; // #56 : lower win
+
+	UPROPERTY(VisibleAnywhere)
+	uint32 SortOrder; // #56 : lower win
+#endif
+
+public:
+	FT4ActionFolderInfo()
+#if WITH_EDITOR
+		: ParentFolderName(NAME_None)
+		, SortOrder(INDEX_NONE)
+#endif
 	{
 	}
 };
@@ -49,6 +82,11 @@ struct T4ENGINE_API FT4ActionCompositeData
 public:
 	UPROPERTY(VisibleAnywhere)
 	TMap<uint32, FT4ActionHeaderInfo> HeaderInfoMap;
+
+#if WITH_EDITORONLY_DATA
+	UPROPERTY(VisibleAnywhere)
+	TMap<FName, FT4ActionFolderInfo> FolderInfoMap; // #56 : value = sortorder
+#endif
 
 	// #T4_ADD_ACTION_TAG_CONTI
 
