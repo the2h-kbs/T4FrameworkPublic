@@ -22,6 +22,7 @@ struct T4ENGINE_API FT4BranchAction : public FT4BaseAction
 	GENERATED_USTRUCT_BODY()
 
 public:
+	// #39 : FT4ContiCustomizeDetails::CustomizeBranchActionDetails
 	UPROPERTY(EditAnywhere)
 	ET4BranchCondition Contition;
 

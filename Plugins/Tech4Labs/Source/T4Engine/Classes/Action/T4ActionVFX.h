@@ -67,12 +67,14 @@ struct T4ENGINE_API FT4ParticleAction : public FT4BaseAction
 
 public:
 	// #39 : FT4ContiCustomizeDetails::CustomizeParticleActionDetails
+	UPROPERTY(EditAnywhere)
+	FVector Scale; // #54
 
 	UPROPERTY(EditAnywhere)
 	FName BoneOrSocketName;
 
 	UPROPERTY(EditAnywhere)
-	TSoftObjectPtr<UParticleSystem> ParticleAsset;
+	TSoftObjectPtr<class UParticleSystem> ParticleAsset;
 
 	UPROPERTY(EditAnywhere)
 	ET4LoadingPolicy LoadingPolicy;
@@ -80,6 +82,7 @@ public:
 public:
 	FT4ParticleAction()
 		: FT4BaseAction(StaticActionType())
+		, Scale(FVector::OneVector) // #54
 		, BoneOrSocketName(NAME_None)
 		, LoadingPolicy(ET4LoadingPolicy::Default)
 	{
