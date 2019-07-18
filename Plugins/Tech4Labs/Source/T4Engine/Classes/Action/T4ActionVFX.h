@@ -79,12 +79,16 @@ public:
 	UPROPERTY(EditAnywhere)
 	ET4LoadingPolicy LoadingPolicy;
 
+	UPROPERTY(EditAnywhere)
+	float PlayRate;
+
 public:
 	FT4ParticleAction()
 		: FT4BaseAction(StaticActionType())
 		, Scale(FVector::OneVector) // #54
 		, ActionPoint(NAME_None)
 		, LoadingPolicy(ET4LoadingPolicy::Default)
+		, PlayRate(1.0f)
 	{
 	}
 
