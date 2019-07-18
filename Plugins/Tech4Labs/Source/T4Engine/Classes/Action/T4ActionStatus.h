@@ -52,7 +52,7 @@ public:
 	TSoftObjectPtr<class UT4WeaponEntityAsset> WeaponEntityAsset;
 
 	UPROPERTY(EditAnywhere)
-	FName BoneOrSocketName;
+	FName ActionPoint; // #57 : BoneOrSocketName;
 
 	UPROPERTY(EditAnywhere)
 	bool bOverrideEquipped; // #48 : 기존 장비의 해제 여부
@@ -63,7 +63,7 @@ public:
 public:
 	FT4EquipWeaponAction()
 		: FT4BaseAction(StaticActionType())
-		, BoneOrSocketName(NAME_None)
+		, ActionPoint(NAME_None)
 		, bOverrideEquipped(false) // #48
 		, LoadingPolicy(ET4LoadingPolicy::Default)
 	{
@@ -78,9 +78,9 @@ public:
 			OutMsg = TEXT("Invalid WeaponEntityAsset");
 			return false;
 		}
-		if (BoneOrSocketName == NAME_None)
+		if (ActionPoint == NAME_None)
 		{
-			OutMsg = TEXT("Not set TargetSocket");
+			OutMsg = TEXT("Not set ActionPoint");
 			return false;
 		}
 		return true;

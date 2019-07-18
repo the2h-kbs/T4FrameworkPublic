@@ -71,7 +71,7 @@ public:
 	FVector Scale; // #54
 
 	UPROPERTY(EditAnywhere)
-	FName BoneOrSocketName;
+	FName ActionPoint; // #57
 
 	UPROPERTY(EditAnywhere)
 	TSoftObjectPtr<class UParticleSystem> ParticleAsset;
@@ -83,7 +83,7 @@ public:
 	FT4ParticleAction()
 		: FT4BaseAction(StaticActionType())
 		, Scale(FVector::OneVector) // #54
-		, BoneOrSocketName(NAME_None)
+		, ActionPoint(NAME_None)
 		, LoadingPolicy(ET4LoadingPolicy::Default)
 	{
 	}

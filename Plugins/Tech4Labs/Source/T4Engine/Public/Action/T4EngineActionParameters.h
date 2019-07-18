@@ -25,6 +25,7 @@ UENUM(Meta = (Bitflags))
 enum class ET4TimeParamBits
 {
 	DurationBit,
+	OffsetTimeBit, // #56
 };
 
 UENUM(Meta = (Bitflags))
@@ -70,10 +71,14 @@ public:
 	UPROPERTY(EditAnywhere)
 	float DurectionSec;
 
+	UPROPERTY(EditAnywhere)
+	float OffsetTimeSec; // #56
+
 public:
 	FT4ActionTimeParameters()
 		: SetBits(0)
 		, DurectionSec(0.0f)
+		, OffsetTimeSec(0.0f) // #56
 	{
 	}
 };
@@ -110,7 +115,7 @@ struct FT4ActionParameters
 {
 	GENERATED_USTRUCT_BODY()
 
-public:
+private:
 	UPROPERTY(EditAnywhere)
 	FT4ActionDefaultParameters DefaultParams;
 
@@ -128,6 +133,21 @@ public:
 	FT4ActionParameters(const FT4ActionParameters& InParameters)
 	{
 		*this = InParameters;
+	}
+
+	FORCEINLINE const FT4ActionDefaultParameters& GetDefaultParams() const
+	{
+		return DefaultParams;
+	}
+
+	FORCEINLINE const FT4ActionTimeParameters& GetTimeParams() const
+	{
+		return TimeParams;
+	}
+
+	FORCEINLINE const FT4ActionTargetParameters& GetTargetParams() const
+	{
+		return TargetParams;
 	}
 
 	FORCEINLINE bool CheckBits(ET4DefaultParamBits InCheckBit) const
@@ -161,6 +181,12 @@ public:
 	{
 		TimeParams.DurectionSec = InDurationSec;
 		TimeParams.SetBits |= BIT_LEFTSHIFT(ET4TimeParamBits::DurationBit);
+	}
+
+	FORCEINLINE void SetOffsetTimeSec(float InOffsetTimeSec)
+	{
+		TimeParams.OffsetTimeSec = InOffsetTimeSec;
+		TimeParams.SetBits |= BIT_LEFTSHIFT(ET4TimeParamBits::OffsetTimeBit); // #56
 	}
 
 	FORCEINLINE void SetTargetObjectID(const FT4ObjectID& InTargetObjectID)

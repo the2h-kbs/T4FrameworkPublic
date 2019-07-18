@@ -27,7 +27,7 @@ public:
 	ET4BranchCondition Contition;
 
 	UPROPERTY(EditAnywhere)
-	FName ContitionName;
+	FName ConditionName;
 
 	UPROPERTY(EditAnywhere)
 	TSoftObjectPtr<class UT4ContiAsset> ContiAsset;
@@ -39,7 +39,7 @@ public:
 	FT4BranchAction()
 		: FT4BaseAction(StaticActionType())
 		, Contition(ET4BranchCondition::Default)
-		, ContitionName(NAME_None)
+		, ConditionName(NAME_None)
 		, LoadingPolicy(ET4LoadingPolicy::Default)
 	{
 	}

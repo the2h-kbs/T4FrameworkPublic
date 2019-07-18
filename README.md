@@ -17,5 +17,5 @@
   - GitHub 비공개 저장소 (Professional License)
     - <https://github.com/Tech4Labs/T4Framework>
 - 라이선스 및 기술 지원 문의
-  - SoonBo Noh (<niceofer@hotmail.com>)
+  - SoonBo Noh (<niceofer@hotmail.com>, @Tech4Labs)
   

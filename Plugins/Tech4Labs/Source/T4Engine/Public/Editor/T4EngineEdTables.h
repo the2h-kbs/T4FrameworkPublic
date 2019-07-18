@@ -16,21 +16,21 @@ struct FT4NameInfo
 	FString Description;
 };
 
-class T4ENGINE_API IT4AnimSetNameTable
+class T4ENGINE_API IT4EngineEdNameTable
 {
 public:
-	virtual ~IT4AnimSetNameTable() {}
+	virtual ~IT4EngineEdNameTable() {}
 
 	virtual bool LoadNameTable(
-		ET4AnimSetNameTableType InNameTable,
+		ET4EngineEdNameTableType InNameTable,
 		const FSoftObjectPath& InNameTablePath
 	) = 0;
 
 	virtual void Reset() = 0;
 
-	virtual TArray<FT4NameInfo>& GetInfoDatas(ET4AnimSetNameTableType InNameTable) = 0;
+	virtual TArray<FT4NameInfo>& GetInfoDatas(ET4EngineEdNameTableType InNameTable) = 0;
 };
 
-T4ENGINE_API IT4AnimSetNameTable* T4EngineEdAnimSetNameTableGet();
+T4ENGINE_API IT4EngineEdNameTable* T4EngineEdNameTableGet();
 
 #endif

@@ -95,7 +95,7 @@ public:
 
 	virtual IT4ActionNode* GetParentNode() const = 0;
 
-	virtual IT4ActionNode* AddChildNode(const FT4BaseAction* InAction) = 0;
+	virtual IT4ActionNode* AddChildNode(const FT4BaseAction* InAction, float InOffsetTimeSec) = 0; // #23, #54
 	virtual bool RemoveChildNode(const FT4StopAction* InAction) = 0;
 
 	virtual uint32 NumChildActions() const = 0;
@@ -134,7 +134,7 @@ public:
 	virtual const UT4EntityAsset* GetEntityAsset() = 0; // #39
 	virtual const FName& GetGameDataIDName() const = 0;
 
-	virtual bool IsLoadComplated() const = 0;
+	virtual bool IsLoaded() const = 0; // #57 : 모든 로딩이 완료 된 상태
 
 	virtual void OnReset() = 0;
 	virtual void OnSetZombie() = 0; // #36 : Leave 시의 Zombie 처리. Coll 충돌 제외 등...
@@ -181,6 +181,8 @@ public:
 
 	virtual const FVector GetMovementVelocity() const = 0;
 	virtual const float GetMovementSpeed() const = 0;
+
+	virtual bool HasActionPoint(const FName& InActionPoint) const = 0; // #57 : ActionPoint = Socket or Bone or VirtualBone
 
 	virtual bool GetSocketLocation(const FName& InSocketName, FVector& OutLocation) const = 0; // #18
 	virtual bool GetSocketRotation(

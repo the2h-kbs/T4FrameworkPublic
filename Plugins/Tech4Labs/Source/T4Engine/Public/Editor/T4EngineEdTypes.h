@@ -7,12 +7,14 @@
 /**
   * #39
  */
-enum ET4AnimSetNameTableType
+enum ET4EngineEdNameTableType
 {
 	BlendSpace,
 	DefaultSection, // #38
 	LocomotionSection,
 	SkillSection,
+
+	ActionPoint, // #47
 
 	Nums,
 };
