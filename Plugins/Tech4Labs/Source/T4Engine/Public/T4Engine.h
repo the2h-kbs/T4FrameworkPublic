@@ -92,6 +92,7 @@ public:
 
 	virtual bool IsPlaying() const = 0;
 	virtual bool IsLooping() const = 0;
+	virtual bool IsPaused() const = 0; // #56
 
 	virtual IT4ActionNode* GetParentNode() const = 0;
 
@@ -108,6 +109,12 @@ public:
 
 	virtual bool IsPlaying(const FT4ActionKey& InActionKey) const = 0;
 	virtual bool IsLooping(const FT4ActionKey& InActionKey) const = 0;
+
+	virtual bool IsPaused(const FT4ActionKey& InActionKey) const = 0; // #56
+#if WITH_EDITOR
+	// #54 : 에디터 전용, 일반적 사용은 TimeScale Action 을 사용할 것!
+	virtual void SetPaused(const FT4ActionKey& InActionKey, bool bPause) = 0;
+#endif
 
 	virtual IT4ActionNode* GetChildNodeByPrimary(const FT4ActionKey& InPrimaryActionKey) = 0;
 	virtual bool GetChildNodes(

@@ -56,6 +56,8 @@ enum class ET4ActionType : uint32
 
 	Stop,
 
+	Dummy, // #56 : Conti Editor 에서 Invisible or Isolate 로 출력을 제어할 때 더미용으로 사용 (delay, duration 동작 보장)
+
 	// begin Editor
 	EditorReload, // #37
 
