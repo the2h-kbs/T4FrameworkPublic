@@ -36,6 +36,12 @@ enum class ET4TargetParamBits
 	DirectionBit,
 };
 
+UENUM(Meta = (Bitflags))
+enum class ET4AnimationParamBits
+{
+	NoBlendInTimeWithOffsetPlayBit, // #54 : 애니 BlendIn Time 을 없앤다. (현재는 툴용)
+};
+
 USTRUCT()
 struct FT4ActionDefaultParameters
 {
@@ -111,6 +117,22 @@ public:
 };
 
 USTRUCT()
+struct FT4ActionAnimationParameters
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	UPROPERTY(EditAnywhere, Meta=(Bitmask, BitmaskEnum="ET4AnimationParamBits"))
+	uint32 SetBits; // ET4AnimationParamBits
+
+public:
+	FT4ActionAnimationParameters()
+		: SetBits(0)
+	{
+	}
+};
+
+USTRUCT()
 struct FT4ActionParameters
 {
 	GENERATED_USTRUCT_BODY()
@@ -124,6 +146,9 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	FT4ActionTargetParameters TargetParams;
+
+	UPROPERTY(EditAnywhere)
+	FT4ActionAnimationParameters AnimationParams; // #54
 
 public:
 	FT4ActionParameters()
@@ -150,6 +175,11 @@ public:
 		return TargetParams;
 	}
 
+	FORCEINLINE const FT4ActionAnimationParameters& GetAnimationParams() const
+	{
+		return AnimationParams;
+	}
+
 	FORCEINLINE bool CheckBits(ET4DefaultParamBits InCheckBit) const
 	{
 		return (DefaultParams.SetBits & BIT_LEFTSHIFT(InCheckBit)) ? true : false;
@@ -163,6 +193,11 @@ public:
 	FORCEINLINE bool CheckBits(ET4TargetParamBits InCheckBit) const
 	{
 		return (TargetParams.SetBits & BIT_LEFTSHIFT(InCheckBit)) ? true : false;
+	}
+
+	FORCEINLINE bool CheckBits(ET4AnimationParamBits InCheckBit) const
+	{
+		return (AnimationParams.SetBits & BIT_LEFTSHIFT(InCheckBit)) ? true : false;
 	}
 
 	FORCEINLINE void SetActionKey(const FT4ActionKey& InActionKey)
@@ -205,6 +240,11 @@ public:
 	{
 		TargetParams.TargetDirection = InTargetDirection;
 		TargetParams.SetBits |= BIT_LEFTSHIFT(ET4TargetParamBits::DirectionBit);
+	}
+
+	FORCEINLINE void SetAnimationNoBlendInTimeWithOffsetPlay() // #54 : 애니 BlendIn Time 을 없앤다. (현재는 툴용)
+	{
+		AnimationParams.SetBits |= BIT_LEFTSHIFT(ET4AnimationParamBits::NoBlendInTimeWithOffsetPlayBit);
 	}
 
 	static T4ENGINE_API const FT4ActionParameters DefaultActionParameter; // #32

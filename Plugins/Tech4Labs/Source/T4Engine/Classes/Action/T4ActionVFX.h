@@ -50,6 +50,7 @@ public:
 		, PlayRate(1.0f)
 		, LoopCount(1)
 	{
+		LifecyclePolicy = ET4LifecyclePolicy::Duration; // Animation 은 Duration 이 기초!
 	}
 
 	static ET4ActionType StaticActionType() { return ET4ActionType::Animation; }

@@ -75,6 +75,8 @@ public:
 	virtual bool StopAnimation(const FName& InAnimMontageName, float InBlendOutTimeSec) = 0; // #38
 	virtual bool StopAnimation(FT4AnimInstanceID InPlayInstanceID, float InBlendOutTimeSec) = 0; // #47
 
+	virtual void PauseAnimation(FT4AnimInstanceID InPlayInstanceID, bool bPause) = 0; // #54
+
 #if WITH_EDITOR
 	virtual bool EditorPlayAnimation(
 		UAnimSequence* InPlayAnimSequence,
@@ -107,10 +109,10 @@ class T4ENGINE_API IT4ActionControl // #23
 public:
 	virtual ~IT4ActionControl() {}
 
-	virtual bool IsPlaying(const FT4ActionKey& InActionKey) const = 0;
-	virtual bool IsLooping(const FT4ActionKey& InActionKey) const = 0;
-
-	virtual bool IsPaused(const FT4ActionKey& InActionKey) const = 0; // #56
+	virtual bool IsPlaying(const FT4ActionKey& InActionKey) = 0;
+	virtual bool IsLooping(const FT4ActionKey& InActionKey) = 0;
+	
+	virtual bool IsPaused(const FT4ActionKey& InActionKey) = 0; // #54
 #if WITH_EDITOR
 	// #54 : 에디터 전용, 일반적 사용은 TimeScale Action 을 사용할 것!
 	virtual void SetPaused(const FT4ActionKey& InActionKey, bool bPause) = 0;
@@ -122,7 +124,8 @@ public:
 		TArray<IT4ActionNode*>& OutNodes
 	) = 0;
 
-	virtual uint32 NumPlayingActions() const = 0;
+	virtual uint32 NumChildActions() const = 0;
+	virtual uint32 NumChildActions(const FT4ActionKey& InActionKey) = 0; // #54
 };
 
 class T4ENGINE_API IT4GameObject
