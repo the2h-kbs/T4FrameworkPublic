@@ -59,6 +59,11 @@ public:
 	{
 		return FString(TEXT("Action:Animation"));
 	}
+
+	FString ToDisplayText() override
+	{
+		return FString::Printf(TEXT("Animation '%s'"), *(SectionName.ToString())); // #54
+	}
 };
 
 USTRUCT()
@@ -98,6 +103,11 @@ public:
 	FString ToString() const override
 	{
 		return FString(TEXT("Action:Particle"));
+	}
+
+	FString ToDisplayText() override
+	{
+		return FString::Printf(TEXT("Particle '%s'"), *(ParticleAsset.GetAssetName())); // #54
 	}
 };
 

@@ -133,9 +133,23 @@ public:
 };
 
 USTRUCT()
+struct FT4EditorParameters
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	TSet<uint32> InvisibleActionSet; // #56 : Conti Editor 에서 Invisible or Isolate 로 출력을 제어한다.
+	TSet<uint32> IsolationActionSet; // #56 : Conti Editor 에서 Invisible or Isolate 로 출력을 제어한다.
+};
+
+USTRUCT()
 struct FT4ActionParameters
 {
 	GENERATED_USTRUCT_BODY()
+
+public:
+	UPROPERTY(Transient)
+	FT4EditorParameters EditorParams; // #56 : Only Editor, Conti Editor 에서 Invisible or Isolate 로 출력을 제어할 때 더미용으로 사용(delay, duration 동작 보장)
 
 private:
 	UPROPERTY(EditAnywhere)

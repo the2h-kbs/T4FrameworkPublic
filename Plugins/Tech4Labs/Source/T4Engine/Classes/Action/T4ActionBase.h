@@ -87,4 +87,9 @@ public:
 	{
 		return FString(TEXT("Action:None"));
 	}
+
+	virtual FString ToDisplayText()
+	{
+		return FString(TEXT("Untitled")); // #54
+	}
 };

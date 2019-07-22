@@ -84,31 +84,6 @@ public:
 	}
 };
 
-// #56 : Conti Editor 에서 Invisible or Isolate 로 출력을 제어한다.
-USTRUCT()
-struct T4ENGINE_API FT4ActionEditInfo
-{
-	GENERATED_USTRUCT_BODY()
-
-public:
-#if WITH_EDITORONLY_DATA
-	UPROPERTY(VisibleAnywhere)
-	bool bInvisible;
-
-	UPROPERTY(VisibleAnywhere)
-	bool bIsolated;
-#endif
-
-public:
-	FT4ActionEditInfo()
-#if WITH_EDITOR
-		: bInvisible(false)
-		, bIsolated(false)
-#endif
-	{
-	}
-};
-
 // #54
 USTRUCT()
 struct T4ENGINE_API FT4ActionCompositeData
@@ -123,12 +98,6 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	TMap<FName, FT4ActionFolderInfo> FolderInfoMap; // #56 : value = sortorder
 #endif
-
-	UPROPERTY(Transient)
-	TMap<uint32, bool> InvisibleActionMap; // #56 : Conti Editor 에서 Invisible or Isolate 로 출력을 제어한다.
-
-	UPROPERTY(Transient)
-	TMap<uint32, bool> IsolationActionMap; // #56 : Conti Editor 에서 Invisible or Isolate 로 출력을 제어한다.
 
 	// #T4_ADD_ACTION_TAG_CONTI
 

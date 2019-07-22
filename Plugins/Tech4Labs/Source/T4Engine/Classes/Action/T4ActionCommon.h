@@ -50,6 +50,11 @@ public:
 	{
 		return FString(TEXT("Action:Branch"));
 	}
+
+	FString ToDisplayText() override
+	{
+		return FString::Printf(TEXT("Branch '%s'"), *(ContiAsset.GetAssetName())); // #54
+	}
 };
 
 USTRUCT()
