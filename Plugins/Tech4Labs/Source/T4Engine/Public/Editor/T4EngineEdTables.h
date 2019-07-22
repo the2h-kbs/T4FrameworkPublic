@@ -22,13 +22,13 @@ public:
 	virtual ~IT4EngineEdNameTable() {}
 
 	virtual bool LoadNameTable(
-		ET4EngineEdNameTableType InNameTable,
+		ET4EngineEdNameTable InNameTable,
 		const FSoftObjectPath& InNameTablePath
 	) = 0;
 
 	virtual void Reset() = 0;
 
-	virtual TArray<FT4NameInfo>& GetInfoDatas(ET4EngineEdNameTableType InNameTable) = 0;
+	virtual TArray<FT4NameInfo>& GetInfoDatas(ET4EngineEdNameTable InNameTable) = 0;
 };
 
 T4ENGINE_API IT4EngineEdNameTable* T4EngineEdNameTableGet();

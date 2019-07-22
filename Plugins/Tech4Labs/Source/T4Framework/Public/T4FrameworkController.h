@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "T4Engine/Public/T4EngineTypes.h"
+#include "T4Engine/Public/T4EngineObjectID.h"
 #include "T4Engine/Public/Action/T4EngineActionKey.h"
 
 #include "Engine/EngineBaseTypes.h"

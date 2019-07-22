@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "T4Engine/Public/T4EngineTypes.h"
+#include "T4Engine/Public/T4EngineObjectID.h"
 #include "Navigation/PathFollowingComponent.h"
 #include "T4PathFollowingComponent.generated.h"
 

@@ -3,7 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "T4EngineObjectID.h"
 #include "T4Core/Public/T4CoreTypes.h"
 #include "T4EngineTypes.generated.h"
 
@@ -11,16 +10,6 @@
   * http://api.unrealengine.com/KOR/Programming/UnrealArchitecture/Reference/Properties/
  */
 typedef int32 FT4AnimInstanceID;
-
-static const float DefaultLineTraceMaxDistance = 10000.0f;
-
-#if (WITH_EDITOR || WITH_SERVER_CODE)
-// DefaultEngine.ini [/Script/Engine.CollisionProfile]
-#define T4COLLISION_GAMEOBJECT		ECC_GameTraceChannel1
-#define T4COLLISION_WEAPON			ECC_GameTraceChannel2
-#endif
-
-#define T4_INVALID_NAVEXTENT		(FVector::ZeroVector)
 
 UENUM()
 enum class ET4WorldType : uint8
@@ -37,6 +26,18 @@ enum class ET4ObjectType : uint8
 {
 	NullObject,
 	GameObject,
+
+	Max	UMETA(Hidden)
+};
+
+UENUM()
+enum class ET4SpawnMode : uint8 // #54
+{
+	All,
+	Client,
+	Server,
+
+	Editor,
 
 	Max	UMETA(Hidden)
 };
@@ -66,6 +67,16 @@ enum ET4CameraType
 };
 
 UENUM()
+enum class ET4MoveMode : uint8
+{
+	Sync,
+	Async,
+
+	Current, // #52
+	Count,
+};
+
+UENUM()
 enum class ET4CollisionChannel : uint8
 {
 	WorldStatic,
@@ -76,7 +87,7 @@ enum class ET4CollisionChannel : uint8
 };
 
 // #38
-enum ET4MoveSpeedType
+enum ET4MoveSpeed
 {
 	Stand,
 	Walk,
@@ -87,7 +98,7 @@ enum ET4MoveSpeedType
 };
 
 UENUM()
-enum class ET4AnimInstanceType
+enum class ET4AnimInstance
 {
 	Human_Basic, // #38
 	Human_Locomotion, // #38
@@ -104,7 +115,7 @@ enum ET4AnimStatePriority
 	AnimPriority_Low,
 };
 
-enum ET4MoveAngleType // #38
+enum ET4MoveAngle // #38
 {
 	MoveAngle_Front,
 	MoveAngle_Back,
@@ -114,7 +125,7 @@ enum ET4MoveAngleType // #38
 	MoveAngle_Nums,
 };
 
-enum ET4TurnAngleType // #44
+enum ET4TurnAngle // #44
 {
 	TurnAngle_Left,
 	TurnAngle_Right,
@@ -124,7 +135,7 @@ enum ET4TurnAngleType // #44
 	TurnAngle_Nums,
 };
 
-enum ET4FootStanceType // #38, #44
+enum ET4FootStance // #38, #44
 {
 	FootStance_Left,
 	FootStance_Right,

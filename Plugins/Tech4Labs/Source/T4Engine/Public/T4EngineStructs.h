@@ -6,7 +6,7 @@
 
 #include "Public/Action/T4EngineActionTypes.h"
 #include "Public/T4EngineTypes.h"
-#include "Public/T4EngineAnimSets.h"
+#include "Public/T4EngineDefinitions.h"
 
 /**
   *
@@ -23,8 +23,8 @@ struct FT4GameObjectProperty // #34
 		bIsLockOn = false;
 
 		// #33
-		MoveSpeed[(uint8)ET4MoveType::Sync] = 0.0f;
-		MoveSpeed[(uint8)ET4MoveType::Async] = 0.0f;
+		MoveSpeed[(uint8)ET4MoveMode::Sync] = 0.0f;
+		MoveSpeed[(uint8)ET4MoveMode::Async] = 0.0f;
 		MoveAccelerationScale = 1.0f; // #38, #52 (0.1 ~ 1)
 		RotationYawRate = 520.0f; // #44, #46
 
@@ -34,19 +34,19 @@ struct FT4GameObjectProperty // #34
 		RelativeScale3D = FVector::OneVector; // #37
 	}
 
-	const float GetMoveSpeed(const ET4MoveType InMoveType) const
+	const float GetMoveSpeed(const ET4MoveMode InMoveType) const
 	{
 		return MoveSpeed[(uint8)InMoveType]; // #33
 	}
 
-	void SetMoveSpeed(ET4MoveType InMoveType, float InMoveSpeed)
+	void SetMoveSpeed(ET4MoveMode InMoveType, float InMoveSpeed)
 	{
 		MoveSpeed[(uint8)InMoveType] = InMoveSpeed;
 	}
 
 	bool bIsLockOn;
 
-	float MoveSpeed[(uint8)ET4MoveType::Count]; // #33
+	float MoveSpeed[(uint8)ET4MoveMode::Count]; // #33
 	float MoveAccelerationScale; // #38, #52 (0.1 ~ 1)
 	float RotationYawRate; // #46
 

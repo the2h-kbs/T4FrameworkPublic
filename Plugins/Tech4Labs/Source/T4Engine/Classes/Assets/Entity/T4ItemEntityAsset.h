@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "T4EntityAsset.h"
-#include "Public/T4EngineEntityTypes.h"
 #include "T4ItemEntityAsset.generated.h"
 
 /**

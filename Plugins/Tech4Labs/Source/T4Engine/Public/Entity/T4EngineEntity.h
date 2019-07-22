@@ -3,7 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Public/T4EngineEntityTypes.h"
+#include "Public/Entity/T4EngineEntityTypes.h"
+#include "Public/Entity/T4EngineEntityKey.h"
 
 /**
   * #35 

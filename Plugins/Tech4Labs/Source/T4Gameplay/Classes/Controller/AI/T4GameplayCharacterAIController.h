@@ -34,7 +34,7 @@ struct FT4NPCAIMemory // #50
 		bActiveAggressive = false;
 		AggressiveClearTimeLeft = 0.0f;
 
-		MoveSpeedType = ET4MoveSpeedType::Stand;
+		MoveSpeedType = ET4MoveSpeed::Stand;
 	}
 
 	FVector InitSpawnLocation;
@@ -50,7 +50,7 @@ struct FT4NPCAIMemory // #50
 	bool bActiveAggressive;
 	float AggressiveClearTimeLeft;
 
-	ET4MoveSpeedType MoveSpeedType;
+	ET4MoveSpeed MoveSpeedType;
 };
 
 struct FT4GameNPCData;
@@ -90,7 +90,7 @@ public:
 	bool DoNormalAttack(const FT4ObjectID& InTargetGameObjectID); // #50
 	bool DoMoveTo(const FVector& InMoveVelocity, bool bForceMaxSpeed); // #52
 	bool DoMoveStop(bool bSyncLocation); // #52
-	bool DoUpdateMoveSpeed(ET4MoveSpeedType InMoveSpeedType); // #52
+	bool DoUpdateMoveSpeed(ET4MoveSpeed InMoveSpeedType); // #52
 
 	bool TakeEffectDamage(
 		const FT4GameEffectDataID& InEffectDataID,

@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "T4ActionBase.h"
-#include "Public/T4EngineAnimSets.h"
+#include "Public/T4EngineDefinitions.h"
 #include "T4ActionVFX.generated.h"
 
 /**
@@ -50,7 +50,7 @@ public:
 		, PlayRate(1.0f)
 		, LoopCount(1)
 	{
-		LifecyclePolicy = ET4LifecyclePolicy::Duration; // Animation 은 Duration 이 기초!
+		LifecyclePolicy = ET4LifecyclePolicy::Duration; // Animation 은 Duration 이 기본!
 	}
 
 	static ET4ActionType StaticActionType() { return ET4ActionType::Animation; }
@@ -74,7 +74,7 @@ struct T4ENGINE_API FT4ParticleAction : public FT4BaseAction
 public:
 	// #39 : FT4ContiCustomizeDetails::CustomizeParticleActionDetails
 	UPROPERTY(EditAnywhere)
-	FVector Scale; // #54
+	ET4AttachParent AttachParent;
 
 	UPROPERTY(EditAnywhere)
 	FName ActionPoint; // #57
@@ -86,14 +86,18 @@ public:
 	ET4LoadingPolicy LoadingPolicy;
 
 	UPROPERTY(EditAnywhere)
+	FVector Scale; // #54
+
+	UPROPERTY(EditAnywhere)
 	float PlayRate;
 
 public:
 	FT4ParticleAction()
 		: FT4BaseAction(StaticActionType())
-		, Scale(FVector::OneVector) // #54
+		, AttachParent(ET4AttachParent::Default) // #54
 		, ActionPoint(NAME_None)
 		, LoadingPolicy(ET4LoadingPolicy::Default)
+		, Scale(FVector::OneVector) // #54
 		, PlayRate(1.0f)
 	{
 	}
@@ -119,11 +123,42 @@ struct T4ENGINE_API FT4DecalAction : public FT4BaseAction
 
 public:
 	// #39 : FT4ContiCustomizeDetails::CustomizeDecalActionDetails
+	UPROPERTY(EditAnywhere)
+	ET4AttachParent AttachParent;
+
+	UPROPERTY(EditAnywhere)
+	FName ActionPoint;
+
+	UPROPERTY(EditAnywhere)
+	TSoftObjectPtr<class UMaterialInterface> DecalMaterial;
+
+	UPROPERTY(EditAnywhere)
+	ET4LoadingPolicy LoadingPolicy;
+
+	UPROPERTY(EditAnywhere)
+	int32 DecalSortOrder;
+
+	UPROPERTY(EditAnywhere)
+	FVector DecalSize;
+
+	UPROPERTY(EditAnywhere)
+	float FadeInTimeSec;
+
+	UPROPERTY(EditAnywhere)
+	float FadeOutTimeSec;
 
 public:
 	FT4DecalAction()
 		: FT4BaseAction(StaticActionType())
+		, AttachParent(ET4AttachParent::Default)
+		, ActionPoint(NAME_None)
+		, LoadingPolicy(ET4LoadingPolicy::Default)
+		, DecalSortOrder(0)
+		, DecalSize(128.0f, 256.0f, 256.0f)
+		, FadeInTimeSec(0.5f)
+		, FadeOutTimeSec(0.5f)
 	{
+		LifecyclePolicy = ET4LifecyclePolicy::Duration; // Decal 은 Duration 이 기본!
 	}
 
 	static ET4ActionType StaticActionType() { return ET4ActionType::Decal; }
@@ -131,6 +166,11 @@ public:
 	FString ToString() const override
 	{
 		return FString(TEXT("Action:Decal"));
+	}
+
+	FString ToDisplayText() override
+	{
+		return FString::Printf(TEXT("Decal '%s'"), *(DecalMaterial.GetAssetName())); // #54
 	}
 };
 

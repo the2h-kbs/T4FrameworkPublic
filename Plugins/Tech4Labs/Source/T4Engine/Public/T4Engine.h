@@ -4,9 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "Public/Action/T4EngineActionTypes.h"
+#include "Public/Entity/T4EngineEntityKey.h"
 #include "Public/T4EngineTypes.h"
+#include "Public/T4EngineObjectID.h"
 #include "Public/T4EngineStructs.h"
-#include "Public/T4EngineEntityTypes.h"
 
 #include "Components/SceneComponent.h"
 #include "CollisionQueryParams.h"

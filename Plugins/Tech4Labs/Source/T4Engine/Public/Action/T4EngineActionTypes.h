@@ -97,13 +97,12 @@ enum class ET4BranchCondition : uint8
 };
 
 UENUM()
-enum class ET4MoveType : uint8
+enum class ET4AttachParent : uint8 // #54
 {
-	Sync,
-	Async,
+	Object, // Default
+	World,
 
-	Current, // #52
-	Count,
+	Default,
 };
 
 UENUM()
@@ -121,7 +120,7 @@ enum class ET4TurnType : uint8
 };
 
 UENUM()
-enum class ET4EditorReloadType : uint8
+enum class ET4EditorReload : uint8
 {
 	All,
 	Attribute,

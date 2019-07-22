@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "T4EngineActionTypes.h"
-#include "Public/T4EngineTypes.h"
+#include "Public/T4EngineObjectID.h"
 #include "T4Core/Public/T4CoreMacros.h"
 #include "T4EngineActionParameters.generated.h"
 

@@ -3,8 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "T4Engine/Public/T4EngineTypes.h"
-#include "T4Engine/Public/T4EngineAnimSets.h"
+#include "Public/T4EngineTypes.h"
+#include "Public/T4EngineDefinitions.h"
 #include "T4AnimSetAsset.generated.h"
 
 /**

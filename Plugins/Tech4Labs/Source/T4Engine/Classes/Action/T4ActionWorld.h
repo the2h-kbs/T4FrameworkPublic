@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "T4ActionBase.h"
-#include "T4Engine/Public/T4EngineEntityTypes.h"
+#include "Public/Entity/T4EngineEntityKey.h"
 #include "T4ActionWorld.generated.h"
 
 /**

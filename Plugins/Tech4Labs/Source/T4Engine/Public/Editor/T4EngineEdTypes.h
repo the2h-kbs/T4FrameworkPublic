@@ -7,7 +7,7 @@
 /**
   * #39
  */
-enum ET4EngineEdNameTableType
+enum ET4EngineEdNameTable
 {
 	BlendSpace,
 	DefaultSection, // #38

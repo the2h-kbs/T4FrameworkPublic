@@ -17,12 +17,12 @@ struct T4ENGINE_API FT4EditorReloadAction : public FT4BaseAction
 
 public:
 	UPROPERTY(EditAnywhere)
-	ET4EditorReloadType ReloadType;
+	ET4EditorReload ReloadType;
 
 public:
 	FT4EditorReloadAction()
 		: FT4BaseAction(StaticActionType())
-		, ReloadType(ET4EditorReloadType::None)
+		, ReloadType(ET4EditorReload::None)
 	{
 	}
 
@@ -30,7 +30,7 @@ public:
 
 	bool Validate(FString& OutMsg) override
 	{
-		if (ET4EditorReloadType::None == ReloadType)
+		if (ET4EditorReload::None == ReloadType)
 		{
 			OutMsg = TEXT("Not set ReloadType");
 			return false;
