@@ -24,10 +24,16 @@ enum class ET4WorldType : uint8
 UENUM()
 enum class ET4ObjectType : uint8
 {
-	NullObject,
-	GameObject,
+	Character,
+	PropStatic,
+	PropSkeletal,
+	PropParticle,
+	ItemStatic,
+	ItemSkeletal,
 
-	Max	UMETA(Hidden)
+	World,
+
+	None UMETA(Hidden)
 };
 
 UENUM()

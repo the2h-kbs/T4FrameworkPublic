@@ -61,6 +61,7 @@ docs/
 BuildRules/
 Saved/
 Intermediate/
+Config/Localization/
 Plugins/Tech4Labs/Source/T4Core/Private
 Plugins/Tech4Labs/Source/T4Engine/Private
 Plugins/Tech4Labs/Source/T4Framework/Private

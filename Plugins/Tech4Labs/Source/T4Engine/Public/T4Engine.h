@@ -135,7 +135,7 @@ public:
 	virtual ~IT4GameObject() {}
 
 	virtual ET4LayerType GetLayerType() const = 0;
-	virtual ET4ObjectType GetType() const = 0;
+	virtual ET4ObjectType GetObjectType() const = 0;
 
 	virtual const FT4ObjectID& GetObjectID() const = 0;
 
@@ -146,9 +146,6 @@ public:
 	virtual const FName& GetGameDataIDName() const = 0;
 
 	virtual bool IsLoaded() const = 0; // #57 : 모든 로딩이 완료 된 상태
-
-	virtual void OnReset() = 0;
-	virtual void OnSetZombie() = 0; // #36 : Leave 시의 Zombie 처리. Coll 충돌 제외 등...
 
 	virtual bool OnExecute(
 		const FT4BaseAction* InAction, // WARN : only reference
@@ -205,21 +202,6 @@ public:
 	virtual void SetHeightOffset(float InOffset) = 0; // #18
 };
 
-class T4ENGINE_API IT4ObjectFactory
-{
-public:
-	virtual ~IT4ObjectFactory() {};
-
-	virtual IT4GameObject* CreateGameObject(
-		ET4LayerType InLayerType,
-		const FT4ObjectEnterAction* InAction
-	) = 0;
-
-	virtual void DestroyGameObject(IT4GameObject* InObject) = 0;
-};
-
-typedef TArray<IT4GameObject*>::TConstIterator FConstGameObjectIterator;
-
 class T4ENGINE_API IT4GameWorld
 {
 public:
@@ -241,8 +223,6 @@ public:
 	virtual UWorld* GetWorld() const = 0;
 	
 	virtual uint32 GetNumObjects() const = 0;
-
-	virtual FConstGameObjectIterator GetObjectIterator() const = 0;
 
 	virtual IT4GameObject* FindObject(const FT4ObjectID& InObjectID) const = 0;
 
@@ -292,6 +272,15 @@ public:
 	virtual bool IsPlayerObject(IT4GameObject* InGameObject) const = 0;
 	virtual IT4GameObject* GetPlayerObject() const = 0;
 
+	// #54 : 현재는 ClientOnly
+	virtual IT4GameObject* CreateClientObject(
+		const FName& InName,
+		const FVector& InSpawnLocation,
+		const FRotator& InSpawnRotation
+	) = 0; 
+	virtual void DestroyClientObject(const FT4ObjectID& InObjectID) = 0;
+	// ~#54 : 현재는 ClientOnly
+
 	// Server Only
 	virtual bool QueryNearestObjects(
 		const FVector& InOriginLocation,
@@ -307,5 +296,3 @@ T4ENGINE_API IT4GameWorld* T4EngineWorldCreate(
 T4ENGINE_API void T4EngineWorldDestroy(IT4GameWorld* InGameWorld);
 
 T4ENGINE_API IT4GameWorld* T4EngineWorldGet(ET4LayerType InSceneWorld);
-
-T4ENGINE_API IT4ObjectFactory* T4EngineObjectFactoryGet();
