@@ -3,9 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Public/T4GameplayTypes.h"
+
+#include "T4GameplayTypes.h"
+#include "Classes/GameTable/T4GameTableDataTypes.h" // #48
+
 #include "T4Framework/Classes/Controller/AI/T4NPCAIController.h"
-#include "Public/T4GameplayDataTypes.h" // #48
 #include "T4GameplayItemAIController.generated.h"
 
 /**

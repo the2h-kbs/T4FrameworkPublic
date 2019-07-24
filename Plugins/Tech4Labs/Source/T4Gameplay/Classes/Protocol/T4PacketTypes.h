@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "T4Framework/Public/T4FrameworkNet.h" // #42
-#include "T4GameplayPacketTypes.generated.h"
+#include "T4PacketTypes.generated.h"
 
 /**
   *

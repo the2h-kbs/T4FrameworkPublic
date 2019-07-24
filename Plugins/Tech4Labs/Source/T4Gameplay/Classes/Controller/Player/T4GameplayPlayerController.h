@@ -4,17 +4,17 @@
 
 #include "CoreMinimal.h"
 
-#include "Public/T4GameplayDataTypes.h"
+#include "Classes/GameTable/T4GameTableDataTypes.h" // #48
 
-#include "Classes/Network/Protocol/T4PacketCS_Status.h"
-#include "Classes/Network/Protocol/T4PacketCS_Move.h"
-#include "Classes/Network/Protocol/T4PacketCS_Action.h"
-#include "Classes/Network/Protocol/T4PacketCS_Command.h"
+#include "Classes/Protocol/T4PacketCS_Status.h"
+#include "Classes/Protocol/T4PacketCS_Move.h"
+#include "Classes/Protocol/T4PacketCS_Action.h"
+#include "Classes/Protocol/T4PacketCS_Command.h"
 
-#include "Classes/Network/Protocol/T4PacketSC_Action.h"
-#include "Classes/Network/Protocol/T4PacketSC_Move.h"
-#include "Classes/Network/Protocol/T4PacketSC_Status.h"
-#include "Classes/Network/Protocol/T4PacketSC_World.h"
+#include "Classes/Protocol/T4PacketSC_Action.h"
+#include "Classes/Protocol/T4PacketSC_Move.h"
+#include "Classes/Protocol/T4PacketSC_Status.h"
+#include "Classes/Protocol/T4PacketSC_World.h"
 
 #include "T4Framework/Classes/Controller/Player/T4PlayerController.h"
 
@@ -66,8 +66,6 @@ private:
 #endif
 
 protected:
-	IT4PacketHandlerSC* GetPacketHandlerSC() const; // #49
-
 	// #27 : Protocol
 	bool CS_RecvPacket_Validate(const FT4PacketCtoS* InPacket);
 	void CS_RecvPacket_Implementation(const FT4PacketCtoS* InPacket);

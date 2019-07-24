@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "T4Engine/Public/Action/T4EngineActionKey.h" // #48
-#include "T4GameplayDataTypes.generated.h"
+#include "T4GameTableDataTypes.generated.h"
 
 /**
   * #48

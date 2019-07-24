@@ -3,8 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Public/T4GameplayPacketTypes.h"
-#include "Public/T4GameplayDataTypes.h" // #48
+#include "T4PacketTypes.h"
+
+#include "Classes/GameTable/T4GameTableDataTypes.h" // #48
+
 #include "T4PacketSC.generated.h"
 
 /**

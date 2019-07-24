@@ -3,10 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Public/T4GameplayTypes.h"
+
+#include "T4GameplayTypes.h"
+#include "Classes/GameTable/T4GameTableDataTypes.h"
+
 #include "T4Framework/Classes/Controller/AI/T4NPCAIController.h"
 #include "T4Framework/Public/T4FrameworkAssetLoader.h" // #42
-#include "Public/T4GameplayDataTypes.h" // #48
 #include "T4GameplayCharacterAIController.generated.h"
 
 /**
@@ -57,7 +59,6 @@ struct FT4GameNPCData;
 struct FT4GameItemWeaponData; // #50
 class UBehaviorTree;
 class IT4GameObject;
-class IT4PacketHandlerSC;
 UCLASS()
 class T4GAMEPLAY_API AT4GameplayCharacterAIController : public AT4NPCAIController
 {
@@ -134,8 +135,6 @@ private:
 		ET4AITargetType InAITargetType,
 		float InMaxDistance
 	); // #50
-
-	IT4PacketHandlerSC* GetPacketHandlerSC() const; // #45
 
 	float GetMoveSpeedSelected() const; // #50
 

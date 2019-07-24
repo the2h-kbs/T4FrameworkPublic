@@ -18,8 +18,6 @@
 class AT4PlayerDefaultPawn;
 class UT4SpringArmComponent;
 class UT4CameraComponent;
-class IT4PacketHandlerSC;
-class IT4PacketHandlerCS;
 class IT4GameObject;
 
 UCLASS()

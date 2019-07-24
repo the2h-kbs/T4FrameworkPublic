@@ -3,8 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Public/T4GameplayDataTypes.h"
+#include "Classes/GameTable/T4GameTableDataTypes.h" // #48
+
 #include "Classes/Engine/DataTable.h"
+
 #include "T4GameTable_World.generated.h"
 
 /**
