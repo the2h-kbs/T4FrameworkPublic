@@ -1,4 +1,4 @@
-// Copyright 2019 Tech4 Labs, Inc.s All Rights Reserved.
+// Copyright 2019 SoonBo Noh.s All Rights Reserved.
 
 #pragma once
 
