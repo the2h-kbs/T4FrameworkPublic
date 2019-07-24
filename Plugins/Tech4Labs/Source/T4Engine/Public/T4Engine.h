@@ -198,6 +198,11 @@ public:
 		ERelativeTransformSpace InTransformSpace, 
 		FRotator& OutRotation
 	) const = 0; // #18
+	virtual bool GetSocketScale(
+		const FName& InSocketName,
+		ERelativeTransformSpace InTransformSpace,
+		FVector& OutScale
+	) const = 0; // #54
 
 	virtual void SetHeightOffset(float InOffset) = 0; // #18
 };
@@ -275,8 +280,9 @@ public:
 	// #54 : 현재는 ClientOnly
 	virtual IT4GameObject* CreateClientObject(
 		const FName& InName,
-		const FVector& InSpawnLocation,
-		const FRotator& InSpawnRotation
+		const FVector& InLocation,
+		const FRotator& InRotation,
+		const FVector& InScale
 	) = 0; 
 	virtual void DestroyClientObject(const FT4ObjectID& InObjectID) = 0;
 	// ~#54 : 현재는 ClientOnly

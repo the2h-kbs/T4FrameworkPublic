@@ -61,6 +61,7 @@ public:
 	FT4EntityBaseRenderingAttribute()
 		: Scale(1.0f)
 		, ImportRotationYaw(-90.0f)
+		, bReceivesDecals(false) // #54
 	{
 	}
 
@@ -69,6 +70,9 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = Property, meta = (ClampMin = "-360.0", ClampMax = "360.0"))
 	float ImportRotationYaw;
+
+	UPROPERTY(EditAnywhere, Category = Property)
+	bool bReceivesDecals; // #54
 };
 
 class UTexture2D;
