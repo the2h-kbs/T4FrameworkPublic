@@ -8,9 +8,8 @@ Powerful toolset and Flexible layer solution
     - 4.22
   - 웹사이트
     - <https://www.tech4labs.com>
-  - 문서
-    - T4Framework 기능 소개
-	  - <https://tech4labs.com/Tech4Labs_T4Framework_Features.html>
+  - 기능 소개
+	- <https://tech4labs.com/Tech4Labs_T4Framework_Features.html>
   - 문의
     - SoonBo Noh (<niceofer@hotmail.com>, @Tech4Labs)
 - 배포
