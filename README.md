@@ -1,4 +1,4 @@
-# T4Framework : Action RPG Framework for UE4
+# T4Framework : MMO Action RPG Framework for UE4
 
 **Warning!! 2019.10 월 릴리즈 버전 배포 예정입니다. 테스트 및 평가 용도로만 사용해주시기 바랍니다.**
 

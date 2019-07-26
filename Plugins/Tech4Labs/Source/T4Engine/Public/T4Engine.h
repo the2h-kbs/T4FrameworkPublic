@@ -227,9 +227,10 @@ public:
 
 	virtual UWorld* GetWorld() const = 0;
 	
-	virtual uint32 GetNumObjects() const = 0;
+	virtual uint32 GetNumGameObjects() const = 0;
 
-	virtual IT4GameObject* FindObject(const FT4ObjectID& InObjectID) const = 0;
+	virtual bool HasGameObject(const FT4ObjectID& InObjectID) const = 0;;
+	virtual IT4GameObject* FindGameObject(const FT4ObjectID& InObjectID) const = 0;
 
 	virtual bool QueryLineTraceSingle(
 		ET4CollisionChannel InCollisionChannel,
@@ -247,6 +248,12 @@ public:
 		const FCollisionQueryParams& InCollisionQueryParams, // FCollisionQueryParams::DefaultQueryParam
 		FT4HitSingleResult& OutHitResult
 	) = 0;
+
+	virtual bool QueryNearestGameObjects(
+		const FVector& InOriginLocation,
+		const float InMaxDistance,
+		TArray<IT4GameObject*>& OutObjects
+	) = 0; // #34
 
 	virtual bool ProjectPointToNavigation(
 		const FVector& InGoal,
@@ -284,15 +291,8 @@ public:
 		const FRotator& InRotation,
 		const FVector& InScale
 	) = 0; 
-	virtual void DestroyClientObject(const FT4ObjectID& InObjectID) = 0;
+	virtual bool DestroyClientObject(const FT4ObjectID& InObjectID) = 0;
 	// ~#54 : 현재는 ClientOnly
-
-	// Server Only
-	virtual bool QueryNearestObjects(
-		const FVector& InOriginLocation,
-		const float InMaxDistance,
-		TArray<IT4GameObject*>& OutObjects
-	) = 0; // #34
 };
 
 T4ENGINE_API IT4GameWorld* T4EngineWorldCreate(
