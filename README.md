@@ -21,6 +21,6 @@ Powerful toolset and Flexible layer solution
     - <https://github.com/Tech4Labs/T4Framework>
 - Release Notes
   - **Warning!! 2019.10 월 정식 버전 배포 예정입니다. 개발 버전이므로 테스트 용도로 만 사용해주시기 바랍니다.**
-  - [@392e21e](https://github.com/Tech4Labs/T4FrameworkPublic/commit/cb81d551db3697457923a118e52e5c12460c7b0a) [M2] Copying //Private to //Deploy (commit fc55aa5) - 2019.07.26
+  - [@0dc30bf](https://github.com/Tech4Labs/T4FrameworkPublic/commit/cb81d551db3697457923a118e52e5c12460c7b0a) [M2] Copying //Private to //Deploy (commit fc55aa5) - 2019.07.26
     - #59 [기능개선] 리허설 툴 실행중 PIE 진입시 뷰포트 멈춤 현상 대응
     - #54 [버그수정] Decal Action 사용중 강제종료(툴 & PIE)시 발생하는 "Array has changed during ranged-for iteration!" ensure 수정
