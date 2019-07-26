@@ -3,7 +3,7 @@
 Powerful toolset and Flexible layer solution
 ``` 
 
-- 정보
+- Features
   - UE4 지원 버전
     - 4.22
   - 웹사이트
@@ -12,7 +12,7 @@ Powerful toolset and Flexible layer solution
 	- <https://tech4labs.com/Tech4Labs_T4Framework_Features.html>
   - 문의
     - SoonBo Noh (<niceofer@hotmail.com>, @Tech4Labs)
-- 배포
+- Repositories
   - UE4 Marketplace
     - 준비중...(2019.10)
   - GitHub 공개 저장소
