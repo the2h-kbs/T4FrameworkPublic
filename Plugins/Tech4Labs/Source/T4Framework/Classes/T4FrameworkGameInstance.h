@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "T4Core/Public/T4CoreTypes.h"
 #include "Engine/GameInstance.h"
-#include "T4GameInstance.generated.h"
+#include "T4FrameworkGameInstance.generated.h"
 
 /**
   * http://api.unrealengine.com/KOR/Gameplay/Framework/GameFlow/index.html
@@ -13,7 +13,7 @@
 class IT4GameFramework;
 
 UCLASS()
-class TECH4DEMO_API UT4GameInstance : public UGameInstance
+class T4FRAMEWORK_API UT4FrameworkGameInstance : public UGameInstance
 {
 	GENERATED_UCLASS_BODY()
 
@@ -28,6 +28,6 @@ public:
 	) override;
 #endif
 
-private:
+protected:
 	IT4GameFramework* GameFramework;
 };

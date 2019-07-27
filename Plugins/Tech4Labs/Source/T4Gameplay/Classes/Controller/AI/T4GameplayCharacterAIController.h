@@ -4,11 +4,12 @@
 
 #include "CoreMinimal.h"
 
-#include "T4GameplayTypes.h"
+#include "Public/T4GameplayTypes.h"
+#include "Public/T4GameplayAssetLoader.h" // #42
+
 #include "Classes/GameTable/T4GameTableDataTypes.h"
 
 #include "T4Framework/Classes/Controller/AI/T4NPCAIController.h"
-#include "T4Framework/Public/T4FrameworkAssetLoader.h" // #42
 #include "T4GameplayCharacterAIController.generated.h"
 
 /**

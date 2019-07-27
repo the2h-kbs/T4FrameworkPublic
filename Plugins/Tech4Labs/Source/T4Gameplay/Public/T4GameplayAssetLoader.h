@@ -8,7 +8,7 @@
 /**
   *
  */
-class T4FRAMEWORK_API FT4BlackboardAssetLoader : public FT4AssetLoader
+class T4GAMEPLAY_API FT4BlackboardAssetLoader : public FT4AssetLoader
 {
 public:
 	explicit FT4BlackboardAssetLoader() {}
@@ -17,7 +17,7 @@ public:
 	class UBlackboardData* GetBlackboardData() const;
 };
 
-class T4FRAMEWORK_API FT4BehaviorTreeAssetLoader : public FT4AssetLoader
+class T4GAMEPLAY_API FT4BehaviorTreeAssetLoader : public FT4AssetLoader
 {
 public:
 	explicit FT4BehaviorTreeAssetLoader() {}

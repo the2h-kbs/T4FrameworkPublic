@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 
-#include "Public/T4FrameworkController.h"
+#include "Public/T4Framework.h" // #25, #42
 
 #include "T4Engine/Public/Action/T4EngineActionKey.h"
 

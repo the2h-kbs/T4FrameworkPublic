@@ -18,8 +18,7 @@ public class Tech4Demo : ModuleRules
                 "InputCore",
                 "T4Core",
                 "T4Engine",
-                "T4Framework",
-                "T4Gameplay",
+                "T4Framework"
             }
         );
 

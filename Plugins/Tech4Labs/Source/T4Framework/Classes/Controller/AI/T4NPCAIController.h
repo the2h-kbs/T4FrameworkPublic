@@ -4,9 +4,7 @@
 
 #include "CoreMinimal.h"
 
-#include "Public/T4FrameworkNet.h" // #25, #42
-#include "Public/T4FrameworkAssetLoader.h" // #42
-#include "Public/T4FrameworkController.h"
+#include "Public/T4Framework.h" // #25, #42
 
 #include "T4Engine/Public/T4Engine.h"
 
