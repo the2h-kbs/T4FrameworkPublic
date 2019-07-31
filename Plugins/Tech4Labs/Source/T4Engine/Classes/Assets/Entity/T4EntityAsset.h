@@ -94,8 +94,8 @@ public:
 	virtual ET4EntityType GetEntityType() const { return ET4EntityType::None; }
 
 #if WITH_EDITOR
-	DECLARE_MULTICAST_DELEGATE(FOnPropertiesChanged);
-	FOnPropertiesChanged& OnPropertiesChanged() { return OnPropertiesChangedDelegate; }
+	DECLARE_MULTICAST_DELEGATE(FT4OnPropertiesChanged);
+	FT4OnPropertiesChanged& OnPropertiesChanged() { return OnPropertiesChangedDelegate; }
 #endif // WITH_EDITOR
 
 	FName GetEntityAssetName() const; // #37 : Make FT4EntityKey
@@ -113,6 +113,6 @@ public:
 
 private:
 #if WITH_EDITOR
-	FOnPropertiesChanged OnPropertiesChangedDelegate;
+	FT4OnPropertiesChanged OnPropertiesChangedDelegate;
 #endif
 };

@@ -5,10 +5,10 @@
 #include "CoreMinimal.h"
 
 #include "Public/T4GameplayTypes.h"
-#include "Public/T4GameplayAssetLoader.h" // #42
 
 #include "Classes/GameTable/T4GameTableDataTypes.h"
 
+#include "T4Engine/Public/T4EngineAssetLoader.h" // #50, #42
 #include "T4Framework/Classes/Controller/AI/T4NPCAIController.h"
 #include "T4GameplayCharacterAIController.generated.h"
 

@@ -47,7 +47,7 @@ protected:
 	void OnUnPossess() override;
 
 public:
-	// IT4GameController
+	// IT4GameplayController
 	ET4LayerType GetLayerType() const override { return LayerType; }
 	ET4GameControllerType GetGameControllerType() const override { return ET4GameControllerType::GameController_Player; }
 
@@ -117,7 +117,7 @@ public:
 		EditorViewportClient = InEditorViewportClient;
 	}
 
-	FOnViewTargetChanged& GetOnViewTargetChanged() override { return OnViewTargetChanged; } // #39
+	FT4OnViewTargetChanged& GetOnViewTargetChanged() override { return OnViewTargetChanged; } // #39
 #endif
 
 protected:
@@ -172,6 +172,6 @@ private:
 
 #if WITH_EDITOR
 	IT4EditorViewportClient* EditorViewportClient; // #30
-	FOnViewTargetChanged OnViewTargetChanged; // #39
+	FT4OnViewTargetChanged OnViewTargetChanged; // #39
 #endif
 };

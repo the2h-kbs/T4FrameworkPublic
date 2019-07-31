@@ -202,6 +202,11 @@ public:
 	{
 	}
 
+	FT4GameEffectDataID(const FName& InRowName)
+		: FT4GameDataID(ET4GameDataType::Effect, InRowName)
+	{
+	}
+
 	FORCEINLINE FT4GameDataID operator=(const FT4GameEffectDataID& InRhs)
 	{
 		Type = InRhs.Type;

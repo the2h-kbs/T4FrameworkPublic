@@ -3,14 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "T4Framework/Classes/T4FrameworkGameInstance.h"
+#include "T4Framework/Classes/T4GameInstance.h"
 #include "Tech4DemoGameInstance.generated.h"
 
 /**
   * http://api.unrealengine.com/KOR/Gameplay/Framework/GameFlow/index.html
  */
 UCLASS()
-class TECH4DEMO_API UTech4DemoGameInstance : public UT4FrameworkGameInstance
+class TECH4DEMO_API UTech4DemoGameInstance : public UT4GameInstance
 {
 	GENERATED_UCLASS_BODY()
 };

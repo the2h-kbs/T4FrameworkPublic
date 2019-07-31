@@ -25,9 +25,9 @@ public:
 #if WITH_EDITOR
 	void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
 
-	DECLARE_MULTICAST_DELEGATE_TwoParams(FOnEngineSettingsChanged, const FString&, const UT4EngineSettings*);
+	DECLARE_MULTICAST_DELEGATE_TwoParams(FT4OnEngineSettingsChanged, const FString&, const UT4EngineSettings*);
 
-	static FOnEngineSettingsChanged& OnSettingsChanged();
+	static FT4OnEngineSettingsChanged& OnSettingsChanged();
 #endif
 
 public:
@@ -83,6 +83,6 @@ public:
 
 protected:
 #if WITH_EDITOR
-	static FOnEngineSettingsChanged SettingsChangedDelegate;
+	static FT4OnEngineSettingsChanged SettingsChangedDelegate;
 #endif
 };

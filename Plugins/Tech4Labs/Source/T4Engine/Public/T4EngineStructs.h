@@ -79,8 +79,8 @@ struct FT4ServerGameObjectAttribute // #46
 
 struct FT4ServerGameObjectDelegates // #49
 {
-	DECLARE_MULTICAST_DELEGATE_ThreeParams(FOnHitOverlap, const FName&, IT4GameObject*, const FHitResult&);
-	FOnHitOverlap OnHitOverlap;
+	DECLARE_MULTICAST_DELEGATE_ThreeParams(FT4OnHitOverlap, const FName&, class IT4GameObject*, const FHitResult&);
+	FT4OnHitOverlap OnHitOverlap;
 };
 #endif
 

@@ -138,8 +138,8 @@ public:
 	//~ End UObject interface
 
 #if WITH_EDITOR
-	DECLARE_MULTICAST_DELEGATE(FOnPropertiesChanged);
-	FOnPropertiesChanged& OnPropertiesChanged() { return OnPropertiesChangedDelegate; }
+	DECLARE_MULTICAST_DELEGATE(FT4OnPropertiesChanged);
+	FT4OnPropertiesChanged& OnPropertiesChanged() { return OnPropertiesChangedDelegate; }
 
 #endif // WITH_EDITOR
 
@@ -212,6 +212,6 @@ public:
 
 private:
 #if WITH_EDITOR
-	FOnPropertiesChanged OnPropertiesChangedDelegate;
+	FT4OnPropertiesChanged OnPropertiesChangedDelegate;
 #endif
 };

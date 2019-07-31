@@ -5,6 +5,10 @@
 #include "CoreMinimal.h"
 #include "T4FrameworkNet.h"
 
+#if WITH_EDITOR
+#include "T4FrameworkEditor.h" // #60
+#endif
+
 #include "T4Core/Public/T4CoreTypes.h"
 #include "T4Engine/Public/T4EngineTypes.h"
 #include "T4Engine/Public/T4EngineObjectID.h"
@@ -46,11 +50,20 @@ enum ET4GameControllerType // #42
 	GameController_None
 };
 
+class IT4GameplayFramework;
+class IT4GameObject;
+DECLARE_DELEGATE_OneParam(FT4OnRegisterGameplayLayerInstancce, IT4GameplayFramework*); // #42
+
+#if WITH_EDITOR
+DECLARE_MULTICAST_DELEGATE_OneParam(FT4OnViewTargetChanged, IT4GameObject*);
+DECLARE_DELEGATE_OneParam(FT4OnCreateEditorPlayerController, IT4GameplayFramework*); // #42
+#endif
+
 // #34
-class T4FRAMEWORK_API IT4GameController
+class T4FRAMEWORK_API IT4GameplayController
 {
 public:
-	virtual ~IT4GameController() {}
+	virtual ~IT4GameplayController() {}
 
 	virtual ET4LayerType GetLayerType() const = 0;
 	virtual ET4GameControllerType GetGameControllerType() const = 0;
@@ -73,13 +86,13 @@ public:
 	virtual AController* GetAController() = 0;
 };
 
-class T4FRAMEWORK_API IT4NPCAIController : public IT4GameController
+class T4FRAMEWORK_API IT4NPCAIController : public IT4GameplayController
 {
 public:
 	virtual ~IT4NPCAIController() {}
 };
 
-class T4FRAMEWORK_API IT4PlayerController : public IT4GameController
+class T4FRAMEWORK_API IT4PlayerController : public IT4GameplayController
 {
 public:
 	virtual ~IT4PlayerController() {}
@@ -137,31 +150,15 @@ public:
 
 	virtual void EditorSetViewportClient(class IT4EditorViewportClient* InEditorViewportClient) = 0;
 
-	DECLARE_MULTICAST_DELEGATE_OneParam(FOnViewTargetChanged, IT4GameObject*);
-	virtual FOnViewTargetChanged& GetOnViewTargetChanged() = 0;
+	virtual FT4OnViewTargetChanged& GetOnViewTargetChanged() = 0;
 #endif
 };
-
-#if WITH_EDITOR
-class IT4EditorViewportClient
-{
-public:
-	virtual ~IT4EditorViewportClient() {}
-
-	virtual void SetMouseLocation(const int InX, const int InY) = 0; 
-	virtual bool GetMousePosition(float& InLocationX, float& InLocationY) = 0;
-	virtual bool GetMousePositionToWorldRay(FVector& OutStartPosition, FVector& OutStartDirection) = 0;
-
-	virtual void ShowMouseCursor(bool InShow) = 0;
-	virtual void SetMouseCursorType(EMouseCursor::Type InMouseCursorType) = 0;
-};
-#endif
 
 // #42
-class T4FRAMEWORK_API IT4GameplayHandler
+class T4FRAMEWORK_API IT4GameplayLayerInstance
 {
 public:
-	virtual ~IT4GameplayHandler() {}
+	virtual ~IT4GameplayLayerInstance() {}
 
 	virtual bool OnInitialize(ET4LayerType InLayerType) = 0;
 	virtual void OnFinalize() = 0;
@@ -173,14 +170,16 @@ public:
 	virtual void OnProcess(float InDeltaTime) = 0;
 
 #if WITH_EDITOR
+	virtual IT4EditorGameData* GetEditorGameData() = 0; // #60
+	
 	virtual void SetInputControlLock(bool bLock) = 0; // #30
 #endif
 };
 
-class T4FRAMEWORK_API IT4GameFramework
+class T4FRAMEWORK_API IT4GameplayFramework
 {
 public:
-	virtual ~IT4GameFramework() {}
+	virtual ~IT4GameplayFramework() {}
 
 	virtual ET4LayerType GetLayerType() const = 0;
 	virtual ET4FrameworkType GetType() const = 0;
@@ -196,8 +195,8 @@ public:
 	virtual UWorld* GetWorld() const = 0;
 	virtual IT4GameWorld* GetGameWorld() const = 0;
 
-	virtual void RegisterGameplayHandler(IT4GameplayHandler* InHandler) = 0; // #42
-	virtual IT4GameplayHandler* GetGameplayHandler() const = 0; // #42
+	virtual void RegisterGameplayLayerInstance(IT4GameplayLayerInstance* InLayerInstance) = 0; // #42
+	virtual IT4GameplayLayerInstance* GetGameplayLayerInstance() const = 0; // #42
 
 	// Client
 	virtual IT4PlayerController* GetPCInterface() const = 0;
@@ -207,7 +206,12 @@ public:
 
 #if WITH_EDITOR
 	virtual void SetInputControlLock(bool bLock) = 0; // #30
+
 	virtual void SetEditoAISystemPaused(bool bInPaused) = 0; // #52
+
+	virtual IT4EditorGameplayAIHandler* GetEditorAISystemHandler() const = 0; // #60
+	virtual void SetEditorAISystemHandler(IT4EditorGameplayAIHandler* bInAIHandler) = 0; // #60
+
 	virtual void SetEditorPlayerController(class AT4PlayerController* InPlayerController) = 0; // #42
 	virtual void SetEditorViewportClient(IT4EditorViewportClient* InViewportClient) = 0; // #30
 #endif
@@ -226,22 +230,20 @@ public:
 class T4FRAMEWORK_API FT4FrameworkDelegates
 {
 public:
-	DECLARE_DELEGATE_OneParam(FOnRegisterDefaultGameplay, IT4GameFramework*); // #42
-	static FOnRegisterDefaultGameplay OnRegisterDefaultGameplay;
+	static FT4OnRegisterGameplayLayerInstancce OnRegisterGameplayLayerInstancce;
 
 #if WITH_EDITOR
-	DECLARE_DELEGATE_OneParam(FOnCreatePlayerController, IT4GameFramework*); // #42
-	static FOnCreatePlayerController OnCreatePlayerController;
+	static FT4OnCreateEditorPlayerController OnCreateEditorPlayerController;
 #endif
 
 private:
 	FT4FrameworkDelegates() {}
 };
 
-T4FRAMEWORK_API IT4GameFramework* T4FrameworkCreate(
+T4FRAMEWORK_API IT4GameplayFramework* T4FrameworkCreate(
 	ET4FrameworkType InFrameworkType,
 	FWorldContext* InWorldContext
 );
-T4FRAMEWORK_API void T4FrameworkDestroy(IT4GameFramework* InFramework);
+T4FRAMEWORK_API void T4FrameworkDestroy(IT4GameplayFramework* InFramework);
 
-T4FRAMEWORK_API IT4GameFramework* T4FrameworkGet(ET4LayerType InLayerType);
+T4FRAMEWORK_API IT4GameplayFramework* T4FrameworkGet(ET4LayerType InLayerType);

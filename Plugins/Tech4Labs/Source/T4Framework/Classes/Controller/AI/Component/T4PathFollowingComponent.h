@@ -16,8 +16,8 @@ class T4FRAMEWORK_API UT4PathFollowingComponent : public UPathFollowingComponent
 {
 	GENERATED_UCLASS_BODY()
 
-	DECLARE_DELEGATE_TwoParams(FOnCallbackMoveTo, const FVector&, bool); // #42, #50
-	DECLARE_DELEGATE(FOnCallbackMoveStop); // #52
+	DECLARE_DELEGATE_TwoParams(FT4OnCallbackMoveTo, const FVector&, bool); // #42, #50
+	DECLARE_DELEGATE(FT4OnCallbackMoveStop); // #52
 
 public:
 	void TickComponent(
@@ -31,8 +31,8 @@ public:
 	void OnPathUpdated() override; // #52
 
 public:
-	FOnCallbackMoveTo& GetOnCallbackMoveTo() { return OnCallbackMoveTo; } // #42, #50
-	FOnCallbackMoveStop& GetOnCallbackMoveStop() { return OnCallbackMoveStop; } // #52
+	FT4OnCallbackMoveTo& GetOnCallbackMoveTo() { return OnCallbackMoveTo; } // #42, #50
+	FT4OnCallbackMoveStop& GetOnCallbackMoveStop() { return OnCallbackMoveStop; } // #52
 
 	void SetGameObjectID(const FT4ObjectID& InObjectID) { TargetObjectID = InObjectID; }
 	void ClearGameObjectID() { TargetObjectID.SetNone(); }
@@ -53,6 +53,6 @@ private:
 	ET4LayerType LayerType;
 	FT4ObjectID TargetObjectID;
 
-	FOnCallbackMoveTo OnCallbackMoveTo;
-	FOnCallbackMoveStop OnCallbackMoveStop; // #52
+	FT4OnCallbackMoveTo OnCallbackMoveTo;
+	FT4OnCallbackMoveStop OnCallbackMoveStop; // #52
 };

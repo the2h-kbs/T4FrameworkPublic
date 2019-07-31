@@ -5,15 +5,15 @@
 #include "CoreMinimal.h"
 #include "T4Core/Public/T4CoreTypes.h"
 #include "Engine/GameInstance.h"
-#include "T4FrameworkGameInstance.generated.h"
+#include "T4GameInstance.generated.h"
 
 /**
   * http://api.unrealengine.com/KOR/Gameplay/Framework/GameFlow/index.html
  */
-class IT4GameFramework;
+class IT4GameplayFramework;
 
 UCLASS()
-class T4FRAMEWORK_API UT4FrameworkGameInstance : public UGameInstance
+class T4FRAMEWORK_API UT4GameInstance : public UGameInstance
 {
 	GENERATED_UCLASS_BODY()
 
@@ -29,5 +29,5 @@ public:
 #endif
 
 protected:
-	IT4GameFramework* GameFramework;
+	IT4GameplayFramework* GameplayFramework;
 };

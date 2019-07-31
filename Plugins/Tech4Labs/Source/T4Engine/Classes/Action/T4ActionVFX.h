@@ -136,6 +136,9 @@ public:
 	ET4LoadingPolicy LoadingPolicy;
 
 	UPROPERTY(EditAnywhere)
+	FVector Scale; // #54
+
+	UPROPERTY(EditAnywhere)
 	int32 DecalSortOrder;
 
 	UPROPERTY(EditAnywhere)
@@ -153,6 +156,7 @@ public:
 		, AttachParent(ET4AttachParent::Default)
 		, ActionPoint(NAME_None)
 		, LoadingPolicy(ET4LoadingPolicy::Default)
+		, Scale(FVector::OneVector)
 		, DecalSortOrder(0)
 		, DecalSize(128.0f, 256.0f, 256.0f)
 		, FadeInTimeSec(0.5f)

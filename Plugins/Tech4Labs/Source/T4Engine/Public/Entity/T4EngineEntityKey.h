@@ -9,7 +9,7 @@
 /**
   * #54
  */
-USTRUCT(BlueprintType)
+USTRUCT()
 struct FT4EntityKey
 {
 	GENERATED_USTRUCT_BODY()

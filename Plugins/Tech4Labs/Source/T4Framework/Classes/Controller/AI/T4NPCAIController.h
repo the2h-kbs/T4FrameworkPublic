@@ -57,7 +57,7 @@ protected:
 	// End AController interface
 
 public:
-	// IT4GameController
+	// IT4GameplayController
 	ET4LayerType GetLayerType() const override { return LayerType; }
 	ET4GameControllerType GetGameControllerType() const override { return ET4GameControllerType::GameController_NPC; }
 

@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "T4Framework/Classes/T4FrameworkGameMode.h"
+#include "T4Framework/Classes/T4GameMode.h"
 #include "Tech4DemoGameMode.generated.h"
 
 /**
@@ -11,7 +11,7 @@
  */
 
 UCLASS()
-class TECH4DEMO_API ATech4DemoGameMode : public AT4FrameworkGameMode
+class TECH4DEMO_API ATech4DemoGameMode : public AT4GameMode
 {
 	GENERATED_UCLASS_BODY()
 };
