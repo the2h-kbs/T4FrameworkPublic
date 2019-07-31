@@ -19,8 +19,8 @@ Powerful toolset and Flexible layer solution
     - <https://github.com/Tech4Labs/T4Framework>
 - Release Notes
   - **Warning!! 2019.10 월 정식 버전 배포 예정입니다. 개발 버전이므로 테스트 용도로 만 사용해주시기 바랍니다.**
-  - [2019.07.27] [M2] Copying //Private to //Deploy (private commit 99469fd)
-    - #61 [기능추가] 프로젝트 또는 T4Gameplay 모듈의 GameInstance/Mode 를 선택해서 플레이 할 수 있도록 기능 추가 (레벨 에디터 => Play => 'T4Gameplay Enabled' )
+  - [2019.07.31] [M2] Copying //Private to //Deploy (private commit 11c94d9)
+    - #60 [기능추가] 리허설 콘티 에디터 기능 개선 및 전투 테스트 기능 추가
   - [2019.07.27] [M2] Copying //Private to //Deploy (private commit 99469fd)
     - #61 [기능추가] 프로젝트 또는 T4Gameplay 모듈의 GameInstance/Mode 를 선택해서 플레이 할 수 있도록 기능 추가 (레벨 에디터 => Play => 'T4Gameplay Enabled' )
   - [2019.07.26] [M2] Copying //Private to //Deploy (private commit fc55aa5)
