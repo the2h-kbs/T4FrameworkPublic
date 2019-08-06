@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "T4Engine/Public/Action/T4EngineActionKey.h" // #48
+#include "T4Engine/Public/Action/T4ActionKey.h" // #48
 #include "T4GameTableDataTypes.generated.h"
 
 /**

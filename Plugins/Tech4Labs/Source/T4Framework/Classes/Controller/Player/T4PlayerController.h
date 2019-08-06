@@ -6,7 +6,7 @@
 
 #include "Public/T4Framework.h" // #25, #42
 
-#include "T4Engine/Public/Action/T4EngineActionKey.h"
+#include "T4Engine/Public/Action/T4ActionKey.h"
 
 #include "GameFramework/PlayerController.h"
 
@@ -126,6 +126,10 @@ protected:
 	virtual void NotifyUnPossess(IT4GameObject* InOldGameObject) {} // #49
 
 	IT4GameObject* FindGameObject(const FT4ObjectID& InObjectID) const; // #49
+
+#if WITH_EDITOR
+	IT4EditorGameplayAIHandler* GetEditorGameplayAIHandler() const; // #60
+#endif
 
 private:
 	void AttachCameraComponent(APawn* InOuter);

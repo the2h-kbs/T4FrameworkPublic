@@ -12,7 +12,7 @@
 #include "T4Core/Public/T4CoreTypes.h"
 #include "T4Engine/Public/T4EngineTypes.h"
 #include "T4Engine/Public/T4EngineObjectID.h"
-#include "T4Engine/Public/Action/T4EngineActionKey.h"
+#include "T4Engine/Public/Action/T4ActionKey.h"
 
 #include "Engine/EngineBaseTypes.h"
 #include "InputCoreTypes.h"

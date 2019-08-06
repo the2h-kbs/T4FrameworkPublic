@@ -62,8 +62,9 @@ BuildRules/
 Saved/
 Intermediate/
 Config/Localization/
+Source/Tech4Labs/T4Asset/Private
 Plugins/Tech4Labs/Source/T4Core/Private
 Plugins/Tech4Labs/Source/T4Engine/Private
 Plugins/Tech4Labs/Source/T4Framework/Private
 Plugins/Tech4Labs/Source/T4Gameplay/Private
-Plugins/Tech4Labs/Source/T4Rehearsal/Private
+Plugins/Tech4Labs/Source/T4RehearsalEditor/Private

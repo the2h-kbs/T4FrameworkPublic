@@ -149,3 +149,27 @@ enum ET4FootStance // #38, #44
 
 	FootStance_Nums,
 };
+
+UENUM()
+enum class ET4TurnType : uint8
+{
+	Current,
+
+	TargetLocation,
+	TargetDirection,
+	TargetObject,
+
+	TargetYawAngle, // #40, #44
+
+	Default,
+};
+
+UENUM()
+enum class ET4EditorReload : uint8
+{
+	All,
+	Attribute,
+	Data,
+
+	None,
+};

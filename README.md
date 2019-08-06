@@ -19,6 +19,8 @@ Powerful toolset and Flexible layer solution
     - <https://github.com/Tech4Labs/T4Framework>
 - Release Notes
   - **Warning!! 2019.10 월 정식 버전 배포 예정입니다. 개발 버전이므로 테스트 용도로 만 사용해주시기 바랍니다.**
+  - [2019.08.06] [M3] Copying //Private to //Deploy (private commit 8b08316)
+    - #62 [리팩토링] T4Engine 플러그인 내 포멧 관련 코드를 T4Asset 모듈로 이전
   - [2019.07.31] [M2] Copying //Private to //Deploy (private commit 11c94d9)
     - #60 [기능추가] 리허설 콘티 에디터 기능 개선 및 전투 테스트 기능 추가
   - [2019.07.27] [M2] Copying //Private to //Deploy (private commit 99469fd)

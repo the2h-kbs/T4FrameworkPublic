@@ -3,11 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Public/Action/T4EngineActionTypes.h"
-#include "Public/Entity/T4EngineEntityKey.h"
+
 #include "Public/T4EngineTypes.h"
 #include "Public/T4EngineObjectID.h"
 #include "Public/T4EngineStructs.h"
+#include "Public/Action/T4ActionKey.h"
+
+#include "T4Asset/Public/Action/T4ActionTypes.h"
+#include "T4Asset/Public/Entity/T4EntityKey.h"
 
 #include "Components/SceneComponent.h"
 #include "CollisionQueryParams.h"

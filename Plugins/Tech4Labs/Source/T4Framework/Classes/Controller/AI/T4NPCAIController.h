@@ -89,6 +89,10 @@ protected:
 
 	IT4GameObject* FindGameObjectForServer(const FT4ObjectID& InObjectID) const; // #49
 
+#if WITH_EDITOR
+	IT4EditorGameplayAIHandler* GetEditorGameplayAIHandler() const; // #60
+#endif
+
 protected:
 	ET4LayerType LayerType;
 

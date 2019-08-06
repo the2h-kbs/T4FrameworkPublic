@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 
+#include "T4Asset/Public/T4AssetDefinitions.h" // #62
+
 /**
   *
  */
@@ -23,21 +25,10 @@ static const float DefaultLineTraceMaxDistance = 10000.0f;
 
 // #39 : AnimSet
 
-static const float T4AnimSetBlendInTimeSec = 0.25f;
-static const float T4AnimSetBlendOutTimeSec = 0.25f;
-
-static const float T4AnimSetLeftStanceValue = 1.0f;
-static const float T4AnimSetRightStanceValue = -1.0f;
-static const float T4AnimSetUnarmedStanceValue = 0.0f;
-
 static const FName T4AnimSetAnimNotifyFootstepName = TEXT("Footstep_C");
 
 static const FName T4AnimSetAnimNotifyLeftFootstepName = TEXT("Footstep_Left");
 static const FName T4AnimSetAnimNotifyRightFootstepName = TEXT("Footstep_Right");
-
-static const FName T4AnimSetAnimMontageDefaultName = TEXT("Default");
-static const FName T4AnimSetAnimMontageLocomotionName = TEXT("Locomotion");
-static const FName T4AnimSetAnimMontageSkillName = TEXT("Skill");
 
 static const FName T4AnimSetSkillGroupName = FName(TEXT("SkillGroup")); // #48
 
