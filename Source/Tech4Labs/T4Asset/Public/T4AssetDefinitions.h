@@ -10,6 +10,7 @@
 
 // Common
 
+static const FName T4ContoParentInheritActionPontName = TEXT("ParentInherit"); // #63
 
 // #39 : AnimSet
 

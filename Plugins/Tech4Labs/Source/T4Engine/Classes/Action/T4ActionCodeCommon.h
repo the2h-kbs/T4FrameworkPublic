@@ -9,7 +9,7 @@
 /**
   *
  */
- // #T4_ADD_ACTION_TAG
+// #T4_ADD_ACTION_TAG
 
 // ET4ActionType::Conti
 // ET4ActionType::Stop
@@ -41,6 +41,30 @@ public:
 	}
 };
 
+// #63
+USTRUCT()
+struct T4ENGINE_API FT4PauseAction : public FT4CodeActionBase
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	UPROPERTY(EditAnywhere)
+	bool bPause;
+
+public:
+	FT4PauseAction()
+		: FT4CodeActionBase(StaticActionType())
+		, bPause(false)
+	{
+	}
+
+	static ET4ActionType StaticActionType() { return ET4ActionType::Pause; }
+
+	FString ToString() const override
+	{
+		return FString(TEXT("Action:Pause"));
+	}
+};
 
 USTRUCT()
 struct T4ENGINE_API FT4StopAction : public FT4CodeActionBase

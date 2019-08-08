@@ -19,6 +19,8 @@ Powerful toolset and Flexible layer solution
     - <https://github.com/Tech4Labs/T4Framework>
 - Release Notes
   - **Warning!! 2019.10 월 정식 버전 배포 예정입니다. 개발 버전이므로 테스트 용도로 만 사용해주시기 바랍니다.**
+  - [2019.08.08] [M3] Copying //Private to //Deploy (private commit 4738783)
+    - #63 [기능추가] Projectile Action 추가 (Ranged attack)
   - [2019.08.06] [M3] Copying //Private to //Deploy (private commit 8b08316)
     - #62 [리팩토링] T4Engine 플러그인 내 포멧 관련 코드를 T4Asset 모듈로 이전
   - [2019.07.31] [M2] Copying //Private to //Deploy (private commit 11c94d9)

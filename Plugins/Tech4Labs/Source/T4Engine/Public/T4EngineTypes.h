@@ -24,14 +24,15 @@ enum class ET4WorldType : uint8
 UENUM()
 enum class ET4ObjectType : uint8
 {
-	Character,
-	PropStatic,
-	PropSkeletal,
-	PropParticle,
-	ItemStatic,
-	ItemSkeletal,
+	Entity_Character,
+	Entity_PropStatic,
+	Entity_PropSkeletal,
+	Entity_PropParticle,
+	Entity_ItemStatic,
+	Entity_ItemSkeletal,
 
-	World,
+	World_Default, // #54
+	World_Projectile, // #63
 
 	None UMETA(Hidden)
 };
@@ -151,17 +152,24 @@ enum ET4FootStance // #38, #44
 };
 
 UENUM()
-enum class ET4TurnType : uint8
+enum class ET4AttackType : uint8 // #63
 {
-	Current,
+	Melee,
+	Ranged,
 
+	None,
+};
+
+UENUM()
+enum class ET4TargetType : uint8
+{
 	TargetLocation,
 	TargetDirection,
 	TargetObject,
 
-	TargetYawAngle, // #40, #44
+	TargetCustom, // #40, #44
 
-	Default,
+	Default, // Current
 };
 
 UENUM()

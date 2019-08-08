@@ -34,6 +34,8 @@ enum class ET4ActionType : uint32
 	Particle,
 	Decal, // #54
 
+	Projectile, // #63
+
 	TimeScale, // #54
 	CameraWork, // #54
 
@@ -52,6 +54,7 @@ enum class ET4ActionType : uint32
 
 	MoveAsync, // #40
 	MoveSync, // #40
+	
 	Jump,
 	Roll, // #46
 	Teleport,
@@ -59,6 +62,8 @@ enum class ET4ActionType : uint32
 
 	MoveStop, // #52
 	MoveSpeedSync, // #52
+
+	Launch, // #63 : Only Projectile
 
 	LockOn,
 
@@ -68,6 +73,7 @@ enum class ET4ActionType : uint32
 
 	Conti, // #24
 
+	Pause, // #63
 	Stop,
 
 	Dummy, // #56 : Conti Editor 에서 Invisible or Isolate 로 출력을 제어할 때 더미용으로 사용 (delay, duration 동작 보장)

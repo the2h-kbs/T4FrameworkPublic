@@ -13,7 +13,7 @@ namespace UnrealBuildTool.Rules
 
 			PrivateIncludePaths.AddRange(
 				new string[] {
-                    "T4Framework/T4Asset/Private",
+                    "Tech4Labs/T4Asset/Private",
 					// ... add other private include paths required here ...
 				}
 			);

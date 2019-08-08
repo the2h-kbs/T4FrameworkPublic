@@ -34,11 +34,6 @@ public:
 
 	bool DoAttackForServer(const FT4PacketAttackCS& InPacket); // #49
 
-	bool TakeEffectDamage(
-		const FT4GameEffectDataID& InEffectDataID,
-		const FT4ObjectID& InAttackerObjectID
-	); // #50
-
 protected:
 	void NotifyAdvance(float InDeltaTime) override; // #49
 	void NotifyPossess(IT4GameObject* InNewGameObject) override; // #49

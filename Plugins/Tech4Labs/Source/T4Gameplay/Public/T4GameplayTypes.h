@@ -34,3 +34,4 @@ enum ET4AITargetType // #50
 	AITarget_All,
 	AITarget_Enemy,
 };
+

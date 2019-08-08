@@ -27,6 +27,9 @@ enum class ET4TimeParamBits
 {
 	DurationBit,
 	OffsetTimeBit, // #56
+
+	ProjectileSpeedBit, // #63
+	ProjectileDurationBit, // #63
 };
 
 UENUM(Meta = (Bitflags))
@@ -81,11 +84,19 @@ public:
 	UPROPERTY(EditAnywhere)
 	float OffsetTimeSec; // #56
 
+	UPROPERTY(EditAnywhere)
+	float ProjectileSpeed; // #63
+
+	UPROPERTY(EditAnywhere)
+	float ProjectileDurationSec; // #63
+
 public:
 	FT4ActionTimeParameters()
 		: SetBits(0)
 		, DurectionSec(0.0f)
 		, OffsetTimeSec(0.0f) // #56
+		, ProjectileSpeed(0.0f) // #63
+		, ProjectileDurationSec(0.0f) // #63
 	{
 	}
 };
@@ -239,6 +250,18 @@ public:
 		TimeParams.SetBits |= BIT_LEFTSHIFT(ET4TimeParamBits::OffsetTimeBit); // #56
 	}
 
+	FORCEINLINE void SetProjectileSpeed(const float& InProjectileSpeed) // #63
+	{
+		TimeParams.ProjectileSpeed = InProjectileSpeed;
+		TimeParams.SetBits |= BIT_LEFTSHIFT(ET4TimeParamBits::ProjectileSpeedBit);
+	}
+
+	FORCEINLINE void SetProjectileDurationSec(const float& InProjectileDurationSec) // #63
+	{
+		TimeParams.ProjectileDurationSec = InProjectileDurationSec;
+		TimeParams.SetBits |= BIT_LEFTSHIFT(ET4TimeParamBits::ProjectileDurationBit);
+	}
+
 	FORCEINLINE void SetTargetObjectID(const FT4ObjectID& InTargetObjectID)
 	{
 		TargetParams.TargetObjectID = InTargetObjectID;
@@ -261,6 +284,20 @@ public:
 	{
 		AnimationParams.SetBits |= BIT_LEFTSHIFT(ET4AnimationParamBits::NoBlendInTimeWithOffsetPlayBit);
 	}
+
+	bool T4ENGINE_API GetTargetObject(
+		ET4LayerType InLayerType,
+		class IT4GameObject** OutTargetObject, 
+		const TCHAR* InDebugString = nullptr
+	) const; // #28
+	bool T4ENGINE_API GetTargetLocation(
+		FVector& OutTargetLocation, 
+		const TCHAR* InDebugString = nullptr
+	) const; // #28
+	bool T4ENGINE_API GetTargetDirection(
+		FVector& OutTargetDirection, 
+		const TCHAR* InDebugString = nullptr
+	) const; // #28
 
 	static T4ENGINE_API const FT4ActionParameters DefaultActionParameter; // #32
 };

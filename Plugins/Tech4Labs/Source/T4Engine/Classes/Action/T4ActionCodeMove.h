@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "T4ActionCodeBase.h"
+#include "Public/T4EngineObjectID.h" // #63
 #include "T4ActionCodeMove.generated.h"
 
 /**
@@ -20,6 +21,8 @@
 
 // ET4ActionType::MoveStop // #52
 // ET4ActionType::MoveSpeedSync // #52
+
+// ET4ActionType::Launch // #63 : Only Projectile
 
 // #40
 USTRUCT()
@@ -226,18 +229,18 @@ struct T4ENGINE_API FT4TurnAction : public FT4CodeActionBase
 
 public:
 	UPROPERTY(EditAnywhere)
-	ET4TurnType TurnType;
+	ET4TargetType TurnType;
 
 	UPROPERTY(EditAnywhere)
 	float RotationYawRate; // #44 : 초당 회전 단위, Yaw
 
 	UPROPERTY(EditAnywhere)
-	float TargetYawAngle; // #40 : LockOn 에서 방향을 맞출 경우 사용 (only ET4TurnType::TargetYawAngle)
+	float TargetYawAngle; // #40 : LockOn 에서 방향을 맞출 경우 사용 (only ET4TargetType::TargetCustom)
 
 public:
 	FT4TurnAction()
 		: FT4CodeActionBase(StaticActionType())
-		, TurnType(ET4TurnType::Default)
+		, TurnType(ET4TargetType::Default)
 		, RotationYawRate(0.0f)
 		, TargetYawAngle(0.0f)
 	{
@@ -306,5 +309,51 @@ public:
 	FString ToString() const override
 	{
 		return FString(TEXT("Action:MoveSpeedSync"));
+	}
+};
+
+// #63
+USTRUCT()
+struct T4ENGINE_API FT4LaunchAction : public FT4CodeActionBase
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	UPROPERTY(EditAnywhere)
+	float MoveSpeed;
+
+	UPROPERTY(EditAnywhere)
+	TSoftObjectPtr<class UT4ContiAsset> HeadContiAsset;
+
+	UPROPERTY(EditAnywhere)
+	TSoftObjectPtr<UT4ContiAsset> EndContiAsset;
+
+	UPROPERTY(EditAnywhere)
+	ET4LoadingPolicy LoadingPolicy;
+
+	UPROPERTY(EditAnywhere)
+	float ThrowOffsetTimeSec; // #63 : Projectile 로딩시간이 길어져 이미 발사 되었을 경우의 타이밍 맞추기
+
+	UPROPERTY(EditAnywhere)
+	float MaxPlayTimeSec; // #63 : Conti 의 MaxPlaytTimeSec 또는 서버에서 계산된 Hit 시간까지의 ProjectileDurationSec
+
+	UPROPERTY(EditAnywhere)
+	FT4ObjectID TargetObjectID; // #63 : Target 이 있을 경우만 설정됨!
+
+public:
+	FT4LaunchAction()
+		: FT4CodeActionBase(StaticActionType())
+		, MoveSpeed(0.0f)
+		, LoadingPolicy(ET4LoadingPolicy::Default)
+		, ThrowOffsetTimeSec(0.0f)
+		, MaxPlayTimeSec(0.0f)
+	{
+	}
+
+	static ET4ActionType StaticActionType() { return ET4ActionType::Launch; }
+
+	FString ToString() const override
+	{
+		return FString(TEXT("Action:Launch"));
 	}
 };

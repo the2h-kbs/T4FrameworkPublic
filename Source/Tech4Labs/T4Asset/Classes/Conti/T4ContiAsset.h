@@ -117,6 +117,9 @@ public:
 	TArray<FT4DecalAction> DecalActions; // #54
 
 	UPROPERTY(EditAnywhere)
+	TArray<FT4ProjectileAction> ProjectileActions; // #63
+	
+	UPROPERTY(EditAnywhere)
 	TArray<FT4TimeScaleAction> TimeScaleActions; // #54
 
 	UPROPERTY(EditAnywhere)
@@ -191,17 +194,25 @@ public:
 	UPROPERTY(EditAnywhere, Category = Editor)
 	TSoftObjectPtr<UT4EntityAsset> TestEntityAsset;
 
-	UPROPERTY(EditAnywhere, Category = Editor)
-	bool bTestAISystemDisabled; // #60
+	// #T4_ADD_EDITOR_PLAY_TAG
 
 	UPROPERTY(EditAnywhere, Category = Editor)
-	bool bTestPlayerRoleAttacker; // #60
+	FName TestWeaponNameID; // #60
+
+	UPROPERTY(EditAnywhere, Category = Editor)
+	bool bTestPlayerOverrideSkillData; // #63
 
 	UPROPERTY(EditAnywhere, Category = Editor)
 	FName TestSandbackNameID; // #60
 
 	UPROPERTY(EditAnywhere, Category = Editor)
-	FName TestWeaponNameID; // #60
+	bool bTestAISystemDisabled; // #60
+
+	UPROPERTY(EditAnywhere, Category = Editor)
+	bool bTestSandbackRoleAttacker; // #63
+
+	UPROPERTY(EditAnywhere, Category = Editor)
+	bool bTestSandbackOverrideSkillData; // #63
 
 	UPROPERTY(EditAnywhere, Category = Editor)
 	FName TestSkillDataNameID; // #60

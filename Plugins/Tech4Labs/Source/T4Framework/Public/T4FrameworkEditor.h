@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "T4Engine/Public/T4EngineTypes.h" // #63
 #include "T4FrameworkEditor.generated.h"
 
 /**
@@ -19,13 +20,15 @@ enum ET4EditorGameDataType
 };
 
 UENUM()
-enum class ET4EditorPlayerRole : uint8
+enum class ET4EditorPlayRole : uint8
 {
 	Attacker,
 	Defender,
 
 	None UMETA(Hidden),
 };
+
+// #T4_ADD_SKILL_CONTENT_TAG 
 
 class UT4ContiAsset;
 USTRUCT()
@@ -37,11 +40,17 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	FName Name;
 
+	UPROPERTY(VisibleAnywhere)
+	ET4AttackType AttackType; // #63
+
 	UPROPERTY(EditAnywhere)
 	float HitDelayTimeSec;
 
 	UPROPERTY(EditAnywhere)
 	float DurationSec;
+
+	UPROPERTY(EditAnywhere)
+	float ProjectileSpeed; // #63
 
 	UPROPERTY(EditAnywhere)
 	bool bMoveable;
@@ -51,11 +60,18 @@ public:
 
 public:
 	FT4EditorSkillDataInfo()
-		: Name(NAME_None)
-		, HitDelayTimeSec(0.0f)
-		, DurationSec(0.0f)
-		, bMoveable(false)
 	{
+		Reset();
+	}
+
+	void Reset()
+	{
+		Name = NAME_None;
+		AttackType = ET4AttackType::Melee;
+		HitDelayTimeSec = 0.0f;
+		DurationSec = 0.0f;;
+		ProjectileSpeed = 0.0f; // #63
+		bMoveable = false;
 	}
 };
 
@@ -73,8 +89,13 @@ public:
 
 public:
 	FT4EditorEffectDataInfo()
-		: Name(NAME_None)
 	{
+		Reset();
+	}
+
+	void Reset()
+	{
+		Name = NAME_None;
 	}
 };
 
@@ -124,7 +145,11 @@ public:
 	virtual ~IT4EditorGameplayAIHandler() {}
 	
 	virtual bool IsAISystemDisabled() const = 0;
+
+	virtual bool IsPlayerOverrideSkillData() const = 0; // #63
+
 	virtual bool IsSandbackAttackable() const = 0;
+	virtual bool IsSandbackOverrideSkillData() const = 0; // #63
 
 	virtual FName GetOverrideSkillDataNameID() const = 0;
 	virtual FName GetOverrideEffectDataNameID() const = 0;

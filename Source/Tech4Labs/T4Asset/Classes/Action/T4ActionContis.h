@@ -10,16 +10,18 @@
 /**
   *
  */
- // #T4_ADD_ACTION_TAG
+ // #T4_ADD_ACTION_TAG_CONTI
 
 // ET4ActionType::Branch // #54
 // ET4ActionType::SpecialMove
 // ET4ActionType::Animation
 // ET4ActionType::Particle
 // ET4ActionType::Decal // #52
+// ET4ActionType::Projectile // #63
 // ET4ActionType::TimeScale // #52
 // ET4ActionType::CameraWork // #52
 
+class UT4ContiAsset;
 
 // #54
 USTRUCT()
@@ -36,7 +38,7 @@ public:
 	FName ConditionName;
 
 	UPROPERTY(EditAnywhere)
-	TSoftObjectPtr<class UT4ContiAsset> ContiAsset;
+	TSoftObjectPtr<UT4ContiAsset> ContiAsset;
 
 	UPROPERTY(EditAnywhere)
 	ET4LoadingPolicy LoadingPolicy;
@@ -163,7 +165,7 @@ public:
 	FT4ParticleAction()
 		: FT4ContiActionBase(StaticActionType())
 		, AttachParent(ET4AttachParent::Default) // #54
-		, ActionPoint(NAME_None)
+		, ActionPoint(T4ContoParentInheritActionPontName)
 		, LoadingPolicy(ET4LoadingPolicy::Default)
 		, Scale(FVector::OneVector) // #54
 		, PlayRate(1.0f)
@@ -222,7 +224,7 @@ public:
 	FT4DecalAction()
 		: FT4ContiActionBase(StaticActionType())
 		, AttachParent(ET4AttachParent::Default)
-		, ActionPoint(NAME_None)
+		, ActionPoint(T4ContoParentInheritActionPontName)
 		, LoadingPolicy(ET4LoadingPolicy::Default)
 		, Scale(FVector::OneVector)
 		, DecalSortOrder(0)
@@ -243,6 +245,58 @@ public:
 	FString ToDisplayText() override
 	{
 		return FString::Printf(TEXT("Decal '%s'"), *(DecalMaterial.GetAssetName())); // #54
+	}
+};
+
+// #63
+USTRUCT()
+struct T4ASSET_API FT4ProjectileAction : public FT4ContiActionBase
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	// #39 : FT4ContiCustomizeDetails::CustomizeProjectileActionDetails
+	UPROPERTY(EditAnywhere)
+	FName ActionPoint; // 어딘가에 붙어야 할 경우. 예) 오른손...
+
+	UPROPERTY(EditAnywhere)
+	TSoftObjectPtr<UT4ContiAsset> CastingContiAsset;
+
+	UPROPERTY(EditAnywhere)
+	TSoftObjectPtr<UT4ContiAsset> HeadContiAsset;
+
+	UPROPERTY(EditAnywhere)
+	TSoftObjectPtr<UT4ContiAsset> EndContiAsset;
+
+	UPROPERTY(EditAnywhere)
+	ET4LoadingPolicy LoadingPolicy;
+
+	UPROPERTY(EditAnywhere)
+	float ThrowDelayTimeSec; // Play 이후 ActionPoint 에서 떨어지는 시간!
+
+	UPROPERTY(EditAnywhere)
+	float CastingStopDelayTimeSec; // ThrowDelayTimeSec 이후 Casting Conti 가 삭제될 시간
+
+public:
+	FT4ProjectileAction()
+		: FT4ContiActionBase(StaticActionType())
+		, ActionPoint(NAME_None)
+		, LoadingPolicy(ET4LoadingPolicy::Default)
+		, ThrowDelayTimeSec(0.0f)
+		, CastingStopDelayTimeSec(0.2f)
+	{
+	}
+
+	static ET4ActionType StaticActionType() { return ET4ActionType::Projectile; }
+
+	FString ToString() const override
+	{
+		return FString(TEXT("Action:Projectile"));
+	}
+
+	FString ToDisplayText() override
+	{
+		return FString::Printf(TEXT("Projectile '%s'"), *(HeadContiAsset.GetAssetName()));
 	}
 };
 

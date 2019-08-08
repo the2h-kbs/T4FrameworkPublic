@@ -101,6 +101,7 @@ public:
 	virtual bool IsPaused() const = 0; // #56
 
 	virtual IT4ActionNode* GetParentNode() const = 0;
+	virtual const FName GetActionPoint() const = 0; // #63
 
 	virtual IT4ActionNode* AddChildNode(const FT4BaseAction* InAction, float InOffsetTimeSec) = 0; // #23, #54
 	virtual bool RemoveChildNode(const FT4StopAction* InAction) = 0;
@@ -117,10 +118,8 @@ public:
 	virtual bool IsLooping(const FT4ActionKey& InActionKey) = 0;
 	
 	virtual bool IsPaused(const FT4ActionKey& InActionKey) = 0; // #54
-#if WITH_EDITOR
-	// #54 : 에디터 전용, 일반적 사용은 TimeScale Action 을 사용할 것!
-	virtual void SetPaused(const FT4ActionKey& InActionKey, bool bPause) = 0;
-#endif
+	virtual void SetPaused(const FT4ActionKey& InActionKey, bool bPause) = 0; // #54
+	virtual void SetPaused(bool bPause) = 0; // #63
 
 	virtual IT4ActionNode* GetChildNodeByPrimary(const FT4ActionKey& InPrimaryActionKey) = 0;
 	virtual bool GetChildNodes(
@@ -289,6 +288,7 @@ public:
 
 	// #54 : 현재는 ClientOnly
 	virtual IT4GameObject* CreateClientObject(
+		ET4ObjectType InWorldObjectType, // #63 : Only World Object
 		const FName& InName,
 		const FVector& InLocation,
 		const FRotator& InRotation,

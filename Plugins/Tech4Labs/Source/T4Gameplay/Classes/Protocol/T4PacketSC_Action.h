@@ -27,11 +27,19 @@ public:
 	FT4GameDataID SkillDataID;
 
 	UPROPERTY(VisibleAnywhere)
-	FVector UseDirection; // #49
+	FT4ObjectID TargetObjectID; // #63 : 타겟이 있으면 먼저 체크! 없으면 Direct 을 사용한다.
+
+	UPROPERTY(VisibleAnywhere)
+	FVector TargetDirection; // #49
+
+	UPROPERTY(VisibleAnywhere)
+	float ProjectileDurationSec; // #63 : Range Attack 이라면 ProjectileSpeed 로 계산된 Duration 시간이 넘어온다.
 
 public:
 	FT4PacketAttackSC()
 		: FT4PacketStoC(ET4PacketStoC::Attack)
+		, TargetDirection(FVector::ZeroVector)
+		, ProjectileDurationSec(0.0f)
 	{
 	}
 
@@ -42,9 +50,9 @@ public:
 			OutMsg = TEXT("Invalid ObjectID");
 			return false;
 		}
-		if (UseDirection.IsNearlyZero())
+		if (!TargetObjectID.IsValid() && TargetDirection.IsNearlyZero())
 		{
-			OutMsg = TEXT("Invalid UseDirection!");
+			OutMsg = TEXT("Invalid Target ObjectID or Direction!");
 			return false;
 		}
 		return true;

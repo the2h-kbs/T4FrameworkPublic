@@ -94,11 +94,6 @@ public:
 	bool DoMoveStop(bool bSyncLocation); // #52
 	bool DoUpdateMoveSpeed(ET4MoveSpeed InMoveSpeedType); // #52
 
-	bool TakeEffectDamage(
-		const FT4GameEffectDataID& InEffectDataID,
-		const FT4ObjectID& InAttackerObjectID
-	); // #50
-
 	const FT4NPCAIMemory& GetAIMemoryConst() const { return AIMemory; } // #50
 
 	void SetMoveTargetLocation(const FVector& InMoveTargetLocation) // #52

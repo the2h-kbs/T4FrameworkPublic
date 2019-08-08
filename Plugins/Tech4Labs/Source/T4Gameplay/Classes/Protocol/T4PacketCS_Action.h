@@ -26,12 +26,15 @@ public:
 	FT4GameDataID SkillDataID;
 
 	UPROPERTY(VisibleAnywhere)
-	FVector UseDirection; // #49
+	FT4ObjectID TargetObjectID; // #63 : 타겟이 있으면 먼저 체크! 없으면 Direct 을 사용한다.
+
+	UPROPERTY(VisibleAnywhere)
+	FVector TargetDirection; // #49
 
 public:
 	FT4PacketAttackCS()
 		: FT4PacketCtoS(ET4PacketCtoS::Attack)
-		, UseDirection(FVector::ZeroVector)
+		, TargetDirection(FVector::ZeroVector)
 	{
 	}
 
@@ -42,9 +45,9 @@ public:
 			OutMsg = TEXT("Invalid Send ObjectID!");
 			return false;
 		}
-		if (UseDirection.IsNearlyZero())
+		if (!TargetObjectID.IsValid() && TargetDirection.IsNearlyZero())
 		{
-			OutMsg = TEXT("Invalid UseDirection!");
+			OutMsg = TEXT("Invalid Target ObjectID or Direction!");
 			return false;
 		}
 		return true;
