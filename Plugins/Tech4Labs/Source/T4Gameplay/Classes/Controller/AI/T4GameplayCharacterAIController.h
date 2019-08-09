@@ -73,6 +73,12 @@ public:
 	) override;
 
 public:
+	// class IT4GameplayControl
+#if (WITH_EDITOR || WITH_SERVER_CODE)
+	virtual void OnNotifyAIEvent(const FName& InEventName) override; // #63
+#endif
+
+public:
 	bool Bind(const FT4GameDataID& InNPCGameDataID); // #31, #50
 
 	bool IsAttacking() const; // #50

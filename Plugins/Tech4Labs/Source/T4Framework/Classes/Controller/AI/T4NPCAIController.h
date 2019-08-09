@@ -57,9 +57,12 @@ protected:
 	// End AController interface
 
 public:
-	// IT4GameplayController
+	// IT4GameplayControl
 	ET4LayerType GetLayerType() const override { return LayerType; }
-	ET4GameControllerType GetGameControllerType() const override { return ET4GameControllerType::GameController_NPC; }
+
+#if (WITH_EDITOR || WITH_SERVER_CODE)
+	virtual void OnNotifyAIEvent(const FName& InEventName) override {}; // #63
+#endif
 
 	bool SetGameObject(const FT4ObjectID& InNewTargetID) override;
 	void ClearGameObject(bool bInSetDefaultPawn) override;
@@ -77,6 +80,10 @@ public:
 	bool HasPlayingAction(const FT4ActionKey& InActionKey) const override; // #20
 
 	AController* GetAController() override;
+	IT4GameplayController* GetGameplayController() override { return static_cast<IT4GameplayController*>(this); } // #63
+
+	// IT4GameplayController
+	ET4ControllerType GetControllerType() const override { return ET4ControllerType::Controller_NPC; }
 
 public:
 	void SetNetID(const FT4NetID& InNetID) { NetID = InNetID;}

@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 
 #include "Public/T4EngineTypes.h"
-#include "Public/T4EngineObjectID.h"
 #include "Public/T4EngineStructs.h"
 #include "Public/Action/T4ActionKey.h"
 
@@ -131,6 +130,37 @@ public:
 	virtual uint32 NumChildActions(const FT4ActionKey& InActionKey) = 0; // #54
 };
 
+// #34, #63
+class T4ENGINE_API IT4GameplayControl
+{
+public:
+	virtual ~IT4GameplayControl() {}
+
+	virtual ET4LayerType GetLayerType() const = 0;
+
+#if (WITH_EDITOR || WITH_SERVER_CODE)
+	virtual void OnNotifyAIEvent(const FName& InEventName) = 0; // #63
+#endif
+
+	virtual bool SetGameObject(const FT4ObjectID& InNewTargetID) = 0;
+	virtual void ClearGameObject(bool bInSetDefaultPawn) = 0;
+
+	virtual bool HasGameObject() const = 0;
+	virtual const FT4ObjectID& GetGameObjectID() const = 0;
+	virtual IT4GameObject* GetGameObject() const = 0;
+
+	virtual bool HasObserverObject() const = 0; // #52
+	virtual bool SetObserverObject(const FT4ObjectID& InNewObserverID) = 0; // #52
+	virtual void ClearObserverObject() = 0; // #52
+
+	virtual IT4GameWorld* GetGameWorld() const = 0; // #52
+
+	virtual bool HasPlayingAction(const FT4ActionKey& InActionKey) const = 0; // #20
+
+	virtual AController* GetAController() = 0;
+	virtual class IT4GameplayController* GetGameplayController() = 0; // #63 : T4Engine 에서 호출 금지!!!
+};
+
 class T4ENGINE_API IT4GameObject
 {
 public:
@@ -159,11 +189,8 @@ public:
 	virtual APawn* GetPawn() = 0;
 
 	// #34 : for Server All or Client Only Player
-	virtual ET4ControllerType GetControllerType() const = 0;
-	virtual void SetControllerType(ET4ControllerType InControllerType) = 0; // #34, #42
-
-	virtual AController* GetAController() = 0; // #34, #42
-	virtual void SetAController(AController* InController) = 0; // #34, #42
+	virtual IT4GameplayControl* GetGameplayControl() = 0; // #34, #42, #36
+	virtual void SetGameplayControl(IT4GameplayControl* InControl) = 0; // #34, #42, #36
 
 	virtual IT4AnimControl* GetAnimControl() const = 0; // #14
 	virtual IT4ActionControl* GetActionControl() const = 0; // #20

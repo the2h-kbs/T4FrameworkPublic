@@ -7,7 +7,7 @@
 
 #include "Classes/GameTable/T4GameTableDataTypes.h" // #48
 
-#include "T4Engine/Public/T4EngineObjectID.h"
+#include "T4Engine/Public/T4EngineTypes.h"
 
 #include "T4PacketCS.generated.h"
 

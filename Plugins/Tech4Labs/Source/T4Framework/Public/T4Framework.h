@@ -11,8 +11,8 @@
 
 #include "T4Core/Public/T4CoreTypes.h"
 #include "T4Engine/Public/T4EngineTypes.h"
-#include "T4Engine/Public/T4EngineObjectID.h"
 #include "T4Engine/Public/Action/T4ActionKey.h"
+#include "T4Engine/Public/T4Engine.h" // #63 : IT4AController
 
 #include "Engine/EngineBaseTypes.h"
 #include "InputCoreTypes.h"
@@ -42,12 +42,12 @@ enum ET4FrameworkType
 	Framework_None
 };
 
-enum ET4GameControllerType // #42
+enum ET4ControllerType // #42
 {
-	GameController_Player,
-	GameController_NPC,
+	Controller_Player,
+	Controller_NPC,
 
-	GameController_None
+	Controller_None
 };
 
 class IT4GameplayFramework;
@@ -59,31 +59,12 @@ DECLARE_MULTICAST_DELEGATE_OneParam(FT4OnViewTargetChanged, IT4GameObject*);
 DECLARE_DELEGATE_OneParam(FT4OnCreateEditorPlayerController, IT4GameplayFramework*); // #42
 #endif
 
-// #34
-class T4FRAMEWORK_API IT4GameplayController
+class T4FRAMEWORK_API IT4GameplayController : public IT4GameplayControl
 {
 public:
 	virtual ~IT4GameplayController() {}
 
-	virtual ET4LayerType GetLayerType() const = 0;
-	virtual ET4GameControllerType GetGameControllerType() const = 0;
-
-	virtual bool SetGameObject(const FT4ObjectID& InNewTargetID) = 0;
-	virtual void ClearGameObject(bool bInSetDefaultPawn) = 0;
-
-	virtual bool HasGameObject() const = 0;
-	virtual const FT4ObjectID& GetGameObjectID() const = 0;
-	virtual IT4GameObject* GetGameObject() const = 0;
-
-	virtual bool HasObserverObject() const = 0; // #52
-	virtual bool SetObserverObject(const FT4ObjectID& InNewObserverID) = 0; // #52
-	virtual void ClearObserverObject() = 0; // #52
-
-	virtual IT4GameWorld* GetGameWorld() const = 0; // #52
-
-	virtual bool HasPlayingAction(const FT4ActionKey& InActionKey) const = 0; // #20
-
-	virtual AController* GetAController() = 0;
+	virtual ET4ControllerType GetControllerType() const = 0;
 };
 
 class T4FRAMEWORK_API IT4NPCAIController : public IT4GameplayController
@@ -100,8 +81,6 @@ public:
 	// #15 : Editor 환경에서 HasAuthority 를 명시적으로 구분하기 위해 도입
 	//       동일 프로세스에서 Player 의 Role 이 바뀌며 C/S Player 로 바뀌기 때문에 혼란스러운 점이 있기 때문
 	virtual bool CheckAuthority() const = 0; // return HasAuthority()
-
-	virtual AController* GetController() = 0; // #42
 
 	virtual UInputComponent* NewInputComponent() = 0;
 	virtual void SetInputComponent(UInputComponent* InInputComponent) = 0;
