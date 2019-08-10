@@ -23,7 +23,7 @@ enum class ET4GameDataType : uint8
 	SkillSet, // #50
 	Effect,
 
-	None,
+	Nums,
 };
 
 USTRUCT()
@@ -40,7 +40,7 @@ public:
 
 public:
 	FT4GameDataID()
-		: Type(ET4GameDataType::None)
+		: Type(ET4GameDataType::Nums)
 		, RowName(NAME_None)
 	{
 	}
@@ -105,7 +105,7 @@ public:
 
 	FORCEINLINE bool IsValid() const
 	{
-		return (ET4GameDataType::None != Type && RowName != NAME_None) ? true : false;
+		return (ET4GameDataType::Nums != Type && RowName != NAME_None) ? true : false;
 	}
 
 	FORCEINLINE bool CheckType(const ET4GameDataType InType) const
@@ -143,7 +143,7 @@ public:
 			TEXT("Effect"),
 			TEXT("None"),
 		};
-		static_assert(ARRAY_COUNT(GameTableTypeStrings) == (uint8)(ET4GameDataType::None) + 1, "GameTableType doesn't match!");
+		static_assert(ARRAY_COUNT(GameTableTypeStrings) == (uint8)(ET4GameDataType::Nums) + 1, "GameTableType doesn't match!");
 		check(uint8(Type) < ARRAY_COUNT(GameTableTypeStrings));
 		return GameTableTypeStrings[uint8(Type)];
 	}

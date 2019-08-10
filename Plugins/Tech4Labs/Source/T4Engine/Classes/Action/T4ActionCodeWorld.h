@@ -114,9 +114,13 @@ public:
 	UPROPERTY(EditAnywhere)
 	FT4ObjectID ObjectID;
 
+	UPROPERTY(EditAnywhere)
+	bool bImmediate; // #67
+
 public:
 	FT4ObjectLeaveAction()
 		: FT4CodeActionBase(StaticActionType())
+		, bImmediate(false) // #67
 	{
 	}
 
