@@ -37,7 +37,7 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("Action:Conti"));
+		return FString(TEXT("ContiAction"));
 	}
 };
 
@@ -62,7 +62,7 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("Action:Pause"));
+		return FString(TEXT("PauseAction"));
 	}
 };
 
@@ -86,6 +86,6 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("Action:Stop"));
+		return FString(TEXT("StopAction"));
 	}
 };

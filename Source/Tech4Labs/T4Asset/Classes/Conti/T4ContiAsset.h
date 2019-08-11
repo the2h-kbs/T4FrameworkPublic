@@ -34,9 +34,6 @@ struct T4ASSET_API FT4ActionHeaderInfo
 
 public:
 	UPROPERTY(VisibleAnywhere)
-	int32 ParentHeaderKey;
-
-	UPROPERTY(VisibleAnywhere)
 	ET4ActionType ActionType;
 
 	UPROPERTY(VisibleAnywhere)
@@ -49,8 +46,7 @@ public:
 
 public:
 	FT4ActionHeaderInfo()
-		: ParentHeaderKey(INDEX_NONE)
-		, ActionType(ET4ActionType::None)
+		: ActionType(ET4ActionType::None)
 		, ActionArrayIndex(INDEX_NONE)
 #if WITH_EDITORONLY_DATA
 		, FolderName(NAME_None) // #56
@@ -128,34 +124,39 @@ public:
 public:
 	void Reset();
 
+#if WITH_EDITOR
 	// #24
 	template <class T>
 	T* AddChild()
 	{
-		return static_cast<T*>(AddChildInternal(
-			T::StaticActionType(),
-			INDEX_NONE // Root
+		return static_cast<T*>(NewAndAddAction(
+			T::StaticActionType()
 		));
 	}
 
 	template <class T>
-	T* AddChild(
-		int32 InParentHeaderKey
-	)
-	{
-		return static_cast<T*>(AddChildInternal(
-			T::StaticActionType(),
-			InParentHeaderKey
-		));
-	}
+	void CopyAction(
+		const FT4ContiActionBase* InSourceAction,
+		T* InOutTargetAction
+	); // #65
+
+	FT4ContiActionBase* NewAndAddAction(
+		ET4ActionType InNewActionType
+	); // #24, #65
+
+	FT4ContiActionBase* CloneAndAddAction(
+		uint32 InSourceHeaderKey
+	); // #65
+
+	FT4ContiActionBase* GetActionBase(
+		uint32 InActionHeaderKey
+	); // #65
+#endif
 
 private:
+#if WITH_EDITOR
 	uint32 GetNewHeaderKey() const;
-
-	FT4ContiActionBase* AddChildInternal(
-		ET4ActionType InNewActionType,
-		int32 InParentHeaderKey
-	); // #24
+#endif
 };
 
 class UTexture2D;

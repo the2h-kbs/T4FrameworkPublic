@@ -17,6 +17,7 @@ struct T4ASSET_API FT4ContiActionBase : public FT4BaseAction
 public:
 	// #39 : FT4ContiCustomizeDetails::CustomizeCommonActionDetails
 	// #24 : Composite 일 경우 사용됨!
+	// #65 : Property 추가시에는 FT4ActionCompositeData::CloneAndAddAction 에도 반영할 것!
 	UPROPERTY(VisibleAnywhere)
 	int32 HeaderKey;
 
@@ -55,7 +56,7 @@ public:
 
 	virtual FString ToString() const
 	{
-		return FString(TEXT("ActionConti:None"));
+		return FString(TEXT("ContiBaseAction"));
 	}
 
 	virtual FString ToDisplayText()

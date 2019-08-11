@@ -56,7 +56,7 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("Action:Branch"));
+		return FString(TEXT("BranchAction"));
 	}
 
 	FString ToDisplayText() override
@@ -84,7 +84,7 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("Action:SpecialMove"));
+		return FString(TEXT("SpecialMoveAction"));
 	}
 };
 
@@ -120,14 +120,13 @@ public:
 		, PlayRate(1.0f)
 		, LoopCount(1)
 	{
-		LifecyclePolicy = ET4LifecyclePolicy::Duration; // Animation 은 Duration 이 기본!
 	}
 
 	static ET4ActionType StaticActionType() { return ET4ActionType::Animation; }
 
 	FString ToString() const override
 	{
-		return FString(TEXT("Action:Animation"));
+		return FString(TEXT("AnimationAction"));
 	}
 
 	FString ToDisplayText() override
@@ -176,7 +175,7 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("Action:Particle"));
+		return FString(TEXT("ParticleAction"));
 	}
 
 	FString ToDisplayText() override
@@ -232,14 +231,13 @@ public:
 		, FadeInTimeSec(0.5f)
 		, FadeOutTimeSec(0.5f)
 	{
-		LifecyclePolicy = ET4LifecyclePolicy::Duration; // Decal 은 Duration 이 기본!
 	}
 
 	static ET4ActionType StaticActionType() { return ET4ActionType::Decal; }
 
 	FString ToString() const override
 	{
-		return FString(TEXT("Action:Decal"));
+		return FString(TEXT("DecalAction"));
 	}
 
 	FString ToDisplayText() override
@@ -291,7 +289,7 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("Action:Projectile"));
+		return FString(TEXT("ProjectileAction"));
 	}
 
 	FString ToDisplayText() override
@@ -319,7 +317,7 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("Action:TimeScale"));
+		return FString(TEXT("TimeScaleAction"));
 	}
 };
 
@@ -342,6 +340,6 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("Action:CameraWork"));
+		return FString(TEXT("CameraWorkAction"));
 	}
 };

@@ -40,7 +40,7 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("Action:ChangeWorld"));
+		return FString(TEXT("ChangeWorldAction"));
 	}
 };
 
@@ -101,7 +101,7 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("Action:ObjectEnter"));
+		return FString(TEXT("ObjectEnterAction"));
 	}
 };
 
@@ -138,6 +138,6 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("Action:ObjectLeave"));
+		return FString(TEXT("ObjectLeaveAction"));
 	}
 };

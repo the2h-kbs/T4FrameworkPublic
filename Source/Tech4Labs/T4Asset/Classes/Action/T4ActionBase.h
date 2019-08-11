@@ -69,7 +69,7 @@ public:
 
 	virtual FString ToString() const
 	{
-		return FString(TEXT("Action:None"));
+		return FString(TEXT("BaseAction"));
 	}
 
 	virtual FString ToDisplayText()

@@ -58,7 +58,7 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("Action:MoveAsyncTo"));
+		return FString(TEXT("MoveAsyncToAction"));
 	}
 };
 
@@ -113,7 +113,7 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("Action:MoveSyncTo"));
+		return FString(TEXT("MoveSyncToAction"));
 	}
 };
 
@@ -147,7 +147,7 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("Action:JumpTo"));
+		return FString(TEXT("JumpToAction"));
 	}
 };
 
@@ -182,7 +182,7 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("Action:RollTo"));
+		return FString(TEXT("RollToAction"));
 	}
 };
 
@@ -217,7 +217,7 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("Action:TeleportTo"));
+		return FString(TEXT("TeleportToAction"));
 	}
 };
 
@@ -249,7 +249,7 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("Action:Turn"));
+		return FString(TEXT("TurnAction"));
 	}
 };
 
@@ -282,7 +282,7 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("Action:MoveStop"));
+		return FString(TEXT("MoveStopAction"));
 	}
 };
 
@@ -307,7 +307,7 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("Action:MoveSpeedSync"));
+		return FString(TEXT("MoveSpeedSyncAction"));
 	}
 };
 
@@ -353,6 +353,6 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("Action:Launch"));
+		return FString(TEXT("LaunchAction"));
 	}
 };

@@ -38,7 +38,7 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("Action:LockOn"));
+		return FString(TEXT("LockOnAction"));
 	}
 };
 
@@ -88,7 +88,7 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("Action:EquipWeapon"));
+		return FString(TEXT("EquipWeaponAction"));
 	}
 };
 
@@ -113,7 +113,7 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("Action:UnEquipWeapon"));
+		return FString(TEXT("UnEquipWeaponAction"));
 	}
 };
 
@@ -156,6 +156,6 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("Action:ExchangeCostume"));
+		return FString(TEXT("ExchangeCostumeAction"));
 	}
 };

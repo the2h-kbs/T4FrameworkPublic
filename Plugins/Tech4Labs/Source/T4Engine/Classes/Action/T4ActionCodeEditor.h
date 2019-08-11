@@ -40,6 +40,6 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("Action:EditorReload"));
+		return FString(TEXT("EditorReloadAction"));
 	}
 };

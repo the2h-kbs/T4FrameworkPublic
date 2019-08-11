@@ -19,20 +19,22 @@ Powerful toolset and Flexible layer solution
     - <https://github.com/Tech4Labs/T4Framework>
 - Release Notes
   - **Warning!! 2019.10 월 정식 버전 배포 예정입니다. 개발 버전이므로 테스트 용도로 만 사용해주시기 바랍니다.**
-  - [2019.08.10] [M3] Copying //Private to //Deploy (private commit f5d51c2)
+  - **[2019.08.11] [M3] Copying //Private to //Deploy (private commit 7329c65)**
+    - #65 [버그수정] Conti Editor 에서 Action Copy&Paste 시 발생하는 크래시 수정
+  - **[2019.08.10] [M3] Copying //Private to //Deploy (private commit f5d51c2)**
     - #67 [버그수정] Conti Editor 에서 Test Entity 변경이 즉시 반영되지 않는 문제 수정
     - #66 [버그수정] Content Table 업데이트가 즉시 반영되지 않는 문제 수정
-  - [2019.08.09] [M3] Copying //Private to //Deploy (private commit 1c4953d)
+  - **[2019.08.09] [M3] Copying //Private to //Deploy (private commit 1c4953d)**
     - #63 [버그수정] NPC AI 의 방향 전환이 정상적으로 동작하지 않던 문제 수정
     - #63 [버그수정] Dedicated Server 에서 Projectile 이 동작하지 않던 문제 및 크래시 수정
-  - [2019.08.08] [M3] Copying //Private to //Deploy (private commit 4738783)
+  - **[2019.08.08] [M3] Copying //Private to //Deploy (private commit 4738783)**
     - #63 [기능추가] Projectile Action 추가 (Ranged attack)
-  - [2019.08.06] [M3] Copying //Private to //Deploy (private commit 8b08316)
+  - **[2019.08.06] [M3] Copying //Private to //Deploy (private commit 8b08316)**
     - #62 [리팩토링] T4Engine 플러그인 내 포멧 관련 코드를 T4Asset 모듈로 이전
-  - [2019.07.31] [M2] Copying //Private to //Deploy (private commit 11c94d9)
+  - **[2019.07.31] [M2] Copying //Private to //Deploy (private commit 11c94d9)**
     - #60 [기능추가] 리허설 콘티 에디터 기능 개선 및 전투 테스트 기능 추가
-  - [2019.07.27] [M2] Copying //Private to //Deploy (private commit 99469fd)
+  - **[2019.07.27] [M2] Copying //Private to //Deploy (private commit 99469fd)**
     - #61 [기능추가] 프로젝트 또는 T4Gameplay 모듈의 GameInstance/Mode 를 선택해서 플레이 할 수 있도록 기능 추가 (레벨 에디터 => Play => 'T4Gameplay Enabled' )
-  - [2019.07.26] [M2] Copying //Private to //Deploy (private commit fc55aa5)
+  - **[2019.07.26] [M2] Copying //Private to //Deploy (private commit fc55aa5)**
     - #59 [기능개선] 리허설 툴 실행중 PIE 진입시 뷰포트 멈춤 현상 대응
     - #54 [버그수정] Decal Action 사용중 강제종료(툴 & PIE)시 발생하는 "Array has changed during ranged-for iteration!" ensure 수정

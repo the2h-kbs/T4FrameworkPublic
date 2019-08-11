@@ -42,7 +42,7 @@ public:
 
 	virtual FString ToString() const
 	{
-		return FString(TEXT("ActionCode:None"));
+		return FString(TEXT("CodeBaseAction"));
 	}
 
 	virtual FString ToDisplayText()
