@@ -4,13 +4,12 @@
 
 #include "CoreMinimal.h"
 
-#include "T4Core/Public/T4CoreTypes.h"
-
 /**
   * http://api.unrealengine.com/KOR/Programming/Assets/AsyncLoading/
  */
+class UObject;
 DECLARE_DELEGATE_OneParam(FT4LoadDelegate, UObject*);
-class T4CORE_API IT4AssetHandle
+class T4ENGINE_API IT4AssetHandle
 {
 public:
 	virtual ~IT4AssetHandle() {}
@@ -26,7 +25,7 @@ public:
 	virtual const FSoftObjectPath& GetObjectPath() const = 0;
 };
 
-class T4CORE_API IT4AssetManager
+class T4ENGINE_API IT4AssetManager
 {
 public:
 	virtual ~IT4AssetManager() {}
@@ -42,4 +41,4 @@ public:
 	) = 0;
 };
 
-T4CORE_API IT4AssetManager* T4CoreAssetManagerGet();
+T4ENGINE_API IT4AssetManager* T4AssetManagerGet();

@@ -9,7 +9,6 @@
 #include "T4FrameworkEditor.h" // #60
 #endif
 
-#include "T4Core/Public/T4CoreTypes.h"
 #include "T4Engine/Public/T4EngineTypes.h"
 #include "T4Engine/Public/Action/T4ActionKey.h"
 #include "T4Engine/Public/T4Engine.h" // #63 : IT4AController
@@ -178,12 +177,14 @@ public:
 	virtual IT4GameplayLayerInstance* GetGameplayLayerInstance() const = 0; // #42
 
 	// Client
-	virtual IT4PlayerController* GetPCInterface() const = 0;
+	virtual IT4PlayerController* GetPlayerController() const = 0;
 
 	virtual IT4GameObject* GetMouseOverGameObject() = 0;
 	virtual bool GetMousePickingLocation(FVector& OutLocation) = 0;
 
 #if WITH_EDITOR
+	virtual bool IsPreviewMode() const = 0; // #68
+
 	virtual void SetInputControlLock(bool bLock) = 0; // #30
 
 	virtual void SetEditoAISystemPaused(bool bInPaused) = 0; // #52

@@ -28,7 +28,6 @@ namespace UnrealBuildTool.Rules
                     "AIModule",
                     "NavigationSystem",
                     "T4Asset",
-                    "T4Core",
                     "T4Engine"
                 }
             );

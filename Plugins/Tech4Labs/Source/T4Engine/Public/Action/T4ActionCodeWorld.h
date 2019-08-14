@@ -71,6 +71,9 @@ public:
 	UPROPERTY(EditAnywhere)
 	FRotator SpawnRotation;
 
+	UPROPERTY(EditAnywhere)
+	bool bPlayer;
+
 public:
 	FT4ObjectEnterAction()
 		: FT4CodeActionBase(StaticActionType())
@@ -79,6 +82,7 @@ public:
 		, GameDataIDName(NAME_None)
 		, SpawnLocation(FVector::ZeroVector)
 		, SpawnRotation(FRotator::ZeroRotator)
+		, bPlayer(false)
 	{
 	}
 

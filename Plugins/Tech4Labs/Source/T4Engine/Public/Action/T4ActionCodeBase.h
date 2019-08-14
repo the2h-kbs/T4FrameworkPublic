@@ -3,8 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "T4Asset/Classes/Action/T4ActionBase.h"
-#include "Public/Action/T4ActionKey.h"
+#include "T4Asset/Public/Action/T4ActionBase.h"
+#include "T4ActionKey.h"
 #include "Public/T4EngineTypes.h"
 #include "T4ActionCodeBase.generated.h"
 

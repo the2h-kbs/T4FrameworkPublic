@@ -4,81 +4,30 @@
 
 #include "CoreMinimal.h"
 
-#include "T4Core/Public/T4CoreAsset.h"
-
 /**
   * http://api.unrealengine.com/KOR/Programming/Assets/AsyncLoading/
  */
+class IT4AssetHandle;
 class T4ENGINE_API FT4AssetLoader
 {
 public:
-	explicit FT4AssetLoader()
-		: bSyncLoad(false)
-		, bBindComplated(false)
-		, LoadHandle(nullptr)
-		, DebugToken(NAME_None)
-	{
-	}
-	virtual ~FT4AssetLoader()
-	{
-		Reset();
-	}
+	explicit FT4AssetLoader();
+	virtual ~FT4AssetLoader();
 
-	virtual void Reset()
-	{
-		if (nullptr != LoadHandle)
-		{
-			LoadHandle->OnDestroy();
-			LoadHandle = nullptr;
-		}
-	}
+	virtual void Reset();
 
 	void Load(
 		const FSoftObjectPath& InAssetPath,
 		bool bInSyncLoad,
 		const TCHAR* InDebugString
-	)
-	{
-		bSyncLoad = bInSyncLoad;
-		IT4AssetManager* AssetLoader = T4CoreAssetManagerGet();
-		LoadHandle = AssetLoader->RequestAsync(InAssetPath);
-		bBindComplated = false;
-		DebugToken = InDebugString;
-	}
+	);
 
-	FORCEINLINE bool IsLoadFailed() const
-	{
-		if (nullptr == LoadHandle)
-		{
-			return true;
-		}
-		return LoadHandle->IsLoadFailed();
-	}
-
-	FORCEINLINE bool IsLoadCompleted() const
-	{
-		if (nullptr == LoadHandle)
-		{
-			return false;
-		}
-		return LoadHandle->IsLoadCompleted();
-	}
-
-	FORCEINLINE bool IsBinded() const
-	{ 
-		return bBindComplated;
-	}
-
-	FORCEINLINE void SetBinded()
-	{
-		Reset();
-		bBindComplated = true;
-	}
-
-	FORCEINLINE bool CheckReset() const
-	{
-		return (nullptr == LoadHandle) ? true : false;
-	}
+	bool IsLoadFailed() const;
+	bool IsLoadCompleted() const;
+	bool IsBinded() const;
+	
+	void SetBinded();
+	bool CheckReset() const;
 
 protected:
 	bool bSyncLoad;

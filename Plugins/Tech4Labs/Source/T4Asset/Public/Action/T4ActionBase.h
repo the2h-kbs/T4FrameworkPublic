@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Public/Action/T4ActionTypes.h"
+#include "T4ActionTypes.h"
 #include "T4ActionBase.generated.h"
 
 /**

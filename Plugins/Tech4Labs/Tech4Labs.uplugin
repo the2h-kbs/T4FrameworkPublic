@@ -17,7 +17,7 @@
 	"Installed": false,
 	"Modules": [
 		{
-			"Name": "T4Core",
+			"Name": "T4Asset",
 			"Type": "Runtime",
 			"LoadingPhase": "PreDefault"
 		},

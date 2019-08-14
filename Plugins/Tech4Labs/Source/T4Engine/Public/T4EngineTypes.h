@@ -3,13 +3,30 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "T4Core/Public/T4CoreTypes.h"
+#include "T4EngineMacros.h"
 #include "T4EngineTypes.generated.h"
 
 /**
   * http://api.unrealengine.com/KOR/Programming/UnrealArchitecture/Reference/Properties/
  */
 typedef int32 FT4AnimInstanceID;
+
+UENUM()
+enum class ET4LayerType : uint8
+{
+	Server, // #15
+	ServerMax,
+
+	Client,
+	ClientMax = Client + 10,
+
+	Preview, // #30
+	PreviewMax = Preview + 50,
+
+	LevelEditor, // #17
+
+	Max,
+};
 
 UENUM()
 enum class ET4WorldType : uint8
@@ -44,6 +61,7 @@ enum class ET4SpawnMode : uint8 // #54
 	Client,
 	Server,
 
+	Playback, // #68
 	Editor,
 
 	Max	UMETA(Hidden)
@@ -182,33 +200,33 @@ struct FT4ObjectID
 
 public:
 	UPROPERTY(EditAnywhere)
-		ET4SpawnMode SpawnMode; // #54
+	uint32 Value;
 
 	UPROPERTY(EditAnywhere)
-		uint32 Value;
+	ET4SpawnMode SpawnMode; // #54
 
 public:
 	FT4ObjectID()
-		: SpawnMode(ET4SpawnMode::All)
-		, Value(T4InvalidGameObjectID)
+		: Value(T4InvalidGameObjectID)
+		, SpawnMode(ET4SpawnMode::All)
 	{
 	}
 
 	FT4ObjectID(const uint32& InValue)
-		: SpawnMode(ET4SpawnMode::All)
-		, Value(InValue)
+		: Value(InValue)
+		, SpawnMode(ET4SpawnMode::All)
 	{
 	}
 
-	FT4ObjectID(const ET4SpawnMode InMode, const uint32& InValue)
-		: SpawnMode(InMode)
-		, Value(InValue)
+	FT4ObjectID(const uint32& InValue, const ET4SpawnMode InMode)
+		: Value(InValue)
+		, SpawnMode(InMode)
 	{
 	}
 
 	FT4ObjectID(const FT4ObjectID& InValue)
-		: SpawnMode(InValue.SpawnMode)
-		, Value(InValue.Value)
+		: Value(InValue.Value)
+		, SpawnMode(InValue.SpawnMode)
 	{
 	}
 
@@ -269,6 +287,7 @@ public:
 			TEXT("All"),
 			TEXT("Client"),
 			TEXT("Server"),
+			TEXT("Playback"), // #68
 			TEXT("Editor"),
 			TEXT("Max"),
 		};

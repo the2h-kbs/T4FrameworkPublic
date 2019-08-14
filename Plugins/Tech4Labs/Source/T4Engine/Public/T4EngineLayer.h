@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "T4CoreTypes.h"
+#include "T4EngineTypes.h"
 
 /**
   *
@@ -11,15 +11,15 @@
 class UWorld;
 struct FWorldContext;
 
-namespace T4CoreLayer
+namespace T4EngineLayer
 {
-	T4CORE_API bool AddMultiLayer(const FWorldContext* InWorldContext); // #30
-	T4CORE_API void RemoveMultiLayer(const FName& InWorldContextName); // #30
+	T4ENGINE_API bool AddMultiLayer(const FWorldContext* InWorldContext); // #30
+	T4ENGINE_API void RemoveMultiLayer(const FName& InWorldContextName); // #30
 
-	T4CORE_API ET4LayerType Get(const FWorldContext* InWorldContext);
-	T4CORE_API ET4LayerType Get(const UWorld* InWorld);
+	T4ENGINE_API ET4LayerType Get(const FWorldContext* InWorldContext);
+	T4ENGINE_API ET4LayerType Get(const UWorld* InWorld);
 
-	T4CORE_API bool CheckServer(const FWorldContext* InWorldContext); // #15
+	T4ENGINE_API bool CheckServer(const FWorldContext* InWorldContext); // #15
 
 	FORCEINLINE bool IsClient(const ET4LayerType InLayerType) // #15
 	{
@@ -64,6 +64,6 @@ namespace T4CoreLayer
 		return false;
 	}
 
-	T4CORE_API ET4LayerType ConvertFromString(const FString& InLayerString);
-	T4CORE_API const FString ConvertToString(ET4LayerType InLayerType);
+	T4ENGINE_API ET4LayerType ConvertFromString(const FString& InLayerString);
+	T4ENGINE_API const FString ConvertToString(ET4LayerType InLayerType);
 }

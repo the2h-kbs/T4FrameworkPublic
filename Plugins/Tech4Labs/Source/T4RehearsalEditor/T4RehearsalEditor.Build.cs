@@ -36,7 +36,6 @@ namespace UnrealBuildTool.Rules
             PublicDependencyModuleNames.AddRange(
                 new string[] {
                     "T4Asset",
-                    "T4Core",
                     "T4Engine",
                     "T4Framework",
                     "T4Gameplay"

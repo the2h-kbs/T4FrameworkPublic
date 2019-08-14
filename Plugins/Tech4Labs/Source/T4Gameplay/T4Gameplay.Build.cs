@@ -29,7 +29,6 @@ namespace UnrealBuildTool.Rules
                     "NavigationSystem",
                     "GameplayTasks",
                     "T4Asset",
-                    "T4Core",
                     "T4Engine",
                     "T4Framework"
                 }

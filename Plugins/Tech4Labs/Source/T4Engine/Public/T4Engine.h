@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 
 #include "Public/T4EngineTypes.h"
+#include "Public/T4EngineLayer.h"
 #include "Public/T4EngineStructs.h"
 #include "Public/Action/T4ActionKey.h"
 
@@ -158,7 +159,7 @@ public:
 	virtual bool HasPlayingAction(const FT4ActionKey& InActionKey) const = 0; // #20
 
 	virtual AController* GetAController() = 0;
-	virtual class IT4GameplayController* GetGameplayController() = 0; // #63 : T4Engine 에서 호출 금지!!!
+	virtual class IT4GameplayController* GetGameplayController() = 0; // #63 : T4Engine 에서 호출 금지!!! (WARNING)
 };
 
 class T4ENGINE_API IT4GameObject
@@ -236,6 +237,24 @@ public:
 	virtual void SetHeightOffset(float InOffset) = 0; // #18
 };
 
+class T4ENGINE_API IT4ActionPlaybackRecorder // #68
+{
+public:
+	virtual ~IT4ActionPlaybackRecorder() {}
+
+	virtual bool IsRecording() const = 0;
+
+	virtual bool RecWorldAction(
+		const FT4BaseAction* InAction,
+		const FT4ActionParameters* InActionParam
+	) = 0;
+	virtual bool RecObjectAction(
+		const FT4ObjectID& InObjectID,
+		const FT4BaseAction* InAction,
+		const FT4ActionParameters* InActionParam
+	) = 0;
+};
+
 class T4ENGINE_API IT4GameWorld
 {
 public:
@@ -305,13 +324,31 @@ public:
 	virtual FVector GetCameraLocation() const = 0;
 	virtual FRotator GetCameraRotation() const = 0;
 
-	virtual APlayerController* GetPCController() = 0;
-	virtual bool SetPCController(APlayerController* InPlayerController) = 0;
+	virtual IT4GameplayControl* GetPlayerControl() = 0;
+	virtual bool SetPlayerControl(IT4GameplayControl* InPlayerControl) = 0;
 
 	virtual bool HasPlayerObject() const = 0;
 	virtual bool IsPlayerObject(const FT4ObjectID& InObjectID) const = 0;
 	virtual bool IsPlayerObject(IT4GameObject* InGameObject) const = 0;
 	virtual IT4GameObject* GetPlayerObject() const = 0;
+
+#if !UE_BUILD_SHIPPING
+	// #68
+	virtual bool IsActionPlaybackPlaying() = 0;
+	virtual bool IsActionPlaybackPlayPaused() = 0;
+	virtual bool DoActionPlaybackPlay(const FString& InPlayFileName) = 0;
+	virtual void DoActionPlaybackPlayStop() = 0;
+	virtual void DoActionPlaybackPlayPause(bool bPause) = 0;
+
+	virtual bool IsActionPlaybackRecording() = 0;
+	virtual bool DoActionPlaybackRec(const FString& InRecFileName) = 0;
+	virtual void DoActionPlaybackRecStop() = 0;
+
+	virtual IT4ActionPlaybackRecorder* GetActionPlaybackRecorder() = 0;
+
+	virtual void DespawnAllPlaybackObjects() = 0;
+	// ~#68
+#endif
 
 	// #54 : 현재는 ClientOnly
 	virtual IT4GameObject* CreateClientObject(

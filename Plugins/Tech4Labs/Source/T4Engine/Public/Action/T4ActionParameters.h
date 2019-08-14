@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "T4ActionKey.h"
 #include "Public/T4EngineTypes.h"
-#include "T4Core/Public/T4CoreMacros.h"
 #include "T4Asset/Public/Action/T4ActionTypes.h"
 #include "T4ActionParameters.generated.h"
 
@@ -160,6 +159,8 @@ struct FT4ActionParameters
 	GENERATED_USTRUCT_BODY()
 
 public:
+	bool bDirty; // #68
+
 	UPROPERTY(Transient)
 	FT4EditorParameters EditorParams; // #56 : Only Editor, Conti Editor 에서 Invisible or Isolate 로 출력을 제어할 때 더미용으로 사용(delay, duration 동작 보장)
 
@@ -178,6 +179,7 @@ private:
 
 public:
 	FT4ActionParameters()
+		: bDirty(false)
 	{
 	}
 
@@ -230,59 +232,69 @@ public:
 	{
 		DefaultParams.ActionKey = InActionKey;
 		DefaultParams.SetBits |= BIT_LEFTSHIFT(ET4DefaultParamBits::ActionKeyBit);
+		bDirty = true; // #68
 	}
 
 	FORCEINLINE void SetConditionName(const FName& InConditionName)
 	{
 		DefaultParams.ActiveConditionName = InConditionName;
 		DefaultParams.SetBits |= BIT_LEFTSHIFT(ET4DefaultParamBits::ContidionNameBit);
+		bDirty = true; // #68
 	}
 
 	FORCEINLINE void SetDurationSec(float InDurationSec)
 	{
 		TimeParams.DurectionSec = InDurationSec;
 		TimeParams.SetBits |= BIT_LEFTSHIFT(ET4TimeParamBits::DurationBit);
+		bDirty = true; // #68
 	}
 
 	FORCEINLINE void SetOffsetTimeSec(float InOffsetTimeSec)
 	{
 		TimeParams.OffsetTimeSec = InOffsetTimeSec;
 		TimeParams.SetBits |= BIT_LEFTSHIFT(ET4TimeParamBits::OffsetTimeBit); // #56
+		bDirty = true; // #68
 	}
 
 	FORCEINLINE void SetProjectileSpeed(const float& InProjectileSpeed) // #63
 	{
 		TimeParams.ProjectileSpeed = InProjectileSpeed;
 		TimeParams.SetBits |= BIT_LEFTSHIFT(ET4TimeParamBits::ProjectileSpeedBit);
+		bDirty = true; // #68
 	}
 
 	FORCEINLINE void SetProjectileDurationSec(const float& InProjectileDurationSec) // #63
 	{
 		TimeParams.ProjectileDurationSec = InProjectileDurationSec;
 		TimeParams.SetBits |= BIT_LEFTSHIFT(ET4TimeParamBits::ProjectileDurationBit);
+		bDirty = true; // #68
 	}
 
 	FORCEINLINE void SetTargetObjectID(const FT4ObjectID& InTargetObjectID)
 	{
 		TargetParams.TargetObjectID = InTargetObjectID;
 		TargetParams.SetBits |= BIT_LEFTSHIFT(ET4TargetParamBits::ObjectIDBit);
+		bDirty = true; // #68
 	}
 
 	FORCEINLINE void SetTargetLocation(const FVector& InTargetLocation)
 	{
 		TargetParams.TargetLocation = InTargetLocation;
 		TargetParams.SetBits |= BIT_LEFTSHIFT(ET4TargetParamBits::LocationBit);
+		bDirty = true; // #68
 	}
 
 	FORCEINLINE void SetTargetDirection(const FVector& InTargetDirection)
 	{
 		TargetParams.TargetDirection = InTargetDirection;
 		TargetParams.SetBits |= BIT_LEFTSHIFT(ET4TargetParamBits::DirectionBit);
+		bDirty = true; // #68
 	}
 
 	FORCEINLINE void SetAnimationNoBlendInTimeWithOffsetPlay() // #54 : 애니 BlendIn Time 을 없앤다. (현재는 툴용)
 	{
 		AnimationParams.SetBits |= BIT_LEFTSHIFT(ET4AnimationParamBits::NoBlendInTimeWithOffsetPlayBit);
+		bDirty = true; // #68
 	}
 
 	bool T4ENGINE_API GetTargetObject(

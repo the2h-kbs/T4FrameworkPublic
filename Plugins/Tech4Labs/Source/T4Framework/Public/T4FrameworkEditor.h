@@ -106,6 +106,8 @@ class IT4EditorViewportClient
 public:
 	virtual ~IT4EditorViewportClient() {}
 
+	virtual bool IsPreviewMode() const = 0;
+
 	virtual void SetMouseLocation(const int InX, const int InY) = 0;
 	virtual bool GetMousePosition(float& InLocationX, float& InLocationY) = 0;
 	virtual bool GetMousePositionToWorldRay(FVector& OutStartPosition, FVector& OutStartDirection) = 0;

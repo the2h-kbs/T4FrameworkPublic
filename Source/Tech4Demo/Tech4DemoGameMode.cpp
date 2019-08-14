@@ -2,7 +2,6 @@
 
 #include "Tech4DemoGameMode.h"
 
-#include "T4Core/Public/T4CoreMinimal.h"
 #include "T4Framework/Public/T4Framework.h"
 #include "T4Framework/Classes/Controller/Player/T4PlayerController.h" // #42
 #include "T4Framework/Classes/Controller/Player/T4PlayerDefaultPawn.h" // #42

@@ -3,7 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "T4Core/Public/T4CoreTypes.h"
 #include "GameFramework/GameModeBase.h"
 #include "T4GameMode.generated.h"
 

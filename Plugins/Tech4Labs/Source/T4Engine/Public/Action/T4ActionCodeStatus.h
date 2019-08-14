@@ -13,6 +13,7 @@
 
 // ET4ActionType::LockOn
 // ET4ActionType::EquipWeapon
+// ET4ActionType::UnEquipWeapon
 
 USTRUCT()
 struct T4ENGINE_API FT4LockOnAction : public FT4CodeActionBase
@@ -55,16 +56,12 @@ public:
 	FName ActionPoint; // #57 : BoneOrSocketName;
 
 	UPROPERTY(EditAnywhere)
-	bool bOverrideEquipped; // #48 : 기존 장비의 해제 여부
-
-	UPROPERTY(EditAnywhere)
 	ET4LoadingPolicy LoadingPolicy;
 
 public:
 	FT4EquipWeaponAction()
 		: FT4CodeActionBase(StaticActionType())
 		, ActionPoint(NAME_None)
-		, bOverrideEquipped(false) // #48
 		, LoadingPolicy(ET4LoadingPolicy::Default)
 	{
 	}

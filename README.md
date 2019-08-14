@@ -17,8 +17,12 @@ Powerful toolset and Flexible layer solution
     - <https://github.com/Tech4Labs/T4FrameworkPublic>
   - GitHub 비공개 저장소 (Professional License)
     - <https://github.com/Tech4Labs/T4Framework>
+- Warning
+  - 2019.10 월 정식 버전 배포 예정입니다. 개발 버전이므로 테스트 용도로 만 사용해주시기 바랍니다.
 - Release Notes
-  - **Warning!! 2019.10 월 정식 버전 배포 예정입니다. 개발 버전이므로 테스트 용도로 만 사용해주시기 바랍니다.**
+  - **[2019.08.14] [M3] Copying //Private to //Deploy (private commit c5406f6)**
+    - #68 [버그수정] LevelEditor Mode 에서 캐릭터 스폰 후 강제 종료 시 발생하는 크래시 수정
+	- #68 [기능추가] Action playback (Replay) 기능 추가 (1차 완료 상태로 Console command 로 동작)
   - **[2019.08.11] [M3] Copying //Private to //Deploy (private commit 7329c65)**
     - #65 [버그수정] Conti Editor 에서 Action Copy&Paste 시 발생하는 크래시 수정
   - **[2019.08.10] [M3] Copying //Private to //Deploy (private commit f5d51c2)**
