@@ -237,12 +237,28 @@ public:
 	virtual void SetHeightOffset(float InOffset) = 0; // #18
 };
 
+class T4ENGINE_API IT4ActionPlaybackPlayer // #68
+{
+public:
+	virtual ~IT4ActionPlaybackPlayer() {}
+
+	virtual bool IsPaused() const = 0;
+	virtual void SetPause(bool bPause) = 0;
+
+	virtual const TCHAR* GetPlayFileName() const = 0;
+	virtual float GetPlayTimeSec() const = 0;
+	virtual float GetMaxPlayTimeSec() const = 0;
+};
+
 class T4ENGINE_API IT4ActionPlaybackRecorder // #68
 {
 public:
 	virtual ~IT4ActionPlaybackRecorder() {}
 
 	virtual bool IsRecording() const = 0;
+
+	virtual const TCHAR* GetRecFileName() const = 0;
+	virtual float GetRecTimeSec() const = 0;
 
 	virtual bool RecWorldAction(
 		const FT4BaseAction* InAction,
@@ -335,18 +351,15 @@ public:
 #if !UE_BUILD_SHIPPING
 	// #68
 	virtual bool IsActionPlaybackPlaying() = 0;
-	virtual bool IsActionPlaybackPlayPaused() = 0;
 	virtual bool DoActionPlaybackPlay(const FString& InPlayFileName) = 0;
 	virtual void DoActionPlaybackPlayStop() = 0;
-	virtual void DoActionPlaybackPlayPause(bool bPause) = 0;
 
 	virtual bool IsActionPlaybackRecording() = 0;
 	virtual bool DoActionPlaybackRec(const FString& InRecFileName) = 0;
 	virtual void DoActionPlaybackRecStop() = 0;
 
+	virtual IT4ActionPlaybackPlayer* GetActionPlaybackPlayer() = 0;
 	virtual IT4ActionPlaybackRecorder* GetActionPlaybackRecorder() = 0;
-
-	virtual void DespawnAllPlaybackObjects() = 0;
 	// ~#68
 #endif
 

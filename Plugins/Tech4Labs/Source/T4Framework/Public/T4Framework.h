@@ -25,6 +25,8 @@
   * 
  */
 class UWorld;
+class FCanvas;
+class FViewport;
 struct FWorldContext;
 class AController;
 class AAIController;
@@ -49,13 +51,22 @@ enum ET4ControllerType // #42
 	Controller_None
 };
 
-class IT4GameplayFramework;
+struct FT4HUDDrawInfo // #68
+{
+	FT4HUDDrawInfo()
+		: LineOffset(4.0f)
+	{
+	}
+	float LineOffset;
+};
+
+class IT4GameFramework;
 class IT4GameObject;
-DECLARE_DELEGATE_OneParam(FT4OnRegisterGameplayLayerInstancce, IT4GameplayFramework*); // #42
+DECLARE_DELEGATE_OneParam(FT4OnRegisterGameplayLayerInstancce, IT4GameFramework*); // #42
 
 #if WITH_EDITOR
 DECLARE_MULTICAST_DELEGATE_OneParam(FT4OnViewTargetChanged, IT4GameObject*);
-DECLARE_DELEGATE_OneParam(FT4OnCreateEditorPlayerController, IT4GameplayFramework*); // #42
+DECLARE_DELEGATE_OneParam(FT4OnCreateEditorPlayerController, IT4GameFramework*); // #42
 #endif
 
 class T4FRAMEWORK_API IT4GameplayController : public IT4GameplayControl
@@ -84,6 +95,8 @@ public:
 	virtual UInputComponent* NewInputComponent() = 0;
 	virtual void SetInputComponent(UInputComponent* InInputComponent) = 0;
 	virtual void OnSetInputMode(ET4InputMode InMode) = 0;
+
+	virtual FViewport* GetViewport() const = 0; // #68
 
 	virtual FRotator GetViewControlRotation() const = 0;
 
@@ -133,10 +146,10 @@ public:
 };
 
 // #42
-class T4FRAMEWORK_API IT4GameplayLayerInstance
+class T4FRAMEWORK_API IT4GameplayInstance
 {
 public:
-	virtual ~IT4GameplayLayerInstance() {}
+	virtual ~IT4GameplayInstance() {}
 
 	virtual bool OnInitialize(ET4LayerType InLayerType) = 0;
 	virtual void OnFinalize() = 0;
@@ -146,6 +159,11 @@ public:
 	virtual void OnPlayerSpawned(IT4PlayerController* InOwnerPC) = 0;
 
 	virtual void OnProcess(float InDeltaTime) = 0;
+	virtual void OnDrawHUD(
+		FViewport* InViewport, 
+		FCanvas* InCanvas, 
+		FT4HUDDrawInfo& InOutDrawInfo
+	) = 0; // #68 : Only Client
 
 #if WITH_EDITOR
 	virtual IT4EditorGameData* GetEditorGameData() = 0; // #60
@@ -154,10 +172,10 @@ public:
 #endif
 };
 
-class T4FRAMEWORK_API IT4GameplayFramework
+class T4FRAMEWORK_API IT4GameFramework
 {
 public:
-	virtual ~IT4GameplayFramework() {}
+	virtual ~IT4GameFramework() {}
 
 	virtual ET4LayerType GetLayerType() const = 0;
 	virtual ET4FrameworkType GetType() const = 0;
@@ -168,19 +186,27 @@ public:
 	virtual void OnProcessPre(float InDeltaTime) = 0; // #34 : OnWorldPreActorTick
 	virtual void OnProcessPost(float InDeltaTime) = 0; // #34 : OnWorldPostActorTick
 
+	virtual void OnDrawHUD(
+		FViewport* InViewport, 
+		FCanvas* InCanvas, 
+		FT4HUDDrawInfo& InOutDrawInfo
+	) = 0; // #68 : Only Client
+
 	virtual bool HasBegunPlay() const = 0;
 
 	virtual UWorld* GetWorld() const = 0;
 	virtual IT4GameWorld* GetGameWorld() const = 0;
 
-	virtual void RegisterGameplayLayerInstance(IT4GameplayLayerInstance* InLayerInstance) = 0; // #42
-	virtual IT4GameplayLayerInstance* GetGameplayLayerInstance() const = 0; // #42
+	virtual void RegisterGameplayInstance(IT4GameplayInstance* InLayerInstance) = 0; // #42
+	virtual IT4GameplayInstance* GetGameplayInstance() const = 0; // #42
 
 	// Client
 	virtual IT4PlayerController* GetPlayerController() const = 0;
 
 	virtual IT4GameObject* GetMouseOverGameObject() = 0;
 	virtual bool GetMousePickingLocation(FVector& OutLocation) = 0;
+
+	virtual FViewport* GetViewport() const = 0; // #68
 
 #if WITH_EDITOR
 	virtual bool IsPreviewMode() const = 0; // #68
@@ -220,10 +246,10 @@ private:
 	FT4FrameworkDelegates() {}
 };
 
-T4FRAMEWORK_API IT4GameplayFramework* T4FrameworkCreate(
+T4FRAMEWORK_API IT4GameFramework* T4FrameworkCreate(
 	ET4FrameworkType InFrameworkType,
 	FWorldContext* InWorldContext
 );
-T4FRAMEWORK_API void T4FrameworkDestroy(IT4GameplayFramework* InFramework);
+T4FRAMEWORK_API void T4FrameworkDestroy(IT4GameFramework* InFramework);
 
-T4FRAMEWORK_API IT4GameplayFramework* T4FrameworkGet(ET4LayerType InLayerType);
+T4FRAMEWORK_API IT4GameFramework* T4FrameworkGet(ET4LayerType InLayerType);

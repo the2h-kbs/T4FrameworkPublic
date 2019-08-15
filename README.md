@@ -20,6 +20,9 @@ Powerful toolset and Flexible layer solution
 - Warning
   - 2019.10 월 정식 버전 배포 예정입니다. 개발 버전이므로 테스트 용도로 만 사용해주시기 바랍니다.
 - Release Notes
+  - **[2019.08.15] [M3] Copying //Private to //Deploy (private commit c1858ff)**
+    - #68 [기능추가] 각종 디버깅 메세지 출력을 위한 Gameplay HUD 처리 추가 
+	- #68 [기능개선] Action Playback 플레이/녹화 시 HUD 에 파일명 및 시간 표시 추가
   - **[2019.08.14] [M3] Copying //Private to //Deploy (private commit c5406f6)**
     - #68 [버그수정] LevelEditor Mode 에서 캐릭터 스폰 후 강제 종료 시 발생하는 크래시 수정
 	- #68 [기능추가] Action playback (Replay) 기능 추가 (1차 완료 상태로 Console command 로 동작)

@@ -83,6 +83,8 @@ public:
 	void SetInputComponent(UInputComponent* InInputComponent) override;
 	void OnSetInputMode(ET4InputMode InMode) override;
 
+	FViewport* GetViewport() const override; // #68
+
 	FRotator GetViewControlRotation() const override;
 
 	ET4CameraType GetCameraType() const override { return CameraTypeSelected; } // #40

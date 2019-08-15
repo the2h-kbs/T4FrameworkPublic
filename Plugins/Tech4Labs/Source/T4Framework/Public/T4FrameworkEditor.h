@@ -101,10 +101,13 @@ public:
 
 
 #if WITH_EDITOR
+class FViewport;
 class IT4EditorViewportClient
 {
 public:
 	virtual ~IT4EditorViewportClient() {}
+
+	virtual FViewport* GetViewport() const = 0; // #68
 
 	virtual bool IsPreviewMode() const = 0;
 
