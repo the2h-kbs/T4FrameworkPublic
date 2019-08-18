@@ -135,6 +135,8 @@ public:
 	virtual bool GetEffectDataInfo(const FName& InEffectDataNameID, FT4EditorEffectDataInfo& OutEffectData) = 0;
 
 	virtual bool DoNPCSpawn(const FName& InNPCDataNameID, const FVector& InSpawnLocation) = 0; // #60 : to player
+	virtual bool DoLeaveAllSpawn(bool bClearPlayerObject) = 0; // #68
+
 	virtual bool DoEquipWeaponItem(const FName& InWeaponDataNameID, bool bInUnEquip) = 0; // #60 : to player
 	virtual bool DoExchangeCostumeItem(const FName& InCostumeDataNameID) = 0; // #60 : to player
 };

@@ -29,6 +29,17 @@ public:
 public:
 	bool Bind(const FT4GameDataID& InItemGameDataID); // #31, #50
 
+public:
+	// IT4GameplayController
+	virtual ET4ControllerType GetControllerType() const override
+	{
+#if (WITH_EDITOR || WITH_SERVER_CODE)
+		return ET4ControllerType::Controller_DropItem;
+#else
+		return AT4NPCAIController::GetControllerType();
+#endif
+	}
+
 protected:
 	void NotifyAIStart() override; // #50
 	void NotifyAIEnd() override; // #50

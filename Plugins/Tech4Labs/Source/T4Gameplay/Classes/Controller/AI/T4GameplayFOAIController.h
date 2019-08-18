@@ -27,6 +27,17 @@ public:
 	) override;
 
 public:
+	// IT4GameplayController
+	virtual ET4ControllerType GetControllerType() const override
+	{
+#if (WITH_EDITOR || WITH_SERVER_CODE)
+		return ET4ControllerType::Controller_FieldObject;
+#else
+		return AT4NPCAIController::GetControllerType();
+#endif
+	}
+
+public:
 	bool Bind(const FT4GameDataID& InFOGameDataID); // #31, #50
 
 protected:

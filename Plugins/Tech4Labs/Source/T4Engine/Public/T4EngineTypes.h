@@ -54,6 +54,21 @@ enum class ET4ObjectType : uint8
 	None UMETA(Hidden)
 };
 
+#if (WITH_EDITOR || WITH_SERVER_CODE)
+enum ET4GameplayControlType
+{
+	GmControl_PC,
+
+#if (WITH_EDITOR || WITH_SERVER_CODE) // #68 : 클라에서는 GameplayControl 은 오직 MyPC 밖에 없다.
+	GmControl_Creature,
+	GmControl_FieldObject,
+	GmControl_DropItem,
+#endif
+
+	GmControl_None,
+};
+#endif
+
 UENUM()
 enum class ET4SpawnMode : uint8 // #54
 {

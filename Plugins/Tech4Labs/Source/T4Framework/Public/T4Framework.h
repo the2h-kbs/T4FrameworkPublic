@@ -46,7 +46,12 @@ enum ET4FrameworkType
 enum ET4ControllerType // #42
 {
 	Controller_Player,
-	Controller_NPC,
+
+#if (WITH_EDITOR || WITH_SERVER_CODE) // #68 : 클라에서는 GameplayControl 은 오직 MyPC 밖에 없다.
+	Controller_Creature,
+	Controller_FieldObject,
+	Controller_DropItem,
+#endif
 
 	Controller_None
 };

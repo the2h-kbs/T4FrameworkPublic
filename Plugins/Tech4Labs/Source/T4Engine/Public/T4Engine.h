@@ -271,6 +271,27 @@ public:
 	) = 0;
 };
 
+class T4ENGINE_API IT4ActionPlaybackController // #68
+{
+public:
+	virtual ~IT4ActionPlaybackController() {}
+
+	virtual bool IsPlaying() const = 0;
+	virtual bool IsRecording() const = 0;
+
+	virtual IT4ActionPlaybackPlayer* GetPlayer() const = 0;
+	virtual IT4ActionPlaybackRecorder* GetRecorder() const = 0;
+
+	virtual bool DoPlay(const FString& InPlayFileName) = 0; // Saved/T4Playback/<InPlayFileName>.dat
+	virtual void DoPlayStop() = 0;
+
+	virtual bool IsPlayRepeat() const = 0;
+	virtual void SetPlayRepeat(bool bEnable) = 0;
+
+	virtual bool DoRec(const FString& InRecFileName) = 0; // Saved/T4Playback/<InRecFileName>.dat
+	virtual void DoRecStop() = 0;
+};
+
 class T4ENGINE_API IT4GameWorld
 {
 public:
@@ -292,6 +313,10 @@ public:
 	virtual UWorld* GetWorld() const = 0;
 	
 	virtual uint32 GetNumGameObjects() const = 0;
+	virtual bool GetGameObjects(
+		ET4SpawnMode InSpawnType, 
+		TArray<IT4GameObject*>& OutGameObjects
+	) = 0; // #68
 
 	virtual bool HasGameObject(const FT4ObjectID& InObjectID) const = 0;;
 	virtual IT4GameObject* FindGameObject(const FT4ObjectID& InObjectID) const = 0;
@@ -350,16 +375,9 @@ public:
 
 #if !UE_BUILD_SHIPPING
 	// #68
-	virtual bool IsActionPlaybackPlaying() = 0;
-	virtual bool DoActionPlaybackPlay(const FString& InPlayFileName) = 0;
-	virtual void DoActionPlaybackPlayStop() = 0;
-
-	virtual bool IsActionPlaybackRecording() = 0;
-	virtual bool DoActionPlaybackRec(const FString& InRecFileName) = 0;
-	virtual void DoActionPlaybackRecStop() = 0;
-
-	virtual IT4ActionPlaybackPlayer* GetActionPlaybackPlayer() = 0;
-	virtual IT4ActionPlaybackRecorder* GetActionPlaybackRecorder() = 0;
+	virtual IT4ActionPlaybackPlayer* GetActionPlaybackPlayer() const = 0;
+	virtual IT4ActionPlaybackRecorder* GetActionPlaybackRecorder() const = 0;
+	virtual IT4ActionPlaybackController* GetActionPlaybackController() = 0;
 	// ~#68
 #endif
 

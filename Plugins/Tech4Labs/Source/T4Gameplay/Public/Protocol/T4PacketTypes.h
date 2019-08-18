@@ -36,16 +36,11 @@ enum class ET4PacketCtoS : uint32
 	CmdChangePlayer, // #11, #52
 
 	CmdPCEnter,
-	CmdPCLeave,
-
 	CmdNPCEnter, // #31
-	CmdNPCLeave, // #31
-
 	CmdFOEnter, // #31
-	CmdFOLeave, // #31
-
 	CmdItemEnter, // #41
-	CmdItemLeave, // #41
+
+	CmdObjectLeave, // #68
 
 	CmdTeleport,
 

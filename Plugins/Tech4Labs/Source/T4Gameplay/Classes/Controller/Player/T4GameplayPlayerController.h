@@ -6,15 +6,15 @@
 
 #include "Classes/GameTable/T4GameTableDataTypes.h" // #48
 
-#include "Classes/Protocol/T4PacketCS_Status.h"
-#include "Classes/Protocol/T4PacketCS_Move.h"
-#include "Classes/Protocol/T4PacketCS_Action.h"
-#include "Classes/Protocol/T4PacketCS_Command.h"
+#include "Public/Protocol/T4PacketCS_Status.h"
+#include "Public/Protocol/T4PacketCS_Move.h"
+#include "Public/Protocol/T4PacketCS_Action.h"
+#include "Public/Protocol/T4PacketCS_Command.h"
 
-#include "Classes/Protocol/T4PacketSC_Action.h"
-#include "Classes/Protocol/T4PacketSC_Move.h"
-#include "Classes/Protocol/T4PacketSC_Status.h"
-#include "Classes/Protocol/T4PacketSC_World.h"
+#include "Public/Protocol/T4PacketSC_Action.h"
+#include "Public/Protocol/T4PacketSC_Move.h"
+#include "Public/Protocol/T4PacketSC_Status.h"
+#include "Public/Protocol/T4PacketSC_World.h"
 
 #include "T4Framework/Classes/Controller/Player/T4PlayerController.h"
 
@@ -111,25 +111,16 @@ private:
 	void CS_RecvPacket_CmdPCEnter(const FT4PacketCmdPCEnterCS& InPacket);
 
 	UFUNCTION(Reliable, server, WithValidation)
-	void CS_RecvPacket_CmdPCLeave(const FT4PacketCmdPCLeaveCS& InPacket);
-
-	UFUNCTION(Reliable, server, WithValidation)
 	void CS_RecvPacket_CmdNPCEnter(const FT4PacketCmdNPCEnterCS& InPacket); // #31
-
-	UFUNCTION(Reliable, server, WithValidation)
-	void CS_RecvPacket_CmdNPCLeave(const FT4PacketCmdNPCLeaveCS& InPacket); // #31
 
 	UFUNCTION(Reliable, server, WithValidation)
 	void CS_RecvPacket_CmdFOEnter(const FT4PacketCmdFOEnterCS& InPacket); // #31
 
 	UFUNCTION(Reliable, server, WithValidation)
-	void CS_RecvPacket_CmdFOLeave(const FT4PacketCmdFOLeaveCS& InPacket); // #31
-
-	UFUNCTION(Reliable, server, WithValidation)
 	void CS_RecvPacket_CmdItemEnter(const FT4PacketCmdItemEnterCS& InPacket); // #41
 
 	UFUNCTION(Reliable, server, WithValidation)
-	void CS_RecvPacket_CmdItemLeave(const FT4PacketCmdItemLeaveCS& InPacket); // #41
+	void CS_RecvPacket_CmdObjectLeave(const FT4PacketCmdObjectLeaveCS& InPacket); // #68
 
 	UFUNCTION(Reliable, server, WithValidation)
 	void CS_RecvPacket_CmdTeleport(const FT4PacketCmdTeleportCS& InPacket);

@@ -83,7 +83,10 @@ public:
 	IT4GameplayController* GetGameplayController() override { return static_cast<IT4GameplayController*>(this); } // #63
 
 	// IT4GameplayController
-	ET4ControllerType GetControllerType() const override { return ET4ControllerType::Controller_NPC; }
+	virtual ET4ControllerType GetControllerType() const override 
+	{ 
+		return ET4ControllerType::Controller_None; 
+	}
 
 public:
 	void SetNetID(const FT4NetID& InNetID) { NetID = InNetID;}

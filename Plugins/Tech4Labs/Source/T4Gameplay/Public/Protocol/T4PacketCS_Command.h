@@ -15,16 +15,11 @@
 // ET4PacketCtoS::CmdChangePlayer // #11, #52
 
 // ET4PacketCtoS::CmdPCEnter
-// ET4PacketCtoS::CmdPCLeave
-
 // ET4PacketCtoS::CmdNPCEnter // #31
-// ET4PacketCtoS::CmdNPCLeave // #31
-
 // ET4PacketCtoS::CmdFOEnter // #31
-// ET4PacketCtoS::CmdFOLeave // #31
-
 // ET4PacketCtoS::CmdItemEnter // #41
-// ET4PacketCtoS::CmdItemLeave // #41
+
+// ET4PacketCtoS::CmdObjectLeave, // #68
 
 // ET4PacketCtoS::CmdTeleport
 
@@ -104,27 +99,6 @@ public:
 	}
 };
 
-USTRUCT()
-struct FT4PacketCmdPCLeaveCS : public FT4PacketCtoS
-{
-	GENERATED_USTRUCT_BODY()
-
-public:
-	UPROPERTY(VisibleAnywhere)
-	FT4ObjectID LeaveObjectID; // IsValid == false ? MyPC : OtherPC
-
-public:
-	FT4PacketCmdPCLeaveCS()
-		: FT4PacketCtoS(ET4PacketCtoS::CmdPCLeave)
-	{
-	}
-
-	FString ToString() const override
-	{
-		return FString(TEXT("CS_Packet:CmdPCLeave"));
-	}
-};
-
 // #31
 USTRUCT()
 struct FT4PacketCmdNPCEnterCS : public FT4PacketCtoS
@@ -152,28 +126,6 @@ public:
 	FString ToString() const override
 	{
 		return FString(TEXT("CS_Packet:CmdNPCEnter"));
-	}
-};
-
-// #31
-USTRUCT()
-struct FT4PacketCmdNPCLeaveCS : public FT4PacketCtoS
-{
-	GENERATED_USTRUCT_BODY()
-
-public:
-	UPROPERTY(VisibleAnywhere)
-	FT4ObjectID LeaveObjectID;
-
-public:
-	FT4PacketCmdNPCLeaveCS()
-		: FT4PacketCtoS(ET4PacketCtoS::CmdNPCLeave)
-	{
-	}
-
-	FString ToString() const override
-	{
-		return FString(TEXT("CS_Packet:CmdNPCLeave"));
 	}
 };
 
@@ -207,28 +159,6 @@ public:
 	}
 };
 
-// #31
-USTRUCT()
-struct FT4PacketCmdFOLeaveCS : public FT4PacketCtoS
-{
-	GENERATED_USTRUCT_BODY()
-
-public:
-	UPROPERTY(VisibleAnywhere)
-	FT4ObjectID LeaveObjectID;
-
-public:
-	FT4PacketCmdFOLeaveCS()
-		: FT4PacketCtoS(ET4PacketCtoS::CmdFOLeave)
-	{
-	}
-
-	FString ToString() const override
-	{
-		return FString(TEXT("CS_Packet:CmdFOLeave"));
-	}
-};
-
 // #41
 USTRUCT()
 struct FT4PacketCmdItemEnterCS : public FT4PacketCtoS
@@ -259,9 +189,9 @@ public:
 	}
 };
 
-// #41
+// #68
 USTRUCT()
-struct FT4PacketCmdItemLeaveCS : public FT4PacketCtoS
+struct FT4PacketCmdObjectLeaveCS : public FT4PacketCtoS
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -270,14 +200,24 @@ public:
 	FT4ObjectID LeaveObjectID;
 
 public:
-	FT4PacketCmdItemLeaveCS()
-		: FT4PacketCtoS(ET4PacketCtoS::CmdItemLeave)
+	FT4PacketCmdObjectLeaveCS()
+		: FT4PacketCtoS(ET4PacketCtoS::CmdObjectLeave)
 	{
+	}
+
+	bool Validate(FString& OutMsg) override
+	{
+		if (!LeaveObjectID.IsValid())
+		{
+			OutMsg = TEXT("Invalid Leave ObjectID!");
+			return false;
+		}
+		return true;
 	}
 
 	FString ToString() const override
 	{
-		return FString(TEXT("CS_Packet:CmdItemLeave"));
+		return FString(TEXT("CS_Packet:CmdObjectLeave"));
 	}
 };
 

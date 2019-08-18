@@ -73,7 +73,10 @@ public:
 	IT4GameplayController* GetGameplayController() override { return static_cast<IT4GameplayController*>(this); } // #63
 
 	// IT4GameplayController
-	ET4ControllerType GetControllerType() const override { return ET4ControllerType::Controller_Player; }
+	ET4ControllerType GetControllerType() const override 
+	{ 
+		return ET4ControllerType::Controller_Player; 
+	}
 
 public:
 	// IT4PlayerController

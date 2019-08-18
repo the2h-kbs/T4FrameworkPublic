@@ -10,7 +10,7 @@
 
 #include "T4Engine/Public/Asset/T4AssetLoader.h" // #50, #42
 #include "T4Framework/Classes/Controller/AI/T4NPCAIController.h"
-#include "T4GameplayCharacterAIController.generated.h"
+#include "T4GameplayCreatureAIController.generated.h"
 
 /**
   * WARN : AI Controller 는 서버에서만 사용하고, 클라리언트에서는 사용하지 않음에 유의할 것!
@@ -61,7 +61,7 @@ struct FT4GameItemWeaponData; // #50
 class UBehaviorTree;
 class IT4GameObject;
 UCLASS()
-class T4GAMEPLAY_API AT4GameplayCharacterAIController : public AT4NPCAIController
+class T4GAMEPLAY_API AT4GameplayCreatureAIController : public AT4NPCAIController
 {
 	GENERATED_UCLASS_BODY()
 
@@ -77,6 +77,16 @@ public:
 #if (WITH_EDITOR || WITH_SERVER_CODE)
 	virtual void OnNotifyAIEvent(const FName& InEventName) override; // #63
 #endif
+
+	// IT4GameplayController
+	virtual ET4ControllerType GetControllerType() const override
+	{
+#if (WITH_EDITOR || WITH_SERVER_CODE)
+		return ET4ControllerType::Controller_Creature;
+#else
+		return AT4NPCAIController::GetControllerType();
+#endif
+	}
 
 public:
 	bool Bind(const FT4GameDataID& InNPCGameDataID); // #31, #50
