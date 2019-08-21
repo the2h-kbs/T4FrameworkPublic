@@ -65,7 +65,7 @@ public:
 };
 
 USTRUCT()
-struct FT4PacketEffectSC : public FT4PacketStoC
+struct FT4PacketEffectDirectSC : public FT4PacketStoC
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -80,8 +80,8 @@ public:
 	FT4ObjectID AttackerObjectID;
 
 public:
-	FT4PacketEffectSC()
-		: FT4PacketStoC(ET4PacketStoC::Effect)
+	FT4PacketEffectDirectSC()
+		: FT4PacketStoC(ET4PacketStoC::EffectDirect)
 	{
 	}
 
@@ -97,6 +97,44 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("SC_Packet:Effect"));
+		return FString(TEXT("SC_Packet:EffectDirect"));
+	}
+};
+
+USTRUCT()
+struct FT4PacketEffectAreaSC : public FT4PacketStoC
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	UPROPERTY(VisibleAnywhere)
+	FVector TargetLocation; // #68 : area attack
+
+	UPROPERTY(VisibleAnywhere)
+	FT4GameDataID EffectDataID;
+
+	UPROPERTY(VisibleAnywhere)
+	FT4ObjectID AttackerObjectID;
+
+public:
+	FT4PacketEffectAreaSC()
+		: FT4PacketStoC(ET4PacketStoC::EffectArea)
+		, TargetLocation(FVector::ZeroVector)
+	{
+	}
+
+	bool Validate(FString& OutMsg) override
+	{
+		if (TargetLocation.IsNearlyZero())
+		{
+			OutMsg = TEXT("Invalid ObjectID");
+			return false;
+		}
+		return true;
+	}
+
+	FString ToString() const override
+	{
+		return FString(TEXT("SC_Packet:EffectArea"));
 	}
 };

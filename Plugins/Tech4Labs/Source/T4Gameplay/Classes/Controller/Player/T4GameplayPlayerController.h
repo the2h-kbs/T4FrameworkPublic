@@ -202,5 +202,8 @@ private:
 	void SC_RecvPacket_Attack(const FT4PacketAttackSC& InPacket);
 
 	UFUNCTION(Reliable, client)
-	void SC_RecvPacket_Effect(const FT4PacketEffectSC& InPacket);
+	void SC_RecvPacket_EffectDirect(const FT4PacketEffectDirectSC& InPacket);
+
+	UFUNCTION(Reliable, client)
+	void SC_RecvPacket_EffectArea(const FT4PacketEffectAreaSC& InPacket); // #68
 };

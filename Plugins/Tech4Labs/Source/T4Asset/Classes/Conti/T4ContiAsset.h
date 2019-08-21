@@ -201,9 +201,6 @@ public:
 	FName TestWeaponNameID; // #60
 
 	UPROPERTY(EditAnywhere, Category = Editor)
-	bool bTestPlayerOverrideSkillData; // #63
-
-	UPROPERTY(EditAnywhere, Category = Editor)
 	FName TestSandbackNameID; // #60
 
 	UPROPERTY(EditAnywhere, Category = Editor)
@@ -213,7 +210,10 @@ public:
 	bool bTestSandbackRoleAttacker; // #63
 
 	UPROPERTY(EditAnywhere, Category = Editor)
-	bool bTestSandbackOverrideSkillData; // #63
+	bool bTestOverrideSkillData; // #63
+
+	UPROPERTY(EditAnywhere, Category = Editor)
+	bool bTestOverrideEffectData; // #68
 
 	UPROPERTY(EditAnywhere, Category = Editor)
 	FName TestSkillDataNameID; // #60

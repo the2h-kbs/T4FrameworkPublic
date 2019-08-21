@@ -3,7 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "T4Framework/Public/T4FrameworkNet.h" // #42
 #include "T4PacketTypes.generated.h"
 
 /**
@@ -86,7 +85,9 @@ enum class ET4PacketStoC : uint32
 	Exchange, // #37
 
 	Attack,
-	Effect,
+
+	EffectDirect,
+	EffectArea, // #68
 
 	None,
 };

@@ -245,7 +245,8 @@ public:
 	virtual bool IsPaused() const = 0;
 	virtual void SetPause(bool bPause) = 0;
 
-	virtual const TCHAR* GetPlayFileName() const = 0;
+	virtual const TCHAR* GetPlayFile() const = 0;
+
 	virtual float GetPlayTimeSec() const = 0;
 	virtual float GetMaxPlayTimeSec() const = 0;
 };
@@ -257,7 +258,8 @@ public:
 
 	virtual bool IsRecording() const = 0;
 
-	virtual const TCHAR* GetRecFileName() const = 0;
+	virtual const TCHAR* GetRecFile() const = 0;
+
 	virtual float GetRecTimeSec() const = 0;
 
 	virtual bool RecWorldAction(
@@ -282,13 +284,18 @@ public:
 	virtual IT4ActionPlaybackPlayer* GetPlayer() const = 0;
 	virtual IT4ActionPlaybackRecorder* GetRecorder() const = 0;
 
-	virtual bool DoPlay(const FString& InPlayFileName) = 0; // Saved/T4Playback/<InPlayFileName>.dat
+	virtual bool DoPlay(const FSoftObjectPath& InPlayPath) = 0;
+	virtual bool DoPlay(const FString& InPlayAssetName, const FString& InFolderName) = 0; // /Tech4Labs/Editor/ActionPlayback/<InFolderName>/<InPlayAssetName>.uasset
 	virtual void DoPlayStop() = 0;
 
 	virtual bool IsPlayRepeat() const = 0;
 	virtual void SetPlayRepeat(bool bEnable) = 0;
 
-	virtual bool DoRec(const FString& InRecFileName) = 0; // Saved/T4Playback/<InRecFileName>.dat
+	virtual bool IsPlayerPossessed() const = 0;
+	virtual void SetPlayerPossessed(bool bPossess) = 0;
+
+	virtual bool DoRec(const FSoftObjectPath& InRecPath) = 0;
+	virtual bool DoRec(const FString& InRecAssetName, const FString& InFolderName) = 0; // /Tech4Labs/Editor/ActionPlayback/<InFolderName>/<InRecAssetName>.uasset
 	virtual void DoRecStop() = 0;
 };
 
@@ -382,6 +389,14 @@ public:
 #endif
 
 	// #54 : 현재는 ClientOnly
+	virtual IT4GameObject* PlayClientObject(
+		ET4ObjectType InWorldObjectType,
+		const FName& InName,
+		const FVector& InLocation,
+		const FRotator& InRotation,
+		const FVector& InScale
+	) = 0; // #68 : 소멸 조건이 되면 스스로 소멸한다.
+
 	virtual IT4GameObject* CreateClientObject(
 		ET4ObjectType InWorldObjectType, // #63 : Only World Object
 		const FName& InName,

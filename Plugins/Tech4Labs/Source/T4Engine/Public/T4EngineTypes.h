@@ -176,15 +176,6 @@ enum ET4FootStance // #38, #44
 };
 
 UENUM()
-enum class ET4AttackType : uint8 // #63
-{
-	Melee,
-	Ranged,
-
-	None,
-};
-
-UENUM()
 enum class ET4TargetType : uint8
 {
 	TargetLocation,

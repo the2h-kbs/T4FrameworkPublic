@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "T4FrameworkGameplay.h"
 #include "T4Engine/Public/T4EngineTypes.h" // #63
 #include "T4FrameworkEditor.generated.h"
 
@@ -28,8 +29,6 @@ enum class ET4EditorPlayRole : uint8
 	None UMETA(Hidden),
 };
 
-// #T4_ADD_SKILL_CONTENT_TAG 
-
 class UT4ContiAsset;
 USTRUCT()
 struct FT4EditorSkillDataInfo
@@ -37,11 +36,13 @@ struct FT4EditorSkillDataInfo
 	GENERATED_USTRUCT_BODY()
 
 public:
+	// #T4_ADD_SKILL_CONTENT_TAG 
+
 	UPROPERTY(VisibleAnywhere)
 	FName Name;
 
 	UPROPERTY(VisibleAnywhere)
-	ET4AttackType AttackType; // #63
+	ET4GameAttackType AttackType; // #63
 
 	UPROPERTY(EditAnywhere)
 	float HitDelayTimeSec;
@@ -55,6 +56,9 @@ public:
 	UPROPERTY(EditAnywhere)
 	bool bMoveable;
 
+	UPROPERTY(VisibleAnywhere)
+	FName ResultEffectDataID;
+
 	UPROPERTY(EditAnywhere)
 	TSoftObjectPtr<UT4ContiAsset> ContiAsset;
 
@@ -67,11 +71,12 @@ public:
 	void Reset()
 	{
 		Name = NAME_None;
-		AttackType = ET4AttackType::Melee;
+		AttackType = ET4GameAttackType::Melee;
 		HitDelayTimeSec = 0.0f;
 		DurationSec = 0.0f;;
 		ProjectileSpeed = 0.0f; // #63
 		bMoveable = false;
+		ResultEffectDataID = NAME_None;
 	}
 };
 
@@ -81,8 +86,22 @@ struct FT4EditorEffectDataInfo
 	GENERATED_USTRUCT_BODY()
 
 public:
+	// #T4_ADD_EFFECT_CONTENT_TAG
+
 	UPROPERTY(VisibleAnywhere)
 	FName Name;
+
+	UPROPERTY(VisibleAnywhere)
+	ET4GameEffectType EffectType;
+
+	UPROPERTY(EditAnywhere)
+	float HitDelayTimeSec;
+
+	UPROPERTY(EditAnywhere)
+	float AreaRange;
+
+	UPROPERTY(VisibleAnywhere)
+	FName DamageEffectDataID;
 
 	UPROPERTY(EditAnywhere)
 	TSoftObjectPtr<UT4ContiAsset> ContiAsset;
@@ -96,6 +115,10 @@ public:
 	void Reset()
 	{
 		Name = NAME_None;
+		EffectType = ET4GameEffectType::Direct;
+		HitDelayTimeSec = 0.0f;
+		AreaRange = 0.0f;
+		DamageEffectDataID = NAME_None;
 	}
 };
 
@@ -152,11 +175,10 @@ public:
 	virtual ~IT4EditorGameplayAIHandler() {}
 	
 	virtual bool IsAISystemDisabled() const = 0;
-
-	virtual bool IsPlayerOverrideSkillData() const = 0; // #63
-
 	virtual bool IsSandbackAttackable() const = 0;
-	virtual bool IsSandbackOverrideSkillData() const = 0; // #63
+
+	virtual bool IsOverrideSkillData() const = 0; // #63
+	virtual bool IsOverrideEffectData() const = 0; // #68
 
 	virtual FName GetOverrideSkillDataNameID() const = 0;
 	virtual FName GetOverrideEffectDataNameID() const = 0;

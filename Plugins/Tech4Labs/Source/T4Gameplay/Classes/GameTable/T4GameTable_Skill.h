@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Classes/GameTable/T4GameTableDataTypes.h" // #48
 #include "T4Engine/Public/T4EngineTypes.h" // #63
+#include "T4Framework/Public/T4FrameworkGameplay.h" // #68
 #include "Classes/Engine/DataTable.h"
 
 #include "T4GameTable_Skill.generated.h"
@@ -14,14 +15,14 @@
  */
 class UT4ContiAsset;
 
-// #T4_ADD_SKILL_CONTENT_TAG 
-
 USTRUCT()
 struct FT4GameSkillTableRow : public FTableRowBase
 {
 	GENERATED_USTRUCT_BODY()
 
 public:
+	// #T4_ADD_SKILL_CONTENT_TAG 
+
 	UPROPERTY(EditAnywhere, Category= Common)
 	FName Name;
 
@@ -29,7 +30,7 @@ public:
 	FGuid Guid;
 
 	UPROPERTY(EditAnywhere, Category = Common)
-	ET4AttackType AttackType; // #63
+	ET4GameAttackType AttackType; // #63
 
 	UPROPERTY(EditAnywhere, Category = Common)
 	float HitDelayTimeSec;
@@ -51,7 +52,7 @@ public:
 
 public:
 	FT4GameSkillTableRow()
-		: AttackType(ET4AttackType::Melee) // #63
+		: AttackType(ET4GameAttackType::Melee) // #63
 	{
 	}
 };

@@ -29,11 +29,15 @@ public:
 	FT4ObjectID TargetObjectID; // #63 : 타겟이 있으면 먼저 체크! 없으면 Direct 을 사용한다.
 
 	UPROPERTY(VisibleAnywhere)
+	FVector TargetLocation; // #68 : Area
+
+	UPROPERTY(VisibleAnywhere)
 	FVector TargetDirection; // #49
 
 public:
 	FT4PacketAttackCS()
 		: FT4PacketCtoS(ET4PacketCtoS::Attack)
+		, TargetLocation(FVector::ZeroVector)
 		, TargetDirection(FVector::ZeroVector)
 	{
 	}
@@ -45,9 +49,9 @@ public:
 			OutMsg = TEXT("Invalid Send ObjectID!");
 			return false;
 		}
-		if (!TargetObjectID.IsValid() && TargetDirection.IsNearlyZero())
+		if (!TargetObjectID.IsValid() && TargetLocation.IsNearlyZero() && TargetDirection.IsNearlyZero())
 		{
-			OutMsg = TEXT("Invalid Target ObjectID or Direction!");
+			OutMsg = TEXT("Invalid Target ObjectID or Location or Direction!");
 			return false;
 		}
 		return true;
