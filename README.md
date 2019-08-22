@@ -20,6 +20,8 @@ Powerful toolset and Flexible layer solution
 - Warning
   - 2019.10 월 정식 버전 배포 예정입니다. 개발 버전이므로 테스트 용도로 만 사용해주시기 바랍니다.
 - Release Notes
+  - **[2019.08.22] [M3] Copying //Private to //Deploy (private commit c19cac4)**
+    - #71 [버그수정] Rehearsal Entity/Conti Editor UI Layout 오류 수정
   - **[2019.08.22] [M3] Copying //Private to //Deploy (private commit faf98b6)**
     - #68 [버그수정] Action playback 저장이 정상적으로 되지 않던 문제 수정
 	- #68 [기능개선] Action playback 를 /Game/Developer 에 저장되도록 수정
