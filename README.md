@@ -20,6 +20,9 @@ Powerful toolset and Flexible layer solution
 - Warning
   - 2019.10 월 정식 버전 배포 예정입니다. 개발 버전이므로 테스트 용도로 만 사용해주시기 바랍니다.
 - Release Notes
+  - **[2019.08.22] [M3] Copying //Private to //Deploy (private commit faf98b6)**
+    - #68 [버그수정] Action playback 저장이 정상적으로 되지 않던 문제 수정
+	- #68 [기능개선] Action playback 를 /Game/Developer 에 저장되도록 수정
   - **[2019.08.21] [M3] Copying //Private to //Deploy (private commit e99aaa7)**
     - #68 [기능추가] Conti Editor 내 범위 공격 테스트 환경 추가
     - #68 [기능추가] Action Playback 기능 1차 완료
