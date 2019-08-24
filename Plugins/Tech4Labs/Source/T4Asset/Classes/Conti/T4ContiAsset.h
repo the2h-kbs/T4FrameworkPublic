@@ -172,9 +172,9 @@ public:
 	void Serialize(FArchive& Ar) override;
 	virtual void PostLoad() override;
 #if WITH_EDITOR
-	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
+	void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
 #endif
-	virtual void GetAssetRegistryTags(TArray<FAssetRegistryTag>& OutTags) const override;
+	void GetAssetRegistryTags(TArray<FAssetRegistryTag>& OutTags) const override;
 	//~ End UObject interface
 
 #if WITH_EDITOR
@@ -192,7 +192,7 @@ public:
 	float MaxPlayTimeSec; // #56
 
 #if WITH_EDITORONLY_DATA
-	UPROPERTY(EditAnywhere, Category = Editor)
+	UPROPERTY(EditAnywhere, Category = Editor, AssetRegistrySearchable)
 	TSoftObjectPtr<UT4EntityAsset> TestEntityAsset;
 
 	// #T4_ADD_EDITOR_PLAY_TAG

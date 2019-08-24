@@ -145,38 +145,46 @@ public:
 public:
 	static const FName CallingContextName;
 
-	UPROPERTY(EditAnywhere, Category = AssetInfo)
+	UPROPERTY(EditAnywhere, Category = Common)
 	TSoftObjectPtr<USkeleton> Skeleton;
 
-	UPROPERTY(VisibleAnywhere, Category = SkillAnimation)
+	// CustomizeSkillAnimationDetails
+
+	UPROPERTY(VisibleAnywhere, Category = EditAnimationLayer)
 	UAnimMontage* SkillAnimMontageAutoGen;
 
-	UPROPERTY(EditAnywhere, Category = SkillAnimation)
+	UPROPERTY(EditAnywhere, Category = EditAnimationLayer)
 	TMap<FName, FT4AnimSequenceInfo> SkillAnimSequenceInfos;
 
-	UPROPERTY(VisibleAnywhere, Category = LocomotionAnimation)
+	// CustomizeLocomotionAnimationDetails
+
+	UPROPERTY(VisibleAnywhere, Category = EditAnimationLayer)
 	UAnimMontage* LocomotionAnimMontageAutoGen;
 
-	UPROPERTY(EditAnywhere, Category = LocomotionAnimation)
+	UPROPERTY(EditAnywhere, Category = EditAnimationLayer)
 	FT4AnimSetLocomotionAttribute LocomotionAttributes;
 
-	UPROPERTY(EditAnywhere, Category = LocomotionAnimation)
+	UPROPERTY(EditAnywhere, Category = EditAnimationLayer)
 	TMap<FName, FT4AnimSequenceInfo> LocomotionAnimSequenceInfos;
 
-	UPROPERTY(VisibleAnywhere, Category = DefaultAnimation) 
+	// CustomizeDefaultAnimationDetails
+
+	UPROPERTY(VisibleAnywhere, Category = EditAnimationLayer)
 	UAnimMontage* DefaultAnimMontageAutoGen; // #38
 
-	UPROPERTY(EditAnywhere, Category = DefaultAnimation)
+	UPROPERTY(EditAnywhere, Category = EditAnimationLayer)
 	TMap<FName, FT4AnimSequenceInfo> DefaultAnimSequenceInfos; // #38
 
-	UPROPERTY(EditAnywhere, Category = BlendSpace)
+	// CustomizeBlendSpaceDetails
+
+	UPROPERTY(EditAnywhere, Category = EditAnimationLayer)
 	FT4AnimSetBlendSpaceAttribute BlendSpaceAttributes; // #38
 
-	UPROPERTY(EditAnywhere, Category = BlendSpace)
+	UPROPERTY(EditAnywhere, Category = EditAnimationLayer)
 	TMap<FName, FT4BlendSpaceInfo> BlendSpaceInfos;
 
 #if WITH_EDITORONLY_DATA
-	UPROPERTY(EditAnywhere, Category = Editor)
+	UPROPERTY(EditAnywhere, Category = Common)
 	TSoftObjectPtr<UT4EntityAsset> ParentEntityAsset;
 
 	UPROPERTY()

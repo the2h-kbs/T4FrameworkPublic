@@ -139,6 +139,16 @@ enum class ET4AnimInstance
 	None
 };
 
+enum ET4AnimLayer // #71
+{
+	AnimLayer_Skill,
+	AnimLayer_Locomotion,
+	AnimLayer_Default,
+	AnimLayer_Blendspace,
+
+	AnimLayer_Nums
+};
+
 enum ET4AnimStatePriority
 {
 	AnimPriority_High,
