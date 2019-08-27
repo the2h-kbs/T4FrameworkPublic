@@ -91,9 +91,6 @@ public:
 	}
 
 	UPROPERTY(EditAnywhere, Category = Asset)
-	TSoftObjectPtr<USkeleton> SkeletonPath; // #39
-
-	UPROPERTY(EditAnywhere, Category = Asset)
 	TSoftObjectPtr<USkeletalMesh> SkeletalMeshPath;
 };
 
@@ -124,9 +121,6 @@ public:
 	{
 	}
 
-	UPROPERTY(EditAnywhere, Category = Asset)
-	TSoftObjectPtr<USkeleton> SkeletonPath; // #39
-
 	UPROPERTY(EditAnywhere, Category = DataPath)
 	FName MasterPartName; // #37
 
@@ -145,10 +139,7 @@ public:
 	}
 
 	UPROPERTY(EditAnywhere, Category = Asset)
-	TSoftObjectPtr<UAnimBlueprint> AnimBPPath;
-
-	UPROPERTY(EditAnywhere, Category = Asset)
-	TSoftObjectPtr<UT4AnimSetAsset> DefaultAnimSetPath; // #39
+	TSoftObjectPtr<UT4AnimSetAsset> AnimSetPath; // #39
 };
 
 UCLASS(ClassGroup = Tech4Labs, Category = "Tech4Labs")
@@ -165,24 +156,38 @@ public:
 	//~ End UObject interface
 
 public:
-	ET4EntityType GetEntityType() const override { return ET4EntityType::Actor; }
+	ET4EntityType GetEntityType() const override { return ET4EntityType::Character; }
 
 public:
-	UPROPERTY(EditAnywhere, Category=Attribute)
-	FT4EntityCharacterPhysicalAttribute Physical;
+	UPROPERTY(EditAnywhere, Category=Default, AssetRegistrySearchable)
+	TSoftObjectPtr<USkeleton> Skeleton; // #39
 
-	UPROPERTY(EditAnywhere, Category=Attribute)
-	FT4EntityCharacterRenderingAttribute Rendering;
-
-	UPROPERTY(EditAnywhere, Category=Data)
+	UPROPERTY(EditAnywhere, Category= Default)
 	ET4EntityCharacterMeshType MeshType;
 
-	UPROPERTY(EditAnywhere, Category=Data)
+	UPROPERTY(EditAnywhere, Category = Default)
+	TSoftObjectPtr<UAnimBlueprint> AnimBPPath;
+
+	UPROPERTY(EditAnywhere, Category=FullbodyMesh)
 	FT4EntityCharacterFullBodyMeshData FullBodyMeshData;
 
-	UPROPERTY(EditAnywhere, Category=Data)
+	UPROPERTY(EditAnywhere, Category=CompositeMesh)
 	FT4EntityCharacterCompositeMeshData CopmpositeMeshData; // #37
 
-	UPROPERTY(EditAnywhere, Category=Data)
-	FT4EntityCharacterAnimationData AnimationData;
+	UPROPERTY(EditAnywhere, Category=Animation)
+	FT4EntityCharacterAnimationData DefaultStanceData;
+
+	UPROPERTY(EditAnywhere, Category= Attribute)
+	FT4EntityCharacterPhysicalAttribute Physical;
+
+	UPROPERTY(EditAnywhere, Category= Attribute)
+	FT4EntityCharacterRenderingAttribute Rendering;
+
+public:
+	// #71 : WARN : CustomizeCompositeMeshDetails 에서 사용하는 임시 프로퍼티! (저장되지 않는다!!)
+	UPROPERTY(EditAnywhere, Transient)
+	FName TransientSelectCompositePartName;
+
+	UPROPERTY(EditAnywhere, Transient)
+	TSoftObjectPtr<UT4CostumeEntityAsset> TransientCompositePartAsset;
 };

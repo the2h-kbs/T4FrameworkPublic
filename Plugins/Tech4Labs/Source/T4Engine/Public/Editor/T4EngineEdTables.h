@@ -29,6 +29,11 @@ public:
 	virtual void Reset() = 0;
 
 	virtual TArray<FT4NameInfo>& GetInfoDatas(ET4EngineEdNameTable InNameTable) = 0;
+
+	virtual const FString GetNameDescription(
+		ET4EngineEdNameTable InNameTable, 
+		FName InName
+	) = 0; // #71
 };
 
 T4ENGINE_API IT4EngineEdNameTable* T4EngineEdNameTableGet();

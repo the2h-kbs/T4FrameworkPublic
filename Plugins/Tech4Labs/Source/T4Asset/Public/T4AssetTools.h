@@ -16,6 +16,8 @@ class UAnimSequence;
 class UT4AnimSetAsset;
 class UT4ContiAsset;
 class UT4EntityAsset;
+class UT4CostumeEntityAsset;
+class UT4CharacterEntityAsset;
 
 T4ASSET_API UObject* T4AssetEdNew(
 	UClass* InAssetClass,
@@ -43,6 +45,19 @@ T4ASSET_API bool T4AssetEdEntitySaveThumbnailCameraInfo(
 	const FRotator& ThumbnailRotation,
 	const FVector& ThumbnailLocation
 );
+
+T4ASSET_API bool T4AssetEdEntityCompositePartAddOrUpdate(
+	UT4CharacterEntityAsset* InOutEntityAsset,
+	const FName& InPartName,
+	TSoftObjectPtr<UT4CostumeEntityAsset>& InCostumeEntitAsset,
+	FString& OutErrorMessage
+); // #71
+
+T4ASSET_API bool T4AssetEdEntityCompositePartRemove(
+	UT4CharacterEntityAsset* InOutEntityAsset,
+	const FName& InPartName,
+	FString& OutErrorMessage
+); // #71
 
 T4ASSET_API bool T4AssetEdAnimSetAnimSequenceAddOrUpdate(
 	UT4AnimSetAsset* InOutAnimSetAsset,

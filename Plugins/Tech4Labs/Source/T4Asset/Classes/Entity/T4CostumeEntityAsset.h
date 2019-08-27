@@ -26,23 +26,8 @@ private:
 	FT4CostumeEntityCustomVersion() {}
 };
 
+class USkeleton;
 class USkeletalMesh;
-
-// #37
-USTRUCT()
-struct T4ASSET_API FT4EntityItemCostumeMeshData
-{
-	GENERATED_USTRUCT_BODY()
-
-public:
-	FT4EntityItemCostumeMeshData()
-	{
-	}
-
-	UPROPERTY(EditAnywhere, Category = Asset)
-	TSoftObjectPtr<USkeletalMesh> SkeletalMeshPath;
-};
-
 UCLASS(ClassGroup = Tech4Labs, Category = "Tech4Labs")
 class T4ASSET_API UT4CostumeEntityAsset : public UT4ItemEntityAsset
 {
@@ -60,6 +45,9 @@ public:
 	ET4EntityType GetEntityType() const override { return ET4EntityType::Costume; }
 
 public:
-	UPROPERTY(EditAnywhere, Category = Data)
-	FT4EntityItemCostumeMeshData MeshData;
+	UPROPERTY(EditAnywhere, Category=Default, AssetRegistrySearchable)
+	TSoftObjectPtr<USkeleton> Skeleton; // #39
+
+	UPROPERTY(EditAnywhere, Category = Default)
+	TSoftObjectPtr<USkeletalMesh> SkeletalMesh; // #37
 };

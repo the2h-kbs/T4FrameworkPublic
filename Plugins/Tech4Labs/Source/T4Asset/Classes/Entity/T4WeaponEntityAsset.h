@@ -67,6 +67,6 @@ public:
 	ET4EntityType GetEntityType() const override { return ET4EntityType::Weapon; }
 
 public:
-	UPROPERTY(EditAnywhere, Category=Data)
+	UPROPERTY(EditAnywhere, Category=Default)
 	FT4EntityItemWeaponMeshData MeshData;
 };

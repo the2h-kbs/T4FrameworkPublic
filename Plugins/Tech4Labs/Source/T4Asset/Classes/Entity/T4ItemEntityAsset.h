@@ -70,12 +70,12 @@ public:
 	//~ End UObject interface
 
 public:
+	UPROPERTY(EditAnywhere, Category=DropMesh)
+	FT4EntityItemDropMeshData DropMeshData;
+
 	UPROPERTY(EditAnywhere, Category=Attribute)
 	FT4EntityItemPhysicalAttribute DropMeshPhysical;
 
 	UPROPERTY(EditAnywhere, Category=Attribute)
 	FT4EntityItemRenderingAttribute DropMeshRendering;
-
-	UPROPERTY(EditAnywhere, Category=Data)
-	FT4EntityItemDropMeshData DropMeshData;
 };

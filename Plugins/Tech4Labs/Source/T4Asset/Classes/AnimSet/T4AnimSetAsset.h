@@ -183,6 +183,7 @@ public:
 	UPROPERTY(EditAnywhere, Category = EditAnimationLayer)
 	TMap<FName, FT4BlendSpaceInfo> BlendSpaceInfos;
 
+public:
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditAnywhere, Category = Common)
 	TSoftObjectPtr<UT4EntityAsset> ParentEntityAsset;

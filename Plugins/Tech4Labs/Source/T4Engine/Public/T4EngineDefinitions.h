@@ -30,8 +30,6 @@ static const FName T4AnimSetAnimNotifyFootstepName = TEXT("Footstep_C");
 static const FName T4AnimSetAnimNotifyLeftFootstepName = TEXT("Footstep_Left");
 static const FName T4AnimSetAnimNotifyRightFootstepName = TEXT("Footstep_Right");
 
-static const FName T4AnimSetSkillGroupName = FName(TEXT("SkillGroup")); // #48
-
 static const FName T4AnimSetDefaultSectionIdleAdditiveName = TEXT("IdleAddtive");
 
 static const FName T4AnimSetLocomotionSectionJumpStartName = TEXT("Jump_Start");

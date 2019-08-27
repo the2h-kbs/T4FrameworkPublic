@@ -86,7 +86,7 @@ public:
 	virtual void Serialize(FArchive& Ar) override;
 	virtual void PostLoad() override;
 #if WITH_EDITOR
-	void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
+	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
 #endif
 	virtual void GetAssetRegistryTags(TArray<FAssetRegistryTag>& OutTags) const override;
 	//~ End UObject interface
@@ -96,7 +96,7 @@ public:
 #if WITH_EDITOR
 	DECLARE_MULTICAST_DELEGATE(FT4OnPropertiesChanged);
 	FT4OnPropertiesChanged& OnPropertiesChanged() { return OnPropertiesChangedDelegate; }
-#endif // WITH_EDITOR
+#endif
 
 	FName GetEntityAssetName() const; // #37 : Make FT4EntityKey
 

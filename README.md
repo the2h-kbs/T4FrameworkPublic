@@ -20,6 +20,9 @@ Powerful toolset and Flexible layer solution
 - Warning
   - 2019.10 월 정식 버전 배포 예정입니다. 개발 버전이므로 테스트 용도로 만 사용해주시기 바랍니다.
 - Release Notes
+  - **[2019.08.27] [M3] Copying //Private to //Deploy (private commit 35ff88e)**
+    - #71 [기능개선] Rehearsal Entity Editor 의 기본 레이아웃 개선
+	- #71 [버그수정] Rehearsal Entity Editor 에서 애니메이션 테스트 플레이가 동작하지 않던 문제 수정
   - **[2019.08.24] [M3] Copying //Private to //Deploy (private commit be68514)**
     - #71 [기능개선] Rehearsal Entity Editor 의 AnimSet 편집을 AnimationLayer 단위로 
 	- #71 [기능추가] Rehearsal Entity Editor 에 ContiBrowser 추가 (Entity 가 사용중인 Conti 리스트 출력)

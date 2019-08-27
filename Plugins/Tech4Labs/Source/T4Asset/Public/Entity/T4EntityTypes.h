@@ -14,7 +14,7 @@ UENUM()
 enum class ET4EntityType : uint8
 {
 	World,
-	Actor, // TODO : Actor => Character
+	Character, // #71 : Actor => Character
 	Prop,
 	Item, // #37 : Costume or Weapon
 	Costume, // #37
