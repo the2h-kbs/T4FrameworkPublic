@@ -16,8 +16,8 @@ namespace T4EngineUtil
 	T4ENGINE_API const FString GetActionPlaybackLongPackagePath(
 		const FString& InFolderName
 	);
-	T4ENGINE_API const FString GetActionPlaybackLongPackageAssetName(
-		const FString& InLongPackageName
+	T4ENGINE_API const FString GetActionPlaybackAssetNameFromObjectPath(
+		const FString& InObjectPathString
 	);
 	T4ENGINE_API const FString GetActionPlaybackLongPackageName(
 		const FString& InAssetName, 

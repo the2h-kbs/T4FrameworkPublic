@@ -177,8 +177,6 @@ public:
 	void Serialize(FArchive& Ar) override;
 
 public:
-	static const FName CallingContextName;
-
 	UPROPERTY(VisibleAnywhere)
 	FT4ActionPlaybackData PlaybackData;
 };

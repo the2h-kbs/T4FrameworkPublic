@@ -183,8 +183,6 @@ public:
 #endif // WITH_EDITOR
 
 public:
-	static const FName CallingContextName;
-
 	UPROPERTY(EditAnywhere)
 	FT4ActionCompositeData CompositeData;
 

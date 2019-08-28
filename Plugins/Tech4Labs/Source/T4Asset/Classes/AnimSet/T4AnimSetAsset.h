@@ -143,23 +143,27 @@ public:
 #endif // WITH_EDITOR
 
 public:
-	static const FName CallingContextName;
-
 	UPROPERTY(EditAnywhere, Category = Common)
 	TSoftObjectPtr<USkeleton> Skeleton;
 
 	// CustomizeSkillAnimationDetails
 
-	UPROPERTY(VisibleAnywhere, Category = EditAnimationLayer)
-	UAnimMontage* SkillAnimMontageAutoGen;
+	UPROPERTY(EditAnywhere, Category = EditAnimationLayer)
+	bool bSkillAnimMontageAutoGen; // #69
+
+	UPROPERTY(EditAnywhere, Category = EditAnimationLayer)
+	TSoftObjectPtr<UAnimMontage> SkillAnimMontage; // #69
 
 	UPROPERTY(EditAnywhere, Category = EditAnimationLayer)
 	TMap<FName, FT4AnimSequenceInfo> SkillAnimSequenceInfos;
 
 	// CustomizeLocomotionAnimationDetails
 
-	UPROPERTY(VisibleAnywhere, Category = EditAnimationLayer)
-	UAnimMontage* LocomotionAnimMontageAutoGen;
+	UPROPERTY(EditAnywhere, Category = EditAnimationLayer)
+	bool bLocomotionAnimMontageAutoGen; // #69
+
+	UPROPERTY(EditAnywhere, Category = EditAnimationLayer)
+	TSoftObjectPtr<UAnimMontage> LocomotionAnimMontage; // #69
 
 	UPROPERTY(EditAnywhere, Category = EditAnimationLayer)
 	FT4AnimSetLocomotionAttribute LocomotionAttributes;
@@ -169,8 +173,11 @@ public:
 
 	// CustomizeDefaultAnimationDetails
 
-	UPROPERTY(VisibleAnywhere, Category = EditAnimationLayer)
-	UAnimMontage* DefaultAnimMontageAutoGen; // #38
+	UPROPERTY(EditAnywhere, Category = EditAnimationLayer)
+	bool bDefaultAnimMontageAutoGen; // #69
+
+	UPROPERTY(EditAnywhere, Category = EditAnimationLayer)
+	TSoftObjectPtr<UAnimMontage> DefaultAnimMontage; // #38, #69
 
 	UPROPERTY(EditAnywhere, Category = EditAnimationLayer)
 	TMap<FName, FT4AnimSequenceInfo> DefaultAnimSequenceInfos; // #38

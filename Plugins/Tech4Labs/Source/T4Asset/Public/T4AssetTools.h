@@ -19,87 +19,89 @@ class UT4EntityAsset;
 class UT4CostumeEntityAsset;
 class UT4CharacterEntityAsset;
 
-T4ASSET_API UObject* T4AssetEdNew(
-	UClass* InAssetClass,
-	const FName InCallingContext,
-	const FString& InAssetName,
-	const FString& InPackagePath
-);
+namespace T4AssetTool
+{
+	T4ASSET_API UObject* NewAsset(
+		UClass* InAssetClass,
+		const FString& InAssetName,
+		const FString& InPackagePath
+	);
 
-T4ASSET_API bool T4AssetEdIsDirty(
-	UObject* InCheckObject
-); // #56
+	T4ASSET_API bool IsDirtyAsset(
+		UObject* InCheckObject
+	); // #56
 
-T4ASSET_API bool T4AssetEdSave(
-	UObject* InSaveObject,
-	bool bInCheckDirty
-);
+	T4ASSET_API bool SaveAsset(
+		UObject* InSaveObject,
+		bool bInCheckDirty
+	);
 
-T4ASSET_API bool T4AssetEdSaveThumbnailImage(
-	UObject* InSaveObject,
-	UTexture2D* InThumbnail
-);
+	T4ASSET_API bool SaveThumbnailImage(
+		UObject* InSaveObject,
+		UTexture2D* InThumbnail
+	);
 
-T4ASSET_API bool T4AssetEdEntitySaveThumbnailCameraInfo(
-	UT4EntityAsset* InEntityAsset,
-	const FRotator& ThumbnailRotation,
-	const FVector& ThumbnailLocation
-);
+	T4ASSET_API bool SaveThumbnailCameraInfoInEntity(
+		UT4EntityAsset* InEntityAsset,
+		const FRotator& ThumbnailRotation,
+		const FVector& ThumbnailLocation
+	);
 
-T4ASSET_API bool T4AssetEdEntityCompositePartAddOrUpdate(
-	UT4CharacterEntityAsset* InOutEntityAsset,
-	const FName& InPartName,
-	TSoftObjectPtr<UT4CostumeEntityAsset>& InCostumeEntitAsset,
-	FString& OutErrorMessage
-); // #71
+	T4ASSET_API bool AddOrUpdateCompositePartInEntity(
+		UT4CharacterEntityAsset* InOutEntityAsset,
+		const FName& InPartName,
+		TSoftObjectPtr<UT4CostumeEntityAsset>& InCostumeEntitAsset,
+		FString& OutErrorMessage
+	); // #71
 
-T4ASSET_API bool T4AssetEdEntityCompositePartRemove(
-	UT4CharacterEntityAsset* InOutEntityAsset,
-	const FName& InPartName,
-	FString& OutErrorMessage
-); // #71
+	T4ASSET_API bool RemoveCompositePartInEntity(
+		UT4CharacterEntityAsset* InOutEntityAsset,
+		const FName& InPartName,
+		FString& OutErrorMessage
+	); // #71
 
-T4ASSET_API bool T4AssetEdAnimSetAnimSequenceAddOrUpdate(
-	UT4AnimSetAsset* InOutAnimSetAsset,
-	const FName& InAnimMontageName,
-	const FName& InAnimSequenceName,
-	TSoftObjectPtr<UAnimSequence>& InAnimSequence,
-	FString& OutErrorMessage
-);
+	T4ASSET_API bool AddOrUpdateAnimSeqeunceInfoInAnimSet(
+		UT4AnimSetAsset* InOutAnimSetAsset,
+		const FName& InAnimMontageName,
+		const FName& InAnimSequenceName,
+		TSoftObjectPtr<UAnimSequence>& InAnimSequence,
+		FString& OutErrorMessage
+	);
 
-T4ASSET_API bool T4AssetEdAnimSetAnimSequenceRemove(
-	UT4AnimSetAsset* InOutAnimSetAsset,
-	const FName& InAnimMontageName,
-	const FName& InAnimSequenceName,
-	FString& OutErrorMessage
-);
+	T4ASSET_API bool RemoveAnimSeqeunceInfoInAnimSet(
+		UT4AnimSetAsset* InOutAnimSetAsset,
+		const FName& InAnimMontageName,
+		const FName& InAnimSequenceName,
+		FString& OutErrorMessage
+	);
 
-T4ASSET_API bool T4AssetEdAnimSetBaseBlendSpaceAddOrUpdate(
-	UT4AnimSetAsset* InOutAnimSetAsset,
-	const FName& InBlendSpaceName,
-	TSoftObjectPtr<UBlendSpaceBase>& InBlendSpace,
-	FString& OutErrorMessage
-);
+	T4ASSET_API bool AddOrUpdateBlendSpaceInfoInAnimSet(
+		UT4AnimSetAsset* InOutAnimSetAsset,
+		const FName& InBlendSpaceName,
+		TSoftObjectPtr<UBlendSpaceBase>& InBlendSpace,
+		FString& OutErrorMessage
+	);
 
-T4ASSET_API bool T4AssetEdAnimSetBaseBlendSpaceRemove(
-	UT4AnimSetAsset* InOutAnimSetAsset,
-	const FName& InBlendSpaceName,
-	FString& OutErrorMessage
-);
+	T4ASSET_API bool RemoveBlendSpaceInfoInAnimSet(
+		UT4AnimSetAsset* InOutAnimSetAsset,
+		const FName& InBlendSpaceName,
+		FString& OutErrorMessage
+	);
 
-T4ASSET_API bool T4AssetEdAnimSetAnimMontageBuild(
-	UT4AnimSetAsset* InOutAnimSetAsset,
-	const FName& InAnimMontageName,
-	const FName& InObjectName
-);
+	T4ASSET_API bool UpdateBlendSpaceInfoInAnimSet(
+		UT4AnimSetAsset* InOutAnimSetAsset
+	);
 
-T4ASSET_API bool T4AssetEdAnimSetBaseBlendSpaceBuild(
-	UT4AnimSetAsset* InOutAnimSetAsset
-);
+	T4ASSET_API bool UpdateAnimSetAsset(
+		UT4AnimSetAsset* InOutAnimSetAsset,
+		FString& OutErrorMessage
+	);
 
-T4ASSET_API bool T4AssetEdAnimSetBuild(
-	UT4AnimSetAsset* InOutAnimSetAsset,
-	FString& OutErrorMessage
-);
+	T4ASSET_API bool SaveAnimSetAsset(
+		UT4AnimSetAsset* InAnimSetAsset,
+		FString& OutErrorMessage
+	); // #69
+
+}
 
 #endif

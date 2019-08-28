@@ -101,8 +101,6 @@ public:
 	FName GetEntityAssetName() const; // #37 : Make FT4EntityKey
 
 public:
-	static const FName CallingContextName;
-
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditAnywhere, Category=Editor)
 	FT4EntityEditorAttribute Editor;

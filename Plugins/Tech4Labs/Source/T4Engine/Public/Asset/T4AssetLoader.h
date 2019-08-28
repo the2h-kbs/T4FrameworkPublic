@@ -22,6 +22,7 @@ public:
 		const TCHAR* InDebugString
 	);
 
+	bool IsLoadStarted() const { return bLoadStart; }
 	bool IsLoadFailed() const;
 	bool IsLoadCompleted() const;
 	bool IsBinded() const;
@@ -30,6 +31,7 @@ public:
 	bool CheckReset() const;
 
 protected:
+	bool bLoadStart;
 	bool bSyncLoad;
 	bool bBindComplated;
 	IT4AssetHandle* LoadHandle;
