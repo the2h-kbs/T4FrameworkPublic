@@ -9,7 +9,7 @@ Powerful toolset and Flexible layer solution
   - 기능 소개
     - <https://tech4labs.com/T4Framework_Features/>
   - 문의
-    - SoonBo Noh (<niceofer@hotmail.com>, @Tech4Labs)
+    - <info@tech4labs.com> (Twitter: @Tech4Labs)
 - Repositories
   - UE4 Marketplace
     - 준비중...(2019.10)
