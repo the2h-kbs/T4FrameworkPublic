@@ -11,8 +11,6 @@ Powerful toolset and Flexible layer solution
   - 문의
     - <info@tech4labs.com> (Twitter: @Tech4Labs)
 - Repositories
-  - UE4 Marketplace
-    - 준비중...(2019.10)
   - GitHub 공개 저장소
     - <https://github.com/Tech4Labs/T4FrameworkPublic>
   - GitHub 비공개 저장소 (Professional License)
