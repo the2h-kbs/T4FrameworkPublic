@@ -159,6 +159,62 @@ private:
 #endif
 };
 
+// #60
+USTRUCT()
+struct T4ASSET_API FT4ContiTestSettings
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	
+#if WITH_EDITORONLY_DATA
+	
+	// #T4_ADD_EDITOR_PLAY_TAG
+	UPROPERTY(EditAnywhere, Category = Editor, AssetRegistrySearchable)
+	TSoftObjectPtr<UT4EntityAsset> EntityAsset;
+
+	UPROPERTY(EditAnywhere, Category = Editor)
+	FName WeaponNameID; // #60
+
+	UPROPERTY(EditAnywhere, Category = Editor)
+	FName SandbackNameID; // #60
+
+	UPROPERTY(EditAnywhere, Category = Editor)
+	bool bAISystemDisabled; // #60
+
+	UPROPERTY(EditAnywhere, Category = Editor)
+	bool bSandbackRoleAttacker; // #63
+
+	UPROPERTY(EditAnywhere, Category = Editor)
+	bool bOverrideSkillData; // #63
+
+	UPROPERTY(EditAnywhere, Category = Editor)
+	bool bOverrideEffectData; // #68
+
+	UPROPERTY(EditAnywhere, Category = Editor)
+	FName SkillDataNameID; // #60
+
+	UPROPERTY(EditAnywhere, Category = Editor)
+	FName EffectDataNameID; // #60
+
+#endif
+
+public:
+	FT4ContiTestSettings()
+#if WITH_EDITORONLY_DATA
+		: WeaponNameID(NAME_None) // #60
+		, SandbackNameID(NAME_None) // #60
+		, bAISystemDisabled(true) // #60
+		, bSandbackRoleAttacker(false) // #63
+		, bOverrideSkillData(true) // #63
+		, bOverrideEffectData(true) // #68
+		, SkillDataNameID(NAME_None) // #60
+		, EffectDataNameID(NAME_None) // #60
+#endif
+	{
+	}
+};
+
 class UTexture2D;
 class UT4EntityAsset;
 
@@ -190,34 +246,8 @@ public:
 	float MaxPlayTimeSec; // #56
 
 #if WITH_EDITORONLY_DATA
-	UPROPERTY(EditAnywhere, Category = Editor, AssetRegistrySearchable)
-	TSoftObjectPtr<UT4EntityAsset> TestEntityAsset;
-
-	// #T4_ADD_EDITOR_PLAY_TAG
-
 	UPROPERTY(EditAnywhere, Category = Editor)
-	FName TestWeaponNameID; // #60
-
-	UPROPERTY(EditAnywhere, Category = Editor)
-	FName TestSandbackNameID; // #60
-
-	UPROPERTY(EditAnywhere, Category = Editor)
-	bool bTestAISystemDisabled; // #60
-
-	UPROPERTY(EditAnywhere, Category = Editor)
-	bool bTestSandbackRoleAttacker; // #63
-
-	UPROPERTY(EditAnywhere, Category = Editor)
-	bool bTestOverrideSkillData; // #63
-
-	UPROPERTY(EditAnywhere, Category = Editor)
-	bool bTestOverrideEffectData; // #68
-
-	UPROPERTY(EditAnywhere, Category = Editor)
-	FName TestSkillDataNameID; // #60
-
-	UPROPERTY(EditAnywhere, Category = Editor)
-	FName TestEffectDataNameID; // #60
+	FT4ContiTestSettings TestSettings; // #60
 
 	UPROPERTY()
 	UTexture2D* ThumbnailImage; // Internal: The thumbnail image
