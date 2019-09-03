@@ -192,7 +192,7 @@ public:
 
 public:
 #if WITH_EDITORONLY_DATA
-	UPROPERTY(EditAnywhere, Category = Common)
+	UPROPERTY(EditAnywhere, Category = Editor)
 	TSoftObjectPtr<UT4EntityAsset> ParentEntityAsset;
 
 	UPROPERTY()

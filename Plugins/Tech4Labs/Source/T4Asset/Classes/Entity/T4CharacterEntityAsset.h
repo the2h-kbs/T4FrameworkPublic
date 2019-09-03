@@ -117,12 +117,14 @@ struct T4ASSET_API FT4EntityCharacterCompositeMeshData
 
 public:
 	FT4EntityCharacterCompositeMeshData()
-		: MasterPartName(NAME_None)
+		: ModularType(ET4EntityCharacterModularType::MasterPose)
 	{
 	}
 
-	UPROPERTY(EditAnywhere, Category = DataPath)
-	FName MasterPartName; // #37
+	// CustomizeFullbodyMeshDetails
+
+	UPROPERTY(EditAnywhere, Category = Default)
+	ET4EntityCharacterModularType ModularType; // #72
 
 	UPROPERTY(EditAnywhere, Category = DataPath)
 	TMap<FName, FT4EntityCharacterCompositePartMeshData> DefaultPartsData; // #37

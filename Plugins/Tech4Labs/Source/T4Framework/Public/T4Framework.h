@@ -174,6 +174,7 @@ public:
 	virtual IT4EditorGameData* GetEditorGameData() = 0; // #60
 	
 	virtual void SetInputControlLock(bool bLock) = 0; // #30
+	virtual void SetPlayerChangeDisable(bool bDisable) = 0; // #72
 #endif
 };
 
@@ -217,6 +218,7 @@ public:
 	virtual bool IsPreviewMode() const = 0; // #68
 
 	virtual void SetInputControlLock(bool bLock) = 0; // #30
+	virtual void SetPlayerChangeDisable(bool bDisable) = 0; // #72
 
 	virtual void SetEditoAISystemPaused(bool bInPaused) = 0; // #52
 

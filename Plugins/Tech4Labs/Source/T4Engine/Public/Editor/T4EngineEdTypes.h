@@ -16,6 +16,7 @@ enum ET4EngineEdNameTable
 
 	ActionPoint, // #47
 
+	EquipPoint, // #72
 	CompositePart, // #71
 
 	Nums,

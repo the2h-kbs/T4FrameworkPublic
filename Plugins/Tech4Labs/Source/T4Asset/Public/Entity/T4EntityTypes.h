@@ -52,6 +52,15 @@ enum class ET4EntityCharacterMeshType : uint8
 };
 
 UENUM()
+enum class ET4EntityCharacterModularType : uint8 // #72
+{
+	MasterPose UMETA(DisplayName = "MasterPose : Physics(X), Morph Target(O)"),
+	MeshMerge UMETA(DisplayName = "MeshMerge : Physics(O), Morph Target(X)"),
+
+	None
+};
+
+UENUM()
 enum class ET4EntityPropMeshType : uint8
 {
 	Normal,

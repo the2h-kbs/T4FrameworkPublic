@@ -14,6 +14,7 @@
 // ET4ActionType::LockOn
 // ET4ActionType::EquipWeapon
 // ET4ActionType::UnEquipWeapon
+// ET4ActionType::ExchangeCostume // #72
 
 USTRUCT()
 struct T4ENGINE_API FT4LockOnAction : public FT4CodeActionBase
@@ -127,10 +128,14 @@ public:
 	UPROPERTY(EditAnywhere)
 	FName TargetPartsName;
 	
+	UPROPERTY(EditAnywhere)
+	bool bClearDefault; // #72 : Character Entity 에 지정된 기본값으로 변경
+
 public:
 	FT4ExchangeCostumeAction()
 		: FT4CodeActionBase(StaticActionType())
 		, TargetPartsName(NAME_None)
+		, bClearDefault(false)
 	{
 	}
 
@@ -138,7 +143,7 @@ public:
 
 	bool Validate(FString& OutMsg) override
 	{
-		if (CostumeEntityAsset.IsNull())
+		if (!bClearDefault && CostumeEntityAsset.IsNull())
 		{
 			OutMsg = TEXT("Invalid CostumeEntityAsset");
 			return false;

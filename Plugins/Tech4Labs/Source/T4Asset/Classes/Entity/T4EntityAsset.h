@@ -10,25 +10,25 @@
   * #35
  */
 USTRUCT()
-struct T4ASSET_API FT4EntityEditorAttribute
+struct T4ASSET_API FT4EntityEditorThumbnailAttribute
 {
 	GENERATED_USTRUCT_BODY()
 
 public:
-	FT4EntityEditorAttribute()
+	FT4EntityEditorThumbnailAttribute()
 #if WITH_EDITORONLY_DATA
-		: ThumbnailRotation(FRotator(0.0f, 180.0f, 0.0f))
-		, ThumbnailLocation(FVector(500.0f, 0.0f, 100.0f))
+		: Rotation(FRotator(0.0f, 180.0f, 0.0f))
+		, Location(FVector(500.0f, 0.0f, 100.0f))
 #endif
 	{
 	}
 
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditAnywhere, Category=Thumbnail)
-	FRotator ThumbnailRotation;
+	FRotator Rotation;
 
 	UPROPERTY(EditAnywhere, Category=Thumbnail)
-	FVector ThumbnailLocation;
+	FVector Location;
 #endif
 };
 
@@ -103,7 +103,7 @@ public:
 public:
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditAnywhere, Category=Editor)
-	FT4EntityEditorAttribute Editor;
+	FT4EntityEditorThumbnailAttribute ThumbnailCameraInfo;
 
 	UPROPERTY()
 	UTexture2D* ThumbnailImage; // Internal: The thumbnail image
