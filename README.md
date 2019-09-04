@@ -18,7 +18,9 @@ Powerful toolset and Flexible layer solution
 - Warning
   - 2019.10 월 정식 버전 배포 예정입니다. 개발 버전이므로 테스트 용도로 만 사용해주시기 바랍니다.
 - Release Notes
-  - **[2019.09.03] [M3] Copying //Private to //Deploy (private commit 2ebd719)**
+  - **[2019.09.04] [M3] Copying //Private to //Deploy (private commit c8ce683)**
+	- #74 [기능개선] Rehearsal Entity Editor, Entity/Conti Browser 의 Item Multi Selection 지원
+  - **[2019.09.03] [M3] Copying //Private to //Deploy (private commit a45a189)**
     - #72 [기능추가] 코스튬 교체 (ExchangeCostumeAction) 기능 추가
 	- #72 [기능개선] Rehearsal Entity Editor 에서 Weapon Equip/Costume Excahnge 테스트 기능 추가
   - **[2019.08.30] [M3] Copying //Private to //Deploy (private commit 2ebd719)**
