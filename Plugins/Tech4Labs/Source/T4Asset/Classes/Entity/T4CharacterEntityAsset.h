@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "T4EntityAsset.h"
+#include "Public/T4AssetDefinitions.h" // #74
 #include "T4CharacterEntityAsset.generated.h"
 
 /**
@@ -32,6 +33,8 @@ class UAnimBlueprint;
 class UAnimMontage;
 class UBlendSpace;
 class UT4AnimSetAsset; // #39
+class UT4ContiAsset; // #74
+class UT4WeaponEntityAsset; // #74
 class UT4CostumeEntityAsset;
 
 USTRUCT()
@@ -91,7 +94,7 @@ public:
 	}
 
 	UPROPERTY(EditAnywhere, Category = Asset)
-	TSoftObjectPtr<USkeletalMesh> SkeletalMeshPath;
+	TSoftObjectPtr<USkeletalMesh> SkeletalMeshAsset;
 };
 
 // #37
@@ -130,18 +133,130 @@ public:
 	TMap<FName, FT4EntityCharacterCompositePartMeshData> DefaultPartsData; // #37
 };
 
+// #73
 USTRUCT()
-struct T4ASSET_API FT4EntityCharacterAnimationData
+struct T4ASSET_API FT4EntityCharacterStanceData
 {
 	GENERATED_USTRUCT_BODY()
 
 public:
-	FT4EntityCharacterAnimationData()
+	FT4EntityCharacterStanceData()
 	{
 	}
 
 	UPROPERTY(EditAnywhere, Category = Asset)
-	TSoftObjectPtr<UT4AnimSetAsset> AnimSetPath; // #39
+	TSoftObjectPtr<UT4AnimSetAsset> AnimSetAsset; // #39
+};
+
+// #73
+USTRUCT()
+struct T4ASSET_API FT4EntityCharacterStanceSetData
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	FT4EntityCharacterStanceSetData()
+	{
+	}
+
+	UPROPERTY(EditAnywhere, Category = Asset)
+	FT4EntityCharacterStanceData DefaultStance; // #39
+};
+
+// #74
+USTRUCT()
+struct T4ASSET_API FT4EntityCharacterWeaponData
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	FT4EntityCharacterWeaponData()
+		: EntityTag(T4EntityDefaultEntityTagName)
+	{
+	}
+
+	UPROPERTY(EditAnywhere, Category = Asset)
+	FName EntityTag;
+
+	UPROPERTY(EditAnywhere, Category = Asset)
+	FName EquipPoint;
+
+	UPROPERTY(EditAnywhere, Category = Asset)
+	TSoftObjectPtr<UT4WeaponEntityAsset> WeaponEntityAsset;
+};
+
+// #74
+USTRUCT()
+struct T4ASSET_API FT4EntityCharacterContiData
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	FT4EntityCharacterContiData()
+		: EntityTag(T4EntityDefaultEntityTagName)
+	{
+	}
+
+	UPROPERTY(EditAnywhere, Category = Asset)
+	FName EntityTag;
+
+	UPROPERTY(EditAnywhere, Category = Asset)
+	TSoftObjectPtr<UT4ContiAsset> ContiAsset;
+};
+
+// #74
+USTRUCT()
+struct T4ASSET_API FT4EntityCharacterAttachmentData
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	FT4EntityCharacterAttachmentData()
+	{
+	}
+
+	UPROPERTY(EditAnywhere, Category = DataPath)
+	TArray<FT4EntityCharacterWeaponData> EquipWeaponDatas;
+
+	UPROPERTY(EditAnywhere, Category = DataPath)
+	TArray<FT4EntityCharacterContiData> StayContiDatas;
+};
+
+// #74
+USTRUCT()
+struct T4ASSET_API FT4EntityCharacterEditorTransientData
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	FT4EntityCharacterEditorTransientData()
+		: TransientCompositePartName(NAME_None)
+		, TransientAttachmentWeaponEntityTag(NAME_None)
+		, TransientAttachmentWeaponEquipPoint(NAME_None)
+		, TransientAttachmentContiEntityTag(NAME_None)
+	{
+	}
+
+	UPROPERTY(EditAnywhere, Transient)
+	FName TransientCompositePartName;
+
+	UPROPERTY(EditAnywhere, Transient)
+	TSoftObjectPtr<UT4CostumeEntityAsset> TransientCompositePartAsset;
+
+	UPROPERTY(EditAnywhere, Transient)
+	FName TransientAttachmentWeaponEntityTag; // #74
+
+	UPROPERTY(EditAnywhere, Transient)
+	FName TransientAttachmentWeaponEquipPoint; // #74
+
+	UPROPERTY(EditAnywhere, Transient)
+	TSoftObjectPtr<UT4WeaponEntityAsset> TransientAttachmentWeaponAsset; // #74
+
+	UPROPERTY(EditAnywhere, Transient)
+	FName TransientAttachmentContiEntityTag; // #74
+
+	UPROPERTY(EditAnywhere, Transient)
+	TSoftObjectPtr<UT4ContiAsset> TransientAttachmentContiAsset; // #74
 };
 
 UCLASS(ClassGroup = Tech4Labs, Category = "Tech4Labs")
@@ -162,13 +277,13 @@ public:
 
 public:
 	UPROPERTY(EditAnywhere, Category=Default, AssetRegistrySearchable)
-	TSoftObjectPtr<USkeleton> Skeleton; // #39
+	TSoftObjectPtr<USkeleton> SkeletonAsset; // #39
+
+	UPROPERTY(EditAnywhere, Category = Default)
+	TSoftObjectPtr<UAnimBlueprint> AnimBlueprintAsset;
 
 	UPROPERTY(EditAnywhere, Category= Default)
 	ET4EntityCharacterMeshType MeshType;
-
-	UPROPERTY(EditAnywhere, Category = Default)
-	TSoftObjectPtr<UAnimBlueprint> AnimBPPath;
 
 	UPROPERTY(EditAnywhere, Category=FullbodyMesh)
 	FT4EntityCharacterFullBodyMeshData FullBodyMeshData;
@@ -176,8 +291,11 @@ public:
 	UPROPERTY(EditAnywhere, Category=CompositeMesh)
 	FT4EntityCharacterCompositeMeshData CopmpositeMeshData; // #37
 
-	UPROPERTY(EditAnywhere, Category=Animation)
-	FT4EntityCharacterAnimationData DefaultStanceData;
+	UPROPERTY(EditAnywhere, Category=Stance)
+	FT4EntityCharacterStanceSetData StanceSetData; // #73
+
+	UPROPERTY(EditAnywhere, Category = Attachment)
+	FT4EntityCharacterAttachmentData AttachmentData; // #74
 
 	UPROPERTY(EditAnywhere, Category= Attribute)
 	FT4EntityCharacterPhysicalAttribute Physical;
@@ -188,8 +306,5 @@ public:
 public:
 	// #71 : WARN : CustomizeCompositeMeshDetails 에서 사용하는 임시 프로퍼티! (저장되지 않는다!!)
 	UPROPERTY(EditAnywhere, Transient)
-	FName TransientSelectCompositePartName;
-
-	UPROPERTY(EditAnywhere, Transient)
-	TSoftObjectPtr<UT4CostumeEntityAsset> TransientCompositePartAsset;
+	FT4EntityCharacterEditorTransientData EditorTransientData;
 };

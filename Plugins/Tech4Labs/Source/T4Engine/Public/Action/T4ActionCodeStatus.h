@@ -54,7 +54,7 @@ public:
 	TSoftObjectPtr<class UT4WeaponEntityAsset> WeaponEntityAsset;
 
 	UPROPERTY(EditAnywhere)
-	FName ActionPoint; // #57 : BoneOrSocketName;
+	FName EquipPoint; // #57 : BoneOrSocketName;
 
 	UPROPERTY(EditAnywhere)
 	ET4LoadingPolicy LoadingPolicy;
@@ -62,7 +62,7 @@ public:
 public:
 	FT4EquipWeaponAction()
 		: FT4CodeActionBase(StaticActionType())
-		, ActionPoint(NAME_None)
+		, EquipPoint(NAME_None)
 		, LoadingPolicy(ET4LoadingPolicy::Default)
 	{
 	}
@@ -76,7 +76,7 @@ public:
 			OutMsg = TEXT("Invalid WeaponEntityAsset");
 			return false;
 		}
-		if (ActionPoint == NAME_None)
+		if (EquipPoint == NAME_None)
 		{
 			OutMsg = TEXT("Not set ActionPoint");
 			return false;

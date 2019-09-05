@@ -39,7 +39,7 @@ public:
 	}
 
 	UPROPERTY(EditAnywhere, Category = Asset)
-	TSoftObjectPtr<UWorld> LevelPath;
+	TSoftObjectPtr<UWorld> WorldAsset;
 };
 
 UCLASS(ClassGroup = Tech4Labs, Category = "Tech4Labs")

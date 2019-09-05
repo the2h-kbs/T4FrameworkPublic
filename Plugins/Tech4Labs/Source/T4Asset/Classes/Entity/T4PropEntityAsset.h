@@ -69,13 +69,13 @@ public:
 	ET4EntityMeshType MeshType;
 
 	UPROPERTY(EditAnywhere, Category = Asset)
-	TSoftObjectPtr<UStaticMesh> StaticMeshPath;
+	TSoftObjectPtr<UStaticMesh> StaticMeshAsset;
 
 	UPROPERTY(EditAnywhere, Category = Asset)
-	TSoftObjectPtr<USkeletalMesh> SkeletalMeshPath;
+	TSoftObjectPtr<USkeletalMesh> SkeletalMeshAsset;
 
 	UPROPERTY(EditAnywhere, Category = Asset)
-	TSoftObjectPtr<UParticleSystem> ParticleSystemPath;
+	TSoftObjectPtr<UParticleSystem> ParticleSystemAsset;
 };
 
 UCLASS(ClassGroup = Tech4Labs, Category = "Tech4Labs")

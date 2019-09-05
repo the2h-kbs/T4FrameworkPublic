@@ -93,7 +93,7 @@ enum class ET4LifecyclePolicy : uint8
 	Auto, // #56
 	Duration,
 
-	Looping UMETA(Hidden), // Code-Base, Other Solution
+	Looping		UMETA(DisplayName = "Looping (Warning #1)"), // #74
 
 	Default, // Default = Auto
 };

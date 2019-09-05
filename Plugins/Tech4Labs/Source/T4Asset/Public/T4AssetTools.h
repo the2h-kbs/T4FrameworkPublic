@@ -16,6 +16,7 @@ class UAnimSequence;
 class UT4AnimSetAsset;
 class UT4ContiAsset;
 class UT4EntityAsset;
+class UT4WeaponEntityAsset;
 class UT4CostumeEntityAsset;
 class UT4CharacterEntityAsset;
 
@@ -47,18 +48,46 @@ namespace T4AssetTool
 		const FVector& ThumbnailLocation
 	);
 
+	// #71
 	T4ASSET_API bool AddOrUpdateCompositePartInEntity(
 		UT4CharacterEntityAsset* InOutEntityAsset,
 		const FName& InPartName,
 		TSoftObjectPtr<UT4CostumeEntityAsset>& InCostumeEntitAsset,
 		FString& OutErrorMessage
-	); // #71
-
+	); 
 	T4ASSET_API bool RemoveCompositePartInEntity(
 		UT4CharacterEntityAsset* InOutEntityAsset,
 		const FName& InPartName,
 		FString& OutErrorMessage
-	); // #71
+	); 
+	// ~#71
+
+	// #74
+	T4ASSET_API bool AddOrUpdateAttachmentEquipWeaponInEntity(
+		UT4CharacterEntityAsset* InOutEntityAsset,
+		const FName& InEntityTagName,
+		const FName& InEquipPointName,
+		TSoftObjectPtr<UT4WeaponEntityAsset>& InWeaponEntitAsset,
+		FString& OutErrorMessage
+	);
+	T4ASSET_API bool RemoveAttachmentEquipWeaponInEntity(
+		UT4CharacterEntityAsset* InOutEntityAsset,
+		int32 InRemoveArrayIndex,
+		FString& OutErrorMessage
+	);
+
+	T4ASSET_API bool AddOrUpdateAttachmentStayContiInEntity(
+		UT4CharacterEntityAsset* InOutEntityAsset,
+		const FName& InEntityTagName,
+		TSoftObjectPtr<UT4ContiAsset>& InContiAsset,
+		FString& OutErrorMessage
+	);
+	T4ASSET_API bool RemoveAttachmentStayContiInEntity(
+		UT4CharacterEntityAsset* InOutEntityAsset,
+		int32 InRemoveArrayIndex,
+		FString& OutErrorMessage
+	);
+	// ~#74
 
 	T4ASSET_API bool AddOrUpdateAnimSeqeunceInfoInAnimSet(
 		UT4AnimSetAsset* InOutAnimSetAsset,

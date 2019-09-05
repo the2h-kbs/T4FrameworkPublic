@@ -46,8 +46,8 @@ public:
 
 public:
 	UPROPERTY(EditAnywhere, Category=Default, AssetRegistrySearchable)
-	TSoftObjectPtr<USkeleton> Skeleton; // #39
+	TSoftObjectPtr<USkeleton> SkeletonAsset; // #39
 
 	UPROPERTY(EditAnywhere, Category = Default)
-	TSoftObjectPtr<USkeletalMesh> SkeletalMesh; // #37
+	TSoftObjectPtr<USkeletalMesh> SkeletalMeshAsset; // #37
 };

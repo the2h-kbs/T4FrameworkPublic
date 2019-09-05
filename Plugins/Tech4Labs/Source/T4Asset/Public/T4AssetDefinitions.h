@@ -12,6 +12,11 @@
 
 static const FName T4ContoParentInheritActionPontName = TEXT("ParentInherit"); // #63
 
+// #74 : Entity
+
+static const FName T4EntityDefaultEntityTagName = TEXT("Default");
+
+
 // #39 : AnimSet
 
 static const float T4AnimSetLeftStanceValue = 1.0f;
