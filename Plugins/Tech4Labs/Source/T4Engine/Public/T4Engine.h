@@ -176,6 +176,8 @@ public:
 
 	virtual const FT4EntityKey& GetEntityKey() const = 0; // #35
 	virtual const UT4EntityAsset* GetEntityAsset() = 0; // #39
+
+	virtual const FName GetStanceName() const = 0; // #73
 	virtual const FName& GetGameDataIDName() const = 0;
 
 	virtual bool IsLoaded() const = 0; // #57 : 모든 로딩이 완료 된 상태

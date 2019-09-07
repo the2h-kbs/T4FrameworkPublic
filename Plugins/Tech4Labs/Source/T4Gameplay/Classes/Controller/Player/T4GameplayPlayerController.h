@@ -90,6 +90,9 @@ private:
 	void CS_RecvPacket_LockOff(const FT4PacketLockOffCS& InPacket);
 
 	UFUNCTION(Reliable, server, WithValidation)
+	void CS_RecvPacket_Stance(const FT4PacketStanceCS& InPacket); // #73
+
+	UFUNCTION(Reliable, server, WithValidation)
 	void CS_RecvPacket_Equip(const FT4PacketEquipCS& InPacket);
 
 	UFUNCTION(Reliable, server, WithValidation)
@@ -188,6 +191,9 @@ private:
 
 	UFUNCTION(Reliable, client)
 	void SC_RecvPacket_LockOff(const FT4PacketLockOffSC& InPacket);
+
+	UFUNCTION(Reliable, client)
+	void SC_RecvPacket_Stance(const FT4PacketStanceSC& InPacket); // #73
 
 	UFUNCTION(Reliable, client)
 	void SC_RecvPacket_Equip(const FT4PacketEquipSC& InPacket);

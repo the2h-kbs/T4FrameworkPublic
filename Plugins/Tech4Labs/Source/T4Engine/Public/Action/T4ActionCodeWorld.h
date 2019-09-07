@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "T4ActionCodeBase.h"
+#include "T4Asset/Public/T4AssetDefinitions.h" // #73
 #include "T4Asset/Public/Entity/T4EntityKey.h"
 #include "T4ActionCodeWorld.generated.h"
 
@@ -50,6 +51,8 @@ struct T4ENGINE_API FT4ObjectEnterAction : public FT4CodeActionBase
 	GENERATED_USTRUCT_BODY()
 
 public:
+	// DoActionPlaybackStartRecording() // #68
+
 	UPROPERTY(EditAnywhere)
 	FT4ObjectID ObjectID;
 
@@ -63,8 +66,8 @@ public:
 	FSoftObjectPath EntityAssetPath;
 
 	UPROPERTY(EditAnywhere)
-	FName GameDataIDName;
-
+	FName StanceName; // #73 : 초기 애니메이션 로딩 타임이 있음으로 가급적 스폰시에도 설정하도록 처리한다.
+	
 	UPROPERTY(EditAnywhere)
 	FVector SpawnLocation;
 
@@ -72,16 +75,20 @@ public:
 	FRotator SpawnRotation;
 
 	UPROPERTY(EditAnywhere)
-	bool bPlayer;
+	FName GameDataIDName;
 
+	UPROPERTY(EditAnywhere)
+	bool bPlayer;
+	   
 public:
 	FT4ObjectEnterAction()
 		: FT4CodeActionBase(StaticActionType())
 		, Name(NAME_None)
 		, EntityType(ET4EntityType::None)
-		, GameDataIDName(NAME_None)
+		, StanceName(NAME_None) // #73
 		, SpawnLocation(FVector::ZeroVector)
 		, SpawnRotation(FRotator::ZeroRotator)
+		, GameDataIDName(NAME_None)
 		, bPlayer(false)
 	{
 	}

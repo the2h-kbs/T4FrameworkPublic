@@ -23,6 +23,8 @@ enum class ET4PacketCtoS : uint32
 	LockOn, // #40
 	LockOff, // #40
 
+	Stance, // #73
+
 	Equip, // #22
 	UnEquip, // #22
 
@@ -78,6 +80,8 @@ enum class ET4PacketStoC : uint32
 
 	LockOn, // #40
 	LockOff, // #40
+
+	Stance, // #73
 
 	Equip,
 	UnEquip,

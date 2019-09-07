@@ -174,6 +174,9 @@ public:
 	TSoftObjectPtr<UT4EntityAsset> EntityAsset;
 
 	UPROPERTY(EditAnywhere, Category = Editor)
+	FName StanceSelected; // #73
+
+	UPROPERTY(EditAnywhere, Category = Editor)
 	FName WeaponNameID; // #60
 
 	UPROPERTY(EditAnywhere, Category = Editor)
@@ -202,7 +205,8 @@ public:
 public:
 	FT4ContiTestSettings()
 #if WITH_EDITORONLY_DATA
-		: WeaponNameID(NAME_None) // #60
+		: StanceSelected(NAME_None) // #73
+		, WeaponNameID(NAME_None) // #60
 		, SandbackNameID(NAME_None) // #60
 		, bAISystemDisabled(true) // #60
 		, bSandbackRoleAttacker(false) // #63

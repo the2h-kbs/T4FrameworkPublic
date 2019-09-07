@@ -93,6 +93,8 @@ public:
 
 	virtual ET4EntityType GetEntityType() const { return ET4EntityType::None; }
 
+	virtual void ResetEditorTransientData() {} // #73
+
 #if WITH_EDITOR
 	DECLARE_MULTICAST_DELEGATE(FT4OnPropertiesChanged);
 	FT4OnPropertiesChanged& OnPropertiesChanged() { return OnPropertiesChangedDelegate; }

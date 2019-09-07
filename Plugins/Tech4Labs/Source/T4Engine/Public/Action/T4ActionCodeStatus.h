@@ -12,6 +12,7 @@
  // #T4_ADD_ACTION_TAG
 
 // ET4ActionType::LockOn
+// ET4ActionType::ChangeStance // #73
 // ET4ActionType::EquipWeapon
 // ET4ActionType::UnEquipWeapon
 // ET4ActionType::ExchangeCostume // #72
@@ -41,6 +42,31 @@ public:
 	FString ToString() const override
 	{
 		return FString(TEXT("LockOnAction"));
+	}
+};
+
+// #73
+USTRUCT()
+struct T4ENGINE_API FT4ChangeStanceAction : public FT4CodeActionBase
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	UPROPERTY(EditAnywhere)
+	FName StanceName;
+
+public:
+	FT4ChangeStanceAction()
+		: FT4CodeActionBase(StaticActionType())
+		, StanceName(NAME_None)
+	{
+	}
+
+	static ET4ActionType StaticActionType() { return ET4ActionType::ChangeStance; }
+
+	FString ToString() const override
+	{
+		return FString(TEXT("ChangeStanceAction"));
 	}
 };
 

@@ -141,11 +141,15 @@ struct T4ASSET_API FT4EntityCharacterStanceData
 
 public:
 	FT4EntityCharacterStanceData()
+		: ActiveEntityTag(NAME_None)
 	{
 	}
 
 	UPROPERTY(EditAnywhere, Category = Asset)
 	TSoftObjectPtr<UT4AnimSetAsset> AnimSetAsset; // #39
+
+	UPROPERTY(EditAnywhere, Category = Asset)
+	FName ActiveEntityTag; // #74, #73
 };
 
 // #73
@@ -160,7 +164,7 @@ public:
 	}
 
 	UPROPERTY(EditAnywhere, Category = Asset)
-	FT4EntityCharacterStanceData DefaultStance; // #39
+	TMap<FName, FT4EntityCharacterStanceData> StanceMap; // #39, #73
 };
 
 // #74
@@ -206,12 +210,12 @@ public:
 
 // #74
 USTRUCT()
-struct T4ASSET_API FT4EntityCharacterAttachmentData
+struct T4ASSET_API FT4EntityCharacterEntityTagData
 {
 	GENERATED_USTRUCT_BODY()
 
 public:
-	FT4EntityCharacterAttachmentData()
+	FT4EntityCharacterEntityTagData()
 	{
 	}
 
@@ -230,11 +234,20 @@ struct T4ASSET_API FT4EntityCharacterEditorTransientData
 
 public:
 	FT4EntityCharacterEditorTransientData()
-		: TransientCompositePartName(NAME_None)
-		, TransientAttachmentWeaponEntityTag(NAME_None)
-		, TransientAttachmentWeaponEquipPoint(NAME_None)
-		, TransientAttachmentContiEntityTag(NAME_None)
 	{
+		Reset();
+	}
+
+	void Reset()
+	{
+#if WITH_EDITOR
+		TransientCompositePartName = NAME_None;
+		TransientStanceName = NAME_None; // #73
+		TransientStanceActiveEntityTag = NAME_None; // #73, #74
+		TransientEntityTagWeaponEntityTag = NAME_None;
+		TransientEntityTagWeaponEquipPoint = NAME_None;
+		TransientEntityTagContiEntityTag = NAME_None;
+#endif
 	}
 
 	UPROPERTY(EditAnywhere, Transient)
@@ -244,19 +257,28 @@ public:
 	TSoftObjectPtr<UT4CostumeEntityAsset> TransientCompositePartAsset;
 
 	UPROPERTY(EditAnywhere, Transient)
-	FName TransientAttachmentWeaponEntityTag; // #74
+	FName TransientStanceName; // #73
 
 	UPROPERTY(EditAnywhere, Transient)
-	FName TransientAttachmentWeaponEquipPoint; // #74
+	TSoftObjectPtr<UT4AnimSetAsset> TransientStanceAsset; // #73
 
 	UPROPERTY(EditAnywhere, Transient)
-	TSoftObjectPtr<UT4WeaponEntityAsset> TransientAttachmentWeaponAsset; // #74
+	FName TransientStanceActiveEntityTag; // #73, #74
 
 	UPROPERTY(EditAnywhere, Transient)
-	FName TransientAttachmentContiEntityTag; // #74
+	FName TransientEntityTagWeaponEntityTag; // #74
 
 	UPROPERTY(EditAnywhere, Transient)
-	TSoftObjectPtr<UT4ContiAsset> TransientAttachmentContiAsset; // #74
+	FName TransientEntityTagWeaponEquipPoint; // #74
+
+	UPROPERTY(EditAnywhere, Transient)
+	TSoftObjectPtr<UT4WeaponEntityAsset> TransientEntityTagWeaponAsset; // #74
+
+	UPROPERTY(EditAnywhere, Transient)
+	FName TransientEntityTagContiEntityTag; // #74
+
+	UPROPERTY(EditAnywhere, Transient)
+	TSoftObjectPtr<UT4ContiAsset> TransientEntityTagContiAsset; // #74
 };
 
 UCLASS(ClassGroup = Tech4Labs, Category = "Tech4Labs")
@@ -274,6 +296,10 @@ public:
 
 public:
 	ET4EntityType GetEntityType() const override { return ET4EntityType::Character; }
+
+#if WITH_EDITOR
+	void ResetEditorTransientData() override { EditorTransientData.Reset();  } // #73
+#endif
 
 public:
 	UPROPERTY(EditAnywhere, Category=Default, AssetRegistrySearchable)
@@ -294,8 +320,8 @@ public:
 	UPROPERTY(EditAnywhere, Category=Stance)
 	FT4EntityCharacterStanceSetData StanceSetData; // #73
 
-	UPROPERTY(EditAnywhere, Category = Attachment)
-	FT4EntityCharacterAttachmentData AttachmentData; // #74
+	UPROPERTY(EditAnywhere, Category = EntityTag)
+	FT4EntityCharacterEntityTagData EntityTagData; // #74
 
 	UPROPERTY(EditAnywhere, Category= Attribute)
 	FT4EntityCharacterPhysicalAttribute Physical;
@@ -304,7 +330,8 @@ public:
 	FT4EntityCharacterRenderingAttribute Rendering;
 
 public:
-	// #71 : WARN : CustomizeCompositeMeshDetails 에서 사용하는 임시 프로퍼티! (저장되지 않는다!!)
+	// #71 : WARN : CustomizeCharacterEntityDetails 에서 사용하는 임시 프로퍼티! (저장되지 않는다!!)
+	// TODO : Transient 설정으로 Editor Dirty 가 발생함으로 다른 방법 고려 필요
 	UPROPERTY(EditAnywhere, Transient)
 	FT4EntityCharacterEditorTransientData EditorTransientData;
 };

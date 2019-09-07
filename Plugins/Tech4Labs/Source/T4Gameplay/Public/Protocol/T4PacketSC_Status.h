@@ -11,9 +11,45 @@
  */
  // #T4_ADD_PACKET_TAG_SC
 
+// ET4PacketStoC::Stance // #73
 // ET4PacketStoC::Equip
 // ET4PacketStoC::UnEquip
 // ET4PacketStoC::Exchange
+
+USTRUCT()
+struct FT4PacketStanceSC : public FT4PacketStoC // #73
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	UPROPERTY(VisibleAnywhere)
+	FT4ObjectID ObjectID;
+
+	UPROPERTY(VisibleAnywhere)
+	FName StanceName; // TODO : Stance Table?
+
+public:
+	FT4PacketStanceSC()
+		: FT4PacketStoC(ET4PacketStoC::Stance)
+		, StanceName(NAME_None)
+	{
+	}
+
+	bool Validate(FString& OutMsg) override
+	{
+		if (!ObjectID.IsValid())
+		{
+			OutMsg = TEXT("Invalid ObjectID");
+			return false;
+		}
+		return true;
+	}
+
+	FString ToString() const override
+	{
+		return FString(TEXT("SC_Packet:Stance"));
+	}
+};
 
 USTRUCT()
 struct FT4PacketEquipSC : public FT4PacketStoC

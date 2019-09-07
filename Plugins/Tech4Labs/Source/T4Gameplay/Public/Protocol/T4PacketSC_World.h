@@ -122,11 +122,15 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	FRotator SpawnRotation;
 	
+	UPROPERTY(VisibleAnywhere)
+	FName StanceName; // #73
+
 public:
 	FT4PacketPCEnterSC()
 		: FT4PacketStoC(ET4PacketStoC::PCEnter)
 		, SpawnLocation(FVector::ZeroVector)
 		, SpawnRotation(FRotator::ZeroRotator)
+		, StanceName(NAME_None) // #73
 	{
 	}
 

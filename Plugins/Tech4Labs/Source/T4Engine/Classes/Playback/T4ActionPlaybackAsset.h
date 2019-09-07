@@ -146,6 +146,9 @@ public:
 	TArray<FT4LockOnAction> LockOnActions;
 
 	UPROPERTY(VisibleAnywhere)
+	TArray<FT4ChangeStanceAction> ChangeStanceActions; // #73
+
+	UPROPERTY(VisibleAnywhere)
 	TArray<FT4EquipWeaponAction> EquipWeaponActions;
 
 	UPROPERTY(VisibleAnywhere)

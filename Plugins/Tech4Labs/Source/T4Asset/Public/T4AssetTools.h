@@ -13,6 +13,7 @@ class UObject;
 class UTexture2D;
 class UBlendSpaceBase;
 class UAnimSequence;
+struct FT4EntityCharacterStanceData;
 class UT4AnimSetAsset;
 class UT4ContiAsset;
 class UT4EntityAsset;
@@ -49,10 +50,14 @@ namespace T4AssetTool
 	);
 
 	// #71
+	T4ASSET_API void SelectCompositePartTransientDataInEntity(
+		UT4CharacterEntityAsset* InOutEntityAsset, 
+		const FName& InPartName
+	);
 	T4ASSET_API bool AddOrUpdateCompositePartInEntity(
 		UT4CharacterEntityAsset* InOutEntityAsset,
 		const FName& InPartName,
-		TSoftObjectPtr<UT4CostumeEntityAsset>& InCostumeEntitAsset,
+		TSoftObjectPtr<UT4CostumeEntityAsset>& InCostumeEntityAsset,
 		FString& OutErrorMessage
 	); 
 	T4ASSET_API bool RemoveCompositePartInEntity(
@@ -62,27 +67,53 @@ namespace T4AssetTool
 	); 
 	// ~#71
 
+	// #73
+	T4ASSET_API void SelectStanceTransientDataInEntity(
+		UT4CharacterEntityAsset* InOutEntityAsset,
+		const FName& InStanceName
+	);
+	T4ASSET_API bool AddOrUpdateStanceInEntity(
+		UT4CharacterEntityAsset* InOutEntityAsset,
+		const FName& InStanceName,
+		const FT4EntityCharacterStanceData* InStanceData,
+		FString& OutErrorMessage
+	);
+	T4ASSET_API bool RemoveStanceInEntity(
+		UT4CharacterEntityAsset* InOutEntityAsset,
+		const FName& InStanceName,
+		FString& OutErrorMessage
+	);
+	// ~#73
+
 	// #74
-	T4ASSET_API bool AddOrUpdateAttachmentEquipWeaponInEntity(
+	T4ASSET_API void SelectEntityTagEquipWeaponTransientDataInCharacterEntity(
+		UT4CharacterEntityAsset* InOutEntityAsset,
+		const int32 InSelectIndex
+	);
+	T4ASSET_API bool AddOrUpdateEntityTagEquipWeaponInEntity(
 		UT4CharacterEntityAsset* InOutEntityAsset,
 		const FName& InEntityTagName,
 		const FName& InEquipPointName,
-		TSoftObjectPtr<UT4WeaponEntityAsset>& InWeaponEntitAsset,
+		TSoftObjectPtr<UT4WeaponEntityAsset>& InWeaponEntityAsset,
 		FString& OutErrorMessage
 	);
-	T4ASSET_API bool RemoveAttachmentEquipWeaponInEntity(
+	T4ASSET_API bool RemoveEntityTagEquipWeaponInEntity(
 		UT4CharacterEntityAsset* InOutEntityAsset,
 		int32 InRemoveArrayIndex,
 		FString& OutErrorMessage
 	);
 
-	T4ASSET_API bool AddOrUpdateAttachmentStayContiInEntity(
+	T4ASSET_API void SelectEntityTagStayContiTransientDataInEntity(
+		UT4CharacterEntityAsset* InOutEntityAsset,
+		const int32 InSelectIndex
+	);
+	T4ASSET_API bool AddOrUpdateEntityTagStayContiInEntity(
 		UT4CharacterEntityAsset* InOutEntityAsset,
 		const FName& InEntityTagName,
 		TSoftObjectPtr<UT4ContiAsset>& InContiAsset,
 		FString& OutErrorMessage
 	);
-	T4ASSET_API bool RemoveAttachmentStayContiInEntity(
+	T4ASSET_API bool RemoveEntityTagStayContiInEntity(
 		UT4CharacterEntityAsset* InOutEntityAsset,
 		int32 InRemoveArrayIndex,
 		FString& OutErrorMessage

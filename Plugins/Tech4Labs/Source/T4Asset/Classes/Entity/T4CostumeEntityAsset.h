@@ -48,6 +48,9 @@ public:
 	UPROPERTY(EditAnywhere, Category=Default, AssetRegistrySearchable)
 	TSoftObjectPtr<USkeleton> SkeletonAsset; // #39
 
-	UPROPERTY(EditAnywhere, Category = Default)
+	UPROPERTY(EditAnywhere, Category=Default, AssetRegistrySearchable)
+	FName CompositePartName; // #72
+
+	UPROPERTY(EditAnywhere, Category=Default)
 	TSoftObjectPtr<USkeletalMesh> SkeletalMeshAsset; // #37
 };

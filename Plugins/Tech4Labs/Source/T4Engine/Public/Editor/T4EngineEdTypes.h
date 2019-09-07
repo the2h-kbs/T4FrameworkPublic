@@ -21,5 +21,7 @@ enum ET4EngineEdNameTable
 
 	EntityTag, // #74
 
+	Stance, // #73
+
 	Nums,
 };
