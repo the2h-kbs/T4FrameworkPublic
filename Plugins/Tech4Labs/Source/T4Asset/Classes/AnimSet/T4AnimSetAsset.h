@@ -99,7 +99,7 @@ public:
 
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditAnywhere, Category = AnimSequenceInfo)
-	TSoftObjectPtr<UAnimSequence> AnimSequnce;
+	TSoftObjectPtr<UAnimSequence> AnimSequnceAsset;
 #endif
 };
 
@@ -118,7 +118,56 @@ public:
 	FName Name;
 
 	UPROPERTY(EditAnywhere, Category = BlendSpaceInfo)
-	TSoftObjectPtr<UBlendSpaceBase> BlendSpace;
+	TSoftObjectPtr<UBlendSpaceBase> BlendSpaceAsset;
+};
+
+// #39
+USTRUCT()
+struct T4ASSET_API FT4AnimSetEditorTransientData
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	FT4AnimSetEditorTransientData()
+	{
+		Reset();
+	}
+
+	void Reset()
+	{
+#if WITH_EDITOR
+		TransientSelectSkillSectionName = NAME_None;
+		TransientSelectLocomotionSectionName = NAME_None;
+		TransientSelectDefaultSectionName = NAME_None;
+		TransientSelectBlendSpaceName = NAME_None;
+#endif
+	}
+
+	// #39 : WARN : CustomDetails 에서 사용하는 임시 프로퍼티! (저장되지 않는다!!)
+	UPROPERTY(EditAnywhere, Transient)
+	FName TransientSelectSkillSectionName;
+
+	UPROPERTY(EditAnywhere, Transient)
+	TSoftObjectPtr<UAnimSequence> TransientSkillAnimSequenceAsset;
+
+	UPROPERTY(EditAnywhere, Transient)
+	FName TransientSelectLocomotionSectionName;
+
+	UPROPERTY(EditAnywhere, Transient)
+	TSoftObjectPtr<UAnimSequence> TransientLocomotionAnimSequenceAsset;
+
+	UPROPERTY(EditAnywhere, Transient)
+	FName TransientSelectDefaultSectionName;
+
+	UPROPERTY(EditAnywhere, Transient)
+	TSoftObjectPtr<UAnimSequence> TransientDefaultAnimSequenceAsset;
+
+	UPROPERTY(EditAnywhere, Transient)
+	FName TransientSelectBlendSpaceName;
+
+	UPROPERTY(EditAnywhere, Transient)
+	TSoftObjectPtr<UBlendSpaceBase> TransientBlendSpaceAsset;
+	// ~#39 : WARN : CustomDetails 에서 사용하는 임시 프로퍼티!
 };
 
 UCLASS(ClassGroup = Tech4Labs, Category = "Tech4Labs")
@@ -144,7 +193,7 @@ public:
 
 public:
 	UPROPERTY(EditAnywhere, Category = Common)
-	TSoftObjectPtr<USkeleton> Skeleton;
+	TSoftObjectPtr<USkeleton> SkeletonAsset;
 
 	// CustomizeSkillAnimationDetails
 
@@ -152,7 +201,7 @@ public:
 	bool bSkillAnimMontageAutoGen; // #69
 
 	UPROPERTY(EditAnywhere, Category = EditAnimationLayer)
-	TSoftObjectPtr<UAnimMontage> SkillAnimMontage; // #69
+	TSoftObjectPtr<UAnimMontage> SkillAnimMontageAsset; // #69
 
 	UPROPERTY(EditAnywhere, Category = EditAnimationLayer)
 	TMap<FName, FT4AnimSequenceInfo> SkillAnimSequenceInfos;
@@ -163,7 +212,7 @@ public:
 	bool bLocomotionAnimMontageAutoGen; // #69
 
 	UPROPERTY(EditAnywhere, Category = EditAnimationLayer)
-	TSoftObjectPtr<UAnimMontage> LocomotionAnimMontage; // #69
+	TSoftObjectPtr<UAnimMontage> LocomotionAnimMontageAsset; // #69
 
 	UPROPERTY(EditAnywhere, Category = EditAnimationLayer)
 	FT4AnimSetLocomotionAttribute LocomotionAttributes;
@@ -177,7 +226,7 @@ public:
 	bool bDefaultAnimMontageAutoGen; // #69
 
 	UPROPERTY(EditAnywhere, Category = EditAnimationLayer)
-	TSoftObjectPtr<UAnimMontage> DefaultAnimMontage; // #38, #69
+	TSoftObjectPtr<UAnimMontage> DefaultAnimMontageAsset; // #38, #69
 
 	UPROPERTY(EditAnywhere, Category = EditAnimationLayer)
 	TMap<FName, FT4AnimSequenceInfo> DefaultAnimSequenceInfos; // #38
@@ -199,31 +248,10 @@ public:
 	UTexture2D* ThumbnailImage; // Internal: The thumbnail image
 #endif
 
-	// #39 : WARN : CustomDetails 에서 사용하는 임시 프로퍼티! (저장되지 않는다!!)
+	// #39 : WARN : AnimSetCustomDetails 에서 사용하는 임시 프로퍼티! (저장되지 않는다!!)
+	// TODO : Transient 설정으로 Editor Dirty 가 발생함으로 다른 방법 고려 필요
 	UPROPERTY(EditAnywhere, Transient)
-	FName TransientSelectSkillSectionName;
-
-	UPROPERTY(EditAnywhere, Transient)
-	TSoftObjectPtr<UAnimSequence> TransientSkillAnimSequence;
-
-	UPROPERTY(EditAnywhere, Transient)
-	FName TransientSelectLocomotionSectionName;
-
-	UPROPERTY(EditAnywhere, Transient)
-	TSoftObjectPtr<UAnimSequence> TransientLocomotionAnimSequence;
-
-	UPROPERTY(EditAnywhere, Transient)
-	FName TransientSelectDefaultSectionName;
-
-	UPROPERTY(EditAnywhere, Transient)
-	TSoftObjectPtr<UAnimSequence> TransientDefaultAnimSequence;
-
-	UPROPERTY(EditAnywhere, Transient)
-	FName TransientSelectBlendSpaceName;
-
-	UPROPERTY(EditAnywhere, Transient)
-	TSoftObjectPtr<UBlendSpaceBase> TransientBlendSpace;
-	// ~#39 : WARN : CustomDetails 에서 사용하는 임시 프로퍼티!
+	FT4AnimSetEditorTransientData EditorTransientData;
 
 private:
 #if WITH_EDITOR

@@ -120,11 +120,31 @@ namespace T4AssetTool
 	);
 	// ~#74
 
+	T4ASSET_API void SelectSkillAnimationLayerTransientDataInAnimSet(
+		UT4AnimSetAsset* InOutAnimSetAsset,
+		const FName& InSelectedName
+	);
+
+	T4ASSET_API void SelectLocomotionAnimationLayerTransientDataInAnimSet(
+		UT4AnimSetAsset* InOutAnimSetAsset,
+		const FName& InSelectedName
+	);
+
+	T4ASSET_API void SelectDefaultAnimationLayerTransientDataInAnimSet(
+		UT4AnimSetAsset* InOutAnimSetAsset,
+		const FName& InSelectedName
+	);
+
+	T4ASSET_API void SelectBlendspaceTransientDataInAnimSet(
+		UT4AnimSetAsset* InOutAnimSetAsset,
+		const FName& InSelectedName
+	);
+
 	T4ASSET_API bool AddOrUpdateAnimSeqeunceInfoInAnimSet(
 		UT4AnimSetAsset* InOutAnimSetAsset,
 		const FName& InAnimMontageName,
 		const FName& InAnimSequenceName,
-		TSoftObjectPtr<UAnimSequence>& InAnimSequence,
+		const TSoftObjectPtr<UAnimSequence>& InAnimSequence,
 		FString& OutErrorMessage
 	);
 
@@ -138,7 +158,7 @@ namespace T4AssetTool
 	T4ASSET_API bool AddOrUpdateBlendSpaceInfoInAnimSet(
 		UT4AnimSetAsset* InOutAnimSetAsset,
 		const FName& InBlendSpaceName,
-		TSoftObjectPtr<UBlendSpaceBase>& InBlendSpace,
+		const TSoftObjectPtr<UBlendSpaceBase>& InBlendSpace,
 		FString& OutErrorMessage
 	);
 
