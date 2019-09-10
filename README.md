@@ -18,6 +18,8 @@ Powerful toolset and Flexible layer solution
 - Warning
   - 2019.10 월 정식 버전 배포 예정입니다. 개발 버전이므로 테스트 용도로 만 사용해주시기 바랍니다.
 - Release Notes
+  - **[2019.09.10] [M3] Copying //Private to //Deploy (private commit 73e3b6d)**
+	- #76 [에셋수정] Character Physics 관련 기능 추가전 테스트용 Mannequin 에셋 리네임 (Locomotion => Fullbody)
   - **[2019.09.09] [M3] Copying //Private to //Deploy (private commit 317215f)**
 	- #73 [버그수정] Conti Editor 의 Stance 변경시 AnimationAction / SectionName Udate 가 되지 않던 문제 수정
   - **[2019.09.07] [M3] Copying //Private to //Deploy (private commit 03a7a80)**
