@@ -9,7 +9,10 @@
 /**
   *
  */
- // #T4_ADD_ACTION_TAG
+ // #T4_ADD_ACTION_TAG_CODE
+
+// ET4ActionType::EditorReload
+
 USTRUCT()
 struct T4ENGINE_API FT4EditorReloadAction : public FT4CodeActionBase
 {

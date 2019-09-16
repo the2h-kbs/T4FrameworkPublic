@@ -170,9 +170,6 @@ public:
 #if WITH_EDITORONLY_DATA
 	
 	// #T4_ADD_EDITOR_PLAY_TAG
-	UPROPERTY(EditAnywhere, Category = Editor, AssetRegistrySearchable)
-	TSoftObjectPtr<UT4EntityAsset> EntityAsset;
-
 	UPROPERTY(EditAnywhere, Category = Editor)
 	FName StanceSelected; // #73
 
@@ -250,6 +247,9 @@ public:
 	float MaxPlayTimeSec; // #56
 
 #if WITH_EDITORONLY_DATA
+	UPROPERTY(EditAnywhere, Category = Editor, AssetRegistrySearchable)
+	TSoftObjectPtr<UT4EntityAsset> PreviewEntityAsset;
+
 	UPROPERTY(EditAnywhere, Category = Editor)
 	FT4ContiTestSettings TestSettings; // #60
 

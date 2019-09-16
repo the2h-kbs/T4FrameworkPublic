@@ -50,7 +50,7 @@ enum class ET4ActionType : uint32
 	ObjectEnter,
 	ObjectLeave,
 
-	// begin Object / #68 : #T4_ADD_ACTION_TAG
+	// begin Object / #68 : #T4_ADD_ACTION_TAG_CODE
 
 	MoveAsync, // #40
 	MoveSync, // #40
@@ -71,6 +71,9 @@ enum class ET4ActionType : uint32
 	EquipWeapon, // #22
 	UnEquipWeapon, // #48
 	ExchangeCostume, // #37
+
+	Die, // #76
+	Resurrect, // #76
 
 	Conti, // #24
 

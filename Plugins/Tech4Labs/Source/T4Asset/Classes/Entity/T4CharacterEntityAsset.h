@@ -28,6 +28,7 @@ private:
 };
 
 class USkeleton;
+class UPhysicsAsset; // #76
 class USkeletalMesh;
 class UAnimBlueprint;
 class UAnimMontage;
@@ -95,6 +96,9 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = Asset)
 	TSoftObjectPtr<USkeletalMesh> SkeletalMeshAsset;
+
+	UPROPERTY(EditAnywhere, Category = Asset)
+	TSoftObjectPtr<UPhysicsAsset> OverridePhysicsAsset; // #76 : Fullbody SK 라면 기본 세팅된 PhsycisAsset 을 그대로 사용하고, Override 할 경우만 재설정한다.
 };
 
 // #37

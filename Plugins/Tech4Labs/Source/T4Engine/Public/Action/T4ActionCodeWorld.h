@@ -11,7 +11,12 @@
 /**
   *
  */
- // #T4_ADD_ACTION_TAG
+ // #T4_ADD_ACTION_TAG_CODE
+
+// ET4ActionType::ChangeWorld
+// ET4ActionType::ObjectEnter
+// ET4ActionType::ObjectLeave
+
 USTRUCT()
 struct T4ENGINE_API FT4ChangeWorldAction : public FT4CodeActionBase
 {

@@ -18,6 +18,8 @@ Powerful toolset and Flexible layer solution
 - Warning
   - 2019.10 월 정식 버전 배포 예정입니다. 개발 버전이므로 테스트 용도로 만 사용해주시기 바랍니다.
 - Release Notes
+  - **[2019.09.16] [M3] Copying //Private to //Deploy (private commit 7f3bd62)**
+	- #76 [기능추가] Rehearsal Editor 의 Viewport 에 "Show/Capsule" 옵션 추가
   - **[2019.09.10] [M3] Copying //Private to //Deploy (private commit 73e3b6d)**
 	- #76 [에셋수정] Character Physics 관련 기능 추가전 테스트용 Mannequin 에셋 리네임 (Locomotion => Fullbody)
   - **[2019.09.09] [M3] Copying //Private to //Deploy (private commit 317215f)**

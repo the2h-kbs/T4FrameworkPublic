@@ -9,7 +9,7 @@
 /**
   *
  */
-// #T4_ADD_ACTION_TAG
+// #T4_ADD_ACTION_TAG_CODE
 
 // ET4ActionType::Conti
 // ET4ActionType::Stop

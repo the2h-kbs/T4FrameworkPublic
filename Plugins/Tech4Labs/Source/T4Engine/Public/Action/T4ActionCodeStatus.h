@@ -9,13 +9,15 @@
 /**
   *
  */
- // #T4_ADD_ACTION_TAG
+ // #T4_ADD_ACTION_TAG_CODE
 
 // ET4ActionType::LockOn
 // ET4ActionType::ChangeStance // #73
 // ET4ActionType::EquipWeapon
 // ET4ActionType::UnEquipWeapon
 // ET4ActionType::ExchangeCostume // #72
+// ET4ActionType::Die // #76
+// ET4ActionType::Resurrect // #76
 
 USTRUCT()
 struct T4ENGINE_API FT4LockOnAction : public FT4CodeActionBase
@@ -185,5 +187,59 @@ public:
 	FString ToString() const override
 	{
 		return FString(TEXT("ExchangeCostumeAction"));
+	}
+};
+
+// #76
+USTRUCT()
+struct T4ENGINE_API FT4DieAction : public FT4CodeActionBase
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+
+public:
+	FT4DieAction()
+		: FT4CodeActionBase(StaticActionType())
+	{
+	}
+
+	static ET4ActionType StaticActionType() { return ET4ActionType::Die; }
+
+	bool Validate(FString& OutMsg) override
+	{
+		return true;
+	}
+
+	FString ToString() const override
+	{
+		return FString(TEXT("DieAction"));
+	}
+};
+
+// #76
+USTRUCT()
+struct T4ENGINE_API FT4ResurrectAction : public FT4CodeActionBase
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+
+public:
+	FT4ResurrectAction()
+		: FT4CodeActionBase(StaticActionType())
+	{
+	}
+
+	static ET4ActionType StaticActionType() { return ET4ActionType::Resurrect; }
+
+	bool Validate(FString& OutMsg) override
+	{
+		return true;
+	}
+
+	FString ToString() const override
+	{
+		return FString(TEXT("ResurrectAction"));
 	}
 };

@@ -242,7 +242,7 @@ public:
 public:
 #if WITH_EDITORONLY_DATA
 	UPROPERTY(EditAnywhere, Category = Editor)
-	TSoftObjectPtr<UT4EntityAsset> ParentEntityAsset;
+	TSoftObjectPtr<UT4EntityAsset> PreviewEntityAsset;
 
 	UPROPERTY()
 	UTexture2D* ThumbnailImage; // Internal: The thumbnail image

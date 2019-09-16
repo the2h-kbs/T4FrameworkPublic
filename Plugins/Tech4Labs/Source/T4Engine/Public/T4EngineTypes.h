@@ -207,6 +207,13 @@ enum class ET4EditorReload : uint8
 	None,
 };
 
+#if !UE_BUILD_SHIPPING
+enum ET4EngineDebugFlag // #76
+{
+	Debug_Object_Capsule_Bit = (1 << 0),
+};
+#endif
+
 static const uint32 T4InvalidGameObjectID = (uint32)-1;
 
 USTRUCT()

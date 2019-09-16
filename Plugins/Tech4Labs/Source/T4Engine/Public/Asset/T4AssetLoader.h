@@ -38,6 +38,71 @@ protected:
 	FName DebugToken;
 };
 
+class UMaterialInterface;
+class UDecalComponent;
+class UAnimMontage;
+class UBlendSpaceBase;
+class UPhysicsAsset;
+class UParticleSystem;
+class USkeletalMeshComponent;
+class USkinnedMeshComponent;
+class USkeletalMeshComponent;
+class UParticleSystemComponent;
+class UT4ContiAsset;
+class UT4AnimSetAsset;
+class UBlackboardData;
+class UBehaviorTree;
+
+class T4ENGINE_API FT4MaterialLoader : public FT4AssetLoader // #54
+{
+public:
+	explicit FT4MaterialLoader() {}
+	virtual ~FT4MaterialLoader() { Reset(); }
+
+	bool Process(UDecalComponent* InDecalComponent);
+
+	UMaterialInterface* GetMaterialInterface();
+};
+
+class T4ENGINE_API FT4AnimBlueprintClassLoader : public FT4AssetLoader
+{
+public:
+	explicit FT4AnimBlueprintClassLoader() {}
+	virtual ~FT4AnimBlueprintClassLoader() { Reset(); }
+
+	bool Process(USkeletalMeshComponent* InMeshComponent);
+};
+
+class T4ENGINE_API FT4AnimMontageLoader : public FT4AssetLoader
+{
+public:
+	explicit FT4AnimMontageLoader() {}
+	virtual ~FT4AnimMontageLoader() { Reset(); }
+
+	UAnimMontage* GetAnimMontage() const;
+};
+
+class T4ENGINE_API FT4BlendSpaceLoader : public FT4AssetLoader
+{
+public:
+	explicit FT4BlendSpaceLoader() {}
+	virtual ~FT4BlendSpaceLoader() { Reset(); }
+
+	UBlendSpaceBase* GetBlendSpace() const;
+};
+
+// #76
+class T4ENGINE_API FT4PhysicsAssetLoader : public FT4AssetLoader
+{
+public:
+	explicit FT4PhysicsAssetLoader() {}
+	virtual ~FT4PhysicsAssetLoader() { Reset(); }
+
+	bool Process(USkeletalMeshComponent* InMeshComponent);
+
+	UPhysicsAsset* GetPhysicsAsset();
+};
+
 class T4ENGINE_API FT4StaticMeshLoader : public FT4AssetLoader
 {
 public:
@@ -62,47 +127,9 @@ public:
 	explicit FT4ParticleSystemLoader() {}
 	virtual ~FT4ParticleSystemLoader() { Reset(); }
 
-	bool Process(class UParticleSystemComponent* InParticleSystemComponent);
+	bool Process(UParticleSystemComponent* InParticleSystemComponent);
 
-	class UParticleSystem* GetParticleSystem(); // #56
-};
-
-class T4ENGINE_API FT4MaterialLoader : public FT4AssetLoader // #54
-{
-public:
-	explicit FT4MaterialLoader() {}
-	virtual ~FT4MaterialLoader() { Reset(); }
-
-	bool Process(class UDecalComponent* InDecalComponent);
-
-	class UMaterialInterface* GetMaterialInterface();
-};
-
-class T4ENGINE_API FT4AnimBlueprintClassLoader : public FT4AssetLoader
-{
-public:
-	explicit FT4AnimBlueprintClassLoader() {}
-	virtual ~FT4AnimBlueprintClassLoader() { Reset(); }
-
-	bool Process(USkeletalMeshComponent* InMeshComponent);
-};
-
-class T4ENGINE_API FT4AnimMontageLoader : public FT4AssetLoader
-{
-public:
-	explicit FT4AnimMontageLoader() {}
-	virtual ~FT4AnimMontageLoader() { Reset(); }
-
-	class UAnimMontage* GetAnimMontage() const;
-};
-
-class T4ENGINE_API FT4BlendSpaceLoader : public FT4AssetLoader
-{
-public:
-	explicit FT4BlendSpaceLoader() {}
-	virtual ~FT4BlendSpaceLoader() { Reset(); }
-
-	class UBlendSpaceBase* GetBlendSpace() const;
+	UParticleSystem* GetParticleSystem(); // #56
 };
 
 // #24
@@ -112,7 +139,7 @@ public:
 	explicit FT4ContiAssetLoader() {}
 	virtual ~FT4ContiAssetLoader() { Reset(); }
 
-	class UT4ContiAsset* GetContiAsset() const;
+	UT4ContiAsset* GetContiAsset() const;
 };
 
 // #39
@@ -124,7 +151,7 @@ public:
 
 	bool Process();
 
-	class UT4AnimSetAsset* GetAnimSetAsset() const;
+	UT4AnimSetAsset* GetAnimSetAsset() const;
 };
 
 // #50
@@ -134,7 +161,7 @@ public:
 	explicit FT4BlackboardAssetLoader() {}
 	~FT4BlackboardAssetLoader() { Reset(); }
 
-	class UBlackboardData* GetBlackboardData() const;
+	UBlackboardData* GetBlackboardData() const;
 };
 
 // #50
@@ -144,5 +171,5 @@ public:
 	explicit FT4BehaviorTreeAssetLoader() {}
 	~FT4BehaviorTreeAssetLoader() { Reset(); }
 
-	class UBehaviorTree* GetBehaviorTree() const;
+	UBehaviorTree* GetBehaviorTree() const;
 };

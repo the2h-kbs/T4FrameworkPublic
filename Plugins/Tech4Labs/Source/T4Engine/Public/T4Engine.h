@@ -237,6 +237,10 @@ public:
 	) const = 0; // #54
 
 	virtual void SetHeightOffset(float InOffset) = 0; // #18
+
+#if !UE_BUILD_SHIPPING
+	virtual FT4GameObjectDebugInfo& GetDebugInfo() = 0; // #76
+#endif
 };
 
 class T4ENGINE_API IT4ActionPlaybackPlayer // #68
@@ -288,7 +292,7 @@ public:
 
 	virtual bool DoPlay(const FSoftObjectPath& InPlayPath) = 0;
 	virtual bool DoPlay(const FString& InPlayAssetName, const FString& InFolderName) = 0; // /Tech4Labs/Editor/ActionPlayback/<InFolderName>/<InPlayAssetName>.uasset
-	virtual void DoPlayStop() = 0;
+	virtual void DoStopPlaying() = 0;
 
 	virtual bool IsPlayRepeat() const = 0;
 	virtual void SetPlayRepeat(bool bEnable) = 0;
@@ -298,7 +302,7 @@ public:
 
 	virtual bool DoRec(const FSoftObjectPath& InRecPath) = 0;
 	virtual bool DoRec(const FString& InRecAssetName, const FString& InFolderName) = 0; // /Tech4Labs/Editor/ActionPlayback/<InFolderName>/<InRecAssetName>.uasset
-	virtual void DoRecStop() = 0;
+	virtual void DoStopRecording() = 0;
 };
 
 class T4ENGINE_API IT4GameWorld

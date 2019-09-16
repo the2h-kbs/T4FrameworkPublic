@@ -9,7 +9,7 @@
 /**
   *
  */
- // #T4_ADD_ACTION_TAG
+ // #T4_ADD_ACTION_TAG_CODE
 
 // ET4ActionType::MoveAsync
 // ET4ActionType::MoveSync

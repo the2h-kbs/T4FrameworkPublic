@@ -56,6 +56,23 @@ struct FT4GameObjectProperty // #34
 	FVector RelativeScale3D; // #37
 };
 
+#if !UE_BUILD_SHIPPING
+struct FT4GameObjectDebugInfo
+{
+	FT4GameObjectDebugInfo()
+	{
+		Reset();
+	}
+
+	void Reset()
+	{
+		DebugBitFlags = 0;
+	}
+
+	uint32 DebugBitFlags; // #76 : ET4EngineDebugFlag
+};
+#endif
+
 #if (WITH_EDITOR || WITH_SERVER_CODE)
 struct FT4ServerGameObjectAttribute // #46
 {

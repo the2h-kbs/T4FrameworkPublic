@@ -96,7 +96,7 @@ public:
 	TMap<uint32, FT4ActionParameters> PlayActionParameters; // PlayUniqueKey
 
 
-	// #T4_ADD_ACTION_TAG
+	// #T4_ADD_ACTION_TAG_CODE
 
 	// T4ActionCodeWorld.h
 
@@ -156,6 +156,12 @@ public:
 
 	UPROPERTY(VisibleAnywhere)
 	TArray<FT4ExchangeCostumeAction> ExchangeCostumeActions;
+
+	UPROPERTY(VisibleAnywhere)
+	TArray<FT4DieAction> DieActions; // #76
+
+	UPROPERTY(VisibleAnywhere)
+	TArray<FT4ResurrectAction> ResurrectActions; // #76
 
 
 	// T4ActionCodeCommon.h
