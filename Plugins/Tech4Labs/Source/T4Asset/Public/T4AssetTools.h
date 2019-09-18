@@ -14,6 +14,7 @@ class UTexture2D;
 class UBlendSpaceBase;
 class UAnimSequence;
 struct FT4EntityCharacterStanceData;
+struct FT4EntityCharacterReactionData; // #76
 class UT4AnimSetAsset;
 class UT4ContiAsset;
 class UT4EntityAsset;
@@ -84,6 +85,24 @@ namespace T4AssetTool
 		FString& OutErrorMessage
 	);
 	// ~#73
+
+	// #76
+	T4ASSET_API void SelectReactionTransientDataInEntity(
+		UT4CharacterEntityAsset* InOutEntityAsset,
+		const FName& InReactionName
+	);
+	T4ASSET_API bool AddOrUpdateReactionInEntity(
+		UT4CharacterEntityAsset* InOutEntityAsset,
+		const FName& InReactionName,
+		const FT4EntityCharacterReactionData* InReactionData,
+		FString& OutErrorMessage
+	);
+	T4ASSET_API bool RemoveReactionInEntity(
+		UT4CharacterEntityAsset* InOutEntityAsset,
+		const FName& InReactionName,
+		FString& OutErrorMessage
+	);
+	// ~#76
 
 	// #74
 	T4ASSET_API void SelectEntityTagEquipWeaponTransientDataInCharacterEntity(

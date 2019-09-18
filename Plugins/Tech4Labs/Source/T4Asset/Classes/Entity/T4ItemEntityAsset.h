@@ -73,9 +73,9 @@ public:
 	UPROPERTY(EditAnywhere, Category=DropMesh)
 	FT4EntityItemDropMeshData DropMeshData;
 
-	UPROPERTY(EditAnywhere, Category=Attribute)
+	UPROPERTY(EditAnywhere, Category=Attributes)
 	FT4EntityItemPhysicalAttribute DropMeshPhysical;
 
-	UPROPERTY(EditAnywhere, Category=Attribute)
+	UPROPERTY(EditAnywhere, Category=Attributes)
 	FT4EntityItemRenderingAttribute DropMeshRendering;
 };

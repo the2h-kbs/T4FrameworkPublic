@@ -10,7 +10,7 @@
 
 // Common
 
-static const FName T4ContoParentInheritActionPontName = TEXT("ParentInherit"); // #63
+static const FName T4ContiDefaultActionPontName = TEXT("Root"); // #63
 
 // #74 : Entity
 

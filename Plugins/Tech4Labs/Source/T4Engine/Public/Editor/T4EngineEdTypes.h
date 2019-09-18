@@ -23,5 +23,7 @@ enum ET4EngineEdNameTable
 
 	Stance, // #73
 
+	Reaction, // #76
+
 	Nums,
 };

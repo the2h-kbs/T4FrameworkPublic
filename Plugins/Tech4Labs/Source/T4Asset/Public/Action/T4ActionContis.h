@@ -18,6 +18,7 @@
 // ET4ActionType::Particle
 // ET4ActionType::Decal // #52
 // ET4ActionType::Projectile // #63
+// ET4ActionType::Hit // #76
 // ET4ActionType::TimeScale // #52
 // ET4ActionType::CameraWork // #52
 
@@ -146,6 +147,9 @@ public:
 	ET4AttachParent AttachParent;
 
 	UPROPERTY(EditAnywhere)
+	bool bParentInheritPoint; // #76
+
+	UPROPERTY(EditAnywhere)
 	FName ActionPoint; // #57
 
 	UPROPERTY(EditAnywhere)
@@ -164,7 +168,8 @@ public:
 	FT4ParticleAction()
 		: FT4ContiActionBase(StaticActionType())
 		, AttachParent(ET4AttachParent::Default) // #54
-		, ActionPoint(T4ContoParentInheritActionPontName)
+		, bParentInheritPoint(false) // #76
+		, ActionPoint(T4ContiDefaultActionPontName)
 		, LoadingPolicy(ET4LoadingPolicy::Default)
 		, Scale(FVector::OneVector) // #54
 		, PlayRate(1.0f)
@@ -196,6 +201,9 @@ public:
 	ET4AttachParent AttachParent;
 
 	UPROPERTY(EditAnywhere)
+	bool bParentInheritPoint; // #76
+
+	UPROPERTY(EditAnywhere)
 	FName ActionPoint;
 
 	UPROPERTY(EditAnywhere)
@@ -223,7 +231,8 @@ public:
 	FT4DecalAction()
 		: FT4ContiActionBase(StaticActionType())
 		, AttachParent(ET4AttachParent::Default)
-		, ActionPoint(T4ContoParentInheritActionPontName)
+		, bParentInheritPoint(false) // #76
+		, ActionPoint(T4ContiDefaultActionPontName)
 		, LoadingPolicy(ET4LoadingPolicy::Default)
 		, Scale(FVector::OneVector)
 		, DecalSortOrder(0)
@@ -295,6 +304,29 @@ public:
 	FString ToDisplayText() override
 	{
 		return FString::Printf(TEXT("Projectile '%s'"), *(HeadContiAsset.GetAssetName()));
+	}
+};
+
+// #76
+USTRUCT()
+struct T4ASSET_API FT4HitAction : public FT4ContiActionBase
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	// #39 : FT4ContiCustomizeDetails::CustomizeHitActionDetails
+
+public:
+	FT4HitAction()
+		: FT4ContiActionBase(StaticActionType())
+	{
+	}
+
+	static ET4ActionType StaticActionType() { return ET4ActionType::Hit; }
+
+	FString ToString() const override
+	{
+		return FString(TEXT("HitAction"));
 	}
 };
 

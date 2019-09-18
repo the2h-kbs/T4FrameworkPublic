@@ -114,6 +114,9 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	TArray<FT4ProjectileAction> ProjectileActions; // #63
+
+	UPROPERTY(EditAnywhere)
+	TArray<FT4HitAction> HitActions; // #76
 	
 	UPROPERTY(EditAnywhere)
 	TArray<FT4TimeScaleAction> TimeScaleActions; // #54
@@ -186,6 +189,9 @@ public:
 	bool bSandbackRoleAttacker; // #63
 
 	UPROPERTY(EditAnywhere, Category = Editor)
+	bool bSandbackOneHitDie; // #76
+
+	UPROPERTY(EditAnywhere, Category = Editor)
 	bool bOverrideSkillData; // #63
 
 	UPROPERTY(EditAnywhere, Category = Editor)
@@ -197,6 +203,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = Editor)
 	FName EffectDataNameID; // #60
 
+	UPROPERTY(EditAnywhere, Category = Editor)
+	FName DieReactionNameID; // #76
+
 #endif
 
 public:
@@ -207,10 +216,12 @@ public:
 		, SandbackNameID(NAME_None) // #60
 		, bAISystemDisabled(true) // #60
 		, bSandbackRoleAttacker(false) // #63
+		, bSandbackOneHitDie(false) // #76
 		, bOverrideSkillData(true) // #63
 		, bOverrideEffectData(true) // #68
 		, SkillDataNameID(NAME_None) // #60
 		, EffectDataNameID(NAME_None) // #60
+		, DieReactionNameID(NAME_None) // #76
 #endif
 	{
 	}

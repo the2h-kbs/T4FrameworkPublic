@@ -197,10 +197,21 @@ struct T4ENGINE_API FT4DieAction : public FT4CodeActionBase
 	GENERATED_USTRUCT_BODY()
 
 public:
+	UPROPERTY(EditAnywhere)
+	FName ReactionName;
+
+	UPROPERTY(EditAnywhere)
+	FVector ShotDirection;
+
+	UPROPERTY(Transient)
+	bool bTransientPlay;
 
 public:
 	FT4DieAction()
 		: FT4CodeActionBase(StaticActionType())
+		, ReactionName(NAME_None)
+		, ShotDirection(FVector::ZeroVector)
+		, bTransientPlay(false)
 	{
 	}
 

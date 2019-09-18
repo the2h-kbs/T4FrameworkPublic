@@ -95,10 +95,10 @@ public:
 	ET4EntityType GetEntityType() const override { return ET4EntityType::Prop; }
 
 public:
-	UPROPERTY(EditAnywhere, Category=Attribute)
+	UPROPERTY(EditAnywhere, Category=Attributes)
 	FT4EntityPropPhysicalAttribute Physical;
 
-	UPROPERTY(EditAnywhere, Category=Attribute)
+	UPROPERTY(EditAnywhere, Category=Attributes)
 	FT4EntityPropRenderingAttribute Rendering;
 
 	UPROPERTY(EditAnywhere, Category= Data)

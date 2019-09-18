@@ -93,5 +93,8 @@ enum class ET4PacketStoC : uint32
 	EffectDirect,
 	EffectArea, // #68
 
+	Die, // #76
+	Resurrect, // #76
+
 	None,
 };

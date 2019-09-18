@@ -59,7 +59,7 @@ public:
 	ET4EntityType GetEntityType() const override { return ET4EntityType::World; }
 
 public:
-	UPROPERTY(EditAnywhere, Category=Attribute)
+	UPROPERTY(EditAnywhere, Category=Attributes)
 	ET4EntityWorldType WorldType;
 
 	UPROPERTY(EditAnywhere, Category=Data)

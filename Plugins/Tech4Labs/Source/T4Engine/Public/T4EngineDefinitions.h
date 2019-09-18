@@ -76,6 +76,8 @@ static const FName T4AnimStateErrorName = TEXT("T4ErrorState");
 static const FName T4AnimStateHumanJumpingName = TEXT("T4JumpingState");
 static const FName T4AnimStateHumanRollingName = TEXT("T4RollingState"); // #46
 
+static const FName T4AnimStateHumanDeathName = TEXT("T4DeathState"); // #76
+
 static const FName T4AnimStateHumanBasicCombatStanceName = TEXT("T4CombatStanceState"); // #48
 static const FName T4AnimStateHumanBasicUnarmedStanceName = TEXT("T4UnarmedStanceState"); // #48
 static const FName T4AnimStateHumanBasicRunningName = TEXT("T4RunningState"); // #48

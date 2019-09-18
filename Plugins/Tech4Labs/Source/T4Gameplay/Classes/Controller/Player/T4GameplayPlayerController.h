@@ -212,4 +212,10 @@ private:
 
 	UFUNCTION(Reliable, client)
 	void SC_RecvPacket_EffectArea(const FT4PacketEffectAreaSC& InPacket); // #68
+
+	UFUNCTION(Reliable, client)
+	void SC_RecvPacket_Die(const FT4PacketDieSC& InPacket); // #76
+
+	UFUNCTION(Reliable, client)
+	void SC_RecvPacket_Resurrect(const FT4PacketResurrectSC& InPacket); // #76
 };

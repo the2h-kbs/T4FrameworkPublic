@@ -112,6 +112,8 @@ public:
 	{
 	}
 
+	// SelectCompositePartTransientDataInEntity
+
 	UPROPERTY(EditAnywhere, Category = Asset)
 	TSoftObjectPtr<UT4CostumeEntityAsset> CostumeEntityAsset;
 };
@@ -130,10 +132,10 @@ public:
 
 	// CustomizeFullbodyMeshDetails
 
-	UPROPERTY(EditAnywhere, Category = Default)
+	UPROPERTY(EditAnywhere, Category = Property)
 	ET4EntityCharacterModularType ModularType; // #72
 
-	UPROPERTY(EditAnywhere, Category = DataPath)
+	UPROPERTY(EditAnywhere, Category = Datas)
 	TMap<FName, FT4EntityCharacterCompositePartMeshData> DefaultPartsData; // #37
 };
 
@@ -149,10 +151,12 @@ public:
 	{
 	}
 
+	// SelectStanceTransientDataInEntity
+
 	UPROPERTY(EditAnywhere, Category = Asset)
 	TSoftObjectPtr<UT4AnimSetAsset> AnimSetAsset; // #39
 
-	UPROPERTY(EditAnywhere, Category = Asset)
+	UPROPERTY(EditAnywhere, Category = Property)
 	FName ActiveEntityTag; // #74, #73
 };
 
@@ -171,6 +175,113 @@ public:
 	TMap<FName, FT4EntityCharacterStanceData> StanceMap; // #39, #73
 };
 
+// #76
+USTRUCT()
+struct T4ASSET_API FT4EntityCharacterReactionPhysicsData
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	FT4EntityCharacterReactionPhysicsData()
+		: SimulateDelayTimeSec(0.0f)
+		, bSimulateBodiesBelow(false)
+		, ImpulseMainActionPoint(NAME_None)
+		, ImpulseSubActionPoint(NAME_None)
+		, ImpulsePower(0.0f)
+		, CenterOfMass(FVector::ZeroVector)
+		, MassOverrideInKg(100.0f)
+		, PhysicsBlendWeight(1.0f)
+	{
+	}
+
+	// SelectReactionTransientDataInEntity
+	UPROPERTY(EditAnywhere, Category = Property)
+	float SimulateDelayTimeSec;
+
+	UPROPERTY(EditAnywhere, Category = Property)
+	bool bSimulateBodiesBelow;
+
+	UPROPERTY(EditAnywhere, Category = Property)
+	FName ImpulseMainActionPoint;
+
+	UPROPERTY(EditAnywhere, Category = Property)
+	FName ImpulseSubActionPoint;
+
+	UPROPERTY(EditAnywhere, Category = Property)
+	float ImpulsePower;
+
+	UPROPERTY(EditAnywhere, Category = Property)
+	FVector CenterOfMass;
+
+	UPROPERTY(EditAnywhere, Category = Property)
+	float MassOverrideInKg;
+
+	UPROPERTY(EditAnywhere, Category = Property)
+	float PhysicsBlendWeight;
+};
+
+// #76
+USTRUCT()
+struct T4ASSET_API FT4EntityCharacterReactionAnimationData
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	FT4EntityCharacterReactionAnimationData()
+		: StartAnimSectionName(NAME_None)
+		, LoopAnimSectionName(NAME_None)
+	{
+	}
+
+	// SelectReactionTransientDataInEntity
+	UPROPERTY(EditAnywhere, Category = Property)
+	FName StartAnimSectionName; // only locomotion layer
+
+	UPROPERTY(EditAnywhere, Category = Property)
+	FName LoopAnimSectionName; // only locomotion layer
+};
+
+// #76
+USTRUCT()
+struct T4ASSET_API FT4EntityCharacterReactionData
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	FT4EntityCharacterReactionData()
+		: bUsePhysics(true)
+		, bUseAnimation(false)
+	{
+	}
+
+	// SelectReactionTransientDataInEntity
+	UPROPERTY(EditAnywhere, Category = Property)
+	bool bUsePhysics;
+
+	UPROPERTY(EditAnywhere, Category = Property, meta = (EditCondition = "bUsePhysics"))
+	FT4EntityCharacterReactionPhysicsData PhysicsData;
+
+	UPROPERTY(EditAnywhere, Category = Property)
+	bool bUseAnimation;
+
+	UPROPERTY(EditAnywhere, Category = Property, meta = (EditCondition = "bUseAnimation"))
+	FT4EntityCharacterReactionAnimationData AnimationData;
+};
+
+USTRUCT()
+struct T4ASSET_API FT4EntityCharacterReactionSetData
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	FT4EntityCharacterReactionSetData()
+	{
+	}
+
+	UPROPERTY(EditAnywhere)
+	TMap<FName, FT4EntityCharacterReactionData> ReactionMap;
+};
+
 // #74
 USTRUCT()
 struct T4ASSET_API FT4EntityCharacterWeaponData
@@ -183,10 +294,10 @@ public:
 	{
 	}
 
-	UPROPERTY(EditAnywhere, Category = Asset)
+	UPROPERTY(EditAnywhere, Category = Property)
 	FName EntityTag;
 
-	UPROPERTY(EditAnywhere, Category = Asset)
+	UPROPERTY(EditAnywhere, Category = Property)
 	FName EquipPoint;
 
 	UPROPERTY(EditAnywhere, Category = Asset)
@@ -205,7 +316,7 @@ public:
 	{
 	}
 
-	UPROPERTY(EditAnywhere, Category = Asset)
+	UPROPERTY(EditAnywhere, Category = Property)
 	FName EntityTag;
 
 	UPROPERTY(EditAnywhere, Category = Asset)
@@ -223,10 +334,10 @@ public:
 	{
 	}
 
-	UPROPERTY(EditAnywhere, Category = DataPath)
+	UPROPERTY(EditAnywhere, Category = Datas)
 	TArray<FT4EntityCharacterWeaponData> EquipWeaponDatas;
 
-	UPROPERTY(EditAnywhere, Category = DataPath)
+	UPROPERTY(EditAnywhere, Category = Datas)
 	TArray<FT4EntityCharacterContiData> StayContiDatas;
 };
 
@@ -246,8 +357,19 @@ public:
 	{
 #if WITH_EDITOR
 		TransientCompositePartName = NAME_None;
+
+		// #76
+		TransientReactionName = NAME_None; 
+		bTransientReactionPhysicsUsed = true;
+		TransientReactionPhysicsData = FT4EntityCharacterReactionPhysicsData();
+		bTransientReactionAnimationUsed = false;
+		TransientReactionAnimationData = FT4EntityCharacterReactionAnimationData();
+		TransientReactionTestShotDirection = FVector::UpVector;
+		// ~#76
+
 		TransientStanceName = NAME_None; // #73
 		TransientStanceActiveEntityTag = NAME_None; // #73, #74
+
 		TransientEntityTagWeaponEntityTag = NAME_None;
 		TransientEntityTagWeaponEquipPoint = NAME_None;
 		TransientEntityTagContiEntityTag = NAME_None;
@@ -259,6 +381,29 @@ public:
 
 	UPROPERTY(EditAnywhere, Transient)
 	TSoftObjectPtr<UT4CostumeEntityAsset> TransientCompositePartAsset;
+
+
+	// HandleOnCharacterAddSelectedReaction
+	// #76
+	UPROPERTY(EditAnywhere, Transient)
+	FName TransientReactionName; // #76
+
+	UPROPERTY(EditAnywhere, Category = Property, meta = (DisplayName = "Use Physics"))
+	bool bTransientReactionPhysicsUsed;
+
+	UPROPERTY(EditAnywhere, Category = Property, meta = (DisplayName = "Physics Data", EditCondition = "bTransientReactionPhysicsUsed"))
+	FT4EntityCharacterReactionPhysicsData TransientReactionPhysicsData;
+
+	UPROPERTY(EditAnywhere, Category = Property, meta = (DisplayName = "Use Animation"))
+	bool bTransientReactionAnimationUsed;
+
+	UPROPERTY(EditAnywhere, Category = Property, meta = (DisplayName = "Animation Data", EditCondition = "bTransientReactionAnimationUsed"))
+	FT4EntityCharacterReactionAnimationData TransientReactionAnimationData;
+
+	UPROPERTY(EditAnywhere, Transient, meta = (DisplayName = "Test Shot Direction"))
+	FVector TransientReactionTestShotDirection;
+	// ~#76
+
 
 	UPROPERTY(EditAnywhere, Transient)
 	FName TransientStanceName; // #73
@@ -324,13 +469,16 @@ public:
 	UPROPERTY(EditAnywhere, Category=Stance)
 	FT4EntityCharacterStanceSetData StanceSetData; // #73
 
+	UPROPERTY(EditAnywhere, Category=Reaction)
+	FT4EntityCharacterReactionSetData ReactionSetData; // #76
+
 	UPROPERTY(EditAnywhere, Category = EntityTag)
 	FT4EntityCharacterEntityTagData EntityTagData; // #74
 
-	UPROPERTY(EditAnywhere, Category= Attribute)
+	UPROPERTY(EditAnywhere, Category= Attributes)
 	FT4EntityCharacterPhysicalAttribute Physical;
 
-	UPROPERTY(EditAnywhere, Category= Attribute)
+	UPROPERTY(EditAnywhere, Category= Attributes)
 	FT4EntityCharacterRenderingAttribute Rendering;
 
 public:

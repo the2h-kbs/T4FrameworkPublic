@@ -15,6 +15,8 @@
 // ET4PacketStoC::Equip
 // ET4PacketStoC::UnEquip
 // ET4PacketStoC::Exchange
+// ET4PacketStoC::Die // #76
+// ET4PacketStoC::Resurrect // #76
 
 USTRUCT()
 struct FT4PacketStanceSC : public FT4PacketStoC // #73
@@ -158,5 +160,76 @@ public:
 	FString ToString() const override
 	{
 		return FString(TEXT("SC_Packet:Exchange"));
+	}
+};
+
+// #76
+USTRUCT()
+struct FT4PacketDieSC : public FT4PacketStoC
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	UPROPERTY(VisibleAnywhere)
+	FT4ObjectID ObjectID;
+
+	UPROPERTY(VisibleAnywhere)
+	FName ReactionName;
+
+	UPROPERTY(VisibleAnywhere)
+	FT4ObjectID AttackerObjectID;
+
+public:
+	FT4PacketDieSC()
+		: FT4PacketStoC(ET4PacketStoC::Die)
+		, ReactionName(NAME_None)
+	{
+	}
+
+	bool Validate(FString& OutMsg) override
+	{
+		if (!ObjectID.IsValid())
+		{
+			OutMsg = TEXT("Invalid ObjectID");
+			return false;
+		}
+		return true;
+	}
+
+	FString ToString() const override
+	{
+		return FString(TEXT("SC_Packet:Die"));
+	}
+};
+
+// #76
+USTRUCT()
+struct FT4PacketResurrectSC : public FT4PacketStoC
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	UPROPERTY(VisibleAnywhere)
+	FT4ObjectID ObjectID;
+
+public:
+	FT4PacketResurrectSC()
+		: FT4PacketStoC(ET4PacketStoC::Resurrect)
+	{
+	}
+
+	bool Validate(FString& OutMsg) override
+	{
+		if (!ObjectID.IsValid())
+		{
+			OutMsg = TEXT("Invalid ObjectID");
+			return false;
+		}
+		return true;
+	}
+
+	FString ToString() const override
+	{
+		return FString(TEXT("SC_Packet:Resurrect"));
 	}
 };

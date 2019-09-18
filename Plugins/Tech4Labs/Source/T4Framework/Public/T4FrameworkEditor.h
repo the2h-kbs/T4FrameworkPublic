@@ -176,12 +176,14 @@ public:
 	
 	virtual bool IsAISystemDisabled() const = 0;
 	virtual bool IsSandbackAttackable() const = 0;
+	virtual bool IsSandbackOneHitDie() const = 0; // #76
 
 	virtual bool IsOverrideSkillData() const = 0; // #63
 	virtual bool IsOverrideEffectData() const = 0; // #68
 
 	virtual FName GetOverrideSkillDataNameID() const = 0;
 	virtual FName GetOverrideEffectDataNameID() const = 0;
+	virtual FName GetOverrideDieReactionNameID() const = 0; // #76 : TODO : 사망 리엑션 값을 테이블에서 가져와야 함!
 
 	virtual const FT4EditorSkillDataInfo& GetOverrideSkillDataInfo() const = 0;
 	virtual const FT4EditorEffectDataInfo& GetOverrideEffectDataInfo() const = 0;

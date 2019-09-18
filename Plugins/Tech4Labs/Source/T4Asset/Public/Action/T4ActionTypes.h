@@ -25,7 +25,7 @@ enum class ET4BaseActionType : uint32
 UENUM()
 enum class ET4ActionType : uint32
 {
-	// #62 : Begin Conti Format
+	// #62 : Begin Conti Format // #T4_ADD_ACTION_TAG_CONTI
 	Branch, // #54
 
 	SpecialMove, // #54
@@ -35,6 +35,8 @@ enum class ET4ActionType : uint32
 	Decal, // #54
 
 	Projectile, // #63
+
+	Hit, // #76
 
 	TimeScale, // #54
 	CameraWork, // #54
