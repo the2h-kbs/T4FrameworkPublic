@@ -9,10 +9,6 @@
 /**
   *
  */
-
-class IT4GameWorld;
-class IT4GameObject;
-
 USTRUCT()
 struct T4ASSET_API FT4BaseAction
 {

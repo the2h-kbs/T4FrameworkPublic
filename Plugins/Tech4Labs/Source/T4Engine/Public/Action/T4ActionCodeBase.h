@@ -12,7 +12,7 @@
   *
  */
 USTRUCT()
-struct T4ENGINE_API FT4CodeActionBase : public FT4BaseAction
+struct T4ENGINE_API FT4CodeBaseAction : public FT4BaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -21,17 +21,17 @@ public:
 	FT4ActionKey ActionKey;
 
 public:
-	FT4CodeActionBase()
+	FT4CodeBaseAction()
 		: FT4BaseAction()
 	{
 	}
 
-	FT4CodeActionBase(ET4ActionType InObjectAction)
+	FT4CodeBaseAction(ET4ActionType InObjectAction)
 		: FT4BaseAction(InObjectAction)
 	{
 	}
 
-	virtual ~FT4CodeActionBase() {}
+	virtual ~FT4CodeBaseAction() {}
 
 	ET4BaseActionType GetBaseActionType() const override { return ET4BaseActionType::Code; } // #52
 

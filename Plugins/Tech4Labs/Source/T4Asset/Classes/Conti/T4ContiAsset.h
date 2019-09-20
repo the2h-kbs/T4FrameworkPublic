@@ -139,19 +139,19 @@ public:
 
 	template <class T>
 	void CopyAction(
-		const FT4ContiActionBase* InSourceAction,
+		const FT4ContiBaseAction* InSourceAction,
 		T* InOutTargetAction
 	); // #65
 
-	FT4ContiActionBase* NewAndAddAction(
+	FT4ContiBaseAction* NewAndAddAction(
 		ET4ActionType InNewActionType
 	); // #24, #65
 
-	FT4ContiActionBase* CloneAndAddAction(
+	FT4ContiBaseAction* CloneAndAddAction(
 		uint32 InSourceHeaderKey
 	); // #65
 
-	FT4ContiActionBase* GetActionBase(
+	FT4ContiBaseAction* GetActionBase(
 		uint32 InActionHeaderKey
 	); // #65
 #endif

@@ -108,8 +108,8 @@ struct FT4AnimParameters // #38
 		, SectionName(NAME_None)
 		, PlayRate(1.0f)
 		, OffsetTimeSec(0.0f)
-		, BlendInTimeSec(T4AnimSetBlendInTimeSec)
-		, BlendOutTimeSec(T4AnimSetBlendOutTimeSec)
+		, BlendInTimeSec(T4AnimSetBlendTimeSec)
+		, BlendOutTimeSec(T4AnimSetBlendTimeSec)
 		, LoopCount(1)
 	{
 	}

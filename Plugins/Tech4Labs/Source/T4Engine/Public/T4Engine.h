@@ -85,8 +85,8 @@ public:
 	virtual bool EditorPlayAnimation(
 		UAnimSequence* InPlayAnimSequence,
 		float InPlayRate = 1.0f,
-		float InBlendInTimeSec = T4AnimSetBlendInTimeSec,
-		float InBlendOutTimeSec = T4AnimSetBlendOutTimeSec
+		float InBlendInTimeSec = T4AnimSetBlendTimeSec,
+		float InBlendOutTimeSec = T4AnimSetBlendTimeSec
 	) = 0;
 #endif
 };
@@ -114,21 +114,18 @@ class T4ENGINE_API IT4ActionControl // #23
 public:
 	virtual ~IT4ActionControl() {}
 
-	virtual bool IsPlaying(const FT4ActionKey& InActionKey) = 0;
-	virtual bool IsLooping(const FT4ActionKey& InActionKey) = 0;
-	
-	virtual bool IsPaused(const FT4ActionKey& InActionKey) = 0; // #54
+	virtual bool IsPlaying(const FT4ActionKey& InActionKey) const = 0;
+	virtual bool IsLooping(const FT4ActionKey& InActionKey) const = 0;
+	virtual bool IsPaused(const FT4ActionKey& InActionKey) const = 0; // #54
+
 	virtual void SetPaused(const FT4ActionKey& InActionKey, bool bPause) = 0; // #54
 	virtual void SetPaused(bool bPause) = 0; // #63
 
-	virtual IT4ActionNode* GetChildNodeByPrimary(const FT4ActionKey& InPrimaryActionKey) = 0;
-	virtual bool GetChildNodes(
-		const FT4ActionKey& InSameActionKey, 
-		TArray<IT4ActionNode*>& OutNodes
-	) = 0;
+	virtual IT4ActionNode* GetChildNodeByPrimary(const FT4ActionKey& InPrimaryActionKey) const = 0;
+	virtual bool GetChildNodes(const FT4ActionKey& InSameActionKey, TArray<IT4ActionNode*>& OutNodes) const = 0;
 
 	virtual uint32 NumChildActions() const = 0;
-	virtual uint32 NumChildActions(const FT4ActionKey& InActionKey) = 0; // #54
+	virtual uint32 NumChildActions(const FT4ActionKey& InActionKey) const = 0; // #54
 };
 
 // #34, #63
@@ -181,22 +178,18 @@ public:
 	virtual const FName& GetGameDataIDName() const = 0;
 
 	virtual bool IsLoaded() const = 0; // #57 : 모든 로딩이 완료 된 상태
-
-	virtual bool OnExecute(
-		const FT4BaseAction* InAction, // WARN : only reference
-		const FT4ActionParameters* InActionParam = nullptr // WARN : only reference
-	) = 0;
-
 	virtual bool IsPlayer() const = 0;
 
 	virtual APawn* GetPawn() = 0;
+
+	virtual bool OnExecute(const FT4BaseAction* InAction, const FT4ActionParameters* InParam = nullptr) = 0; // #76 : ActionPublicManager only
 
 	// #34 : for Server All or Client Only Player
 	virtual IT4GameplayControl* GetGameplayControl() = 0; // #34, #42, #36
 	virtual void SetGameplayControl(IT4GameplayControl* InControl) = 0; // #34, #42, #36
 
 	virtual IT4AnimControl* GetAnimControl() const = 0; // #14
-	virtual IT4ActionControl* GetActionControl() const = 0; // #20
+	virtual IT4ActionControl* GetActionControl() = 0; // #20
 	virtual const FT4GameObjectProperty& GetPropertyConst() const = 0; // #34
 
 #if (WITH_EDITOR || WITH_SERVER_CODE)
@@ -225,18 +218,14 @@ public:
 	virtual bool HasActionPoint(const FName& InActionPoint) const = 0; // #57 : ActionPoint = Socket or Bone or VirtualBone
 
 	virtual bool GetSocketLocation(const FName& InSocketName, FVector& OutLocation) const = 0; // #18
-	virtual bool GetSocketRotation(
-		const FName& InSocketName, 
-		ERelativeTransformSpace InTransformSpace, 
-		FRotator& OutRotation
-	) const = 0; // #18
-	virtual bool GetSocketScale(
-		const FName& InSocketName,
-		ERelativeTransformSpace InTransformSpace,
-		FVector& OutScale
-	) const = 0; // #54
+	virtual bool GetSocketRotation(const FName& InSocketName, ERelativeTransformSpace InTransformSpace, FRotator& OutRotation) const = 0; // #18
+	virtual bool GetSocketScale(const FName& InSocketName, ERelativeTransformSpace InTransformSpace, FVector& OutScale) const = 0; // #54
 
 	virtual void SetHeightOffset(float InOffset) = 0; // #18
+
+#if WITH_EDITOR
+	virtual void EditorRestoreReaction() = 0; // #76
+#endif
 
 #if !UE_BUILD_SHIPPING
 	virtual FT4GameObjectDebugInfo& GetDebugInfo() = 0; // #76

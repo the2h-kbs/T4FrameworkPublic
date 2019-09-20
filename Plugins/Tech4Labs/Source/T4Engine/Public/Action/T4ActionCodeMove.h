@@ -25,7 +25,7 @@
 
 // #40
 USTRUCT()
-struct T4ENGINE_API FT4MoveAsyncAction : public FT4CodeActionBase
+struct T4ENGINE_API FT4MoveAsyncAction : public FT4CodeBaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -38,7 +38,7 @@ public:
 
 public:
 	FT4MoveAsyncAction()
-		: FT4CodeActionBase(StaticActionType())
+		: FT4CodeBaseAction(StaticActionType())
 		, MoveDirection(FVector::ZeroVector)
 		, HeadYawAngle(TNumericLimits<float>::Max())
 	{
@@ -64,7 +64,7 @@ public:
 
 // #33, #40
 USTRUCT()
-struct T4ENGINE_API FT4MoveSyncAction : public FT4CodeActionBase
+struct T4ENGINE_API FT4MoveSyncAction : public FT4CodeBaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -88,7 +88,7 @@ public:
 
 public:
 	FT4MoveSyncAction()
-		: FT4CodeActionBase(StaticActionType())
+		: FT4CodeBaseAction(StaticActionType())
 		, MoveVelocity(FVector::ZeroVector)
 		, HeadYawAngle(TNumericLimits<float>::Max())
 		, bForceMaxSpeed(false) // #52
@@ -118,7 +118,7 @@ public:
 };
 
 USTRUCT()
-struct T4ENGINE_API FT4JumpAction : public FT4CodeActionBase
+struct T4ENGINE_API FT4JumpAction : public FT4CodeBaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -128,7 +128,7 @@ public:
 
 public:
 	FT4JumpAction()
-		: FT4CodeActionBase(StaticActionType())
+		: FT4CodeBaseAction(StaticActionType())
 		, JumpVelocity(FVector::ZeroVector)
 	{
 	}
@@ -153,7 +153,7 @@ public:
 
 // #46
 USTRUCT()
-struct T4ENGINE_API FT4RollAction : public FT4CodeActionBase
+struct T4ENGINE_API FT4RollAction : public FT4CodeBaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -163,7 +163,7 @@ public:
 
 public:
 	FT4RollAction()
-		: FT4CodeActionBase(StaticActionType())
+		: FT4CodeBaseAction(StaticActionType())
 		, RollVelocity(FVector::ZeroVector)
 	{
 	}
@@ -188,7 +188,7 @@ public:
 
 // #34
 USTRUCT()
-struct T4ENGINE_API FT4TeleportAction : public FT4CodeActionBase
+struct T4ENGINE_API FT4TeleportAction : public FT4CodeBaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -198,7 +198,7 @@ public:
 
 public:
 	FT4TeleportAction()
-		: FT4CodeActionBase(StaticActionType())
+		: FT4CodeBaseAction(StaticActionType())
 		, TargetLocation(FVector::ZeroVector)
 	{
 	}
@@ -222,7 +222,7 @@ public:
 };
 
 USTRUCT()
-struct T4ENGINE_API FT4TurnAction : public FT4CodeActionBase
+struct T4ENGINE_API FT4TurnAction : public FT4CodeBaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -238,7 +238,7 @@ public:
 
 public:
 	FT4TurnAction()
-		: FT4CodeActionBase(StaticActionType())
+		: FT4CodeBaseAction(StaticActionType())
 		, TurnType(ET4TargetType::Default)
 		, RotationYawRate(0.0f)
 		, TargetYawAngle(0.0f)
@@ -255,7 +255,7 @@ public:
 
 // #52
 USTRUCT()
-struct T4ENGINE_API FT4MoveStopAction : public FT4CodeActionBase
+struct T4ENGINE_API FT4MoveStopAction : public FT4CodeBaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -271,7 +271,7 @@ public:
 
 public:
 	FT4MoveStopAction()
-		: FT4CodeActionBase(StaticActionType())
+		: FT4CodeBaseAction(StaticActionType())
 		, StopLocation(FVector::ZeroVector)
 		, HeadYawAngle(TNumericLimits<float>::Max())
 		, bSyncLocation(false)
@@ -288,7 +288,7 @@ public:
 
 // #52
 USTRUCT()
-struct T4ENGINE_API FT4MoveSpeedSyncAction : public FT4CodeActionBase
+struct T4ENGINE_API FT4MoveSpeedSyncAction : public FT4CodeBaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -298,7 +298,7 @@ public:
 
 public:
 	FT4MoveSpeedSyncAction()
-		: FT4CodeActionBase(StaticActionType())
+		: FT4CodeBaseAction(StaticActionType())
 		, MoveSpeed(0.0f)
 	{
 	}
@@ -313,7 +313,7 @@ public:
 
 // #63
 USTRUCT()
-struct T4ENGINE_API FT4LaunchAction : public FT4CodeActionBase
+struct T4ENGINE_API FT4LaunchAction : public FT4CodeBaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -341,7 +341,7 @@ public:
 
 public:
 	FT4LaunchAction()
-		: FT4CodeActionBase(StaticActionType())
+		: FT4CodeBaseAction(StaticActionType())
 		, MoveSpeed(0.0f)
 		, LoadingPolicy(ET4LoadingPolicy::Default)
 		, ThrowOffsetTimeSec(0.0f)

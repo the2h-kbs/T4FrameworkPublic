@@ -69,3 +69,14 @@ enum class ET4EntityPropMeshType : uint8
 
 	None
 };
+
+UENUM()
+enum class ET4EntityReactionType : uint8 // #76
+{
+	Die,
+	Resurrect,
+	
+	Hit,
+
+	None,
+};

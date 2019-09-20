@@ -14,7 +14,7 @@
 // ET4ActionType::EditorReload
 
 USTRUCT()
-struct T4ENGINE_API FT4EditorReloadAction : public FT4CodeActionBase
+struct T4ENGINE_API FT4EditorReloadAction : public FT4CodeBaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -24,7 +24,7 @@ public:
 
 public:
 	FT4EditorReloadAction()
-		: FT4CodeActionBase(StaticActionType())
+		: FT4CodeBaseAction(StaticActionType())
 		, ReloadType(ET4EditorReload::None)
 	{
 	}

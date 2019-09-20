@@ -18,7 +18,7 @@
 // ET4ActionType::ObjectLeave
 
 USTRUCT()
-struct T4ENGINE_API FT4ChangeWorldAction : public FT4CodeActionBase
+struct T4ENGINE_API FT4ChangeWorldAction : public FT4CodeBaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -28,7 +28,7 @@ public:
 
 public:
 	FT4ChangeWorldAction()
-		: FT4CodeActionBase(StaticActionType())
+		: FT4CodeBaseAction(StaticActionType())
 	{
 	}
 
@@ -51,7 +51,7 @@ public:
 };
 
 USTRUCT()
-struct T4ENGINE_API FT4ObjectEnterAction : public FT4CodeActionBase
+struct T4ENGINE_API FT4ObjectEnterAction : public FT4CodeBaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -87,7 +87,7 @@ public:
 	   
 public:
 	FT4ObjectEnterAction()
-		: FT4CodeActionBase(StaticActionType())
+		: FT4CodeBaseAction(StaticActionType())
 		, Name(NAME_None)
 		, EntityType(ET4EntityType::None)
 		, StanceName(NAME_None) // #73
@@ -122,7 +122,7 @@ public:
 };
 
 USTRUCT()
-struct T4ENGINE_API FT4ObjectLeaveAction : public FT4CodeActionBase
+struct T4ENGINE_API FT4ObjectLeaveAction : public FT4CodeBaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -135,7 +135,7 @@ public:
 
 public:
 	FT4ObjectLeaveAction()
-		: FT4CodeActionBase(StaticActionType())
+		: FT4CodeBaseAction(StaticActionType())
 		, bImmediate(false) // #67
 	{
 	}

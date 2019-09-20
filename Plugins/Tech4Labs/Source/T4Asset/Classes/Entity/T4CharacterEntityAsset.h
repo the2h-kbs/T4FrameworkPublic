@@ -230,6 +230,8 @@ public:
 	FT4EntityCharacterReactionAnimationData()
 		: StartAnimSectionName(NAME_None)
 		, LoopAnimSectionName(NAME_None)
+		, BlendInTimeSec(T4AnimSetBlendTimeSec)
+		, BlendOutTimeSec(T4AnimSetBlendTimeSec)
 	{
 	}
 
@@ -239,6 +241,12 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = Property)
 	FName LoopAnimSectionName; // only locomotion layer
+
+	UPROPERTY(EditAnywhere, Category = Property)
+	float BlendInTimeSec;
+
+	UPROPERTY(EditAnywhere, Category = Property)
+	float BlendOutTimeSec;
 };
 
 // #76
@@ -249,12 +257,16 @@ struct T4ASSET_API FT4EntityCharacterReactionData
 
 public:
 	FT4EntityCharacterReactionData()
-		: bUsePhysics(true)
+		: ReactionType(ET4EntityReactionType::None)
+		, bUsePhysics(true)
 		, bUseAnimation(false)
 	{
 	}
 
 	// SelectReactionTransientDataInEntity
+	UPROPERTY(EditAnywhere, Category = Property)
+	ET4EntityReactionType ReactionType;
+
 	UPROPERTY(EditAnywhere, Category = Property)
 	bool bUsePhysics;
 
@@ -360,6 +372,7 @@ public:
 
 		// #76
 		TransientReactionName = NAME_None; 
+		TransientReactionType = ET4EntityReactionType::None;
 		bTransientReactionPhysicsUsed = true;
 		TransientReactionPhysicsData = FT4EntityCharacterReactionPhysicsData();
 		bTransientReactionAnimationUsed = false;
@@ -388,19 +401,22 @@ public:
 	UPROPERTY(EditAnywhere, Transient)
 	FName TransientReactionName; // #76
 
-	UPROPERTY(EditAnywhere, Category = Property, meta = (DisplayName = "Use Physics"))
+	UPROPERTY(EditAnywhere, Transient, meta = (DisplayName = "Reaction Type"))
+	ET4EntityReactionType TransientReactionType; // #76
+
+	UPROPERTY(EditAnywhere, Transient, meta = (DisplayName = "Use Physics"))
 	bool bTransientReactionPhysicsUsed;
 
-	UPROPERTY(EditAnywhere, Category = Property, meta = (DisplayName = "Physics Data", EditCondition = "bTransientReactionPhysicsUsed"))
+	UPROPERTY(EditAnywhere, Transient, meta = (DisplayName = "Physics Data", EditCondition = "bTransientReactionPhysicsUsed"))
 	FT4EntityCharacterReactionPhysicsData TransientReactionPhysicsData;
 
-	UPROPERTY(EditAnywhere, Category = Property, meta = (DisplayName = "Use Animation"))
+	UPROPERTY(EditAnywhere, Transient, meta = (DisplayName = "Use Animation"))
 	bool bTransientReactionAnimationUsed;
 
-	UPROPERTY(EditAnywhere, Category = Property, meta = (DisplayName = "Animation Data", EditCondition = "bTransientReactionAnimationUsed"))
+	UPROPERTY(EditAnywhere, Transient, meta = (DisplayName = "Animation Data", EditCondition = "bTransientReactionAnimationUsed"))
 	FT4EntityCharacterReactionAnimationData TransientReactionAnimationData;
 
-	UPROPERTY(EditAnywhere, Transient, meta = (DisplayName = "Test Shot Direction"))
+	UPROPERTY(EditAnywhere, Transient, meta = (DisplayName = "Shot Direction"))
 	FVector TransientReactionTestShotDirection;
 	// ~#76
 

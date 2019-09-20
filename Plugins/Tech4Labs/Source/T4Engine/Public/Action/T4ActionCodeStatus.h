@@ -20,7 +20,7 @@
 // ET4ActionType::Resurrect // #76
 
 USTRUCT()
-struct T4ENGINE_API FT4LockOnAction : public FT4CodeActionBase
+struct T4ENGINE_API FT4LockOnAction : public FT4CodeBaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -33,7 +33,7 @@ public:
 
 public:
 	FT4LockOnAction()
-		: FT4CodeActionBase(StaticActionType())
+		: FT4CodeBaseAction(StaticActionType())
 		, bSetLocked(false)
 		, HeadYawAngle(TNumericLimits<float>::Max())
 	{
@@ -49,7 +49,7 @@ public:
 
 // #73
 USTRUCT()
-struct T4ENGINE_API FT4ChangeStanceAction : public FT4CodeActionBase
+struct T4ENGINE_API FT4ChangeStanceAction : public FT4CodeBaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -59,7 +59,7 @@ public:
 
 public:
 	FT4ChangeStanceAction()
-		: FT4CodeActionBase(StaticActionType())
+		: FT4CodeBaseAction(StaticActionType())
 		, StanceName(NAME_None)
 	{
 	}
@@ -73,7 +73,7 @@ public:
 };
 
 USTRUCT()
-struct T4ENGINE_API FT4EquipWeaponAction : public FT4CodeActionBase
+struct T4ENGINE_API FT4EquipWeaponAction : public FT4CodeBaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -89,7 +89,7 @@ public:
 
 public:
 	FT4EquipWeaponAction()
-		: FT4CodeActionBase(StaticActionType())
+		: FT4CodeBaseAction(StaticActionType())
 		, EquipPoint(NAME_None)
 		, LoadingPolicy(ET4LoadingPolicy::Default)
 	{
@@ -120,13 +120,13 @@ public:
 
 // #48
 USTRUCT()
-struct T4ENGINE_API FT4UnEquipWeaponAction : public FT4CodeActionBase
+struct T4ENGINE_API FT4UnEquipWeaponAction : public FT4CodeBaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
 public:
 	FT4UnEquipWeaponAction()
-		: FT4CodeActionBase(StaticActionType())
+		: FT4CodeBaseAction(StaticActionType())
 	{
 	}
 
@@ -145,7 +145,7 @@ public:
 
 // #37
 USTRUCT()
-struct T4ENGINE_API FT4ExchangeCostumeAction : public FT4CodeActionBase
+struct T4ENGINE_API FT4ExchangeCostumeAction : public FT4CodeBaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -161,7 +161,7 @@ public:
 
 public:
 	FT4ExchangeCostumeAction()
-		: FT4CodeActionBase(StaticActionType())
+		: FT4CodeBaseAction(StaticActionType())
 		, TargetPartsName(NAME_None)
 		, bClearDefault(false)
 	{
@@ -192,7 +192,7 @@ public:
 
 // #76
 USTRUCT()
-struct T4ENGINE_API FT4DieAction : public FT4CodeActionBase
+struct T4ENGINE_API FT4DieAction : public FT4CodeBaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
@@ -208,7 +208,7 @@ public:
 
 public:
 	FT4DieAction()
-		: FT4CodeActionBase(StaticActionType())
+		: FT4CodeBaseAction(StaticActionType())
 		, ReactionName(NAME_None)
 		, ShotDirection(FVector::ZeroVector)
 		, bTransientPlay(false)
@@ -222,7 +222,7 @@ public:
 		return true;
 	}
 
-	FString ToString() const override
+	virtual FString ToString() const override
 	{
 		return FString(TEXT("DieAction"));
 	}
@@ -230,15 +230,40 @@ public:
 
 // #76
 USTRUCT()
-struct T4ENGINE_API FT4ResurrectAction : public FT4CodeActionBase
+struct T4ENGINE_API FT4PrivateDieAction : public FT4DieAction
 {
 	GENERATED_USTRUCT_BODY()
 
 public:
+	void CopyFrom(const FT4DieAction& InAction)
+	{
+		*static_cast<FT4DieAction*>(this) = InAction;
+	}
+
+	FString ToString() const override
+	{
+		return FString(TEXT("DieAction (Private)"));
+	}
+};
+
+// #76
+USTRUCT()
+struct T4ENGINE_API FT4ResurrectAction : public FT4CodeBaseAction
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	UPROPERTY(EditAnywhere)
+	FName ReactionName;
+
+	UPROPERTY(Transient)
+	bool bTransientPlay;
 
 public:
 	FT4ResurrectAction()
-		: FT4CodeActionBase(StaticActionType())
+		: FT4CodeBaseAction(StaticActionType())
+		, ReactionName(NAME_None)
+		, bTransientPlay(false)
 	{
 	}
 
@@ -249,8 +274,26 @@ public:
 		return true;
 	}
 
-	FString ToString() const override
+	virtual FString ToString() const override
 	{
 		return FString(TEXT("ResurrectAction"));
+	}
+};
+
+// #76
+USTRUCT()
+struct T4ENGINE_API FT4PrivateResurrectAction : public FT4ResurrectAction
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	void CopyFrom(const FT4ResurrectAction& InAction)
+	{
+		*static_cast<FT4ResurrectAction*>(this) = InAction;
+	}
+
+	FString ToString() const override
+	{
+		return FString(TEXT("ResurrectAction (Private)"));
 	}
 };
