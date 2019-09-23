@@ -59,7 +59,7 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	FName ResultEffectDataID;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(VisibleAnywhere)
 	TSoftObjectPtr<UT4ContiAsset> ContiAsset;
 
 public:
@@ -103,7 +103,7 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	FName DamageEffectDataID;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(VisibleAnywhere)
 	TSoftObjectPtr<UT4ContiAsset> ContiAsset;
 
 public:

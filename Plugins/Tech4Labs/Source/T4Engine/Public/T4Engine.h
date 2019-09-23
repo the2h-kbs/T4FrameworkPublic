@@ -153,7 +153,7 @@ public:
 
 	virtual IT4GameWorld* GetGameWorld() const = 0; // #52
 
-	virtual bool HasPlayingAction(const FT4ActionKey& InActionKey) const = 0; // #20
+	virtual bool HasPlayingPublicAction(const FT4ActionKey& InActionKey) const = 0; // #20
 
 	virtual AController* GetAController() = 0;
 	virtual class IT4GameplayController* GetGameplayController() = 0; // #63 : T4Engine 에서 호출 금지!!! (WARNING)
@@ -182,14 +182,14 @@ public:
 
 	virtual APawn* GetPawn() = 0;
 
-	virtual bool OnExecute(const FT4BaseAction* InAction, const FT4ActionParameters* InParam = nullptr) = 0; // #76 : ActionPublicManager only
+	virtual bool OnExecutePublicAction(const FT4BaseAction* InAction, const FT4ActionParameters* InParam = nullptr) = 0; // #76 : ActionControl only
 
 	// #34 : for Server All or Client Only Player
 	virtual IT4GameplayControl* GetGameplayControl() = 0; // #34, #42, #36
 	virtual void SetGameplayControl(IT4GameplayControl* InControl) = 0; // #34, #42, #36
 
 	virtual IT4AnimControl* GetAnimControl() const = 0; // #14
-	virtual IT4ActionControl* GetActionControl() = 0; // #20
+	virtual IT4ActionControl* GetActionControl() = 0; // #20, #76 : Action Public Manager
 	virtual const FT4GameObjectProperty& GetPropertyConst() const = 0; // #34
 
 #if (WITH_EDITOR || WITH_SERVER_CODE)
@@ -202,7 +202,7 @@ public:
 #endif
 
 	virtual bool HasPlayingAnimState(const FName& InAnimStateName) const = 0; // #47
-	virtual bool HasPlayingAction(const FT4ActionKey& InActionKey) const = 0;
+	virtual bool HasPlayingPublicAction(const FT4ActionKey& InActionKey) const = 0; // #76 : Action Public Manager
 
 	virtual const FVector GetCOMLocation() const = 0; // #18 : WARN : Center of mass 캐릭터의 경우 Coll Capsule 의 중점이다.
 	virtual const FVector GetRootLocation() const = 0;

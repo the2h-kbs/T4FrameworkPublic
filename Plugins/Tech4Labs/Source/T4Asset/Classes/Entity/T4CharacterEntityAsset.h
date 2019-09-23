@@ -177,29 +177,53 @@ public:
 
 // #76
 USTRUCT()
-struct T4ASSET_API FT4EntityCharacterReactionPhysicsData
+struct T4ASSET_API FT4EntityCharacterReactionPhysicsBlendData
 {
 	GENERATED_USTRUCT_BODY()
 
 public:
-	FT4EntityCharacterReactionPhysicsData()
-		: SimulateDelayTimeSec(0.0f)
-		, bSimulateBodiesBelow(false)
+	FT4EntityCharacterReactionPhysicsBlendData()
+		: TargetWeight(1.0f)
+		, DurationSec(0.0f)
+		, BlendInTimeSec(0.0f)
+		, BlendOutTimeSec(0.0f)
+	{
+	}
+
+	UPROPERTY(EditAnywhere, Category = Property)
+	float TargetWeight;
+
+	UPROPERTY(EditAnywhere, Category = Property)
+	float DurationSec; // 0.0f : immediate
+
+	UPROPERTY(EditAnywhere, Category = Property)
+	float BlendInTimeSec;
+
+	UPROPERTY(EditAnywhere, Category = Property)
+	float BlendOutTimeSec;
+};
+
+// #76
+USTRUCT()
+struct T4ASSET_API FT4EntityCharacterReactionPhysicsStartData
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	FT4EntityCharacterReactionPhysicsStartData()
+		: DelayTimeSec(0.0f)
 		, ImpulseMainActionPoint(NAME_None)
 		, ImpulseSubActionPoint(NAME_None)
 		, ImpulsePower(0.0f)
 		, CenterOfMass(FVector::ZeroVector)
 		, MassOverrideInKg(100.0f)
-		, PhysicsBlendWeight(1.0f)
+		, bSimulateBodiesBelow(false)
 	{
 	}
 
 	// SelectReactionTransientDataInEntity
 	UPROPERTY(EditAnywhere, Category = Property)
-	float SimulateDelayTimeSec;
-
-	UPROPERTY(EditAnywhere, Category = Property)
-	bool bSimulateBodiesBelow;
+	float DelayTimeSec;
 
 	UPROPERTY(EditAnywhere, Category = Property)
 	FName ImpulseMainActionPoint;
@@ -217,7 +241,27 @@ public:
 	float MassOverrideInKg;
 
 	UPROPERTY(EditAnywhere, Category = Property)
-	float PhysicsBlendWeight;
+	bool bSimulateBodiesBelow;
+
+	UPROPERTY(EditAnywhere, Category = Property)
+	FT4EntityCharacterReactionPhysicsBlendData BlendData;
+};
+
+// #76
+USTRUCT()
+struct T4ASSET_API FT4EntityCharacterReactionPhysicsStopData
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	FT4EntityCharacterReactionPhysicsStopData()
+		: DelayTimeSec(0.0f)
+	{
+	}
+
+	// SelectReactionTransientDataInEntity
+	UPROPERTY(EditAnywhere, Category = Property)
+	float DelayTimeSec;
 };
 
 // #76
@@ -228,7 +272,8 @@ struct T4ASSET_API FT4EntityCharacterReactionAnimationData
 
 public:
 	FT4EntityCharacterReactionAnimationData()
-		: StartAnimSectionName(NAME_None)
+		: DelayTimeSec(0.0f)
+		, StartAnimSectionName(NAME_None)
 		, LoopAnimSectionName(NAME_None)
 		, BlendInTimeSec(T4AnimSetBlendTimeSec)
 		, BlendOutTimeSec(T4AnimSetBlendTimeSec)
@@ -236,6 +281,9 @@ public:
 	}
 
 	// SelectReactionTransientDataInEntity
+	UPROPERTY(EditAnywhere, Category = Property)
+	float DelayTimeSec;
+
 	UPROPERTY(EditAnywhere, Category = Property)
 	FName StartAnimSectionName; // only locomotion layer
 
@@ -258,7 +306,8 @@ struct T4ASSET_API FT4EntityCharacterReactionData
 public:
 	FT4EntityCharacterReactionData()
 		: ReactionType(ET4EntityReactionType::None)
-		, bUsePhysics(true)
+		, bUsePhysicsStart(false)
+		, bUsePhysicsStop(false)
 		, bUseAnimation(false)
 	{
 	}
@@ -268,10 +317,16 @@ public:
 	ET4EntityReactionType ReactionType;
 
 	UPROPERTY(EditAnywhere, Category = Property)
-	bool bUsePhysics;
+	bool bUsePhysicsStart;
 
-	UPROPERTY(EditAnywhere, Category = Property, meta = (EditCondition = "bUsePhysics"))
-	FT4EntityCharacterReactionPhysicsData PhysicsData;
+	UPROPERTY(EditAnywhere, Category = Property, meta = (EditCondition = "bUsePhysicsStart"))
+	FT4EntityCharacterReactionPhysicsStartData PhysicsStartData;
+
+	UPROPERTY(EditAnywhere, Category = Property)
+	bool bUsePhysicsStop;
+
+	UPROPERTY(EditAnywhere, Category = Property, meta = (EditCondition = "bUsePhysicsStop"))
+	FT4EntityCharacterReactionPhysicsStopData PhysicsStopData;
 
 	UPROPERTY(EditAnywhere, Category = Property)
 	bool bUseAnimation;
@@ -373,8 +428,10 @@ public:
 		// #76
 		TransientReactionName = NAME_None; 
 		TransientReactionType = ET4EntityReactionType::None;
-		bTransientReactionPhysicsUsed = true;
-		TransientReactionPhysicsData = FT4EntityCharacterReactionPhysicsData();
+		bTransientReactionPhysicsStartUsed = false;
+		TransientReactionPhysicsStartData = FT4EntityCharacterReactionPhysicsStartData();
+		bTransientReactionPhysicsStopUsed = false;
+		TransientReactionPhysicsStopData = FT4EntityCharacterReactionPhysicsStopData();
 		bTransientReactionAnimationUsed = false;
 		TransientReactionAnimationData = FT4EntityCharacterReactionAnimationData();
 		TransientReactionTestShotDirection = FVector::UpVector;
@@ -404,11 +461,17 @@ public:
 	UPROPERTY(EditAnywhere, Transient, meta = (DisplayName = "Reaction Type"))
 	ET4EntityReactionType TransientReactionType; // #76
 
-	UPROPERTY(EditAnywhere, Transient, meta = (DisplayName = "Use Physics"))
-	bool bTransientReactionPhysicsUsed;
+	UPROPERTY(EditAnywhere, Transient, meta = (DisplayName = "Use Physics Start"))
+	bool bTransientReactionPhysicsStartUsed;
 
-	UPROPERTY(EditAnywhere, Transient, meta = (DisplayName = "Physics Data", EditCondition = "bTransientReactionPhysicsUsed"))
-	FT4EntityCharacterReactionPhysicsData TransientReactionPhysicsData;
+	UPROPERTY(EditAnywhere, Transient, meta = (DisplayName = "Physics Start Data", EditCondition = "bTransientReactionPhysicsStartUsed"))
+	FT4EntityCharacterReactionPhysicsStartData TransientReactionPhysicsStartData;
+
+	UPROPERTY(EditAnywhere, Transient, meta = (DisplayName = "Use Physics Stop"))
+	bool bTransientReactionPhysicsStopUsed;
+
+	UPROPERTY(EditAnywhere, Transient, meta = (DisplayName = "Physics Stop Data", EditCondition = "bTransientReactionPhysicsStopUsed"))
+	FT4EntityCharacterReactionPhysicsStopData TransientReactionPhysicsStopData;
 
 	UPROPERTY(EditAnywhere, Transient, meta = (DisplayName = "Use Animation"))
 	bool bTransientReactionAnimationUsed;

@@ -77,7 +77,7 @@ public:
 
 	IT4GameWorld* GetGameWorld() const override; // #52
 
-	bool HasPlayingAction(const FT4ActionKey& InActionKey) const override; // #20
+	bool HasPlayingPublicAction(const FT4ActionKey& InActionKey) const override; // #20
 
 	AController* GetAController() override;
 	IT4GameplayController* GetGameplayController() override { return static_cast<IT4GameplayController*>(this); } // #63

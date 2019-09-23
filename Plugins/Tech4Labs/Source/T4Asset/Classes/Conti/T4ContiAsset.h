@@ -116,7 +116,7 @@ public:
 	TArray<FT4ProjectileAction> ProjectileActions; // #63
 
 	UPROPERTY(EditAnywhere)
-	TArray<FT4HitAction> HitActions; // #76
+	TArray<FT4ReactionAction> ReactionActions; // #76
 	
 	UPROPERTY(EditAnywhere)
 	TArray<FT4TimeScaleAction> TimeScaleActions; // #54
@@ -217,8 +217,8 @@ public:
 		, bAISystemDisabled(true) // #60
 		, bSandbackRoleAttacker(false) // #63
 		, bSandbackOneHitDie(false) // #76
-		, bOverrideSkillData(true) // #63
-		, bOverrideEffectData(true) // #68
+		, bOverrideSkillData(false) // #63
+		, bOverrideEffectData(false) // #68
 		, SkillDataNameID(NAME_None) // #60
 		, EffectDataNameID(NAME_None) // #60
 		, DieReactionNameID(NAME_None) // #76

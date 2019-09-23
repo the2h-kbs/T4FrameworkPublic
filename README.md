@@ -18,6 +18,9 @@ Powerful toolset and Flexible layer solution
 - Warning
   - 2019.10 월 정식 버전 배포 예정입니다. 개발 버전이므로 테스트 용도로 만 사용해주시기 바랍니다.
 - Release Notes
+  - **[2019.09.23] [M3] Copying //Private to //Deploy (private commit 729fdde)**
+	- #76 [버그수정] Projectile Head 가 타겟에 도착할 경우 Particle 이 즉시 사라지지 않던 문제 수정
+	- #76 [기능추가] Rehearsal Entity 및 Conti Editor 내 Hit Reaction 설정 기능 추가
   - **[2019.09.20] [M3] Copying //Private to //Deploy (private commit 8bcbee5)**
 	- #76 [버그수정] Rehearsal Editor 의 DropListView 및 ListView 가 Refresh 될 경우 Selection Focus 가 사라지는 문제 수정
 	- #76 [기능개선] Rehearsal Entity Editor 의 Reaction Detail Property 설정을 Group Detail 로 정리

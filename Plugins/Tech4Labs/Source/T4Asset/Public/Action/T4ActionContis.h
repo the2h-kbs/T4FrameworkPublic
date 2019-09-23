@@ -18,7 +18,7 @@
 // ET4ActionType::Particle
 // ET4ActionType::Decal // #52
 // ET4ActionType::Projectile // #63
-// ET4ActionType::Hit // #76
+// ET4ActionType::Reaction // #76
 // ET4ActionType::TimeScale // #52
 // ET4ActionType::CameraWork // #52
 
@@ -365,24 +365,32 @@ public:
 
 // #76
 USTRUCT()
-struct T4ASSET_API FT4HitAction : public FT4ContiBaseAction
+struct T4ASSET_API FT4ReactionAction : public FT4ContiBaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
 public:
-	// #39 : FT4ContiCustomizeDetails::CustomizeHitActionDetails
+	// #39 : FT4ContiCustomizeDetails::CustomizeReactionActionDetails
+	UPROPERTY(EditAnywhere)
+	FName ReactionName;
 
 public:
-	FT4HitAction()
+	FT4ReactionAction()
 		: FT4ContiBaseAction(StaticActionType())
+		, ReactionName(NAME_None)
 	{
 	}
 
-	static ET4ActionType StaticActionType() { return ET4ActionType::Hit; }
+	static ET4ActionType StaticActionType() { return ET4ActionType::Reaction; }
 
 	FString ToString() const override
 	{
-		return FString(TEXT("HitAction"));
+		return FString(TEXT("ReactionAction"));
+	}
+
+	FString ToDisplayText() override
+	{
+		return FString::Printf(TEXT("Reaction '%s'"), *(ReactionName.ToString())); // #67
 	}
 };
 

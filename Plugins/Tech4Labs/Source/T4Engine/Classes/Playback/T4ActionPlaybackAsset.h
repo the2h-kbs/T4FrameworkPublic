@@ -158,6 +158,9 @@ public:
 	TArray<FT4ExchangeCostumeAction> ExchangeCostumeActions;
 
 	UPROPERTY(VisibleAnywhere)
+	TArray<FT4HitAction> HitActions; // #76
+
+	UPROPERTY(VisibleAnywhere)
 	TArray<FT4DieAction> DieActions; // #76
 
 	UPROPERTY(VisibleAnywhere)

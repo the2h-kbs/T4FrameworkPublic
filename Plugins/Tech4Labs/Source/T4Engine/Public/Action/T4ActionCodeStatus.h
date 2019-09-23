@@ -16,6 +16,7 @@
 // ET4ActionType::EquipWeapon
 // ET4ActionType::UnEquipWeapon
 // ET4ActionType::ExchangeCostume // #72
+// ET4ActionType::Hit // #76
 // ET4ActionType::Die // #76
 // ET4ActionType::Resurrect // #76
 
@@ -192,6 +193,44 @@ public:
 
 // #76
 USTRUCT()
+struct T4ENGINE_API FT4HitAction : public FT4CodeBaseAction
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	UPROPERTY(EditAnywhere)
+	FName ReactionName;
+
+	UPROPERTY(EditAnywhere)
+	FVector ShotDirection;
+
+	UPROPERTY(Transient)
+	bool bTransientPlay;
+
+public:
+	FT4HitAction()
+		: FT4CodeBaseAction(StaticActionType())
+		, ReactionName(NAME_None)
+		, ShotDirection(FVector::ZeroVector)
+		, bTransientPlay(false)
+	{
+	}
+
+	static ET4ActionType StaticActionType() { return ET4ActionType::Hit; }
+
+	bool Validate(FString& OutMsg) override
+	{
+		return true;
+	}
+
+	virtual FString ToString() const override
+	{
+		return FString(TEXT("HitAction"));
+	}
+};
+
+// #76
+USTRUCT()
 struct T4ENGINE_API FT4DieAction : public FT4CodeBaseAction
 {
 	GENERATED_USTRUCT_BODY()
@@ -230,24 +269,6 @@ public:
 
 // #76
 USTRUCT()
-struct T4ENGINE_API FT4PrivateDieAction : public FT4DieAction
-{
-	GENERATED_USTRUCT_BODY()
-
-public:
-	void CopyFrom(const FT4DieAction& InAction)
-	{
-		*static_cast<FT4DieAction*>(this) = InAction;
-	}
-
-	FString ToString() const override
-	{
-		return FString(TEXT("DieAction (Private)"));
-	}
-};
-
-// #76
-USTRUCT()
 struct T4ENGINE_API FT4ResurrectAction : public FT4CodeBaseAction
 {
 	GENERATED_USTRUCT_BODY()
@@ -277,23 +298,5 @@ public:
 	virtual FString ToString() const override
 	{
 		return FString(TEXT("ResurrectAction"));
-	}
-};
-
-// #76
-USTRUCT()
-struct T4ENGINE_API FT4PrivateResurrectAction : public FT4ResurrectAction
-{
-	GENERATED_USTRUCT_BODY()
-
-public:
-	void CopyFrom(const FT4ResurrectAction& InAction)
-	{
-		*static_cast<FT4ResurrectAction*>(this) = InAction;
-	}
-
-	FString ToString() const override
-	{
-		return FString(TEXT("ResurrectAction (Private)"));
 	}
 };

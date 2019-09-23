@@ -36,7 +36,7 @@ enum class ET4ActionType : uint32
 
 	Projectile, // #63
 
-	Hit, // #76
+	Reaction, // #76
 
 	TimeScale, // #54
 	CameraWork, // #54
@@ -73,6 +73,8 @@ enum class ET4ActionType : uint32
 	EquipWeapon, // #22
 	UnEquipWeapon, // #48
 	ExchangeCostume, // #37
+
+	Hit, // #76
 
 	Die, // #76
 	Resurrect, // #76
