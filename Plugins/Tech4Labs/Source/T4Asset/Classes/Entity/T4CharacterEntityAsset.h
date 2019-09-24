@@ -184,7 +184,6 @@ struct T4ASSET_API FT4EntityCharacterReactionPhysicsBlendData
 public:
 	FT4EntityCharacterReactionPhysicsBlendData()
 		: TargetWeight(1.0f)
-		, DurationSec(0.0f)
 		, BlendInTimeSec(0.0f)
 		, BlendOutTimeSec(0.0f)
 	{
@@ -192,9 +191,6 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = Property)
 	float TargetWeight;
-
-	UPROPERTY(EditAnywhere, Category = Property)
-	float DurationSec; // 0.0f : immediate
 
 	UPROPERTY(EditAnywhere, Category = Property)
 	float BlendInTimeSec;
@@ -306,6 +302,7 @@ struct T4ASSET_API FT4EntityCharacterReactionData
 public:
 	FT4EntityCharacterReactionData()
 		: ReactionType(ET4EntityReactionType::None)
+		, MaxPlayTimeSec(0.0f)
 		, bUsePhysicsStart(false)
 		, bUsePhysicsStop(false)
 		, bUseAnimation(false)
@@ -315,6 +312,9 @@ public:
 	// SelectReactionTransientDataInEntity
 	UPROPERTY(EditAnywhere, Category = Property)
 	ET4EntityReactionType ReactionType;
+
+	UPROPERTY(EditAnywhere, Category = Property)
+	float MaxPlayTimeSec;
 
 	UPROPERTY(EditAnywhere, Category = Property)
 	bool bUsePhysicsStart;
@@ -428,6 +428,7 @@ public:
 		// #76
 		TransientReactionName = NAME_None; 
 		TransientReactionType = ET4EntityReactionType::None;
+		TransientReactionMaxPlayTimeSec = 0.0f;
 		bTransientReactionPhysicsStartUsed = false;
 		TransientReactionPhysicsStartData = FT4EntityCharacterReactionPhysicsStartData();
 		bTransientReactionPhysicsStopUsed = false;
@@ -460,6 +461,9 @@ public:
 
 	UPROPERTY(EditAnywhere, Transient, meta = (DisplayName = "Reaction Type"))
 	ET4EntityReactionType TransientReactionType; // #76
+
+	UPROPERTY(EditAnywhere, Transient, meta = (DisplayName = "Max PlayTime (0 == Looping)"))
+	float TransientReactionMaxPlayTimeSec; // #76
 
 	UPROPERTY(EditAnywhere, Transient, meta = (DisplayName = "Use Physics Start"))
 	bool bTransientReactionPhysicsStartUsed;
