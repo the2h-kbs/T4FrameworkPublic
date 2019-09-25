@@ -22,6 +22,12 @@ static const FName T4EntityDefaultEntityTagName = TEXT("Default");
 static const FName T4StanceDefaultStanceName = TEXT("Default");
 
 
+// #78
+
+static const float T4ObjectWorldEnterTimeSec = 1.0f;
+static const float T4ObjectWorldLeaveTimeSec = 1.0f;
+
+
 // #39 : AnimSet
 
 static const float T4AnimSetLeftStanceValue = 1.0f;

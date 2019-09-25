@@ -22,6 +22,11 @@ static const float DefaultLineTraceMaxDistance = 10000.0f;
 
 #define T4_INVALID_NAVEXTENT		(FVector::ZeroVector)
 
+// #78 : Material Parameter
+
+static const FName T4MaterialParameterOpacityParamName = TEXT("T4OpacityParam"); // #78
+
+
 // #39 : AnimSet
 
 static const FName T4AnimSetAnimNotifyFootstepName = TEXT("Footstep_C");

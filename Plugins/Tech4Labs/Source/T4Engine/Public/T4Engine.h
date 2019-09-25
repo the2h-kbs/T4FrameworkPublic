@@ -215,6 +215,8 @@ public:
 	virtual const FVector GetMovementVelocity() const = 0;
 	virtual const float GetMovementSpeed() const = 0;
 
+	virtual const float GetOpacity() const = 0; // #78
+
 	virtual bool HasActionPoint(const FName& InActionPoint) const = 0; // #57 : ActionPoint = Socket or Bone or VirtualBone
 
 	virtual bool GetSocketLocation(const FName& InSocketName, FVector& OutLocation) const = 0; // #18

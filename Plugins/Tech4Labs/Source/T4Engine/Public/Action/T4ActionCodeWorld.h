@@ -131,12 +131,12 @@ public:
 	FT4ObjectID ObjectID;
 
 	UPROPERTY(EditAnywhere)
-	bool bImmediate; // #67
+	float FadeOutTimeSec; // #67, #78
 
 public:
 	FT4ObjectLeaveAction()
 		: FT4CodeBaseAction(StaticActionType())
-		, bImmediate(false) // #67
+		, FadeOutTimeSec(T4ObjectWorldLeaveTimeSec) // #67, #78
 	{
 	}
 

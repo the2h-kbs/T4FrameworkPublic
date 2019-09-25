@@ -18,6 +18,8 @@ Powerful toolset and Flexible layer solution
 - Warning
   - 2019.10 월 정식 버전 배포 예정입니다. 개발 버전이므로 테스트 용도로 만 사용해주시기 바랍니다.
 - Release Notes
+  - **[2019.09.25] [M3] Copying //Private to //Deploy (private commit 415a991)**
+	- #78 [기능추가] 캐릭터 Enter/Leave 시 Material Fade In/Out 처리 추가
   - **[2019.09.24] [M3] Copying //Private to //Deploy (private commit 3b1b83e)**
 	- #76 [기능개선] Rehearsal Entity Editor 의 Reaction 설정에 MaxPlayTime 프로퍼티 추가
   - **[2019.09.23] [M3] Copying //Private to //Deploy (private commit 729fdde)**
