@@ -29,6 +29,7 @@ private:
 
 class USkeleton;
 class UPhysicsAsset; // #76
+class UMaterialInterface; // #80
 class USkeletalMesh;
 class UAnimBlueprint;
 class UAnimMontage;
@@ -98,6 +99,9 @@ public:
 	TSoftObjectPtr<USkeletalMesh> SkeletalMeshAsset;
 
 	UPROPERTY(EditAnywhere, Category = Asset)
+	FT4EntityOverrideMaterialData OverrideMaterialData; // #80
+
+	UPROPERTY(EditAnywhere, Category = Asset)
 	TSoftObjectPtr<UPhysicsAsset> OverridePhysicsAsset; // #76 : Fullbody SK 라면 기본 세팅된 PhsycisAsset 을 그대로 사용하고, Override 할 경우만 재설정한다.
 };
 
@@ -112,7 +116,7 @@ public:
 	{
 	}
 
-	// SelectCompositePartTransientDataInEntity
+	// EntityCharacterSelectCompositePartByPartName
 
 	UPROPERTY(EditAnywhere, Category = Asset)
 	TSoftObjectPtr<UT4CostumeEntityAsset> CostumeEntityAsset;
@@ -151,7 +155,7 @@ public:
 	{
 	}
 
-	// SelectStanceTransientDataInEntity
+	// EntityCharacterSelectStanceDataByName
 
 	UPROPERTY(EditAnywhere, Category = Asset)
 	TSoftObjectPtr<UT4AnimSetAsset> AnimSetAsset; // #39
@@ -217,7 +221,7 @@ public:
 	{
 	}
 
-	// SelectReactionTransientDataInEntity
+	// EntityCharacterSelectReactionDataByName
 	UPROPERTY(EditAnywhere, Category = Property)
 	float DelayTimeSec;
 
@@ -255,7 +259,7 @@ public:
 	{
 	}
 
-	// SelectReactionTransientDataInEntity
+	// EntityCharacterSelectReactionDataByName
 	UPROPERTY(EditAnywhere, Category = Property)
 	float DelayTimeSec;
 };
@@ -276,7 +280,7 @@ public:
 	{
 	}
 
-	// SelectReactionTransientDataInEntity
+	// EntityCharacterSelectReactionDataByName
 	UPROPERTY(EditAnywhere, Category = Property)
 	float DelayTimeSec;
 
@@ -309,7 +313,7 @@ public:
 	{
 	}
 
-	// SelectReactionTransientDataInEntity
+	// EntityCharacterSelectReactionDataByName
 	UPROPERTY(EditAnywhere, Category = Property)
 	ET4EntityReactionType ReactionType;
 
@@ -390,6 +394,24 @@ public:
 	TSoftObjectPtr<UT4ContiAsset> ContiAsset;
 };
 
+// #80
+USTRUCT()
+struct T4ASSET_API FT4EntityCharacterEffectMaterialData
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	FT4EntityCharacterEffectMaterialData()
+	{
+	}
+
+	UPROPERTY(EditAnywhere, Category = Property)
+	FName EntityTag;
+
+	UPROPERTY(EditAnywhere, Category = Asset)
+	FT4EntityOverrideMaterialData OverrideMaterailData;
+};
+
 // #74
 USTRUCT()
 struct T4ASSET_API FT4EntityCharacterEntityTagData
@@ -401,11 +423,14 @@ public:
 	{
 	}
 
-	UPROPERTY(EditAnywhere, Category = Datas)
+	UPROPERTY(EditAnywhere)
 	TArray<FT4EntityCharacterWeaponData> EquipWeaponDatas;
 
-	UPROPERTY(EditAnywhere, Category = Datas)
+	UPROPERTY(EditAnywhere)
 	TArray<FT4EntityCharacterContiData> StayContiDatas;
+
+	UPROPERTY(EditAnywhere)
+	TArray<FT4EntityCharacterEffectMaterialData> EffectMaterialDatas; // #80
 };
 
 // #74
@@ -423,6 +448,10 @@ public:
 	void Reset()
 	{
 #if WITH_EDITOR
+		// #80
+		TransientFullbodyOverrideMaterialSlotName = NAME_None;
+		// ~#80
+
 		TransientCompositePartName = NAME_None;
 
 		// #76
@@ -441,18 +470,30 @@ public:
 		TransientStanceName = NAME_None; // #73
 		TransientStanceActiveEntityTag = NAME_None; // #73, #74
 
-		TransientEntityTagWeaponEntityTag = NAME_None;
+		TransientEntityTagWeaponDataName = NAME_None;
 		TransientEntityTagWeaponEquipPoint = NAME_None;
-		TransientEntityTagContiEntityTag = NAME_None;
+		TransientEntityTagContiDataName = NAME_None;
+
+		TransientEntityTagEffectMaterialDataName = NAME_None; // #80
+		TransientEntityTagEffectMaterialSlotName = NAME_None; // #80
 #endif
 	}
+
+	// #80
+	UPROPERTY(VisibleAnywhere, Transient, meta = (DisplayName = "Slot Name"))
+	FName TransientFullbodyOverrideMaterialSlotName;
+
+	UPROPERTY(EditAnywhere, Transient, meta = (DisplayName = "Material Asset"))
+	TSoftObjectPtr<UMaterialInterface> TransientFullbodyOverrideMaterialAsset;
+	// ~#80
+
 
 	UPROPERTY(EditAnywhere, Transient)
 	FName TransientCompositePartName;
 
+
 	UPROPERTY(EditAnywhere, Transient)
 	TSoftObjectPtr<UT4CostumeEntityAsset> TransientCompositePartAsset;
-
 
 	// HandleOnCharacterAddSelectedReaction
 	// #76
@@ -498,7 +539,7 @@ public:
 	FName TransientStanceActiveEntityTag; // #73, #74
 
 	UPROPERTY(EditAnywhere, Transient)
-	FName TransientEntityTagWeaponEntityTag; // #74
+	FName TransientEntityTagWeaponDataName; // #74
 
 	UPROPERTY(EditAnywhere, Transient)
 	FName TransientEntityTagWeaponEquipPoint; // #74
@@ -507,10 +548,22 @@ public:
 	TSoftObjectPtr<UT4WeaponEntityAsset> TransientEntityTagWeaponAsset; // #74
 
 	UPROPERTY(EditAnywhere, Transient)
-	FName TransientEntityTagContiEntityTag; // #74
+	FName TransientEntityTagContiDataName; // #74
 
 	UPROPERTY(EditAnywhere, Transient)
 	TSoftObjectPtr<UT4ContiAsset> TransientEntityTagContiAsset; // #74
+
+
+	// #80
+	UPROPERTY(EditAnywhere, Transient)
+	FName TransientEntityTagEffectMaterialDataName; 
+
+	UPROPERTY(VisibleAnywhere, Transient, meta = (DisplayName = "Slot Name"))
+	FName TransientEntityTagEffectMaterialSlotName;
+
+	UPROPERTY(EditAnywhere, Transient, meta = (DisplayName = "Material Asset"))
+	TSoftObjectPtr<UMaterialInterface> TransientEntityTagEffectMaterialAsset;
+	// ~#80
 };
 
 UCLASS(ClassGroup = Tech4Labs, Category = "Tech4Labs")

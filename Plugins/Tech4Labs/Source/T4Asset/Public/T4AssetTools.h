@@ -13,11 +13,13 @@ class UObject;
 class UTexture2D;
 class UBlendSpaceBase;
 class UAnimSequence;
+class UMaterialInterface;
 struct FT4EntityCharacterStanceData;
 struct FT4EntityCharacterReactionData; // #76
 class UT4AnimSetAsset;
 class UT4ContiAsset;
 class UT4EntityAsset;
+class UT4ItemEntityAsset;
 class UT4WeaponEntityAsset;
 class UT4CostumeEntityAsset;
 class UT4CharacterEntityAsset;
@@ -50,18 +52,96 @@ namespace T4AssetTool
 		const FVector& ThumbnailLocation
 	);
 
+	// #80
+	T4ASSET_API bool EntityCharacterGetFullbodyMeterialSlots(
+		UT4CharacterEntityAsset* InOutEntityAsset,
+		FString& OutErrorMessage
+	);
+	T4ASSET_API bool EntityCharacterClearFullbodyMeterialSlots(
+		UT4CharacterEntityAsset* InOutEntityAsset,
+		FString& OutErrorMessage
+	);
+	T4ASSET_API void EntityCharacterSelectFullbodyOverrideMaterialBySlotName(
+		UT4CharacterEntityAsset* InOutEntityAsset,
+		const FName& InSlotName
+	);
+	T4ASSET_API bool EntityCharacterUpdateFullbodyOverrideMaterialBySlotName(
+		UT4CharacterEntityAsset* InOutEntityAsset,
+		const FName& InSlotName,
+		const TSoftObjectPtr<UMaterialInterface>& InMaterialAsset,
+		FString& OutErrorMessage
+	);
+
+	T4ASSET_API bool EntityItemGetOverrideMeterialSlots(
+		UT4ItemEntityAsset* InOutEntityAsset,
+		FString& OutErrorMessage
+	);
+	T4ASSET_API bool EntityItemClearOverrideMeterialSlots(
+		UT4ItemEntityAsset* InOutEntityAsset,
+		FString& OutErrorMessage
+	);
+	T4ASSET_API void EntityItemSelectOverrideMaterialBySlotName(
+		UT4ItemEntityAsset* InOutEntityAsset,
+		const FName& InSlotName
+	);
+	T4ASSET_API bool EntityItemUpdateOverrideMaterialBySlotName(
+		UT4ItemEntityAsset* InOutEntityAsset,
+		const FName& InSlotName,
+		const TSoftObjectPtr<UMaterialInterface>& InMaterialAsset,
+		FString& OutErrorMessage
+	);
+
+	T4ASSET_API bool EntityWeaponGetOverrideMeterialSlots(
+		UT4WeaponEntityAsset* InOutEntityAsset,
+		FString& OutErrorMessage
+	);
+	T4ASSET_API bool EntityWeaponClearOverrideMeterialSlots(
+		UT4WeaponEntityAsset* InOutEntityAsset,
+		FString& OutErrorMessage
+	);
+	T4ASSET_API void EntityWeaponSelectOverrideMaterialBySlotName(
+		UT4WeaponEntityAsset* InOutEntityAsset,
+		const FName& InSlotName
+	);
+	T4ASSET_API bool EntityWeaponUpdateOverrideMaterialBySlotName(
+		UT4WeaponEntityAsset* InOutEntityAsset,
+		const FName& InSlotName,
+		const TSoftObjectPtr<UMaterialInterface>& InMaterialAsset,
+		FString& OutErrorMessage
+	);
+
+	T4ASSET_API bool EntityCostumeGetOverrideMeterialSlots(
+		UT4CostumeEntityAsset* InOutEntityAsset,
+		FString& OutErrorMessage
+	);
+	T4ASSET_API bool EntityCostumeClearOverrideMeterialSlots(
+		UT4CostumeEntityAsset* InOutEntityAsset,
+		FString& OutErrorMessage
+	);
+	T4ASSET_API void EntityCostumeSelectOverrideMaterialBySlotName(
+		UT4CostumeEntityAsset* InOutEntityAsset,
+		const FName& InSlotName
+	);
+	T4ASSET_API bool EntityCostumeUpdateOverrideMaterialBySlotName(
+		UT4CostumeEntityAsset* InOutEntityAsset,
+		const FName& InSlotName,
+		const TSoftObjectPtr<UMaterialInterface>& InMaterialAsset,
+		FString& OutErrorMessage
+	);
+	// ~#80
+
 	// #71
-	T4ASSET_API void SelectCompositePartTransientDataInEntity(
+	T4ASSET_API void EntityCharacterSelectCompositePartByPartName(
 		UT4CharacterEntityAsset* InOutEntityAsset, 
 		const FName& InPartName
 	);
-	T4ASSET_API bool AddOrUpdateCompositePartInEntity(
+	T4ASSET_API bool EntityCharacterAddOrUpdateCompositePartByPartName(
 		UT4CharacterEntityAsset* InOutEntityAsset,
 		const FName& InPartName,
-		TSoftObjectPtr<UT4CostumeEntityAsset>& InCostumeEntityAsset,
+		const TSoftObjectPtr<UT4CostumeEntityAsset>& InCostumeEntityAsset,
 		FString& OutErrorMessage
 	); 
-	T4ASSET_API bool RemoveCompositePartInEntity(
+	T4ASSET_API bool EntityCharacterRemoveCompositePartByPartName(
 		UT4CharacterEntityAsset* InOutEntityAsset,
 		const FName& InPartName,
 		FString& OutErrorMessage
@@ -69,17 +149,17 @@ namespace T4AssetTool
 	// ~#71
 
 	// #73
-	T4ASSET_API void SelectStanceTransientDataInEntity(
+	T4ASSET_API void EntityCharacterSelectStanceDataByName(
 		UT4CharacterEntityAsset* InOutEntityAsset,
 		const FName& InStanceName
 	);
-	T4ASSET_API bool AddOrUpdateStanceInEntity(
+	T4ASSET_API bool EntityCharacterAddOrUpdateStanceDataByName(
 		UT4CharacterEntityAsset* InOutEntityAsset,
 		const FName& InStanceName,
 		const FT4EntityCharacterStanceData* InStanceData,
 		FString& OutErrorMessage
 	);
-	T4ASSET_API bool RemoveStanceInEntity(
+	T4ASSET_API bool EntityCharacterRemoveStanceDataByName(
 		UT4CharacterEntityAsset* InOutEntityAsset,
 		const FName& InStanceName,
 		FString& OutErrorMessage
@@ -87,17 +167,17 @@ namespace T4AssetTool
 	// ~#73
 
 	// #76
-	T4ASSET_API void SelectReactionTransientDataInEntity(
+	T4ASSET_API void EntityCharacterSelectReactionDataByName(
 		UT4CharacterEntityAsset* InOutEntityAsset,
 		const FName& InReactionName
 	);
-	T4ASSET_API bool AddOrUpdateReactionInEntity(
+	T4ASSET_API bool EntityCharacterAddOrUpdateReactionDataByName(
 		UT4CharacterEntityAsset* InOutEntityAsset,
 		const FName& InReactionName,
 		const FT4EntityCharacterReactionData* InReactionData,
 		FString& OutErrorMessage
 	);
-	T4ASSET_API bool RemoveReactionInEntity(
+	T4ASSET_API bool EntityCharacterRemoveReactionDataByName(
 		UT4CharacterEntityAsset* InOutEntityAsset,
 		const FName& InReactionName,
 		FString& OutErrorMessage
@@ -105,61 +185,80 @@ namespace T4AssetTool
 	// ~#76
 
 	// #74
-	T4ASSET_API void SelectEntityTagEquipWeaponTransientDataInCharacterEntity(
+	T4ASSET_API void EntityCharacterSelectEntityTagWeaponDataByIndex(
 		UT4CharacterEntityAsset* InOutEntityAsset,
 		const int32 InSelectIndex
 	);
-	T4ASSET_API bool AddOrUpdateEntityTagEquipWeaponInEntity(
+	T4ASSET_API bool EntityCharacterAddOrUpdateEntityTagWeaponData(
 		UT4CharacterEntityAsset* InOutEntityAsset,
+		const int32 InSelectIndex,
 		const FName& InEntityTagName,
 		const FName& InEquipPointName,
-		TSoftObjectPtr<UT4WeaponEntityAsset>& InWeaponEntityAsset,
+		const TSoftObjectPtr<UT4WeaponEntityAsset>& InWeaponEntityAsset,
 		FString& OutErrorMessage
 	);
-	T4ASSET_API bool RemoveEntityTagEquipWeaponInEntity(
+	T4ASSET_API bool EntityCharacterRemoveEntityTagWeaponDataByIndex(
 		UT4CharacterEntityAsset* InOutEntityAsset,
 		int32 InRemoveArrayIndex,
 		FString& OutErrorMessage
 	);
 
-	T4ASSET_API void SelectEntityTagStayContiTransientDataInEntity(
+	T4ASSET_API void EntityCharacterSelectEntityTagStayContiDataByIndex(
 		UT4CharacterEntityAsset* InOutEntityAsset,
 		const int32 InSelectIndex
 	);
-	T4ASSET_API bool AddOrUpdateEntityTagStayContiInEntity(
+	T4ASSET_API bool EntityCharacterAddOrUpdateEntityTagStayContiData(
 		UT4CharacterEntityAsset* InOutEntityAsset,
+		const int32 InSelectIndex,
 		const FName& InEntityTagName,
-		TSoftObjectPtr<UT4ContiAsset>& InContiAsset,
+		const TSoftObjectPtr<UT4ContiAsset>& InContiAsset,
 		FString& OutErrorMessage
 	);
-	T4ASSET_API bool RemoveEntityTagStayContiInEntity(
+	T4ASSET_API bool EntityCharacterRemoveEntityTagStayContiDataByIndex(
 		UT4CharacterEntityAsset* InOutEntityAsset,
 		int32 InRemoveArrayIndex,
 		FString& OutErrorMessage
 	);
 	// ~#74
 
-	T4ASSET_API void SelectSkillAnimationLayerTransientDataInAnimSet(
+	// #80
+	T4ASSET_API void EntityCharacterSelectEntityTagEffectMaterialDataByIndex(
+		UT4CharacterEntityAsset* InOutEntityAsset,
+		const int32 InSelectIndex
+	);
+	T4ASSET_API bool EntityCharacterAddOrUpdateEntityTagEffectMaterialData(
+		UT4CharacterEntityAsset* InOutEntityAsset,
+		const FName& InEntityTagName,
+		FString& OutErrorMessage
+	);
+	T4ASSET_API bool EntityCharacterRemoveEntityTagEffectMaterialDataByIndex(
+		UT4CharacterEntityAsset* InOutEntityAsset,
+		int32 InRemoveArrayIndex,
+		FString& OutErrorMessage
+	);
+	// ~#80
+
+	T4ASSET_API void AnimSetSelectSkillAnimationLayerDataByName(
 		UT4AnimSetAsset* InOutAnimSetAsset,
 		const FName& InSelectedName
 	);
 
-	T4ASSET_API void SelectLocomotionAnimationLayerTransientDataInAnimSet(
+	T4ASSET_API void AnimSetSelectLocomotionAnimationLayerDataByName(
 		UT4AnimSetAsset* InOutAnimSetAsset,
 		const FName& InSelectedName
 	);
 
-	T4ASSET_API void SelectDefaultAnimationLayerTransientDataInAnimSet(
+	T4ASSET_API void AnimSetSelectDefaultAnimationLayerDataByName(
 		UT4AnimSetAsset* InOutAnimSetAsset,
 		const FName& InSelectedName
 	);
 
-	T4ASSET_API void SelectBlendspaceTransientDataInAnimSet(
+	T4ASSET_API void AnimSetSelectBlendSpaceDataByName(
 		UT4AnimSetAsset* InOutAnimSetAsset,
 		const FName& InSelectedName
 	);
 
-	T4ASSET_API bool AddOrUpdateAnimSeqeunceInfoInAnimSet(
+	T4ASSET_API bool AnimSetAddOrUpdateAnimSeqeunceInfo(
 		UT4AnimSetAsset* InOutAnimSetAsset,
 		const FName& InAnimMontageName,
 		const FName& InAnimSequenceName,
@@ -167,36 +266,36 @@ namespace T4AssetTool
 		FString& OutErrorMessage
 	);
 
-	T4ASSET_API bool RemoveAnimSeqeunceInfoInAnimSet(
+	T4ASSET_API bool AnimSetRemoveAnimSeqeunceInfo(
 		UT4AnimSetAsset* InOutAnimSetAsset,
 		const FName& InAnimMontageName,
 		const FName& InAnimSequenceName,
 		FString& OutErrorMessage
 	);
 
-	T4ASSET_API bool AddOrUpdateBlendSpaceInfoInAnimSet(
+	T4ASSET_API bool AnimSetAddOrUpdateBlendSpaceInfo(
 		UT4AnimSetAsset* InOutAnimSetAsset,
 		const FName& InBlendSpaceName,
 		const TSoftObjectPtr<UBlendSpaceBase>& InBlendSpace,
 		FString& OutErrorMessage
 	);
 
-	T4ASSET_API bool RemoveBlendSpaceInfoInAnimSet(
+	T4ASSET_API bool AnimSetRemoveBlendSpaceInfoByName(
 		UT4AnimSetAsset* InOutAnimSetAsset,
 		const FName& InBlendSpaceName,
 		FString& OutErrorMessage
 	);
 
-	T4ASSET_API bool UpdateBlendSpaceInfoInAnimSet(
+	T4ASSET_API bool AnimSetUpdateBlendSpaceInfo(
 		UT4AnimSetAsset* InOutAnimSetAsset
 	);
 
-	T4ASSET_API bool UpdateAnimSetAsset(
+	T4ASSET_API bool AnimSetUpdateAll(
 		UT4AnimSetAsset* InOutAnimSetAsset,
 		FString& OutErrorMessage
 	);
 
-	T4ASSET_API bool SaveAnimSetAsset(
+	T4ASSET_API bool AnimSetSaveAll(
 		UT4AnimSetAsset* InAnimSetAsset,
 		FString& OutErrorMessage
 	); // #69

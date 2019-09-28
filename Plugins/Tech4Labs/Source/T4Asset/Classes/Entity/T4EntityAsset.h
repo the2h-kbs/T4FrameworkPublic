@@ -75,6 +75,25 @@ public:
 	bool bReceivesDecals; // #54
 };
 
+// #80
+class UMaterialInterface;
+USTRUCT()
+struct T4ASSET_API FT4EntityOverrideMaterialData
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	FT4EntityOverrideMaterialData()
+	{
+	}
+
+	UPROPERTY(EditAnywhere)
+	TMap<FName, TSoftObjectPtr<UMaterialInterface>> MaterialMap;
+
+	UPROPERTY(EditAnywhere)
+	TArray<FName> MaterialSortedSlotNames;
+};
+
 class UTexture2D;
 UCLASS(ClassGroup = Tech4Labs, Category = "Tech4Labs")
 class T4ASSET_API UT4EntityAsset : public UObject
@@ -104,7 +123,7 @@ public:
 
 public:
 #if WITH_EDITORONLY_DATA
-	UPROPERTY(EditAnywhere, Category=Editor)
+	UPROPERTY(EditAnywhere)
 	FT4EntityEditorThumbnailAttribute ThumbnailCameraInfo;
 
 	UPROPERTY()

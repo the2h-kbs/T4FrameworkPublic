@@ -8,6 +8,9 @@
 #include "Public/Action/T4ActionCodeMove.h"
 #include "Public/Action/T4ActionCodeCommon.h"
 #include "Public/Action/T4ActionCodeWorld.h"
+#if WITH_EDITOR
+#include "Public/Action/T4ActionCodeEditor.h"
+#endif
 
 #include "Public/Action/T4ActionParameters.h"
 
@@ -177,6 +180,13 @@ public:
 
 	UPROPERTY(VisibleAnywhere)
 	TArray<FT4StopAction> StopActions;
+
+
+#if WITH_EDITORONLY_DATA
+	// T4ActionCodeEditor.h
+	UPROPERTY(VisibleAnywhere)
+	TArray<FT4EditorAction> EditorActions; // #80
+#endif
 };
 
 UCLASS(ClassGroup = Tech4Labs, Category = "Tech4Labs")

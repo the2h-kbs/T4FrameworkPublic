@@ -182,7 +182,8 @@ public:
 
 	virtual APawn* GetPawn() = 0;
 
-	virtual bool OnExecutePublicAction(const FT4BaseAction* InAction, const FT4ActionParameters* InParam = nullptr) = 0; // #76 : ActionControl only
+	// #76 : Only Public Action, Playback used
+	virtual bool DoExecuteAction(const FT4BaseAction* InAction, const FT4ActionParameters* InParam = nullptr) = 0;
 
 	// #34 : for Server All or Client Only Player
 	virtual IT4GameplayControl* GetGameplayControl() = 0; // #34, #42, #36
@@ -224,10 +225,6 @@ public:
 	virtual bool GetSocketScale(const FName& InSocketName, ERelativeTransformSpace InTransformSpace, FVector& OutScale) const = 0; // #54
 
 	virtual void SetHeightOffset(float InOffset) = 0; // #18
-
-#if WITH_EDITOR
-	virtual void EditorRestoreReaction() = 0; // #76
-#endif
 
 #if !UE_BUILD_SHIPPING
 	virtual FT4GameObjectDebugInfo& GetDebugInfo() = 0; // #76
@@ -309,10 +306,7 @@ public:
 	virtual void OnProcessPre(float InDeltaTime) = 0; // #34 : OnWorldPreActorTick
 	virtual void OnProcessPost(float InDeltaTime) = 0; // #34 : OnWorldPostActorTick
 
-	virtual bool OnExecute(
-		const FT4BaseAction* InAction, // WARN : only reference
-		const FT4ActionParameters* InActionParam = nullptr // WARN : only reference
-	) = 0;
+	virtual bool DoExecuteAction(const FT4BaseAction* InAction, const FT4ActionParameters* InActionParam = nullptr) = 0;
 
 	virtual UWorld* GetWorld() const = 0;
 	

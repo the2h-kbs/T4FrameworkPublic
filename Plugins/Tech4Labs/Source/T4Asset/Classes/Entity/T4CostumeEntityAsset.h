@@ -27,7 +27,64 @@ private:
 };
 
 class USkeleton;
+class UPhysicsAsset; // #76
 class USkeletalMesh;
+
+// #80
+USTRUCT()
+struct T4ASSET_API FT4EntityItemCostumeMeshData
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	FT4EntityItemCostumeMeshData()
+		: CompositePartName(NAME_None)
+		//, bUseDropMesh(true) // #80
+	{
+	}
+
+	UPROPERTY(EditAnywhere, Category=Default, AssetRegistrySearchable)
+	TSoftObjectPtr<USkeleton> SkeletonAsset; // #39
+
+	UPROPERTY(EditAnywhere, Category=Default, AssetRegistrySearchable)
+	FName CompositePartName; // #72
+
+	UPROPERTY(EditAnywhere, Category=Default)
+	TSoftObjectPtr<USkeletalMesh> SkeletalMeshAsset; // #37
+
+	UPROPERTY(EditAnywhere, Category = Default)
+	FT4EntityOverrideMaterialData OverrideMaterialData; // #80
+
+	//UPROPERTY(EditAnywhere)
+	//bool bUseDropMesh; // #80
+};
+
+// #80
+USTRUCT()
+struct T4ASSET_API FT4EntityCostumeEditorTransientData
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	FT4EntityCostumeEditorTransientData()
+	{
+		Reset();
+	}
+
+	void Reset()
+	{
+#if WITH_EDITOR
+		TransientItemOverrideMaterialSlotName = NAME_None; // #80
+#endif
+	}
+
+	UPROPERTY(VisibleAnywhere, Transient, meta = (DisplayName = "Slot Name"))
+	FName TransientItemOverrideMaterialSlotName;
+
+	UPROPERTY(EditAnywhere, Transient, meta = (DisplayName = "Material Asset"))
+	TSoftObjectPtr<UMaterialInterface> TransientItemOverrideMaterialAsset;
+};
+
 UCLASS(ClassGroup = Tech4Labs, Category = "Tech4Labs")
 class T4ASSET_API UT4CostumeEntityAsset : public UT4ItemEntityAsset
 {
@@ -45,12 +102,12 @@ public:
 	ET4EntityType GetEntityType() const override { return ET4EntityType::Costume; }
 
 public:
-	UPROPERTY(EditAnywhere, Category=Default, AssetRegistrySearchable)
-	TSoftObjectPtr<USkeleton> SkeletonAsset; // #39
+	UPROPERTY(EditAnywhere)
+	FT4EntityItemCostumeMeshData MeshData;
 
-	UPROPERTY(EditAnywhere, Category=Default, AssetRegistrySearchable)
-	FName CompositePartName; // #72
-
-	UPROPERTY(EditAnywhere, Category=Default)
-	TSoftObjectPtr<USkeletalMesh> SkeletalMeshAsset; // #37
+public:
+	// #80 : OverrideMaterial Data/ Physics Asset
+	// TODO : Transient 설정으로 Editor Dirty 가 발생함으로 다른 방법 고려 필요
+	UPROPERTY(EditAnywhere, Transient)
+	FT4EntityCostumeEditorTransientData EditorCostumeTransientData;
 };

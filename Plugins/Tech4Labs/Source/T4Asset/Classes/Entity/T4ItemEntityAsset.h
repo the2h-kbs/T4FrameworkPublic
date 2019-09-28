@@ -11,6 +11,8 @@
  */
 class UStaticMesh;
 class USkeletalMesh;
+class UParticleSystem;
+class UMaterialInterface;
 
 USTRUCT()
 struct T4ASSET_API FT4EntityItemPhysicalAttribute : public FT4EntityBasePhysicalAttribute
@@ -47,14 +49,49 @@ public:
 	{
 	}
 
-	UPROPERTY(EditAnywhere, Category= Asset)
+	UPROPERTY(EditAnywhere)
 	ET4EntityMeshType MeshType;
 
-	UPROPERTY(EditAnywhere, Category = Asset)
+	UPROPERTY(EditAnywhere)
 	TSoftObjectPtr<UStaticMesh> StaticMeshAsset;
 
-	UPROPERTY(EditAnywhere, Category = Asset)
+	UPROPERTY(EditAnywhere, meta = (DisplayName = "Override Material Data"))
+	FT4EntityOverrideMaterialData StaticMeshOverrideMaterialData; // #80
+
+	UPROPERTY(EditAnywhere)
 	TSoftObjectPtr<USkeletalMesh> SkeletalMeshAsset;
+
+	UPROPERTY(EditAnywhere, meta = (DisplayName = "Override Material Data"))
+	FT4EntityOverrideMaterialData SkeletalMeshOverrideMaterialData; // #80
+
+	UPROPERTY(EditAnywhere)
+	TSoftObjectPtr<UParticleSystem> ParticleSystemAsset;
+};
+
+// #80
+USTRUCT()
+struct T4ASSET_API FT4EntityItemEditorTransientData
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	FT4EntityItemEditorTransientData()
+	{
+		Reset();
+	}
+
+	void Reset()
+	{
+#if WITH_EDITOR
+		TransientDropMeshOverrideMaterialSlotName = NAME_None; // #80
+#endif
+	}
+
+	UPROPERTY(VisibleAnywhere, Transient, meta = (DisplayName = "Slot Name"))
+	FName TransientDropMeshOverrideMaterialSlotName;
+
+	UPROPERTY(EditAnywhere, Transient, meta = (DisplayName = "Material Asset"))
+	TSoftObjectPtr<UMaterialInterface> TransientDropMeshOverrideMaterialAsset;
 };
 
 UCLASS(ClassGroup = Tech4Labs, Category = "Tech4Labs")
@@ -70,12 +107,18 @@ public:
 	//~ End UObject interface
 
 public:
-	UPROPERTY(EditAnywhere, Category=DropMesh)
+	UPROPERTY(EditAnywhere, meta = (DisplayName = "Mesh Data"))
 	FT4EntityItemDropMeshData DropMeshData;
 
-	UPROPERTY(EditAnywhere, Category=Attributes)
+	UPROPERTY(EditAnywhere, meta = (DisplayName = "Physical"))
 	FT4EntityItemPhysicalAttribute DropMeshPhysical;
 
-	UPROPERTY(EditAnywhere, Category=Attributes)
+	UPROPERTY(EditAnywhere, meta = (DisplayName = "Rendering"))
 	FT4EntityItemRenderingAttribute DropMeshRendering;
+
+public:
+	// #80 : OverrideMaterial Data/ Physics Asset
+	// TODO : Transient 설정으로 Editor Dirty 가 발생함으로 다른 방법 고려 필요
+	UPROPERTY(EditAnywhere, Transient)
+	FT4EntityItemEditorTransientData EditorItemTransientData;
 };

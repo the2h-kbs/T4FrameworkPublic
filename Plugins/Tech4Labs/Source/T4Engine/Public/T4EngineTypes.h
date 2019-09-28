@@ -198,11 +198,11 @@ enum class ET4TargetType : uint8
 };
 
 UENUM()
-enum class ET4EditorReload : uint8
+enum class ET4EditorAction : uint8
 {
-	All,
-	Attribute,
-	Data,
+	ReloadObject, // #37
+	RestoreReaction, // #76
+	UpdateOverrideMaterials, // #80
 
 	None,
 };

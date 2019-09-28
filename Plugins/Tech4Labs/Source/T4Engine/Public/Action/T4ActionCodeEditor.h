@@ -11,31 +11,31 @@
  */
  // #T4_ADD_ACTION_TAG_CODE
 
-// ET4ActionType::EditorReload
+// ET4ActionType::Editor
 
 USTRUCT()
-struct T4ENGINE_API FT4EditorReloadAction : public FT4CodeBaseAction
+struct T4ENGINE_API FT4EditorAction : public FT4CodeBaseAction
 {
 	GENERATED_USTRUCT_BODY()
 
 public:
 	UPROPERTY(EditAnywhere)
-	ET4EditorReload ReloadType;
+	ET4EditorAction EditorActionType;
 
 public:
-	FT4EditorReloadAction()
+	FT4EditorAction()
 		: FT4CodeBaseAction(StaticActionType())
-		, ReloadType(ET4EditorReload::None)
+		, EditorActionType(ET4EditorAction::None)
 	{
 	}
 
-	static ET4ActionType StaticActionType() { return ET4ActionType::EditorReload; }
+	static ET4ActionType StaticActionType() { return ET4ActionType::Editor; }
 
 	bool Validate(FString& OutMsg) override
 	{
-		if (ET4EditorReload::None == ReloadType)
+		if (ET4EditorAction::None == EditorActionType)
 		{
-			OutMsg = TEXT("Not set ReloadType");
+			OutMsg = TEXT("Not set EditorActionType");
 			return false;
 		}
 		return true;
@@ -43,6 +43,6 @@ public:
 
 	FString ToString() const override
 	{
-		return FString(TEXT("EditorReloadAction"));
+		return FString(TEXT("EditorAction"));
 	}
 };

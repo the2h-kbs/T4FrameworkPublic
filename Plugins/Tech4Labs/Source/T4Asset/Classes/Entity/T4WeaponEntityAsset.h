@@ -28,7 +28,8 @@ private:
 
 class UStaticMesh;
 class USkeletalMesh;
-
+class UPhysicsAsset; // #76
+class UMaterialInterface;
 USTRUCT()
 struct T4ASSET_API FT4EntityItemWeaponMeshData
 {
@@ -40,14 +41,49 @@ public:
 	{
 	}
 
-	UPROPERTY(EditAnywhere, Category= Asset)
+	UPROPERTY(EditAnywhere)
 	ET4EntityMeshType MeshType;
 
-	UPROPERTY(EditAnywhere, Category = Asset)
+	UPROPERTY(EditAnywhere)
 	TSoftObjectPtr<UStaticMesh> StaticMeshAsset;
 
-	UPROPERTY(EditAnywhere, Category = Asset)
+	UPROPERTY(EditAnywhere, meta = (DisplayName = "Override Material Data"))
+	FT4EntityOverrideMaterialData StaticMeshOverrideMaterialData; // #80
+
+	UPROPERTY(EditAnywhere)
 	TSoftObjectPtr<USkeletalMesh> SkeletalMeshAsset;
+
+	UPROPERTY(EditAnywhere, meta = (DisplayName = "Override Material Data"))
+	FT4EntityOverrideMaterialData SkeletalMeshOverrideMaterialData; // #80
+
+	UPROPERTY(EditAnywhere)
+	TSoftObjectPtr<UParticleSystem> ParticleSystemAsset;
+};
+
+// #80
+USTRUCT()
+struct T4ASSET_API FT4EntityWeaponEditorTransientData
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	FT4EntityWeaponEditorTransientData()
+	{
+		Reset();
+	}
+
+	void Reset()
+	{
+#if WITH_EDITOR
+		TransientItemOverrideMaterialSlotName = NAME_None; // #80
+#endif
+	}
+
+	UPROPERTY(VisibleAnywhere, Transient, meta = (DisplayName = "Slot Name"))
+	FName TransientItemOverrideMaterialSlotName;
+
+	UPROPERTY(EditAnywhere, Transient, meta = (DisplayName = "Material Asset"))
+	TSoftObjectPtr<UMaterialInterface> TransientItemOverrideMaterialAsset;
 };
 
 UCLASS(ClassGroup = Tech4Labs, Category = "Tech4Labs")
@@ -67,6 +103,12 @@ public:
 	ET4EntityType GetEntityType() const override { return ET4EntityType::Weapon; }
 
 public:
-	UPROPERTY(EditAnywhere, Category=Default)
+	UPROPERTY(EditAnywhere)
 	FT4EntityItemWeaponMeshData MeshData;
+
+public:
+	// #80 : OverrideMaterial Data/ Physics Asset
+	// TODO : Transient 설정으로 Editor Dirty 가 발생함으로 다른 방법 고려 필요
+	UPROPERTY(EditAnywhere, Transient)
+	FT4EntityWeaponEditorTransientData EditorWeaponTransientData;
 };
