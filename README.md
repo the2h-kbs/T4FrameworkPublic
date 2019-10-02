@@ -18,6 +18,8 @@ Powerful toolset and Flexible layer solution
 - Warning
   - 2019.10 월 정식 버전 배포 예정입니다. 개발 버전이므로 테스트 용도로 만 사용해주시기 바랍니다.
 - Release Notes
+  - **[2019.10.02] [M3] Copying //Private to //Deploy (private commit c719284)**
+	- #75 [버그수정] Conti Editor 의 Action Copy&Paste 동작 오류 수정
   - **[2019.10.02] [M3] Copying //Private to //Deploy (private commit b29fce8)**
 	- #81 [기능추가] Entity 및 Conti 를 통한 Effect Material 플레이 기능 추가
   - **[2019.09.28] [M3] Copying //Private to //Deploy (private commit 15cdc10)**
