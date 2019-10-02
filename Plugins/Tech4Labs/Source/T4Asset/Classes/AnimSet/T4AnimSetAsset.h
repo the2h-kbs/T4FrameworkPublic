@@ -246,12 +246,12 @@ public:
 
 	UPROPERTY()
 	UTexture2D* ThumbnailImage; // Internal: The thumbnail image
-#endif
 
 	// #39 : WARN : AnimSetCustomDetails 에서 사용하는 임시 프로퍼티! (저장되지 않는다!!)
 	// TODO : Transient 설정으로 Editor Dirty 가 발생함으로 다른 방법 고려 필요
 	UPROPERTY(EditAnywhere, Transient)
 	FT4AnimSetEditorTransientData EditorTransientData;
+#endif
 
 private:
 #if WITH_EDITOR

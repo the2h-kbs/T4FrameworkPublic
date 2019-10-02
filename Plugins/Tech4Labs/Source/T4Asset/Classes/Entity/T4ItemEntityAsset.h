@@ -107,6 +107,15 @@ public:
 	//~ End UObject interface
 
 public:
+#if WITH_EDITOR
+	virtual void ResetEditorTransientData() override
+	{
+		UT4EntityAsset::ResetEditorTransientData();
+		EditorTransientItemData.Reset();
+	} // #73
+#endif
+
+public:
 	UPROPERTY(EditAnywhere, meta = (DisplayName = "Mesh Data"))
 	FT4EntityItemDropMeshData DropMeshData;
 
@@ -116,9 +125,10 @@ public:
 	UPROPERTY(EditAnywhere, meta = (DisplayName = "Rendering"))
 	FT4EntityItemRenderingAttribute DropMeshRendering;
 
-public:
+#if WITH_EDITORONLY_DATA
 	// #80 : OverrideMaterial Data/ Physics Asset
 	// TODO : Transient 설정으로 Editor Dirty 가 발생함으로 다른 방법 고려 필요
 	UPROPERTY(EditAnywhere, Transient)
-	FT4EntityItemEditorTransientData EditorItemTransientData;
+	FT4EntityItemEditorTransientData EditorTransientItemData;
+#endif
 };

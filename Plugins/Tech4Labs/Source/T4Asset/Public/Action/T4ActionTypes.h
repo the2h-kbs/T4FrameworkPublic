@@ -41,6 +41,8 @@ enum class ET4ActionType : uint32
 	TimeScale, // #54
 	CameraWork, // #54
 
+	LayerSet, // #81
+
 	// #62 : End Conti Format
 
 	// #62 : Start Code Format
@@ -83,7 +85,7 @@ enum class ET4ActionType : uint32
 
 	Pause, // #63
 	Stop,
-
+	
 	Dummy, // #56 : Conti Editor 에서 Invisible or Isolate 로 출력을 제어할 때 더미용으로 사용 (delay, duration 동작 보장)
 
 	// begin Editor
@@ -134,4 +136,14 @@ enum class ET4AttachParent : uint8 // #54
 	World,
 
 	Default,
+};
+
+UENUM()
+enum class ET4LayerTagType : uint8 // #81
+{
+	Material, // #81
+	Weapon, // #74
+	Conti, // #74
+
+	All, // #81
 };

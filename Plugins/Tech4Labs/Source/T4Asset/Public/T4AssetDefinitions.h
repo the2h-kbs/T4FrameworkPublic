@@ -14,7 +14,7 @@ static const FName T4ContiDefaultActionPontName = TEXT("Root"); // #63
 
 // #74 : Entity
 
-static const FName T4EntityDefaultEntityTagName = TEXT("Default");
+static const FName T4EntityDefaultLayerTagName = TEXT("Default");
 
 
 // #73 : Stance

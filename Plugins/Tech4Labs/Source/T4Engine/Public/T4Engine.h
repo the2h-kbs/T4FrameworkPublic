@@ -218,6 +218,8 @@ public:
 
 	virtual const float GetOpacity() const = 0; // #78
 
+	virtual bool HasReaction(const FName& InReactionName) const = 0; // #73
+	virtual bool HasLayerTag(const FName& InLayerTagName, ET4LayerTagType InLayerTagType) const = 0; // #81
 	virtual bool HasActionPoint(const FName& InActionPoint) const = 0; // #57 : ActionPoint = Socket or Bone or VirtualBone
 
 	virtual bool GetSocketLocation(const FName& InSocketName, FVector& OutLocation) const = 0; // #18

@@ -21,6 +21,7 @@
 // ET4ActionType::Reaction // #76
 // ET4ActionType::TimeScale // #52
 // ET4ActionType::CameraWork // #52
+// ET4ActionType::LayerSet // #81
 
 class UT4ContiAsset;
 
@@ -437,5 +438,40 @@ public:
 	FString ToString() const override
 	{
 		return FString(TEXT("CameraWorkAction"));
+	}
+};
+
+// #81
+USTRUCT()
+struct T4ASSET_API FT4LayerSetAction : public FT4ContiBaseAction
+{
+	GENERATED_USTRUCT_BODY()
+
+public:
+	// #39 : FT4ContiCustomizeDetails::CustomizeLayerSetActionDetails
+	UPROPERTY(EditAnywhere)
+	FName LayerTagName;
+
+	UPROPERTY(EditAnywhere)
+	ET4LayerTagType LayerTagType;
+
+public:
+	FT4LayerSetAction()
+		: FT4ContiBaseAction(StaticActionType())
+		, LayerTagName(NAME_None)
+		, LayerTagType(ET4LayerTagType::All)
+	{
+	}
+
+	static ET4ActionType StaticActionType() { return ET4ActionType::LayerSet; }
+
+	FString ToString() const override
+	{
+		return FString(TEXT("LayerSetAction"));
+	}
+
+	FString ToDisplayText() override
+	{
+		return FString::Printf(TEXT("LayerSet '%s'"), *(LayerTagName.ToString()));
 	}
 };

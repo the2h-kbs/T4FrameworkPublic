@@ -200,9 +200,20 @@ enum class ET4TargetType : uint8
 UENUM()
 enum class ET4EditorAction : uint8
 {
+	ReloadAttributes, // #81
+
+	ReloadAnimSetSkill, // #81
+	ReloadAnimSetLocomotion, // #81
+	ReloadAnimSetDefault, // #81
+	ReloadAnimSetBlendSpace, // #81
+
 	ReloadObject, // #37
+
 	RestoreReaction, // #76
 	UpdateOverrideMaterials, // #80
+
+	LayerSet, // #81
+	LayerSetClear, // #81
 
 	None,
 };

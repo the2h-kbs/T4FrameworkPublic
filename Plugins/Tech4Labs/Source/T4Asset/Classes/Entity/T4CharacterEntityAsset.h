@@ -151,7 +151,7 @@ struct T4ASSET_API FT4EntityCharacterStanceData
 
 public:
 	FT4EntityCharacterStanceData()
-		: ActiveEntityTag(NAME_None)
+		: ActiveLayerTag(NAME_None)
 	{
 	}
 
@@ -161,7 +161,7 @@ public:
 	TSoftObjectPtr<UT4AnimSetAsset> AnimSetAsset; // #39
 
 	UPROPERTY(EditAnywhere, Category = Property)
-	FName ActiveEntityTag; // #74, #73
+	FName ActiveLayerTag; // #74, #73
 };
 
 // #73
@@ -355,86 +355,6 @@ public:
 
 // #74
 USTRUCT()
-struct T4ASSET_API FT4EntityCharacterWeaponData
-{
-	GENERATED_USTRUCT_BODY()
-
-public:
-	FT4EntityCharacterWeaponData()
-		: EntityTag(T4EntityDefaultEntityTagName)
-	{
-	}
-
-	UPROPERTY(EditAnywhere, Category = Property)
-	FName EntityTag;
-
-	UPROPERTY(EditAnywhere, Category = Property)
-	FName EquipPoint;
-
-	UPROPERTY(EditAnywhere, Category = Asset)
-	TSoftObjectPtr<UT4WeaponEntityAsset> WeaponEntityAsset;
-};
-
-// #74
-USTRUCT()
-struct T4ASSET_API FT4EntityCharacterContiData
-{
-	GENERATED_USTRUCT_BODY()
-
-public:
-	FT4EntityCharacterContiData()
-		: EntityTag(T4EntityDefaultEntityTagName)
-	{
-	}
-
-	UPROPERTY(EditAnywhere, Category = Property)
-	FName EntityTag;
-
-	UPROPERTY(EditAnywhere, Category = Asset)
-	TSoftObjectPtr<UT4ContiAsset> ContiAsset;
-};
-
-// #80
-USTRUCT()
-struct T4ASSET_API FT4EntityCharacterEffectMaterialData
-{
-	GENERATED_USTRUCT_BODY()
-
-public:
-	FT4EntityCharacterEffectMaterialData()
-	{
-	}
-
-	UPROPERTY(EditAnywhere, Category = Property)
-	FName EntityTag;
-
-	UPROPERTY(EditAnywhere, Category = Asset)
-	FT4EntityOverrideMaterialData OverrideMaterailData;
-};
-
-// #74
-USTRUCT()
-struct T4ASSET_API FT4EntityCharacterEntityTagData
-{
-	GENERATED_USTRUCT_BODY()
-
-public:
-	FT4EntityCharacterEntityTagData()
-	{
-	}
-
-	UPROPERTY(EditAnywhere)
-	TArray<FT4EntityCharacterWeaponData> EquipWeaponDatas;
-
-	UPROPERTY(EditAnywhere)
-	TArray<FT4EntityCharacterContiData> StayContiDatas;
-
-	UPROPERTY(EditAnywhere)
-	TArray<FT4EntityCharacterEffectMaterialData> EffectMaterialDatas; // #80
-};
-
-// #74
-USTRUCT()
 struct T4ASSET_API FT4EntityCharacterEditorTransientData
 {
 	GENERATED_USTRUCT_BODY()
@@ -468,14 +388,7 @@ public:
 		// ~#76
 
 		TransientStanceName = NAME_None; // #73
-		TransientStanceActiveEntityTag = NAME_None; // #73, #74
-
-		TransientEntityTagWeaponDataName = NAME_None;
-		TransientEntityTagWeaponEquipPoint = NAME_None;
-		TransientEntityTagContiDataName = NAME_None;
-
-		TransientEntityTagEffectMaterialDataName = NAME_None; // #80
-		TransientEntityTagEffectMaterialSlotName = NAME_None; // #80
+		TransientStanceActiveLayerTag = NAME_None; // #73, #74
 #endif
 	}
 
@@ -536,34 +449,7 @@ public:
 	TSoftObjectPtr<UT4AnimSetAsset> TransientStanceAsset; // #73
 
 	UPROPERTY(EditAnywhere, Transient)
-	FName TransientStanceActiveEntityTag; // #73, #74
-
-	UPROPERTY(EditAnywhere, Transient)
-	FName TransientEntityTagWeaponDataName; // #74
-
-	UPROPERTY(EditAnywhere, Transient)
-	FName TransientEntityTagWeaponEquipPoint; // #74
-
-	UPROPERTY(EditAnywhere, Transient)
-	TSoftObjectPtr<UT4WeaponEntityAsset> TransientEntityTagWeaponAsset; // #74
-
-	UPROPERTY(EditAnywhere, Transient)
-	FName TransientEntityTagContiDataName; // #74
-
-	UPROPERTY(EditAnywhere, Transient)
-	TSoftObjectPtr<UT4ContiAsset> TransientEntityTagContiAsset; // #74
-
-
-	// #80
-	UPROPERTY(EditAnywhere, Transient)
-	FName TransientEntityTagEffectMaterialDataName; 
-
-	UPROPERTY(VisibleAnywhere, Transient, meta = (DisplayName = "Slot Name"))
-	FName TransientEntityTagEffectMaterialSlotName;
-
-	UPROPERTY(EditAnywhere, Transient, meta = (DisplayName = "Material Asset"))
-	TSoftObjectPtr<UMaterialInterface> TransientEntityTagEffectMaterialAsset;
-	// ~#80
+	FName TransientStanceActiveLayerTag; // #73, #74
 };
 
 UCLASS(ClassGroup = Tech4Labs, Category = "Tech4Labs")
@@ -583,7 +469,24 @@ public:
 	ET4EntityType GetEntityType() const override { return ET4EntityType::Character; }
 
 #if WITH_EDITOR
-	void ResetEditorTransientData() override { EditorTransientData.Reset();  } // #73
+	virtual USkeletalMesh* GetPrimarySkeletalMeshAsset() const override // #81
+	{
+		if (ET4EntityCharacterMeshType::FullBody != MeshType)
+		{
+			return nullptr;
+		}
+		if (FullBodyMeshData.SkeletalMeshAsset.IsNull())
+		{
+			return nullptr;
+		}
+		return FullBodyMeshData.SkeletalMeshAsset.LoadSynchronous();
+	}
+
+	virtual void ResetEditorTransientData() override
+	{ 
+		UT4EntityAsset::ResetEditorTransientData();
+		EditorTransientCharacterData.Reset();
+	} // #73
 #endif
 
 public:
@@ -608,18 +511,16 @@ public:
 	UPROPERTY(EditAnywhere, Category=Reaction)
 	FT4EntityCharacterReactionSetData ReactionSetData; // #76
 
-	UPROPERTY(EditAnywhere, Category = EntityTag)
-	FT4EntityCharacterEntityTagData EntityTagData; // #74
-
 	UPROPERTY(EditAnywhere, Category= Attributes)
 	FT4EntityCharacterPhysicalAttribute Physical;
 
 	UPROPERTY(EditAnywhere, Category= Attributes)
 	FT4EntityCharacterRenderingAttribute Rendering;
 
-public:
+#if WITH_EDITORONLY_DATA
 	// #71 : WARN : CustomizeCharacterEntityDetails 에서 사용하는 임시 프로퍼티! (저장되지 않는다!!)
 	// TODO : Transient 설정으로 Editor Dirty 가 발생함으로 다른 방법 고려 필요
 	UPROPERTY(EditAnywhere, Transient)
-	FT4EntityCharacterEditorTransientData EditorTransientData;
+	FT4EntityCharacterEditorTransientData EditorTransientCharacterData;
+#endif
 };

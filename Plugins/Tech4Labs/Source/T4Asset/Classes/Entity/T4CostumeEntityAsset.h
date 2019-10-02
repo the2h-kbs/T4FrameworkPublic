@@ -101,13 +101,31 @@ public:
 public:
 	ET4EntityType GetEntityType() const override { return ET4EntityType::Costume; }
 
+#if WITH_EDITOR
+	virtual USkeletalMesh* GetPrimarySkeletalMeshAsset() const override // #81
+	{
+		if (MeshData.SkeletalMeshAsset.IsNull())
+		{
+			return nullptr;
+		}
+		return MeshData.SkeletalMeshAsset.LoadSynchronous();
+	}
+
+	virtual void ResetEditorTransientData() override
+	{
+		UT4ItemEntityAsset::ResetEditorTransientData();
+		EditorTransientCostumeData.Reset();
+	} // #73
+#endif
+
 public:
 	UPROPERTY(EditAnywhere)
 	FT4EntityItemCostumeMeshData MeshData;
 
-public:
+#if WITH_EDITORONLY_DATA
 	// #80 : OverrideMaterial Data/ Physics Asset
 	// TODO : Transient 설정으로 Editor Dirty 가 발생함으로 다른 방법 고려 필요
 	UPROPERTY(EditAnywhere, Transient)
-	FT4EntityCostumeEditorTransientData EditorCostumeTransientData;
+	FT4EntityCostumeEditorTransientData EditorTransientCostumeData;
+#endif
 };

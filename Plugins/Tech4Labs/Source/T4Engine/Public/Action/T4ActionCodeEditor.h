@@ -22,10 +22,18 @@ public:
 	UPROPERTY(EditAnywhere)
 	ET4EditorAction EditorActionType;
 
+	UPROPERTY(EditAnywhere)
+	FName LayerTagName; // #81 : LayerSet, LayerSetClear
+
+	UPROPERTY(EditAnywhere)
+	ET4LayerTagType LayerTagType; // #81 : LayerSet, LayerSetClear
+
 public:
 	FT4EditorAction()
 		: FT4CodeBaseAction(StaticActionType())
 		, EditorActionType(ET4EditorAction::None)
+		, LayerTagName(NAME_None) // #81 : LayerSet, LayerSetClear
+		, LayerTagType(ET4LayerTagType::All) // #81 : LayerSet, LayerSetClear
 	{
 	}
 

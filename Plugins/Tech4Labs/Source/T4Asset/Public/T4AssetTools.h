@@ -14,6 +14,7 @@ class UTexture2D;
 class UBlendSpaceBase;
 class UAnimSequence;
 class UMaterialInterface;
+struct FT4EntityOverrideMaterialData; // #81
 struct FT4EntityCharacterStanceData;
 struct FT4EntityCharacterReactionData; // #76
 class UT4AnimSetAsset;
@@ -51,6 +52,82 @@ namespace T4AssetTool
 		const FRotator& ThumbnailRotation,
 		const FVector& ThumbnailLocation
 	);
+
+	// #74, #81
+	T4ASSET_API void EntityLayerTagSelectionByIndex(
+		UT4EntityAsset* InOutEntityAsset,
+		ET4LayerTagType InLayerTagType,
+		const int32 InSelectIndex
+	);
+	T4ASSET_API bool EntityLayerTagAddOrUpdateWeaponData(
+		UT4EntityAsset* InOutEntityAsset,
+		const int32 InSelectIndex,
+		const FName& InLayerTagName,
+		const FName& InEquipPointName,
+		const TSoftObjectPtr<UT4WeaponEntityAsset>& InWeaponEntityAsset,
+		FString& OutErrorMessage
+	);
+	T4ASSET_API bool EntityLayerTagRemoveWeaponDataByIndex(
+		UT4EntityAsset* InOutEntityAsset,
+		int32 InRemoveArrayIndex,
+		FString& OutErrorMessage
+	);
+
+	T4ASSET_API bool EntityLayerTagAddOrUpdateContiData(
+		UT4EntityAsset* InOutEntityAsset,
+		const int32 InSelectIndex,
+		const FName& InLayerTagName,
+		const TSoftObjectPtr<UT4ContiAsset>& InContiAsset,
+		FString& OutErrorMessage
+	);
+	T4ASSET_API bool EntityLayerTagRemoveContiDataByIndex(
+		UT4EntityAsset* InOutEntityAsset,
+		int32 InRemoveArrayIndex,
+		FString& OutErrorMessage
+	);
+	// ~#74, #81
+
+	// #81
+	T4ASSET_API bool EntityLayerTagAddOrUpdateMaterialData(
+		UT4EntityAsset* InOutEntityAsset,
+		const FName& InLayerTagName,
+		FString& OutErrorMessage
+	);
+	T4ASSET_API bool EntityLayerTagRemoveMaterialDataByIndex(
+		UT4EntityAsset* InOutEntityAsset,
+		int32 InRemoveArrayIndex,
+		FString& OutErrorMessage
+	);
+
+	T4ASSET_API bool EntityLayerTagGetMeterialSlots(
+		UT4EntityAsset* InOutEntityAsset,
+		const int32 InSelectIndex,
+		const FName& InLayerTagName,
+		const FName& InSlotName,
+		FString& OutErrorMessage
+	);
+	T4ASSET_API bool EntityLayerTagClearMeterialSlots(
+		UT4EntityAsset* InOutEntityAsset,
+		const int32 InSelectIndex,
+		const FName& InLayerTagName,
+		const FName& InSlotName,
+		FString& OutErrorMessage
+	);
+	T4ASSET_API void EntityLayerTagSelectMaterialBySlotName(
+		UT4EntityAsset* InOutEntityAsset,
+		const int32 InSelectIndex,
+		const FName& InLayerTagName,
+		const FName& InSlotName
+	);
+	T4ASSET_API bool EntityLayerTagUpdatMaterialBySlotName(
+		UT4EntityAsset* InOutEntityAsset,
+		const int32 InSelectIndex,
+		const FName& InLayerTagName,
+		const FName& InSlotName,
+		const TSoftObjectPtr<UMaterialInterface>& InMaterialAsset,
+		FString& OutErrorMessage
+	);
+	// ~#81
 
 	// #80
 	T4ASSET_API bool EntityCharacterGetFullbodyMeterialSlots(
@@ -183,60 +260,6 @@ namespace T4AssetTool
 		FString& OutErrorMessage
 	);
 	// ~#76
-
-	// #74
-	T4ASSET_API void EntityCharacterSelectEntityTagWeaponDataByIndex(
-		UT4CharacterEntityAsset* InOutEntityAsset,
-		const int32 InSelectIndex
-	);
-	T4ASSET_API bool EntityCharacterAddOrUpdateEntityTagWeaponData(
-		UT4CharacterEntityAsset* InOutEntityAsset,
-		const int32 InSelectIndex,
-		const FName& InEntityTagName,
-		const FName& InEquipPointName,
-		const TSoftObjectPtr<UT4WeaponEntityAsset>& InWeaponEntityAsset,
-		FString& OutErrorMessage
-	);
-	T4ASSET_API bool EntityCharacterRemoveEntityTagWeaponDataByIndex(
-		UT4CharacterEntityAsset* InOutEntityAsset,
-		int32 InRemoveArrayIndex,
-		FString& OutErrorMessage
-	);
-
-	T4ASSET_API void EntityCharacterSelectEntityTagStayContiDataByIndex(
-		UT4CharacterEntityAsset* InOutEntityAsset,
-		const int32 InSelectIndex
-	);
-	T4ASSET_API bool EntityCharacterAddOrUpdateEntityTagStayContiData(
-		UT4CharacterEntityAsset* InOutEntityAsset,
-		const int32 InSelectIndex,
-		const FName& InEntityTagName,
-		const TSoftObjectPtr<UT4ContiAsset>& InContiAsset,
-		FString& OutErrorMessage
-	);
-	T4ASSET_API bool EntityCharacterRemoveEntityTagStayContiDataByIndex(
-		UT4CharacterEntityAsset* InOutEntityAsset,
-		int32 InRemoveArrayIndex,
-		FString& OutErrorMessage
-	);
-	// ~#74
-
-	// #80
-	T4ASSET_API void EntityCharacterSelectEntityTagEffectMaterialDataByIndex(
-		UT4CharacterEntityAsset* InOutEntityAsset,
-		const int32 InSelectIndex
-	);
-	T4ASSET_API bool EntityCharacterAddOrUpdateEntityTagEffectMaterialData(
-		UT4CharacterEntityAsset* InOutEntityAsset,
-		const FName& InEntityTagName,
-		FString& OutErrorMessage
-	);
-	T4ASSET_API bool EntityCharacterRemoveEntityTagEffectMaterialDataByIndex(
-		UT4CharacterEntityAsset* InOutEntityAsset,
-		int32 InRemoveArrayIndex,
-		FString& OutErrorMessage
-	);
-	// ~#80
 
 	T4ASSET_API void AnimSetSelectSkillAnimationLayerDataByName(
 		UT4AnimSetAsset* InOutAnimSetAsset,

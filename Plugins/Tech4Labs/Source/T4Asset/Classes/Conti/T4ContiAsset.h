@@ -117,12 +117,15 @@ public:
 
 	UPROPERTY(EditAnywhere)
 	TArray<FT4ReactionAction> ReactionActions; // #76
-	
+
 	UPROPERTY(EditAnywhere)
 	TArray<FT4TimeScaleAction> TimeScaleActions; // #54
 
 	UPROPERTY(EditAnywhere)
 	TArray<FT4CameraWorkAction> CameraWorkActions; // #54
+
+	UPROPERTY(EditAnywhere)
+	TArray<FT4LayerSetAction> LayerSetActions; // #81
 
 public:
 	void Reset();

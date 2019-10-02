@@ -19,7 +19,7 @@ enum ET4EngineEdNameTable
 	EquipPoint, // #72
 	CompositePart, // #71
 
-	EntityTag, // #74
+	LayerTag, // #74
 
 	Stance, // #73
 
