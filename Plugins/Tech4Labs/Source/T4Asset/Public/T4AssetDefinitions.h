@@ -37,5 +37,5 @@ static const float T4AnimSetUnarmedStanceValue = 0.0f;
 static const float T4AnimSetBlendTimeSec = 0.25f;
 
 static const FName T4AnimSetAnimMontageDefaultName = TEXT("Default");
-static const FName T4AnimSetAnimMontageLocomotionName = TEXT("Locomotion");
+static const FName T4AnimSetAnimMontageAdditiveName = TEXT("Additive");
 static const FName T4AnimSetAnimMontageSkillName = TEXT("Skill");

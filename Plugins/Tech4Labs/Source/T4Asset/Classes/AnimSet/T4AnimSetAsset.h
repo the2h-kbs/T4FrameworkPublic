@@ -34,25 +34,25 @@ class UBlendSpaceBase;
 class UT4EntityAsset;
 
 USTRUCT()
-struct T4ASSET_API FT4AnimSetLocomotionAttribute
+struct T4ASSET_API FT4AnimSetDefaultAttribute
 {
 	GENERATED_USTRUCT_BODY()
 
 public:
-	FT4AnimSetLocomotionAttribute()
+	FT4AnimSetDefaultAttribute()
 		: MinAccelerationScale(0.1f)
 		, MaxAcceleratedMoveTimeSec(0.75f)
 		, MaxFootStanceIdlePlayCount(3)
 	{
 	}
 
-	UPROPERTY(EditAnywhere, Category = LocomotionAttributes)
+	UPROPERTY(EditAnywhere, Category = DefaultAttributes)
 	float MinAccelerationScale;
 
-	UPROPERTY(EditAnywhere, Category = LocomotionAttributes)
+	UPROPERTY(EditAnywhere, Category = DefaultAttributes)
 	float MaxAcceleratedMoveTimeSec;
 
-	UPROPERTY(EditAnywhere, Category = LocomotionAttributes)
+	UPROPERTY(EditAnywhere, Category = DefaultAttributes)
 	uint32 MaxFootStanceIdlePlayCount;
 };
 
@@ -69,13 +69,13 @@ public:
 	{
 	}
 
-	UPROPERTY(EditAnywhere, Category = RunAndWalkBlendspace)
+	UPROPERTY(EditAnywhere, Category = RunAndWalkBlendSpace)
 	float StartWalkSpeedLevel;
 
-	UPROPERTY(EditAnywhere, Category = RunAndWalkBlendspace)
+	UPROPERTY(EditAnywhere, Category = RunAndWalkBlendSpace)
 	float StartRunSpeedLevel;
 
-	UPROPERTY(EditAnywhere, Category = RunAndWalkBlendspace)
+	UPROPERTY(EditAnywhere, Category = RunAndWalkBlendSpace)
 	float StartFastRunSpeedLevel;
 };
 
@@ -89,6 +89,16 @@ public:
 		: Name(NAME_None)
 		, DurationSec(0.0f)
 	{
+	}
+
+	FORCEINLINE bool operator==(const FName& InKey) const
+	{
+		return (Name == InKey) ? true : false;
+	}
+
+	FORCEINLINE bool operator==(const FT4AnimSequenceInfo& InRhs) const
+	{
+		return (Name == InRhs.Name) ? true : false;
 	}
 
 	UPROPERTY(VisibleAnywhere, Category = AnimSequenceInfo)
@@ -114,6 +124,16 @@ public:
 	{
 	}
 
+	FORCEINLINE bool operator==(const FName& InKey) const
+	{
+		return (Name == InKey) ? true : false;
+	}
+
+	FORCEINLINE bool operator==(const FT4BlendSpaceInfo& InRhs) const
+	{
+		return (Name == InRhs.Name) ? true : false;
+	}
+
 	UPROPERTY(VisibleAnywhere, Category = BlendSpaceInfo)
 	FName Name;
 
@@ -137,7 +157,7 @@ public:
 	{
 #if WITH_EDITOR
 		TransientSelectSkillSectionName = NAME_None;
-		TransientSelectLocomotionSectionName = NAME_None;
+		TransientSelectAdditiveSectionName = NAME_None;
 		TransientSelectDefaultSectionName = NAME_None;
 		TransientSelectBlendSpaceName = NAME_None;
 #endif
@@ -151,10 +171,10 @@ public:
 	TSoftObjectPtr<UAnimSequence> TransientSkillAnimSequenceAsset;
 
 	UPROPERTY(EditAnywhere, Transient)
-	FName TransientSelectLocomotionSectionName;
+	FName TransientSelectAdditiveSectionName;
 
 	UPROPERTY(EditAnywhere, Transient)
-	TSoftObjectPtr<UAnimSequence> TransientLocomotionAnimSequenceAsset;
+	TSoftObjectPtr<UAnimSequence> TransientAdditiveAnimSequenceAsset;
 
 	UPROPERTY(EditAnywhere, Transient)
 	FName TransientSelectDefaultSectionName;
@@ -204,21 +224,20 @@ public:
 	TSoftObjectPtr<UAnimMontage> SkillAnimMontageAsset; // #69
 
 	UPROPERTY(EditAnywhere, Category = EditAnimationLayer)
-	TMap<FName, FT4AnimSequenceInfo> SkillAnimSequenceInfos;
+	TArray<FT4AnimSequenceInfo> SkillAnimSequenceArray;
 
-	// CustomizeLocomotionAnimationDetails
 
-	UPROPERTY(EditAnywhere, Category = EditAnimationLayer)
-	bool bLocomotionAnimMontageAutoGen; // #69
+	// CustomizeAdditiveAnimationDetails
 
 	UPROPERTY(EditAnywhere, Category = EditAnimationLayer)
-	TSoftObjectPtr<UAnimMontage> LocomotionAnimMontageAsset; // #69
+	bool bAdditiveAnimMontageAutoGen; // #69
 
 	UPROPERTY(EditAnywhere, Category = EditAnimationLayer)
-	FT4AnimSetLocomotionAttribute LocomotionAttributes;
+	TSoftObjectPtr<UAnimMontage> AdditiveAnimMontageAsset; // #69
 
 	UPROPERTY(EditAnywhere, Category = EditAnimationLayer)
-	TMap<FName, FT4AnimSequenceInfo> LocomotionAnimSequenceInfos;
+	TArray<FT4AnimSequenceInfo> AdditiveAnimSequenceArray;
+
 
 	// CustomizeDefaultAnimationDetails
 
@@ -229,7 +248,11 @@ public:
 	TSoftObjectPtr<UAnimMontage> DefaultAnimMontageAsset; // #38, #69
 
 	UPROPERTY(EditAnywhere, Category = EditAnimationLayer)
-	TMap<FName, FT4AnimSequenceInfo> DefaultAnimSequenceInfos; // #38
+	FT4AnimSetDefaultAttribute DefaultAttributes;
+
+	UPROPERTY(EditAnywhere, Category = EditAnimationLayer)
+	TArray<FT4AnimSequenceInfo> DefaultAnimSequenceArray;
+
 
 	// CustomizeBlendSpaceDetails
 
@@ -237,7 +260,7 @@ public:
 	FT4AnimSetBlendSpaceAttribute BlendSpaceAttributes; // #38
 
 	UPROPERTY(EditAnywhere, Category = EditAnimationLayer)
-	TMap<FName, FT4BlendSpaceInfo> BlendSpaceInfos;
+	TArray<FT4BlendSpaceInfo> BlendSpaceArray;
 
 public:
 #if WITH_EDITORONLY_DATA

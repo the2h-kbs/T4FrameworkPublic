@@ -142,9 +142,9 @@ enum class ET4AnimInstance
 enum ET4AnimLayer // #71
 {
 	AnimLayer_Skill,
-	AnimLayer_Locomotion,
+	AnimLayer_Additive,
 	AnimLayer_Default,
-	AnimLayer_Blendspace,
+	AnimLayer_BlendSpace,
 
 	AnimLayer_Nums
 };
@@ -203,7 +203,7 @@ enum class ET4EditorAction : uint8
 	ReloadAttributes, // #81
 
 	ReloadAnimSetSkill, // #81
-	ReloadAnimSetLocomotion, // #81
+	ReloadAnimSetAdditive, // #81
 	ReloadAnimSetDefault, // #81
 	ReloadAnimSetBlendSpace, // #81
 

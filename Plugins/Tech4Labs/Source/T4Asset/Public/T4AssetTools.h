@@ -261,28 +261,41 @@ namespace T4AssetTool
 	);
 	// ~#76
 
-	T4ASSET_API void AnimSetSelectSkillAnimationLayerDataByName(
-		UT4AnimSetAsset* InOutAnimSetAsset,
+	T4ASSET_API void AnimSetSelectAnimSequenceInfoByName(
+		UT4AnimSetAsset* InAnimSetAsset,
+		const FName& InAnimMontageName,
 		const FName& InSelectedName
 	);
 
-	T4ASSET_API void AnimSetSelectLocomotionAnimationLayerDataByName(
-		UT4AnimSetAsset* InOutAnimSetAsset,
+	T4ASSET_API void AnimSetSelectBlendSpaceInfoByName(
+		UT4AnimSetAsset* InAnimSetAsset,
 		const FName& InSelectedName
 	);
 
-	T4ASSET_API void AnimSetSelectDefaultAnimationLayerDataByName(
-		UT4AnimSetAsset* InOutAnimSetAsset,
+	T4ASSET_API void AnimSetMoveUpAnimSequenceInfoByName(
+		UT4AnimSetAsset* InAnimSetAsset,
+		const FName& InAnimMontageName,
 		const FName& InSelectedName
 	);
 
-	T4ASSET_API void AnimSetSelectBlendSpaceDataByName(
-		UT4AnimSetAsset* InOutAnimSetAsset,
+	T4ASSET_API void AnimSetMoveUpBlendSpaceInfoByName(
+		UT4AnimSetAsset* InAnimSetAsset,
+		const FName& InSelectedName
+	);
+
+	T4ASSET_API void AnimSetMoveDownAnimSequenceInfoByName(
+		UT4AnimSetAsset* InAnimSetAsset,
+		const FName& InAnimMontageName,
+		const FName& InSelectedName
+	);
+
+	T4ASSET_API void AnimSetMoveDownBlendSpaceInfoByName(
+		UT4AnimSetAsset* InAnimSetAsset,
 		const FName& InSelectedName
 	);
 
 	T4ASSET_API bool AnimSetAddOrUpdateAnimSeqeunceInfo(
-		UT4AnimSetAsset* InOutAnimSetAsset,
+		UT4AnimSetAsset* InAnimSetAsset,
 		const FName& InAnimMontageName,
 		const FName& InAnimSequenceName,
 		const TSoftObjectPtr<UAnimSequence>& InAnimSequence,
@@ -290,31 +303,31 @@ namespace T4AssetTool
 	);
 
 	T4ASSET_API bool AnimSetRemoveAnimSeqeunceInfo(
-		UT4AnimSetAsset* InOutAnimSetAsset,
+		UT4AnimSetAsset* InAnimSetAsset,
 		const FName& InAnimMontageName,
 		const FName& InAnimSequenceName,
 		FString& OutErrorMessage
 	);
 
 	T4ASSET_API bool AnimSetAddOrUpdateBlendSpaceInfo(
-		UT4AnimSetAsset* InOutAnimSetAsset,
+		UT4AnimSetAsset* InAnimSetAsset,
 		const FName& InBlendSpaceName,
 		const TSoftObjectPtr<UBlendSpaceBase>& InBlendSpace,
 		FString& OutErrorMessage
 	);
 
 	T4ASSET_API bool AnimSetRemoveBlendSpaceInfoByName(
-		UT4AnimSetAsset* InOutAnimSetAsset,
+		UT4AnimSetAsset* InAnimSetAsset,
 		const FName& InBlendSpaceName,
 		FString& OutErrorMessage
 	);
 
 	T4ASSET_API bool AnimSetUpdateBlendSpaceInfo(
-		UT4AnimSetAsset* InOutAnimSetAsset
+		UT4AnimSetAsset* InAnimSetAsset
 	);
 
 	T4ASSET_API bool AnimSetUpdateAll(
-		UT4AnimSetAsset* InOutAnimSetAsset,
+		UT4AnimSetAsset* InAnimSetAsset,
 		FString& OutErrorMessage
 	);
 

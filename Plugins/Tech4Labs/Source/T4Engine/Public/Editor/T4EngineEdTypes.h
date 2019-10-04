@@ -11,7 +11,7 @@ enum ET4EngineEdNameTable
 {
 	BlendSpace,
 	DefaultSection, // #38
-	LocomotionSection,
+	AdditiveSection,
 	SkillSection,
 
 	ActionPoint, // #47

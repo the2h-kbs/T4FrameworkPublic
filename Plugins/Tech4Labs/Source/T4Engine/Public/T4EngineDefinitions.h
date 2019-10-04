@@ -34,43 +34,43 @@ static const FName T4AnimSetAnimNotifyFootstepName = TEXT("Footstep_C");
 static const FName T4AnimSetAnimNotifyLeftFootstepName = TEXT("Footstep_Left");
 static const FName T4AnimSetAnimNotifyRightFootstepName = TEXT("Footstep_Right");
 
-static const FName T4AnimSetDefaultSectionIdleAdditiveName = TEXT("IdleAddtive");
+static const FName T4AnimSetAdditiveSectionIdleName = TEXT("IdleAdditive");
 
-static const FName T4AnimSetLocomotionSectionJumpStartName = TEXT("Jump_Start");
-static const FName T4AnimSetLocomotionSectionJumpEndName = TEXT("Jump_End");
+static const FName T4AnimSetDefaultSectionJumpStartName = TEXT("Jump_Start");
+static const FName T4AnimSetDefaultSectionJumpEndName = TEXT("Jump_End");
 
-static const FName T4AnimSetLocomotionSectionStanceUnarmedToLFName = TEXT("Stance_N_LF");
-static const FName T4AnimSetLocomotionSectionStanceUnaremdToRFName = TEXT("Stance_N_RF");
+static const FName T4AnimSetDefaultSectionStanceUnarmedToLFName = TEXT("Stance_N_LF");
+static const FName T4AnimSetDefaultSectionStanceUnaremdToRFName = TEXT("Stance_N_RF");
 
-static const FName T4AnimSetLocomotionSectionStanceLFToUnaremdName = TEXT("Stance_LF_N");
-static const FName T4AnimSetLocomotionSectionStanceRFToUnaremdlName = TEXT("Stance_RF_N");
+static const FName T4AnimSetDefaultSectionStanceLFToUnaremdName = TEXT("Stance_LF_N");
+static const FName T4AnimSetDefaultSectionStanceRFToUnaremdlName = TEXT("Stance_RF_N");
 
-static const FName T4AnimSetLocomotionSectionStanceLFFromFrontName = TEXT("Stance_LF_F");
-static const FName T4AnimSetLocomotionSectionStanceLFFromBackName = TEXT("Stance_LF_B");
-static const FName T4AnimSetLocomotionSectionStanceLFFromLeftName = TEXT("Stance_LF_L");
-static const FName T4AnimSetLocomotionSectionStanceLFFromRightName = TEXT("Stance_LF_R");
+static const FName T4AnimSetDefaultSectionStanceLFFromFrontName = TEXT("Stance_LF_F");
+static const FName T4AnimSetDefaultSectionStanceLFFromBackName = TEXT("Stance_LF_B");
+static const FName T4AnimSetDefaultSectionStanceLFFromLeftName = TEXT("Stance_LF_L");
+static const FName T4AnimSetDefaultSectionStanceLFFromRightName = TEXT("Stance_LF_R");
 
-static const FName T4AnimSetLocomotionSectionStanceRFFromFrontName = TEXT("Stance_RF_F");
-static const FName T4AnimSetLocomotionSectionStanceRFFromBackName = TEXT("Stance_RF_B");
-static const FName T4AnimSetLocomotionSectionStanceRFFromLeftName = TEXT("Stance_RF_L");
-static const FName T4AnimSetLocomotionSectionStanceRFFromRightName = TEXT("Stance_RF_R");
+static const FName T4AnimSetDefaultSectionStanceRFFromFrontName = TEXT("Stance_RF_F");
+static const FName T4AnimSetDefaultSectionStanceRFFromBackName = TEXT("Stance_RF_B");
+static const FName T4AnimSetDefaultSectionStanceRFFromLeftName = TEXT("Stance_RF_L");
+static const FName T4AnimSetDefaultSectionStanceRFFromRightName = TEXT("Stance_RF_R");
 
-static const FName T4AnimSetLocomotionSectionTurnLFToLeft90Name = TEXT("Turn_LF_L90"); // #44
-static const FName T4AnimSetLocomotionSectionTurnLFToRight90Name = TEXT("Turn_LF_R90"); // #44
-static const FName T4AnimSetLocomotionSectionTurnLFToRight180Name = TEXT("Turn_LF_R180"); // #44
+static const FName T4AnimSetDefaultSectionTurnLFToLeft90Name = TEXT("Turn_LF_L90"); // #44
+static const FName T4AnimSetDefaultSectionTurnLFToRight90Name = TEXT("Turn_LF_R90"); // #44
+static const FName T4AnimSetDefaultSectionTurnLFToRight180Name = TEXT("Turn_LF_R180"); // #44
 
-static const FName T4AnimSetLocomotionSectionTurnRFToLeft90Name = TEXT("Turn_RF_L90"); // #44
-static const FName T4AnimSetLocomotionSectionTurnRFToRight90Name = TEXT("Turn_RF_R90"); // #44
-static const FName T4AnimSetLocomotionSectionTurnRFToLeft180Name = TEXT("Turn_RF_L180"); // #44
+static const FName T4AnimSetDefaultSectionTurnRFToLeft90Name = TEXT("Turn_RF_L90"); // #44
+static const FName T4AnimSetDefaultSectionTurnRFToRight90Name = TEXT("Turn_RF_R90"); // #44
+static const FName T4AnimSetDefaultSectionTurnRFToLeft180Name = TEXT("Turn_RF_L180"); // #44
 
-static const FName T4AnimSetLocomotionSectionRollFrontName = TEXT("Roll_F"); // #46
-static const FName T4AnimSetLocomotionSectionRollBackName = TEXT("Roll_B"); // #46
-static const FName T4AnimSetLocomotionSectionRollLeftName = TEXT("Roll_L"); // #46
-static const FName T4AnimSetLocomotionSectionRollRightName = TEXT("Roll_R"); // #46
-static const FName T4AnimSetLocomotionSectionRollFrontLeftName = TEXT("Roll_FL"); // #46
-static const FName T4AnimSetLocomotionSectionRollFrontRightName = TEXT("Roll_FR"); // #46
-static const FName T4AnimSetLocomotionSectionRollBackLeftName = TEXT("Roll_BL"); // #46
-static const FName T4AnimSetLocomotionSectionRollBackRightName = TEXT("Roll_BR"); // #46
+static const FName T4AnimSetDefaultSectionRollFrontName = TEXT("Roll_F"); // #46
+static const FName T4AnimSetDefaultSectionRollBackName = TEXT("Roll_B"); // #46
+static const FName T4AnimSetDefaultSectionRollLeftName = TEXT("Roll_L"); // #46
+static const FName T4AnimSetDefaultSectionRollRightName = TEXT("Roll_R"); // #46
+static const FName T4AnimSetDefaultSectionRollFrontLeftName = TEXT("Roll_FL"); // #46
+static const FName T4AnimSetDefaultSectionRollFrontRightName = TEXT("Roll_FR"); // #46
+static const FName T4AnimSetDefaultSectionRollBackLeftName = TEXT("Roll_BL"); // #46
+static const FName T4AnimSetDefaultSectionRollBackRightName = TEXT("Roll_BR"); // #46
 
 
 // #47 : AnimState
