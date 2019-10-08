@@ -33,6 +33,7 @@ class AAIController;
 class UInputComponent;
 class IT4GameObject;
 class IT4GameWorld;
+class AT4PlayerController;
 
 // #30
 enum ET4FrameworkType
@@ -219,13 +220,15 @@ public:
 
 	virtual void SetInputControlLock(bool bLock) = 0; // #30
 	virtual void SetPlayerChangeDisable(bool bDisable) = 0; // #72
-
 	virtual void SetEditoAISystemPaused(bool bInPaused) = 0; // #52
 
 	virtual IT4EditorGameplayAIHandler* GetEditorAISystemHandler() const = 0; // #60
 	virtual void SetEditorAISystemHandler(IT4EditorGameplayAIHandler* bInAIHandler) = 0; // #60
 
-	virtual void SetEditorPlayerController(class AT4PlayerController* InPlayerController) = 0; // #42
+	virtual AT4PlayerController* GetEditorPlayerController() const = 0; // #79
+	virtual void SetEditorPlayerController(AT4PlayerController* InPlayerController) = 0; // #42
+
+	virtual IT4EditorViewportClient* GetEditorViewportClient() const = 0; // #79
 	virtual void SetEditorViewportClient(IT4EditorViewportClient* InViewportClient) = 0; // #30
 #endif
 

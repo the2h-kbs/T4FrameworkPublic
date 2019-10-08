@@ -18,6 +18,8 @@ Powerful toolset and Flexible layer solution
 - Warning
   - 2019.10 월 정식 버전 배포 예정입니다. 개발 버전이므로 테스트 용도로 만 사용해주시기 바랍니다.
 - Release Notes
+  - **[2019.10.08] [M4] Copying //Private to //Deploy (private commit d540ab9)**
+	- #79 [기능추가] Rehearsal Editor 뷰포트에 World 로딩 처리 추가
   - **[2019.10.04] [M3] Copying //Private to //Deploy (private commit 3160edf)**
 	- #69 [기능추가] Rehearsal Entity Editor 의 AnimSequence List 에서 Item Move Up/Down 기능 추가
 	- #69 [기능개선] Animation Layer Rename (Default => Additive, Locomotion => Default)
