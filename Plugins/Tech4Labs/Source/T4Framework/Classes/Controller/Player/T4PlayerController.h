@@ -15,7 +15,6 @@
 /**
   * http://api.unrealengine.com/KOR/Gameplay/Framework/Controller/PlayerController/index.html
  */
-class AT4PlayerDefaultPawn;
 class UT4SpringArmComponent;
 class UT4CameraComponent;
 class IT4GameObject;
@@ -157,7 +156,7 @@ private:
 	FT4ObjectID GameObjectID;
 	FT4ObjectID ObserverObjectID; // #52
 
-	TWeakObjectPtr<AT4PlayerDefaultPawn> CachedDefaultPawn;
+	TWeakObjectPtr<APawn> CachedDefaultPawn;
 
 	bool bCameraTypeDirty; // #40
 	ET4CameraType CameraTypeSelected; // #40

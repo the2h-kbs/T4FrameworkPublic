@@ -38,6 +38,7 @@ struct FT4NPCAIMemory // #50
 		AggressiveClearTimeLeft = 0.0f;
 
 		MoveSpeedType = ET4MoveSpeed::Stand;
+		CurrentMoveSpeed = 0.0f;
 	}
 
 	FVector InitSpawnLocation;
@@ -54,6 +55,7 @@ struct FT4NPCAIMemory // #50
 	float AggressiveClearTimeLeft;
 
 	ET4MoveSpeed MoveSpeedType;
+	float CurrentMoveSpeed;
 };
 
 struct FT4GameNPCData;
@@ -91,6 +93,7 @@ public:
 public:
 	bool Bind(const FT4GameDataID& InNPCGameDataID); // #31, #50
 
+	bool IsMoving() const; // #50
 	bool IsAttacking() const; // #50
 	bool IsCurrentAggressive() const; // #50
 

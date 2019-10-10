@@ -124,6 +124,7 @@ public:
 
 
 #if WITH_EDITOR
+struct FWorldContext;
 class FViewport;
 class IT4EditorViewportClient
 {
@@ -131,10 +132,13 @@ public:
 	virtual ~IT4EditorViewportClient() {}
 
 	virtual FViewport* GetViewport() const = 0; // #68
+	virtual FWorldContext* GetWorldContext() const = 0; // #79
 
 	virtual bool IsPreviewMode() const = 0;
 
 	virtual void WorldTravel(const TCHAR* InTravelURL) = 0; // #79
+
+	virtual void SetUpdateCameraForPlayer(bool bEnable) = 0; // #79
 
 	virtual void SetMouseLocation(const int InX, const int InY) = 0;
 	virtual bool GetMousePosition(float& InLocationX, float& InLocationY) = 0;
