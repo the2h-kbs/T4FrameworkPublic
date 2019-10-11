@@ -13,7 +13,7 @@
 UENUM()
 enum class ET4EntityType : uint8
 {
-	World,
+	Map,
 	Character, // #71 : Actor => Character
 	Prop,
 	Item, // #37 : Costume or Weapon
@@ -32,16 +32,6 @@ enum class ET4EntityMeshType : uint8
 
 	None
 };
-
-UENUM()
-enum class ET4EntityWorldType : uint8
-{
-	Normal,
-	Seamless, // TODO : M3
-
-	Max
-};
-
 UENUM()
 enum class ET4EntityCharacterMeshType : uint8
 {

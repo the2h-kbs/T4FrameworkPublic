@@ -18,8 +18,11 @@ Powerful toolset and Flexible layer solution
 - Warning
   - 2019.10 월 정식 버전 배포 예정입니다. 개발 버전이므로 테스트 용도로 만 사용해주시기 바랍니다.
 - Release Notes
+  - **[2019.10.11] [M4] Copying //Private to //Deploy (private commit e482772)**
+	- #83 [기능개선] T4WorldEntityAsset 을 T4MapEntityAsset 으로 리네임
+	- #79 [기능개선] Rehearsal Entity Editor 의 Entity Browser 를 통해 맵이동이 가능하도록 개선
   - **[2019.10.10] [M4] Copying //Private to //Deploy (private commit 01e7921)**
-	- #79 [기능추가] Rehearsal Editor 뷰포트에 World 로딩 처리 추가 (캐릭터 스폰, 전투 테스트)
+	- #79 [기능개선] Rehearsal Editor 뷰포트에 World 로딩 처리 추가 (캐릭터 스폰, 전투 테스트, 버그 수정)
   - **[2019.10.08] [M4] Copying //Private to //Deploy (private commit d540ab9)**
 	- #79 [기능추가] Rehearsal Editor 뷰포트에 World 로딩 처리 추가
   - **[2019.10.04] [M3] Copying //Private to //Deploy (private commit 3160edf)**

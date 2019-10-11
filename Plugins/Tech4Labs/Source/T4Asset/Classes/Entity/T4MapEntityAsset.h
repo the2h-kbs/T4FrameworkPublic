@@ -4,12 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "T4EntityAsset.h"
-#include "T4WorldEntityAsset.generated.h"
+#include "T4MapEntityAsset.generated.h"
 
 /**
   * #35
  */
-struct FT4WorldEntityCustomVersion
+struct FT4MapEntityCustomVersion
 {
 	enum Type
 	{
@@ -23,27 +23,25 @@ struct FT4WorldEntityCustomVersion
 	T4ASSET_API const static FGuid GUID;
 
 private:
-	FT4WorldEntityCustomVersion() {}
+	FT4MapEntityCustomVersion() {}
 };
 
-class ULevel;
-
 USTRUCT()
-struct T4ASSET_API FT4EntityNormalWorldData
+struct T4ASSET_API FT4EntityMapData
 {
 	GENERATED_USTRUCT_BODY()
 
 public:
-	FT4EntityNormalWorldData()
+	FT4EntityMapData()
 	{
 	}
 
-	UPROPERTY(EditAnywhere, Category = Asset)
-	TSoftObjectPtr<UWorld> WorldAsset;
+	UPROPERTY(EditAnywhere)
+	TSoftObjectPtr<UWorld> LevelAsset;
 };
 
 UCLASS(ClassGroup = Tech4Labs, Category = "Tech4Labs")
-class T4ASSET_API UT4WorldEntityAsset : public UT4EntityAsset
+class T4ASSET_API UT4MapEntityAsset : public UT4EntityAsset
 {
 	GENERATED_UCLASS_BODY()
 
@@ -56,12 +54,9 @@ public:
 	//~ End UObject interface
 
 public:
-	ET4EntityType GetEntityType() const override { return ET4EntityType::World; }
+	ET4EntityType GetEntityType() const override { return ET4EntityType::Map; }
 
 public:
-	UPROPERTY(EditAnywhere, Category=Attributes)
-	ET4EntityWorldType WorldType;
-
-	UPROPERTY(EditAnywhere, Category=Data)
-	FT4EntityNormalWorldData NormalWorldData;
+	UPROPERTY(EditAnywhere)
+	FT4EntityMapData MapData;
 };

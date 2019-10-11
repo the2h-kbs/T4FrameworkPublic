@@ -124,6 +124,14 @@ public:
 
 
 #if WITH_EDITOR
+enum ET4WorldTravelResult // #79
+{
+	TravelResult_Success,
+	TravelResult_ChangeContext,
+
+	TravelResult_Failed,
+};
+
 struct FWorldContext;
 class FViewport;
 class IT4EditorViewportClient
@@ -136,7 +144,7 @@ public:
 
 	virtual bool IsPreviewMode() const = 0;
 
-	virtual void WorldTravel(const TCHAR* InTravelURL) = 0; // #79
+	virtual ET4WorldTravelResult OnWorldTravel(const TCHAR* InTravelURL) = 0; // #79
 
 	virtual void SetUpdateCameraForPlayer(bool bEnable) = 0; // #79
 

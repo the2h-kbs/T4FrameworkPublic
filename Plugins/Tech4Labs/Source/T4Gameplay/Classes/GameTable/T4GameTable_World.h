@@ -12,7 +12,7 @@
 /**
   * http://api.unrealengine.com/KOR/Gameplay/DataDriven/
  */
-class UT4WorldEntityAsset;
+class UT4MapEntityAsset;
 
 USTRUCT()
 struct FT4GameWorldTableRow : public FTableRowBase
@@ -27,7 +27,7 @@ public:
 	FGuid Guid;
 
 	UPROPERTY(EditAnywhere, Category= ClientOnly)
-	TSoftObjectPtr<UT4WorldEntityAsset> EntityAsset;
+	TSoftObjectPtr<UT4MapEntityAsset> EntityAsset;
 
 public:
 	FT4GameWorldTableRow()
