@@ -53,6 +53,9 @@ public:
 #endif // WITH_EDITOR
 
 public:
+	UPROPERTY(EditAnywhere)
+	TSoftObjectPtr<UWorld> LevelAsset;
+
 #if WITH_EDITORONLY_DATA
 	UPROPERTY()
 	UTexture2D* ThumbnailImage; // Internal: The thumbnail image

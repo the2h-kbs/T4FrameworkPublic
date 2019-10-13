@@ -12,9 +12,11 @@ namespace UnrealBuildTool.Rules
             PrivateDependencyModuleNames.AddRange(
 				new string[]
 				{
+                    "ApplicationCore",
+                    "AppFramework",
                     "Core",
                     "CoreUObject",
-					"ApplicationCore",
+                    "RenderCore",
                     "Json",
                     "JsonUtilities",
                     "Engine",
@@ -24,15 +26,27 @@ namespace UnrealBuildTool.Rules
                     "EditorStyle",
                     "InputCore",
                     "UnrealEd",
-                    "LevelEditor",
+                    "Landscape",
+					"GraphEditor",
+					"LevelEditor",
                     "PropertyEditor",
+                    "DesktopPlatform",
+                    "MainFrame",
                     "Projects",
                     "MovieScene",
                     "Sequencer",
+                    "FoliageEdit",
+                    "Foliage",
                     "AdvancedPreviewScene",
                     "MovieSceneTools",
                     "MovieSceneTracks",
-                    "NavigationSystem"
+                    "LandscapeEditor",
+                    "NavigationSystem",
+                    "MaterialUtilities",
+                    "MeshDescription",
+                    "SourceControl",
+					"SourceControlWindows",
+                    "RHI"
                 }
 			);
 
