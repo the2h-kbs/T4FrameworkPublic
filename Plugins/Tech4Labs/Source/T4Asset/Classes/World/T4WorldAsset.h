@@ -53,7 +53,7 @@ public:
 #endif // WITH_EDITOR
 
 public:
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, meta = (DisplayName = "Level Asset"))
 	TSoftObjectPtr<UWorld> LevelAsset;
 
 #if WITH_EDITORONLY_DATA

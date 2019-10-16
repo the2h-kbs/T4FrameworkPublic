@@ -120,12 +120,12 @@ enum class ET4CollisionChannel : uint8
 // #38
 enum ET4MoveSpeed
 {
-	Stand,
-	Walk,
-	Run,
-	FastRun,
+	MoveSpeed_Stand,
+	MoveSpeed_Walk,
+	MoveSpeed_Run,
+	MoveSpeed_FastRun,
 
-	Count,
+	MoveSpeed_Count,
 };
 
 UENUM()

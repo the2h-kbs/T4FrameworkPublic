@@ -37,7 +37,7 @@ struct FT4NPCAIMemory // #50
 		bActiveAggressive = false;
 		AggressiveClearTimeLeft = 0.0f;
 
-		MoveSpeedType = ET4MoveSpeed::Stand;
+		MoveSpeedType = ET4MoveSpeed::MoveSpeed_Stand;
 		CurrentMoveSpeed = 0.0f;
 	}
 
