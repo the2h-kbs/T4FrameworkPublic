@@ -33,4 +33,4 @@ Powerful toolset and Flexible layer solution
   - **[2019.10.08] [M4] Copying //Private to //Deploy (private commit d540ab9)**
 	- #79 [기능추가] Rehearsal Editor 뷰포트에 World 로딩 처리 추가
 - Older Release Notes
-  - 2019.07 ~ 2019.09 : <ReleaseNotes.md>
+  - 2019.07 ~ 2019.09 : ReleaseNotes.md
